@@ -1,0 +1,25 @@
+{
+  "name": "@nativeskill/cli",
+  "version": "0.1.0",
+  "description": "Offline locale profiles and translation catalog checks for NativeSkill",
+  "license": "MIT",
+  "type": "module",
+  "engines": {"node": ">=22.20.0"},
+  "bin": {"nativeskill": "packages/cli/src/cli.mjs"},
+  "files": [
+    "packages/cli/src",
+    "skills/nativeskill/assets",
+    "skills/nativeskill/LICENSE-UNICODE.txt",
+    "skills/nativeskill/THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "test": "node --test packages/cli/test/*.test.mjs",
+    "generate:locales": "node scripts/generate-locales.mjs"
+  },
+  "dependencies": {
+    "@formatjs/icu-messageformat-parser": "2.11.4",
+    "typescript": "5.9.3"
+  },
+  "devDependencies": {"cldr-core": "49.0.0"},
+  "private": true
+}

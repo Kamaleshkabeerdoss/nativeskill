@@ -1,0 +1,43 @@
+{
+  "South Asian": [
+    ["ta", "Tamil"], ["hi", "Hindi"], ["te", "Telugu"], ["ml", "Malayalam"],
+    ["kn", "Kannada"], ["bn", "Bengali"], ["mr", "Marathi"], ["gu", "Gujarati"],
+    ["pa", "Punjabi"], ["ur", "Urdu"], ["ne", "Nepali"], ["si", "Sinhala"],
+    ["or", "Odia"], ["as", "Assamese"], ["sa", "Sanskrit"], ["mai", "Maithili"],
+    ["sd", "Sindhi"], ["kok", "Konkani", ["gom"]], ["doi", "Dogri"], ["ks", "Kashmiri"]
+  ],
+  "East and Southeast Asian": [
+    ["zh", "Chinese"], ["ja", "Japanese"], ["ko", "Korean"], ["ms", "Malay"],
+    ["id", "Indonesian"], ["th", "Thai"], ["vi", "Vietnamese"], ["fil", "Filipino"],
+    ["my", "Burmese"], ["km", "Khmer"], ["lo", "Lao"], ["jv", "Javanese"],
+    ["su", "Sundanese"], ["ceb", "Cebuano"], ["mn", "Mongolian"], ["bo", "Tibetan"],
+    ["hmn", "Hmong", ["mww", "hnj"]], ["ban", "Balinese"]
+  ],
+  "European": [
+    ["en", "English"], ["fr", "French"], ["de", "German"], ["es", "Spanish"],
+    ["pt", "Portuguese"], ["it", "Italian"], ["nl", "Dutch"], ["ru", "Russian"],
+    ["uk", "Ukrainian"], ["pl", "Polish"], ["sv", "Swedish"], ["no", "Norwegian", ["nb", "nn"]],
+    ["da", "Danish"], ["fi", "Finnish"], ["is", "Icelandic"], ["el", "Greek"],
+    ["cs", "Czech"], ["sk", "Slovak"], ["hu", "Hungarian"], ["ro", "Romanian"],
+    ["bg", "Bulgarian"], ["hr", "Croatian"], ["sr", "Serbian"], ["bs", "Bosnian"],
+    ["sl", "Slovenian"], ["sq", "Albanian"], ["mk", "Macedonian"], ["lt", "Lithuanian"],
+    ["lv", "Latvian"], ["et", "Estonian"], ["ca", "Catalan"], ["eu", "Basque"],
+    ["gl", "Galician"], ["ga", "Irish"], ["cy", "Welsh"], ["mt", "Maltese"],
+    ["lb", "Luxembourgish"], ["be", "Belarusian"]
+  ],
+  "Middle Eastern and Central Asian": [
+    ["ar", "Arabic"], ["he", "Hebrew"], ["fa", "Persian"], ["tr", "Turkish"],
+    ["ku", "Kurdish", ["ckb"]], ["ps", "Pashto"], ["az", "Azerbaijani"], ["kk", "Kazakh"],
+    ["uz", "Uzbek"], ["ky", "Kyrgyz"], ["tk", "Turkmen"], ["tg", "Tajik"],
+    ["hy", "Armenian"], ["ka", "Georgian"], ["ug", "Uyghur"], ["yi", "Yiddish"]
+  ],
+  "African": [
+    ["sw", "Swahili"], ["af", "Afrikaans"], ["am", "Amharic"], ["so", "Somali"],
+    ["ha", "Hausa"], ["yo", "Yoruba"], ["ig", "Igbo"], ["zu", "Zulu"],
+    ["xh", "Xhosa"], ["mg", "Malagasy"], ["rw", "Kinyarwanda"], ["om", "Oromo"],
+    ["sn", "Shona"], ["wo", "Wolof"]
+  ],
+  "Additional": [
+    ["mi", "Māori"], ["sm", "Samoan"], ["haw", "Hawaiian"], ["eo", "Esperanto"]
+  ]
+}

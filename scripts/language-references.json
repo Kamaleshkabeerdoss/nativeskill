@@ -1,0 +1,906 @@
+{
+  "ta": [
+    {
+      "id": "kaikki-ta",
+      "kind": "descriptive-dictionary",
+      "scope": "ta",
+      "url": "https://kaikki.org/dictionary/Tamil/index.html"
+    }
+  ],
+  "hi": [
+    {
+      "id": "kaikki-hi",
+      "kind": "descriptive-dictionary",
+      "scope": "hi",
+      "url": "https://kaikki.org/dictionary/Hindi/index.html"
+    }
+  ],
+  "te": [
+    {
+      "id": "kaikki-te",
+      "kind": "descriptive-dictionary",
+      "scope": "te",
+      "url": "https://kaikki.org/dictionary/Telugu/index.html"
+    }
+  ],
+  "ml": [
+    {
+      "id": "kaikki-ml",
+      "kind": "descriptive-dictionary",
+      "scope": "ml",
+      "url": "https://kaikki.org/dictionary/Malayalam/index.html"
+    }
+  ],
+  "kn": [
+    {
+      "id": "kaikki-kn",
+      "kind": "descriptive-dictionary",
+      "scope": "kn",
+      "url": "https://kaikki.org/dictionary/Kannada/index.html"
+    }
+  ],
+  "bn": [
+    {
+      "id": "kaikki-bn",
+      "kind": "descriptive-dictionary",
+      "scope": "bn",
+      "url": "https://kaikki.org/dictionary/Bengali/index.html"
+    }
+  ],
+  "mr": [
+    {
+      "id": "kaikki-mr",
+      "kind": "descriptive-dictionary",
+      "scope": "mr",
+      "url": "https://kaikki.org/dictionary/Marathi/index.html"
+    }
+  ],
+  "gu": [
+    {
+      "id": "kaikki-gu",
+      "kind": "descriptive-dictionary",
+      "scope": "gu",
+      "url": "https://kaikki.org/dictionary/Gujarati/index.html"
+    }
+  ],
+  "pa": [
+    {
+      "id": "kaikki-pa",
+      "kind": "descriptive-dictionary",
+      "scope": "pa",
+      "url": "https://kaikki.org/dictionary/Punjabi/index.html"
+    }
+  ],
+  "ur": [
+    {
+      "id": "kaikki-ur",
+      "kind": "descriptive-dictionary",
+      "scope": "ur",
+      "url": "https://kaikki.org/dictionary/Urdu/index.html"
+    }
+  ],
+  "ne": [
+    {
+      "id": "kaikki-ne",
+      "kind": "descriptive-dictionary",
+      "scope": "ne",
+      "url": "https://kaikki.org/dictionary/Nepali/index.html"
+    }
+  ],
+  "si": [
+    {
+      "id": "kaikki-si",
+      "kind": "descriptive-dictionary",
+      "scope": "si",
+      "url": "https://kaikki.org/dictionary/Sinhalese/index.html"
+    }
+  ],
+  "or": [
+    {
+      "id": "kaikki-or",
+      "kind": "descriptive-dictionary",
+      "scope": "or",
+      "url": "https://kaikki.org/dictionary/Odia/index.html"
+    }
+  ],
+  "as": [
+    {
+      "id": "kaikki-as",
+      "kind": "descriptive-dictionary",
+      "scope": "as",
+      "url": "https://kaikki.org/dictionary/Assamese/index.html"
+    }
+  ],
+  "sa": [
+    {
+      "id": "kaikki-sa",
+      "kind": "descriptive-dictionary",
+      "scope": "sa",
+      "url": "https://kaikki.org/dictionary/Sanskrit/index.html"
+    }
+  ],
+  "mai": [
+    {
+      "id": "ciil",
+      "kind": "dictionary",
+      "scope": "mai",
+      "url": "https://sanchika.ciil.org/items/841a04cc-c902-4e2d-b7b5-6c6ab2122646/full"
+    }
+  ],
+  "sd": [
+    {
+      "id": "kaikki-sd",
+      "kind": "descriptive-dictionary",
+      "scope": "sd",
+      "url": "https://kaikki.org/dictionary/Sindhi/index.html"
+    }
+  ],
+  "kok": [
+    {
+      "id": "kaikki-kok",
+      "kind": "descriptive-dictionary",
+      "scope": "kok",
+      "url": "https://kaikki.org/dictionary/Konkani/index.html"
+    }
+  ],
+  "doi": [
+    {
+      "id": "bharatavani",
+      "kind": "dictionary",
+      "scope": "doi",
+      "url": "https://sec.bharatavani.in/dogri/dictionaries"
+    }
+  ],
+  "ks": [
+    {
+      "id": "kaikki-ks",
+      "kind": "descriptive-dictionary",
+      "scope": "ks",
+      "url": "https://kaikki.org/dictionary/Kashmiri/index.html"
+    }
+  ],
+  "zh": [
+    {
+      "id": "kaikki-zh",
+      "kind": "descriptive-dictionary",
+      "scope": "zh",
+      "url": "https://kaikki.org/dictionary/Chinese/index.html"
+    }
+  ],
+  "ja": [
+    {
+      "id": "kaikki-ja",
+      "kind": "descriptive-dictionary",
+      "scope": "ja",
+      "url": "https://kaikki.org/dictionary/Japanese/index.html"
+    }
+  ],
+  "ko": [
+    {
+      "id": "kaikki-ko",
+      "kind": "descriptive-dictionary",
+      "scope": "ko",
+      "url": "https://kaikki.org/dictionary/Korean/index.html"
+    }
+  ],
+  "ms": [
+    {
+      "id": "kaikki-ms",
+      "kind": "descriptive-dictionary",
+      "scope": "ms",
+      "url": "https://kaikki.org/dictionary/Malay/index.html"
+    }
+  ],
+  "id": [
+    {
+      "id": "kaikki-id",
+      "kind": "descriptive-dictionary",
+      "scope": "id",
+      "url": "https://kaikki.org/dictionary/Indonesian/index.html"
+    }
+  ],
+  "th": [
+    {
+      "id": "kaikki-th",
+      "kind": "descriptive-dictionary",
+      "scope": "th",
+      "url": "https://kaikki.org/dictionary/Thai/index.html"
+    }
+  ],
+  "vi": [
+    {
+      "id": "kaikki-vi",
+      "kind": "descriptive-dictionary",
+      "scope": "vi",
+      "url": "https://kaikki.org/dictionary/Vietnamese/index.html"
+    }
+  ],
+  "fil": [
+    {
+      "id": "kwf",
+      "kind": "dictionary",
+      "scope": "fil",
+      "url": "https://dfe.kwfdiksiyonaryo.ph/"
+    }
+  ],
+  "my": [
+    {
+      "id": "kaikki-my",
+      "kind": "descriptive-dictionary",
+      "scope": "my",
+      "url": "https://kaikki.org/dictionary/Burmese/index.html"
+    }
+  ],
+  "km": [
+    {
+      "id": "kaikki-km",
+      "kind": "descriptive-dictionary",
+      "scope": "km",
+      "url": "https://kaikki.org/dictionary/Khmer/index.html"
+    }
+  ],
+  "lo": [
+    {
+      "id": "kaikki-lo",
+      "kind": "descriptive-dictionary",
+      "scope": "lo",
+      "url": "https://kaikki.org/dictionary/Lao/index.html"
+    }
+  ],
+  "jv": [
+    {
+      "id": "kaikki-jv",
+      "kind": "descriptive-dictionary",
+      "scope": "jv",
+      "url": "https://kaikki.org/dictionary/Javanese/index.html"
+    }
+  ],
+  "su": [
+    {
+      "id": "kaikki-su",
+      "kind": "descriptive-dictionary",
+      "scope": "su",
+      "url": "https://kaikki.org/dictionary/Sundanese/index.html"
+    }
+  ],
+  "ceb": [
+    {
+      "id": "kaikki-ceb",
+      "kind": "descriptive-dictionary",
+      "scope": "ceb",
+      "url": "https://kaikki.org/dictionary/Cebuano/index.html"
+    }
+  ],
+  "mn": [
+    {
+      "id": "kaikki-mn",
+      "kind": "descriptive-dictionary",
+      "scope": "mn",
+      "url": "https://kaikki.org/dictionary/Mongolian/index.html"
+    }
+  ],
+  "bo": [
+    {
+      "id": "kaikki-bo",
+      "kind": "descriptive-dictionary",
+      "scope": "bo",
+      "url": "https://kaikki.org/dictionary/Tibetan/index.html"
+    }
+  ],
+  "hmn": [
+    {
+      "id": "kaikki-mww",
+      "kind": "descriptive-dictionary",
+      "scope": "mww",
+      "url": "https://kaikki.org/dictionary/White%20Hmong/index.html"
+    },
+    {
+      "id": "mong-njua-dictionary",
+      "kind": "dictionary",
+      "scope": "hnj",
+      "url": "https://ci.nii.ac.jp/ncid/BA05315920"
+    }
+  ],
+  "ban": [
+    {
+      "id": "kaikki-ban",
+      "kind": "descriptive-dictionary",
+      "scope": "ban",
+      "url": "https://kaikki.org/dictionary/Balinese/index.html"
+    }
+  ],
+  "en": [
+    {
+      "id": "kaikki-en",
+      "kind": "descriptive-dictionary",
+      "scope": "en",
+      "url": "https://kaikki.org/dictionary/English/index.html"
+    }
+  ],
+  "fr": [
+    {
+      "id": "kaikki-fr",
+      "kind": "descriptive-dictionary",
+      "scope": "fr",
+      "url": "https://kaikki.org/dictionary/French/index.html"
+    }
+  ],
+  "de": [
+    {
+      "id": "kaikki-de",
+      "kind": "descriptive-dictionary",
+      "scope": "de",
+      "url": "https://kaikki.org/dictionary/German/index.html"
+    }
+  ],
+  "es": [
+    {
+      "id": "kaikki-es",
+      "kind": "descriptive-dictionary",
+      "scope": "es",
+      "url": "https://kaikki.org/dictionary/Spanish/index.html"
+    }
+  ],
+  "pt": [
+    {
+      "id": "kaikki-pt",
+      "kind": "descriptive-dictionary",
+      "scope": "pt",
+      "url": "https://kaikki.org/dictionary/Portuguese/index.html"
+    }
+  ],
+  "it": [
+    {
+      "id": "kaikki-it",
+      "kind": "descriptive-dictionary",
+      "scope": "it",
+      "url": "https://kaikki.org/dictionary/Italian/index.html"
+    }
+  ],
+  "nl": [
+    {
+      "id": "kaikki-nl",
+      "kind": "descriptive-dictionary",
+      "scope": "nl",
+      "url": "https://kaikki.org/dictionary/Dutch/index.html"
+    }
+  ],
+  "ru": [
+    {
+      "id": "kaikki-ru",
+      "kind": "descriptive-dictionary",
+      "scope": "ru",
+      "url": "https://kaikki.org/dictionary/Russian/index.html"
+    }
+  ],
+  "uk": [
+    {
+      "id": "kaikki-uk",
+      "kind": "descriptive-dictionary",
+      "scope": "uk",
+      "url": "https://kaikki.org/dictionary/Ukrainian/index.html"
+    }
+  ],
+  "pl": [
+    {
+      "id": "kaikki-pl",
+      "kind": "descriptive-dictionary",
+      "scope": "pl",
+      "url": "https://kaikki.org/dictionary/Polish/index.html"
+    }
+  ],
+  "sv": [
+    {
+      "id": "kaikki-sv",
+      "kind": "descriptive-dictionary",
+      "scope": "sv",
+      "url": "https://kaikki.org/dictionary/Swedish/index.html"
+    }
+  ],
+  "no": [
+    {
+      "id": "kaikki-no",
+      "kind": "descriptive-dictionary",
+      "scope": "no",
+      "url": "https://kaikki.org/dictionary/Norwegian/index.html"
+    },
+    {
+      "id": "kaikki-nb",
+      "kind": "descriptive-dictionary",
+      "scope": "nb",
+      "url": "https://kaikki.org/dictionary/Norwegian%20Bokm%C3%A5l/index.html"
+    },
+    {
+      "id": "kaikki-nn",
+      "kind": "descriptive-dictionary",
+      "scope": "nn",
+      "url": "https://kaikki.org/dictionary/Norwegian%20Nynorsk/index.html"
+    }
+  ],
+  "da": [
+    {
+      "id": "kaikki-da",
+      "kind": "descriptive-dictionary",
+      "scope": "da",
+      "url": "https://kaikki.org/dictionary/Danish/index.html"
+    }
+  ],
+  "fi": [
+    {
+      "id": "kaikki-fi",
+      "kind": "descriptive-dictionary",
+      "scope": "fi",
+      "url": "https://kaikki.org/dictionary/Finnish/index.html"
+    }
+  ],
+  "is": [
+    {
+      "id": "kaikki-is",
+      "kind": "descriptive-dictionary",
+      "scope": "is",
+      "url": "https://kaikki.org/dictionary/Icelandic/index.html"
+    }
+  ],
+  "el": [
+    {
+      "id": "kaikki-el",
+      "kind": "descriptive-dictionary",
+      "scope": "el",
+      "url": "https://kaikki.org/dictionary/Greek/index.html"
+    }
+  ],
+  "cs": [
+    {
+      "id": "kaikki-cs",
+      "kind": "descriptive-dictionary",
+      "scope": "cs",
+      "url": "https://kaikki.org/dictionary/Czech/index.html"
+    }
+  ],
+  "sk": [
+    {
+      "id": "kaikki-sk",
+      "kind": "descriptive-dictionary",
+      "scope": "sk",
+      "url": "https://kaikki.org/dictionary/Slovak/index.html"
+    }
+  ],
+  "hu": [
+    {
+      "id": "kaikki-hu",
+      "kind": "descriptive-dictionary",
+      "scope": "hu",
+      "url": "https://kaikki.org/dictionary/Hungarian/index.html"
+    }
+  ],
+  "ro": [
+    {
+      "id": "kaikki-ro",
+      "kind": "descriptive-dictionary",
+      "scope": "ro",
+      "url": "https://kaikki.org/dictionary/Romanian/index.html"
+    }
+  ],
+  "bg": [
+    {
+      "id": "kaikki-bg",
+      "kind": "descriptive-dictionary",
+      "scope": "bg",
+      "url": "https://kaikki.org/dictionary/Bulgarian/index.html"
+    }
+  ],
+  "hr": [
+    {
+      "id": "hjp",
+      "kind": "dictionary",
+      "scope": "hr",
+      "url": "https://hjp.znanje.hr/index.php?show=o-nama"
+    }
+  ],
+  "sr": [
+    {
+      "id": "govori",
+      "kind": "dictionary",
+      "scope": "sr",
+      "url": "https://govoridictionaries.com/"
+    }
+  ],
+  "bs": [
+    {
+      "id": "bosanski-jezicki-portal",
+      "kind": "dictionary",
+      "scope": "bs",
+      "url": "https://bosanskijezickiportal.ba/rjecnik/o-rjecniku"
+    }
+  ],
+  "sl": [
+    {
+      "id": "kaikki-sl",
+      "kind": "descriptive-dictionary",
+      "scope": "sl",
+      "url": "https://kaikki.org/dictionary/Slovene/index.html"
+    }
+  ],
+  "sq": [
+    {
+      "id": "kaikki-sq",
+      "kind": "descriptive-dictionary",
+      "scope": "sq",
+      "url": "https://kaikki.org/dictionary/Albanian/index.html"
+    }
+  ],
+  "mk": [
+    {
+      "id": "kaikki-mk",
+      "kind": "descriptive-dictionary",
+      "scope": "mk",
+      "url": "https://kaikki.org/dictionary/Macedonian/index.html"
+    }
+  ],
+  "lt": [
+    {
+      "id": "kaikki-lt",
+      "kind": "descriptive-dictionary",
+      "scope": "lt",
+      "url": "https://kaikki.org/dictionary/Lithuanian/index.html"
+    }
+  ],
+  "lv": [
+    {
+      "id": "kaikki-lv",
+      "kind": "descriptive-dictionary",
+      "scope": "lv",
+      "url": "https://kaikki.org/dictionary/Latvian/index.html"
+    }
+  ],
+  "et": [
+    {
+      "id": "kaikki-et",
+      "kind": "descriptive-dictionary",
+      "scope": "et",
+      "url": "https://kaikki.org/dictionary/Estonian/index.html"
+    }
+  ],
+  "ca": [
+    {
+      "id": "kaikki-ca",
+      "kind": "descriptive-dictionary",
+      "scope": "ca",
+      "url": "https://kaikki.org/dictionary/Catalan/index.html"
+    }
+  ],
+  "eu": [
+    {
+      "id": "kaikki-eu",
+      "kind": "descriptive-dictionary",
+      "scope": "eu",
+      "url": "https://kaikki.org/dictionary/Basque/index.html"
+    }
+  ],
+  "gl": [
+    {
+      "id": "kaikki-gl",
+      "kind": "descriptive-dictionary",
+      "scope": "gl",
+      "url": "https://kaikki.org/dictionary/Galician/index.html"
+    }
+  ],
+  "ga": [
+    {
+      "id": "kaikki-ga",
+      "kind": "descriptive-dictionary",
+      "scope": "ga",
+      "url": "https://kaikki.org/dictionary/Irish/index.html"
+    }
+  ],
+  "cy": [
+    {
+      "id": "kaikki-cy",
+      "kind": "descriptive-dictionary",
+      "scope": "cy",
+      "url": "https://kaikki.org/dictionary/Welsh/index.html"
+    }
+  ],
+  "mt": [
+    {
+      "id": "kaikki-mt",
+      "kind": "descriptive-dictionary",
+      "scope": "mt",
+      "url": "https://kaikki.org/dictionary/Maltese/index.html"
+    }
+  ],
+  "lb": [
+    {
+      "id": "kaikki-lb",
+      "kind": "descriptive-dictionary",
+      "scope": "lb",
+      "url": "https://kaikki.org/dictionary/Luxembourgish/index.html"
+    }
+  ],
+  "be": [
+    {
+      "id": "kaikki-be",
+      "kind": "descriptive-dictionary",
+      "scope": "be",
+      "url": "https://kaikki.org/dictionary/Belarusian/index.html"
+    }
+  ],
+  "ar": [
+    {
+      "id": "kaikki-ar",
+      "kind": "descriptive-dictionary",
+      "scope": "ar",
+      "url": "https://kaikki.org/dictionary/Arabic/index.html"
+    }
+  ],
+  "he": [
+    {
+      "id": "kaikki-he",
+      "kind": "descriptive-dictionary",
+      "scope": "he",
+      "url": "https://kaikki.org/dictionary/Hebrew/index.html"
+    }
+  ],
+  "fa": [
+    {
+      "id": "kaikki-fa",
+      "kind": "descriptive-dictionary",
+      "scope": "fa",
+      "url": "https://kaikki.org/dictionary/Persian/index.html"
+    }
+  ],
+  "tr": [
+    {
+      "id": "kaikki-tr",
+      "kind": "descriptive-dictionary",
+      "scope": "tr",
+      "url": "https://kaikki.org/dictionary/Turkish/index.html"
+    }
+  ],
+  "ku": [
+    {
+      "id": "kaikki-ku",
+      "kind": "descriptive-dictionary",
+      "scope": "ku",
+      "url": "https://kaikki.org/dictionary/Northern%20Kurdish/index.html"
+    },
+    {
+      "id": "kaikki-ckb",
+      "kind": "descriptive-dictionary",
+      "scope": "ckb",
+      "url": "https://kaikki.org/dictionary/Central%20Kurdish/index.html"
+    }
+  ],
+  "ps": [
+    {
+      "id": "kaikki-ps",
+      "kind": "descriptive-dictionary",
+      "scope": "ps",
+      "url": "https://kaikki.org/dictionary/Pashto/index.html"
+    }
+  ],
+  "az": [
+    {
+      "id": "kaikki-az",
+      "kind": "descriptive-dictionary",
+      "scope": "az",
+      "url": "https://kaikki.org/dictionary/Azerbaijani/index.html"
+    }
+  ],
+  "kk": [
+    {
+      "id": "kaikki-kk",
+      "kind": "descriptive-dictionary",
+      "scope": "kk",
+      "url": "https://kaikki.org/dictionary/Kazakh/index.html"
+    }
+  ],
+  "uz": [
+    {
+      "id": "kaikki-uz",
+      "kind": "descriptive-dictionary",
+      "scope": "uz",
+      "url": "https://kaikki.org/dictionary/Uzbek/index.html"
+    }
+  ],
+  "ky": [
+    {
+      "id": "kaikki-ky",
+      "kind": "descriptive-dictionary",
+      "scope": "ky",
+      "url": "https://kaikki.org/dictionary/Kyrgyz/index.html"
+    }
+  ],
+  "tk": [
+    {
+      "id": "kaikki-tk",
+      "kind": "descriptive-dictionary",
+      "scope": "tk",
+      "url": "https://kaikki.org/dictionary/Turkmen/index.html"
+    }
+  ],
+  "tg": [
+    {
+      "id": "kaikki-tg",
+      "kind": "descriptive-dictionary",
+      "scope": "tg",
+      "url": "https://kaikki.org/dictionary/Tajik/index.html"
+    }
+  ],
+  "hy": [
+    {
+      "id": "kaikki-hy",
+      "kind": "descriptive-dictionary",
+      "scope": "hy",
+      "url": "https://kaikki.org/dictionary/Armenian/index.html"
+    }
+  ],
+  "ka": [
+    {
+      "id": "kaikki-ka",
+      "kind": "descriptive-dictionary",
+      "scope": "ka",
+      "url": "https://kaikki.org/dictionary/Georgian/index.html"
+    }
+  ],
+  "ug": [
+    {
+      "id": "kaikki-ug",
+      "kind": "descriptive-dictionary",
+      "scope": "ug",
+      "url": "https://kaikki.org/dictionary/Uyghur/index.html"
+    }
+  ],
+  "yi": [
+    {
+      "id": "kaikki-yi",
+      "kind": "descriptive-dictionary",
+      "scope": "yi",
+      "url": "https://kaikki.org/dictionary/Yiddish/index.html"
+    }
+  ],
+  "sw": [
+    {
+      "id": "kaikki-sw",
+      "kind": "descriptive-dictionary",
+      "scope": "sw",
+      "url": "https://kaikki.org/dictionary/Swahili/index.html"
+    }
+  ],
+  "af": [
+    {
+      "id": "kaikki-af",
+      "kind": "descriptive-dictionary",
+      "scope": "af",
+      "url": "https://kaikki.org/dictionary/Afrikaans/index.html"
+    }
+  ],
+  "am": [
+    {
+      "id": "kaikki-am",
+      "kind": "descriptive-dictionary",
+      "scope": "am",
+      "url": "https://kaikki.org/dictionary/Amharic/index.html"
+    }
+  ],
+  "so": [
+    {
+      "id": "kaikki-so",
+      "kind": "descriptive-dictionary",
+      "scope": "so",
+      "url": "https://kaikki.org/dictionary/Somali/index.html"
+    }
+  ],
+  "ha": [
+    {
+      "id": "kaikki-ha",
+      "kind": "descriptive-dictionary",
+      "scope": "ha",
+      "url": "https://kaikki.org/dictionary/Hausa/index.html"
+    }
+  ],
+  "yo": [
+    {
+      "id": "kaikki-yo",
+      "kind": "descriptive-dictionary",
+      "scope": "yo",
+      "url": "https://kaikki.org/dictionary/Yoruba/index.html"
+    }
+  ],
+  "ig": [
+    {
+      "id": "nkowaokwu",
+      "kind": "dictionary",
+      "scope": "ig",
+      "url": "https://nkowaokwu.com/"
+    }
+  ],
+  "zu": [
+    {
+      "id": "kaikki-zu",
+      "kind": "descriptive-dictionary",
+      "scope": "zu",
+      "url": "https://kaikki.org/dictionary/Zulu/index.html"
+    }
+  ],
+  "xh": [
+    {
+      "id": "kaikki-xh",
+      "kind": "descriptive-dictionary",
+      "scope": "xh",
+      "url": "https://kaikki.org/dictionary/Xhosa/index.html"
+    }
+  ],
+  "mg": [
+    {
+      "id": "kaikki-mg",
+      "kind": "descriptive-dictionary",
+      "scope": "mg",
+      "url": "https://kaikki.org/dictionary/Malagasy/index.html"
+    }
+  ],
+  "rw": [
+    {
+      "id": "webonary-iriza",
+      "kind": "dictionary",
+      "scope": "rw",
+      "url": "https://www.webonary.org/kinyarwanda/files/keng.pdf"
+    }
+  ],
+  "om": [
+    {
+      "id": "kaikki-om",
+      "kind": "descriptive-dictionary",
+      "scope": "om",
+      "url": "https://kaikki.org/dictionary/Oromo/index.html"
+    }
+  ],
+  "sn": [
+    {
+      "id": "kaikki-sn",
+      "kind": "descriptive-dictionary",
+      "scope": "sn",
+      "url": "https://kaikki.org/dictionary/Shona/index.html"
+    }
+  ],
+  "wo": [
+    {
+      "id": "kaikki-wo",
+      "kind": "descriptive-dictionary",
+      "scope": "wo",
+      "url": "https://kaikki.org/dictionary/Wolof/index.html"
+    }
+  ],
+  "mi": [
+    {
+      "id": "kaikki-mi",
+      "kind": "descriptive-dictionary",
+      "scope": "mi",
+      "url": "https://kaikki.org/dictionary/M%C4%81ori/index.html"
+    }
+  ],
+  "sm": [
+    {
+      "id": "kaikki-sm",
+      "kind": "descriptive-dictionary",
+      "scope": "sm",
+      "url": "https://kaikki.org/dictionary/Samoan/index.html"
+    }
+  ],
+  "haw": [
+    {
+      "id": "kaikki-haw",
+      "kind": "descriptive-dictionary",
+      "scope": "haw",
+      "url": "https://kaikki.org/dictionary/Hawaiian/index.html"
+    }
+  ],
+  "eo": [
+    {
+      "id": "kaikki-eo",
+      "kind": "descriptive-dictionary",
+      "scope": "eo",
+      "url": "https://kaikki.org/dictionary/Esperanto/index.html"
+    }
+  ]
+}

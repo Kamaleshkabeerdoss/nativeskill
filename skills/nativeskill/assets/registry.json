@@ -1,0 +1,1006 @@
+{
+  "schema": 1,
+  "cldrVersion": "49.0.0",
+  "languageCount": 110,
+  "regionalLocaleCount": 449,
+  "tagOwners": {
+    "ta": "ta",
+    "hi": "hi",
+    "te": "te",
+    "ml": "ml",
+    "kn": "kn",
+    "bn": "bn",
+    "mr": "mr",
+    "gu": "gu",
+    "pa": "pa",
+    "ur": "ur",
+    "ne": "ne",
+    "si": "si",
+    "or": "or",
+    "as": "as",
+    "sa": "sa",
+    "mai": "mai",
+    "sd": "sd",
+    "kok": "kok",
+    "gom": "kok",
+    "doi": "doi",
+    "ks": "ks",
+    "zh": "zh",
+    "ja": "ja",
+    "ko": "ko",
+    "ms": "ms",
+    "id": "id",
+    "th": "th",
+    "vi": "vi",
+    "fil": "fil",
+    "my": "my",
+    "km": "km",
+    "lo": "lo",
+    "jv": "jv",
+    "su": "su",
+    "ceb": "ceb",
+    "mn": "mn",
+    "bo": "bo",
+    "hmn": "hmn",
+    "mww": "hmn",
+    "hnj": "hmn",
+    "ban": "ban",
+    "en": "en",
+    "fr": "fr",
+    "de": "de",
+    "es": "es",
+    "pt": "pt",
+    "it": "it",
+    "nl": "nl",
+    "ru": "ru",
+    "uk": "uk",
+    "pl": "pl",
+    "sv": "sv",
+    "no": "no",
+    "nb": "no",
+    "nn": "no",
+    "da": "da",
+    "fi": "fi",
+    "is": "is",
+    "el": "el",
+    "cs": "cs",
+    "sk": "sk",
+    "hu": "hu",
+    "ro": "ro",
+    "bg": "bg",
+    "hr": "hr",
+    "sr": "sr",
+    "bs": "bs",
+    "sl": "sl",
+    "sq": "sq",
+    "mk": "mk",
+    "lt": "lt",
+    "lv": "lv",
+    "et": "et",
+    "ca": "ca",
+    "eu": "eu",
+    "gl": "gl",
+    "ga": "ga",
+    "cy": "cy",
+    "mt": "mt",
+    "lb": "lb",
+    "be": "be",
+    "ar": "ar",
+    "he": "he",
+    "fa": "fa",
+    "tr": "tr",
+    "ku": "ku",
+    "ckb": "ku",
+    "ps": "ps",
+    "az": "az",
+    "kk": "kk",
+    "uz": "uz",
+    "ky": "ky",
+    "tk": "tk",
+    "tg": "tg",
+    "hy": "hy",
+    "ka": "ka",
+    "ug": "ug",
+    "yi": "yi",
+    "sw": "sw",
+    "af": "af",
+    "am": "am",
+    "so": "so",
+    "ha": "ha",
+    "yo": "yo",
+    "ig": "ig",
+    "zu": "zu",
+    "xh": "xh",
+    "mg": "mg",
+    "rw": "rw",
+    "om": "om",
+    "sn": "sn",
+    "wo": "wo",
+    "mi": "mi",
+    "sm": "sm",
+    "haw": "haw",
+    "eo": "eo"
+  },
+  "languages": [
+    {
+      "id": "ta",
+      "name": "Tamil",
+      "group": "South Asian",
+      "path": "locales/ta.json",
+      "regionalProfiles": 4,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "hi",
+      "name": "Hindi",
+      "group": "South Asian",
+      "path": "locales/hi.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "te",
+      "name": "Telugu",
+      "group": "South Asian",
+      "path": "locales/te.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ml",
+      "name": "Malayalam",
+      "group": "South Asian",
+      "path": "locales/ml.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "kn",
+      "name": "Kannada",
+      "group": "South Asian",
+      "path": "locales/kn.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "bn",
+      "name": "Bengali",
+      "group": "South Asian",
+      "path": "locales/bn.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "mr",
+      "name": "Marathi",
+      "group": "South Asian",
+      "path": "locales/mr.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "gu",
+      "name": "Gujarati",
+      "group": "South Asian",
+      "path": "locales/gu.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "pa",
+      "name": "Punjabi",
+      "group": "South Asian",
+      "path": "locales/pa.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ur",
+      "name": "Urdu",
+      "group": "South Asian",
+      "path": "locales/ur.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ne",
+      "name": "Nepali",
+      "group": "South Asian",
+      "path": "locales/ne.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "si",
+      "name": "Sinhala",
+      "group": "South Asian",
+      "path": "locales/si.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "or",
+      "name": "Odia",
+      "group": "South Asian",
+      "path": "locales/or.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "as",
+      "name": "Assamese",
+      "group": "South Asian",
+      "path": "locales/as.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sa",
+      "name": "Sanskrit",
+      "group": "South Asian",
+      "path": "locales/sa.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "mai",
+      "name": "Maithili",
+      "group": "South Asian",
+      "path": "locales/mai.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sd",
+      "name": "Sindhi",
+      "group": "South Asian",
+      "path": "locales/sd.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "kok",
+      "name": "Konkani",
+      "group": "South Asian",
+      "path": "locales/kok.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "doi",
+      "name": "Dogri",
+      "group": "South Asian",
+      "path": "locales/doi.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ks",
+      "name": "Kashmiri",
+      "group": "South Asian",
+      "path": "locales/ks.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "zh",
+      "name": "Chinese",
+      "group": "East and Southeast Asian",
+      "path": "locales/zh.json",
+      "regionalProfiles": 9,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ja",
+      "name": "Japanese",
+      "group": "East and Southeast Asian",
+      "path": "locales/ja.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ko",
+      "name": "Korean",
+      "group": "East and Southeast Asian",
+      "path": "locales/ko.json",
+      "regionalProfiles": 3,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ms",
+      "name": "Malay",
+      "group": "East and Southeast Asian",
+      "path": "locales/ms.json",
+      "regionalProfiles": 6,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "id",
+      "name": "Indonesian",
+      "group": "East and Southeast Asian",
+      "path": "locales/id.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "th",
+      "name": "Thai",
+      "group": "East and Southeast Asian",
+      "path": "locales/th.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "vi",
+      "name": "Vietnamese",
+      "group": "East and Southeast Asian",
+      "path": "locales/vi.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "fil",
+      "name": "Filipino",
+      "group": "East and Southeast Asian",
+      "path": "locales/fil.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "my",
+      "name": "Burmese",
+      "group": "East and Southeast Asian",
+      "path": "locales/my.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "km",
+      "name": "Khmer",
+      "group": "East and Southeast Asian",
+      "path": "locales/km.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "lo",
+      "name": "Lao",
+      "group": "East and Southeast Asian",
+      "path": "locales/lo.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "jv",
+      "name": "Javanese",
+      "group": "East and Southeast Asian",
+      "path": "locales/jv.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "su",
+      "name": "Sundanese",
+      "group": "East and Southeast Asian",
+      "path": "locales/su.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ceb",
+      "name": "Cebuano",
+      "group": "East and Southeast Asian",
+      "path": "locales/ceb.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "mn",
+      "name": "Mongolian",
+      "group": "East and Southeast Asian",
+      "path": "locales/mn.json",
+      "regionalProfiles": 3,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "bo",
+      "name": "Tibetan",
+      "group": "East and Southeast Asian",
+      "path": "locales/bo.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "hmn",
+      "name": "Hmong",
+      "group": "East and Southeast Asian",
+      "path": "locales/hmn.json",
+      "regionalProfiles": 7,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ban",
+      "name": "Balinese",
+      "group": "East and Southeast Asian",
+      "path": "locales/ban.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "en",
+      "name": "English",
+      "group": "European",
+      "path": "locales/en.json",
+      "regionalProfiles": 124,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "fr",
+      "name": "French",
+      "group": "European",
+      "path": "locales/fr.json",
+      "regionalProfiles": 46,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "de",
+      "name": "German",
+      "group": "European",
+      "path": "locales/de.json",
+      "regionalProfiles": 7,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "es",
+      "name": "Spanish",
+      "group": "European",
+      "path": "locales/es.json",
+      "regionalProfiles": 28,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "pt",
+      "name": "Portuguese",
+      "group": "European",
+      "path": "locales/pt.json",
+      "regionalProfiles": 12,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "it",
+      "name": "Italian",
+      "group": "European",
+      "path": "locales/it.json",
+      "regionalProfiles": 4,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "nl",
+      "name": "Dutch",
+      "group": "European",
+      "path": "locales/nl.json",
+      "regionalProfiles": 7,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ru",
+      "name": "Russian",
+      "group": "European",
+      "path": "locales/ru.json",
+      "regionalProfiles": 6,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "uk",
+      "name": "Ukrainian",
+      "group": "European",
+      "path": "locales/uk.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "pl",
+      "name": "Polish",
+      "group": "European",
+      "path": "locales/pl.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sv",
+      "name": "Swedish",
+      "group": "European",
+      "path": "locales/sv.json",
+      "regionalProfiles": 3,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "no",
+      "name": "Norwegian",
+      "group": "European",
+      "path": "locales/no.json",
+      "regionalProfiles": 4,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "da",
+      "name": "Danish",
+      "group": "European",
+      "path": "locales/da.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "fi",
+      "name": "Finnish",
+      "group": "European",
+      "path": "locales/fi.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "is",
+      "name": "Icelandic",
+      "group": "European",
+      "path": "locales/is.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "el",
+      "name": "Greek",
+      "group": "European",
+      "path": "locales/el.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "cs",
+      "name": "Czech",
+      "group": "European",
+      "path": "locales/cs.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sk",
+      "name": "Slovak",
+      "group": "European",
+      "path": "locales/sk.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "hu",
+      "name": "Hungarian",
+      "group": "European",
+      "path": "locales/hu.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ro",
+      "name": "Romanian",
+      "group": "European",
+      "path": "locales/ro.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "bg",
+      "name": "Bulgarian",
+      "group": "European",
+      "path": "locales/bg.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "hr",
+      "name": "Croatian",
+      "group": "European",
+      "path": "locales/hr.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sr",
+      "name": "Serbian",
+      "group": "European",
+      "path": "locales/sr.json",
+      "regionalProfiles": 8,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "bs",
+      "name": "Bosnian",
+      "group": "European",
+      "path": "locales/bs.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sl",
+      "name": "Slovenian",
+      "group": "European",
+      "path": "locales/sl.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sq",
+      "name": "Albanian",
+      "group": "European",
+      "path": "locales/sq.json",
+      "regionalProfiles": 3,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "mk",
+      "name": "Macedonian",
+      "group": "European",
+      "path": "locales/mk.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "lt",
+      "name": "Lithuanian",
+      "group": "European",
+      "path": "locales/lt.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "lv",
+      "name": "Latvian",
+      "group": "European",
+      "path": "locales/lv.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "et",
+      "name": "Estonian",
+      "group": "European",
+      "path": "locales/et.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ca",
+      "name": "Catalan",
+      "group": "European",
+      "path": "locales/ca.json",
+      "regionalProfiles": 4,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "eu",
+      "name": "Basque",
+      "group": "European",
+      "path": "locales/eu.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "gl",
+      "name": "Galician",
+      "group": "European",
+      "path": "locales/gl.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ga",
+      "name": "Irish",
+      "group": "European",
+      "path": "locales/ga.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "cy",
+      "name": "Welsh",
+      "group": "European",
+      "path": "locales/cy.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "mt",
+      "name": "Maltese",
+      "group": "European",
+      "path": "locales/mt.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "lb",
+      "name": "Luxembourgish",
+      "group": "European",
+      "path": "locales/lb.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "be",
+      "name": "Belarusian",
+      "group": "European",
+      "path": "locales/be.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ar",
+      "name": "Arabic",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/ar.json",
+      "regionalProfiles": 28,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "he",
+      "name": "Hebrew",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/he.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "fa",
+      "name": "Persian",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/fa.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "tr",
+      "name": "Turkish",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/tr.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ku",
+      "name": "Kurdish",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/ku.json",
+      "regionalProfiles": 5,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ps",
+      "name": "Pashto",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/ps.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "az",
+      "name": "Azerbaijani",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/az.json",
+      "regionalProfiles": 3,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "kk",
+      "name": "Kazakh",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/kk.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "uz",
+      "name": "Uzbek",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/uz.json",
+      "regionalProfiles": 3,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ky",
+      "name": "Kyrgyz",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/ky.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "tk",
+      "name": "Turkmen",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/tk.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "tg",
+      "name": "Tajik",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/tg.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "hy",
+      "name": "Armenian",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/hy.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ka",
+      "name": "Georgian",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/ka.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ug",
+      "name": "Uyghur",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/ug.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "yi",
+      "name": "Yiddish",
+      "group": "Middle Eastern and Central Asian",
+      "path": "locales/yi.json",
+      "regionalProfiles": 3,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sw",
+      "name": "Swahili",
+      "group": "African",
+      "path": "locales/sw.json",
+      "regionalProfiles": 4,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "af",
+      "name": "Afrikaans",
+      "group": "African",
+      "path": "locales/af.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "am",
+      "name": "Amharic",
+      "group": "African",
+      "path": "locales/am.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "so",
+      "name": "Somali",
+      "group": "African",
+      "path": "locales/so.json",
+      "regionalProfiles": 4,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ha",
+      "name": "Hausa",
+      "group": "African",
+      "path": "locales/ha.json",
+      "regionalProfiles": 5,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "yo",
+      "name": "Yoruba",
+      "group": "African",
+      "path": "locales/yo.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "ig",
+      "name": "Igbo",
+      "group": "African",
+      "path": "locales/ig.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "zu",
+      "name": "Zulu",
+      "group": "African",
+      "path": "locales/zu.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "xh",
+      "name": "Xhosa",
+      "group": "African",
+      "path": "locales/xh.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "mg",
+      "name": "Malagasy",
+      "group": "African",
+      "path": "locales/mg.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "rw",
+      "name": "Kinyarwanda",
+      "group": "African",
+      "path": "locales/rw.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "om",
+      "name": "Oromo",
+      "group": "African",
+      "path": "locales/om.json",
+      "regionalProfiles": 2,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sn",
+      "name": "Shona",
+      "group": "African",
+      "path": "locales/sn.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "wo",
+      "name": "Wolof",
+      "group": "African",
+      "path": "locales/wo.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "mi",
+      "name": "Māori",
+      "group": "Additional",
+      "path": "locales/mi.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "sm",
+      "name": "Samoan",
+      "group": "Additional",
+      "path": "locales/sm.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "haw",
+      "name": "Hawaiian",
+      "group": "Additional",
+      "path": "locales/haw.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    },
+    {
+      "id": "eo",
+      "name": "Esperanto",
+      "group": "Additional",
+      "path": "locales/eo.json",
+      "regionalProfiles": 1,
+      "wordingStatus": "foundation"
+    }
+  ]
+}

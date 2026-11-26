@@ -1,0 +1,119 @@
+import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import test from 'node:test';
+import { inspectConcept, inspectLanguage, inspectLocale, registry } from '../src/locales.mjs';
+
+const cli = fileURLToPath(new URL('../src/cli.mjs', import.meta.url));
+const launch = JSON.parse(readFileSync(new URL('../../../scripts/launch-languages.json', import.meta.url), 'utf8'));
+const run = (...args) => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' });
+
+function catalogs(t, inputs) {
+  const directory = mkdtempSync(join(tmpdir(), 'nativeskill-test-'));
+  t.after(() => rmSync(directory, { force: true, recursive: true }));
+  const files = [];
+  for (const [name, content] of Object.entries(inputs)) {
+    const path = join(directory, name);
+    writeFileSync(path, typeof content === 'object' ? JSON.stringify(content) : content);
+    files.push(path);
+  }
+  return files;
+}
+
+function validate(t, inputs, ...args) {
+  const [source, target] = catalogs(t, inputs);
+  const result = run('validate', '--source', source, '--target', target, '--locale', 'ta-MY', '--json', ...args);
+  if ([0, 1].includes(result.status)) result.report = JSON.parse(result.stdout);
+  return result;
+}
+
+test('the registry preserves the exact requested 110 languages and has scoped references for each', () => {
+  const requested = Object.values(launch).flat().map(([id, name]) => [id, name]);
+  assert.equal(registry.languageCount, 110);
+  assert.deepEqual(registry.languages.map(({ id, name }) => [id, name]), requested);
+  assert.ok(registry.regionalLocaleCount >= 150);
+  for (const { id } of registry.languages) {
+    const pack = inspectLanguage(id);
+    assert.ok(pack.profiles.length > 0, id);
+    assert.ok(pack.references.some(({ kind, scope }) => kind.includes('dictionary') && pack.codes.includes(scope)), id);
+    assert.ok(pack.references.some(({ id }) => id === 'iana'));
+    assert.ok(pack.references.some(({ id }) => id === 'cldr-scripts'));
+    assert.equal(pack.wording.status, 'foundation');
+  }
+});
+
+test('locale lookups use a script and keep regional, macrolanguage, and member distinctions', () => {
+  const expected = {
+    'pa-IN': ['Guru', 'ltr'], 'pa-PK': ['Arab', 'rtl'],
+    'az-Arab-IR': ['Arab', 'rtl'], 'az-Latn-AZ': ['Latn', 'ltr'],
+    'ms-Arab-MY': ['Arab', 'rtl'], 'ms-MY': ['Latn', 'ltr'],
+    'zh-CN': ['Hans', 'ltr'], 'zh-TW': ['Hant', 'ltr'],
+    'ar-001': ['Arab', 'rtl'], 'ckb-Arab-IQ': ['Arab', 'rtl'], 'ku-TR': ['Latn', 'ltr'],
+    he: ['Hebr', 'rtl'], fa: ['Arab', 'rtl'], ur: ['Arab', 'rtl'], ps: ['Arab', 'rtl'],
+    ug: ['Arab', 'rtl'], yi: ['Hebr', 'rtl'], 'ban-Bali-ID': ['Bali', 'ltr']
+  };
+  for (const [tag, value] of Object.entries(expected)) {
+    const { profile } = inspectLocale(tag);
+    assert.deepEqual([profile.script, profile.direction], value, tag);
+  }
+  assert.equal(inspectLocale('ckb-Arab-IQ').id, 'ku');
+  assert.equal(inspectLocale('nn-NO').id, 'no');
+  assert.deepEqual(inspectLocale('ar-EG').profile.plurals.cardinal.categories, ['zero', 'one', 'two', 'few', 'many', 'other']);
+  assert.throws(() => inspectLocale('pa-Latn-PK'), /No profile/);
+  assert.throws(() => inspectLocale('x-a'), /Invalid locale/);
+});
+
+test('context retrieval distinguishes dialog dismiss and cancellation of renewal', () => {
+  const concept = inspectConcept('dialog.dismiss');
+  const output = run('inspect', '--locale', 'ms-MY', '--concept', 'billing.stop_renewal', '--json');
+  assert.equal(output.status, 0, output.stderr);
+  const report = JSON.parse(output.stdout);
+  assert.notEqual(report.concept.intent, concept.intent);
+  assert.deepEqual(report.wording.entries, []);
+  assert.equal(report.profile.tag, 'ms-MY');
+});
+
+test('the CLI finds missing keys, exact source copies, placeholder changes, and changed markup', (t) => {
+  const result = validate(t, {
+    'en.json': { renew: 'Access continues until {date}', link: '<help>{name}</help>', exact: 'Stop auto-renewal', absent: 'Open settings' },
+    'ta.json': { renew: '{until} வரை அணுகல் தொடரும்', link: '<b>{name}</b>', exact: 'Stop auto-renewal', orphan: 'தொடரவும்' }
+  }, '--source-locale', 'en');
+  assert.equal(result.status, 1, result.stderr);
+  assert.equal(result.report.errors, 3);
+  assert.equal(result.report.warnings, 2);
+  assert.deepEqual(result.report.findings.map(({ code }) => code), [
+    'placeholder-mismatch', 'markup-mismatch', 'possible-source-copy', 'missing-key', 'extra-key'
+  ]);
+});
+
+test('the CLI handles i18next interpolation and checks ICU plural and select semantics', (t) => {
+  const result = validate(t, {
+    'en.json': { receipt: '{{ customer }}', count: '{n, plural, =0 {Empty} one {# item} other {# items}}', selection: '{state, select, open {Open} other {Other}}' },
+    'ta.json': { receipt: '{{- customer }}', count: '{n, plural, other {# உருப்படிகள்}}', selection: '{state, select, closed {மூடப்பட்டது} other {வேறு}}' }
+  });
+  assert.equal(result.status, 1, result.stderr);
+  assert.deepEqual(result.report.findings.map(({ code }) => code), [
+    'placeholder-mismatch', 'selector-mismatch', 'plural-fallback', 'selector-mismatch'
+  ]);
+});
+
+test('static TypeScript dictionaries are read without evaluating code', (t) => {
+  const result = validate(t, {
+    'en.ts': 'throw new Error("must never be executed"); const en = { title: "Continue", nested: { ok: "OK" }, runtime: () => String(1) } as const; export default en;',
+    'ta.ts': 'export const ta = { title: "தொடரவும்", nested: { ok: "சரி" }, runtime: () => String(1) } as const;'
+  });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(result.report.findings.map(({ code }) => code), ['dynamic-value']);
+});
+
+test('unsupported spreads fail explicitly for a static dictionary', (t) => {
+  const result = validate(t, {
+    'en.ts': 'export default { title: "Continue", ...unknown };',
+    'ta.json': { title: 'தொடரவும்' }
+  });
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /spreads and computed keys/);
+});

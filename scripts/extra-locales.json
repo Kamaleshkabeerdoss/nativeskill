@@ -1,0 +1,23 @@
+{
+  "ar": ["ar-001"],
+  "az": ["az-Arab-IR", "az-Cyrl-AZ"],
+  "ban": ["ban-Bali-ID"],
+  "ckb": ["ckb-Arab-IQ", "ckb-Arab-IR"],
+  "gom": ["gom-Deva-IN", "gom-Latn-IN"],
+  "ha": ["ha-Arab-NE", "ha-Arab-NG"],
+  "hnj": ["hnj-Hmnp-US", "hnj-Laoo-LA", "hnj-Latn-LA"],
+  "jv": ["jv-Java-ID"],
+  "kk": ["kk-Arab-CN", "kk-Cyrl-KZ"],
+  "kok": ["kok-Deva-IN", "kok-Latn-IN"],
+  "ks": ["ks-Arab-IN", "ks-Deva-IN"],
+  "mn": ["mn-Mong-CN", "mn-Mong-MN"],
+  "ms": ["ms-Arab-BN", "ms-Arab-MY"],
+  "mww": ["mww-Hmnp-US", "mww-Latn-LA", "mww-Latn-US"],
+  "pa": ["pa-Arab-PK", "pa-Guru-IN"],
+  "sd": ["sd-Arab-PK", "sd-Deva-IN"],
+  "sr": ["sr-Cyrl-RS", "sr-Latn-RS"],
+  "su": ["su-Sund-ID"],
+  "uz": ["uz-Arab-AF", "uz-Cyrl-UZ", "uz-Latn-UZ"],
+  "yi": ["yi-IL", "yi-US"],
+  "zh": ["zh-Hans-CN", "zh-Hant-TW"]
+}
