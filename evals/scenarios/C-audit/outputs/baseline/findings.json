@@ -1,0 +1,219 @@
+[
+  {
+    "id": "ta-welcome-placeholder",
+    "file": "ta.json",
+    "key": "welcome",
+    "problem": "The placeholder was translated. {பெயர்} is the Tamil word for name, not the {name} token, so the person's name is never substituted.",
+    "replacement": "வணக்கம், {name}"
+  },
+  {
+    "id": "ta-stop-renewal-action",
+    "file": "ta.json",
+    "key": "stopRenewal",
+    "problem": "Billing cancel uses ரத்துசெய், the same dialog-dismiss label as dialogCancel. This control stops a subscription renewal; it does not close a dialog.",
+    "replacement": "சந்தாவை ரத்துசெய்"
+  },
+  {
+    "id": "ta-stop-renewal-help-english",
+    "file": "ta.json",
+    "key": "stopRenewalHelp",
+    "problem": "The sentence is still English: Access continues until {date}.",
+    "replacement": "அணுகல் {date} வரை தொடரும்."
+  },
+  {
+    "id": "ta-receipt-plural",
+    "file": "ta.json",
+    "key": "receiptCount",
+    "problem": "Tamil plural rules have only the category other. The one branch never matches, so a count of 1 is shown with the plural ரசீதுகள். A singular line has to be an exact =1 selector.",
+    "replacement": "{count, plural, =1 {# ரசீது} other {# ரசீதுகள்}}"
+  },
+  {
+    "id": "ta-save-draft-wording",
+    "file": "ta.json",
+    "key": "saveDraft",
+    "problem": "Machine-translated button. வெற்றிகரமாக (successfully) is not in the source, and சேமிக்கவும் is a polite request while the other buttons use a bare imperative such as சேமி.",
+    "replacement": "வரைவைச் சேமி"
+  },
+  {
+    "id": "ta-delete-forever",
+    "file": "ta.json",
+    "key": "deleteForever",
+    "problem": "நீக்கு means only Delete. The permanent, irreversible meaning is gone, so the control reads as an ordinary delete.",
+    "replacement": "நிரந்தரமாக நீக்கு"
+  },
+  {
+    "id": "ta-archive-means-copy",
+    "file": "ta.json",
+    "key": "archive",
+    "problem": "காப்பிடு means Copy (from the English word copy), not Archive.",
+    "replacement": "காப்பகப்படுத்து"
+  },
+  {
+    "id": "ta-deny-camera",
+    "file": "ta.json",
+    "key": "denyCamera",
+    "problem": "வேண்டாம் means no or don't want. It does not say Don't allow.",
+    "replacement": "அனுமதிக்க வேண்டாம்"
+  },
+  {
+    "id": "ar-stop-renewal-action",
+    "file": "ar.json",
+    "key": "stopRenewal",
+    "problem": "Billing cancel is إلغاء, the same dialog-dismiss word as dialogCancel. It does not say the subscription or renewal is being canceled.",
+    "replacement": "إلغاء الاشتراك"
+  },
+  {
+    "id": "ar-empty-question-mark",
+    "file": "ar.json",
+    "key": "empty",
+    "problem": "No receipts yet is a statement, but the Arabic ends with a Latin question mark (U+003F).",
+    "replacement": "لا توجد إيصالات بعد."
+  },
+  {
+    "id": "ar-delete-forever",
+    "file": "ar.json",
+    "key": "deleteForever",
+    "problem": "حذف means only Delete. Permanence is missing on a destructive action.",
+    "replacement": "حذف نهائي"
+  },
+  {
+    "id": "ar-receipt-plural",
+    "file": "ar.json",
+    "key": "receiptCount",
+    "problem": "Arabic needs the plural categories zero, one, two, few, many, and other, and the noun form changes across them. This string has only one and other, and other uses إيصالات, which is the form for 3–10 (few), not for 100 and above. Counts such as 0, 2, 11, and 100 therefore get the wrong form.",
+    "replacement": "{count, plural, zero {# إيصال} one {# إيصال} two {إيصالان} few {# إيصالات} many {# إيصالًا} other {# إيصال}}"
+  },
+  {
+    "id": "ja-save-formality",
+    "file": "ja.json",
+    "key": "save",
+    "problem": "保存します is a polite sentence (will save), not a button label. The other controls are plain nouns or dictionary forms, including 下書きを保存.",
+    "replacement": "保存"
+  },
+  {
+    "id": "ja-stop-renewal-action",
+    "file": "ja.json",
+    "key": "stopRenewal",
+    "problem": "キャンセル is the dialog-cancel loanword and is identical to dialogCancel. Canceling a subscription is 解約.",
+    "replacement": "解約"
+  },
+  {
+    "id": "ja-receipt-plural",
+    "file": "ja.json",
+    "key": "receiptCount",
+    "problem": "Japanese has only the plural category other. The one branch is extra and is never selected. The two branches are the same text.",
+    "replacement": "{count, plural, other {領収書 # 件}}"
+  },
+  {
+    "id": "zh-stop-renewal-action",
+    "file": "zh.json",
+    "key": "stopRenewal",
+    "problem": "取消 is the dialog-dismiss word, the same label as dialogCancel. It does not say the renewal is being canceled.",
+    "replacement": "取消续订"
+  },
+  {
+    "id": "zh-stop-renewal-help-formality",
+    "file": "zh.json",
+    "key": "stopRenewalHelp",
+    "problem": "Mixed address in one sentence: 您 (formal) and 你 (informal). The added clause 你可以继续使用 is not in the English, which only says that access continues until the date.",
+    "replacement": "访问权限持续到 {date}。"
+  },
+  {
+    "id": "de-workspace-english",
+    "file": "de.json",
+    "key": "workspace",
+    "problem": "Left in English. The usual German product term is Arbeitsbereich.",
+    "replacement": "Arbeitsbereich"
+  },
+  {
+    "id": "de-stop-renewal-abort",
+    "file": "de.json",
+    "key": "stopRenewal",
+    "problem": "Abbrechen means abort or dismiss a dialog, and it is the same label as dialogCancel. Canceling a paid renewal is Kündigen.",
+    "replacement": "Kündigen"
+  },
+  {
+    "id": "de-download-grammar",
+    "file": "de.json",
+    "key": "download",
+    "problem": "Herunterladen Sie is ungrammatical. The infinitive used on the other buttons cannot be followed by Sie; this mixes Herunterladen with the imperative Laden Sie herunter.",
+    "replacement": "Herunterladen"
+  },
+  {
+    "id": "de-stop-renewal-help-formality",
+    "file": "de.json",
+    "key": "stopRenewalHelp",
+    "problem": "Informal Du, while download addresses the user with Sie. The file has no consistent form of address.",
+    "replacement": "Der Zugriff bleibt bis {date} bestehen."
+  },
+  {
+    "id": "ms-download-indonesian",
+    "file": "ms.json",
+    "key": "download",
+    "problem": "Unduh is Indonesian. The Malay button is Muat turun.",
+    "replacement": "Muat turun"
+  },
+  {
+    "id": "ms-stop-renewal-action",
+    "file": "ms.json",
+    "key": "stopRenewal",
+    "problem": "Batal is the dialog-dismiss word, identical to dialogCancel. It does not say the subscription or renewal is being canceled.",
+    "replacement": "Batalkan langganan"
+  },
+  {
+    "id": "ms-deny-camera",
+    "file": "ms.json",
+    "key": "denyCamera",
+    "problem": "Nafi means to deny or negate a statement. A permission button for Don't allow is Jangan benarkan, parallel to Benarkan.",
+    "replacement": "Jangan benarkan"
+  },
+  {
+    "id": "ms-delete-forever",
+    "file": "ms.json",
+    "key": "deleteForever",
+    "problem": "Padam means only Delete. The permanent meaning is missing.",
+    "replacement": "Padam secara kekal"
+  },
+  {
+    "id": "ms-receipt-plural",
+    "file": "ms.json",
+    "key": "receiptCount",
+    "problem": "Malay has only the plural category other. The one branch is extra. The noun resit itself is fine; Malay does not inflect it after a number.",
+    "replacement": "{count, plural, other {# resit}}"
+  },
+  {
+    "id": "hi-stop-renewal-action",
+    "file": "hi.json",
+    "key": "stopRenewal",
+    "problem": "रद्द करें is the dialog-dismiss label, the same as dialogCancel. It does not say the subscription or renewal is being canceled.",
+    "replacement": "सदस्यता रद्द करें"
+  },
+  {
+    "id": "hi-pay-now-placeholder",
+    "file": "hi.json",
+    "key": "payNow",
+    "problem": "The {amount} placeholder is missing, so the button cannot show what will be charged. The English is Pay {amount}.",
+    "replacement": "{amount} का भुगतान करें"
+  },
+  {
+    "id": "hi-deny-camera",
+    "file": "hi.json",
+    "key": "denyCamera",
+    "problem": "अभी नहीं means Not now, which postpones the prompt. Don't allow is a refusal.",
+    "replacement": "अनुमति न दें"
+  },
+  {
+    "id": "hi-receipt-plural",
+    "file": "hi.json",
+    "key": "receiptCount",
+    "problem": "Hindi uses the categories one (0 and 1) and other. Only other is present, and it uses the plural रसीदें, so 1 is shown as 1 रसीदें instead of 1 रसीद.",
+    "replacement": "{count, plural, one {# रसीद} other {# रसीदें}}"
+  },
+  {
+    "id": "hi-delete-forever",
+    "file": "hi.json",
+    "key": "deleteForever",
+    "problem": "मिटाएँ means Erase and does not say the deletion is permanent.",
+    "replacement": "हमेशा के लिए मिटाएँ"
+  }
+]
