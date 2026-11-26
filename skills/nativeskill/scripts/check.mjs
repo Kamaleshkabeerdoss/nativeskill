@@ -28,9 +28,11 @@ function readName(text, index) {
 function parseMessage(text, start, closer) {
   const placeholders = [];
   const plurals = [];
+  const selects = [];
+  const exacts = [];
   let index = start;
   while (index < text.length) {
-    if (closer && text[index] === closer) return { placeholders, plurals, index };
+    if (closer && text[index] === closer) return { placeholders, plurals, selects, exacts, index };
     if (text.startsWith('%%', index)) {
       index += 2;
       continue;
@@ -95,6 +97,8 @@ function parseMessage(text, start, closer) {
           if (text[nested.index] !== '}') throw new Error('Unclosed plural choice ' + option);
           if (nested.placeholders.length) placeholders.push(...nested.placeholders);
           if (nested.plurals.length) plurals.push(...nested.plurals);
+          if (nested.selects.length) selects.push(...nested.selects);
+          if (nested.exacts.length) exacts.push(...nested.exacts);
           if (text.slice(index + 1, nested.index).includes('#')) usesPound = true;
           options.push(option);
           index = skipSpace(text, nested.index + 1);
@@ -103,8 +107,10 @@ function parseMessage(text, start, closer) {
         if ((type === 'plural' || type === 'selectordinal') && !options.includes('other')) {
           throw new Error(type + ' for ' + name + ' is missing other');
         }
+        if (type === 'select') selects.push({ name, choices: options });
         if (type === 'plural' || type === 'selectordinal') {
           plurals.push({ name, type, categories: options.filter((option) => !option.startsWith('=')), usesPound });
+          exacts.push({ name, type, values: options.filter((option) => option.startsWith('=')) });
         }
         placeholders.push(`{${name}, ${type}}`);
         index += 1;
@@ -113,6 +119,8 @@ function parseMessage(text, start, closer) {
       const nested = parseMessage(text, index, '}');
       placeholders.push(...nested.placeholders);
       plurals.push(...nested.plurals);
+      selects.push(...nested.selects);
+      exacts.push(...nested.exacts);
       if (text[nested.index] !== '}') throw new Error('Unclosed {' + name + ', ' + type + '}');
       placeholders.push(`{${name}, ${type}}`);
       index = nested.index + 1;
@@ -121,7 +129,7 @@ function parseMessage(text, start, closer) {
     index += 1;
   }
   if (closer) throw new Error('Unclosed message');
-  return { placeholders, plurals, index };
+  return { placeholders, plurals, selects, exacts, index };
 }
 
 export function describeMessage(text) {
@@ -129,14 +137,72 @@ export function describeMessage(text) {
 }
 
 function sameList(left, right) {
-  return left.length === right.length && [...left].sort().every((token, index) => token === [...right].sort()[index]);
+  const a = [...left].sort();
+  const b = [...right].sort();
+  return a.length === b.length && a.every((token, index) => token === b[index]);
+}
+
+function printfParts(token) {
+  const match = token.match(/^%(?:(\d+)\$)?(lld|lli|ld|lu|d|i|u|f|s|@)$/);
+  if (!match) return null;
+  return { position: match[1] ? Number(match[1]) : null, type: match[2] };
+}
+
+function isNumericToken(token) {
+  const parts = printfParts(token);
+  if (parts && parts.type !== '@' && parts.type !== 's') return true;
+  return token === '{count}' || token.startsWith('{count,');
+}
+
+function categoryIsExact(locale, category) {
+  const rules = new Intl.PluralRules(locale);
+  let hits = 0;
+  for (let value = 0; value <= 200; value += 1) {
+    if (rules.select(value) === category) hits += 1;
+    if (hits > 1) return false;
+  }
+  return hits === 1;
+}
+
+function comparePrintf(sourceTokens, targetTokens, add, key) {
+  const left = sourceTokens.map(printfParts);
+  const right = targetTokens.map(printfParts);
+  if (left.some((item) => !item) || right.some((item) => !item)) return false;
+  let next = 1;
+  for (const item of left) if (item.position == null) item.position = next++;
+  const targetHasPosition = right.some((item) => item.position != null);
+  const targetMissingPosition = right.some((item) => item.position == null);
+  if (targetHasPosition && targetMissingPosition) {
+    add('placeholder-order', 'error', key, 'Do not mix numbered and unnumbered placeholders. Use %1$@ and %2$d throughout.');
+    return true;
+  }
+  next = 1;
+  if (!targetHasPosition) for (const item of right) item.position = next++;
+  const typeAt = (items) => new Map(items.map((item) => [item.position, item.type]));
+  const sourceTypes = typeAt(left);
+  const targetTypes = typeAt(right);
+  const positions = [...new Set([...sourceTypes.keys(), ...targetTypes.keys()])].sort((a, b) => a - b);
+  const changed = positions.some((position) => sourceTypes.get(position) !== targetTypes.get(position));
+  if (!changed) return true;
+  const sourceOrder = left.map((item) => item.type).join(' ');
+  const targetOrder = right.map((item) => item.type).join(' ');
+  if ([...sourceTypes.values()].sort().join() === [...targetTypes.values()].sort().join()) {
+    add('placeholder-order', 'error', key, 'Unnumbered placeholders changed order (' + sourceOrder + ' → ' + targetOrder + '). Keep the order or use %1$@ and %2$d.');
+  } else {
+    add('placeholder-mismatch', 'error', key, 'Placeholders changed. Source has ' + (sourceTokens.join(' ') || 'none') + '. Target has ' + (targetTokens.join(' ') || 'none') + '.');
+  }
+  return true;
+}
+
+function choiceKey(items) {
+  return items.map((item) => item.name + ':' + [...item.choices ?? item.values].sort().join(',')).sort().join('|');
 }
 
 function tagsIn(text) {
   return [...text.matchAll(/<\/?[A-Za-z][^>\s/>]*/g)].map((match) => match[0]);
 }
 
-export function compareText(source, target, locale, add, key) {
+export function compareText(source, target, locale, add, key, options = {}) {
   let left;
   let right;
   try { left = describeMessage(source); }
@@ -144,8 +210,27 @@ export function compareText(source, target, locale, add, key) {
   try { right = describeMessage(target); }
   catch (error) { add('icu-syntax', 'error', key, 'Target message: ' + error.message); }
   if (!left || !right) return;
-  if (!sameList(left.placeholders, right.placeholders)) {
-    add('placeholder-mismatch', 'error', key, 'Placeholders changed. Source has ' + (left.placeholders.join(' ') || 'none') + '. Target has ' + (right.placeholders.join(' ') || 'none') + '.');
+  let sourceTokens = left.placeholders;
+  let targetTokens = right.placeholders;
+  if (options.exactCategory && targetTokens.every((token) => !isNumericToken(token))) {
+    sourceTokens = sourceTokens.filter((token) => !isNumericToken(token));
+  }
+  const sourcePrintf = sourceTokens.filter((token) => token.startsWith('%'));
+  const targetPrintf = targetTokens.filter((token) => token.startsWith('%'));
+  const sourceNamed = sourceTokens.filter((token) => !token.startsWith('%'));
+  const targetNamed = targetTokens.filter((token) => !token.startsWith('%'));
+  const printfHandled = comparePrintf(sourcePrintf, targetPrintf, add, key);
+  if (!printfHandled && !sameList(sourcePrintf, targetPrintf)) {
+    add('placeholder-mismatch', 'error', key, 'Placeholders changed. Source has ' + (sourcePrintf.join(' ') || 'none') + '. Target has ' + (targetPrintf.join(' ') || 'none') + '.');
+  }
+  if (!sameList(sourceNamed, targetNamed)) {
+    add('placeholder-mismatch', 'error', key, 'Placeholders changed. Source has ' + (sourceNamed.join(' ') || 'none') + '. Target has ' + (targetNamed.join(' ') || 'none') + '.');
+  }
+  if (choiceKey(left.selects.map((item) => ({ name: item.name, choices: item.choices }))) !== choiceKey(right.selects.map((item) => ({ name: item.name, choices: item.choices })))) {
+    add('selector-mismatch', 'error', key, 'Select branches changed. Keep every choice, including other.');
+  }
+  if (choiceKey(left.exacts.map((item) => ({ name: item.name, values: item.values }))) !== choiceKey(right.exacts.map((item) => ({ name: item.name, values: item.values })))) {
+    add('exact-choice-missing', 'error', key, 'An exact plural choice such as =0 was added or removed.');
   }
   if (!sameList(tagsIn(source), tagsIn(target))) {
     add('markup-mismatch', 'error', key, 'Rich-text tags changed.');
@@ -219,18 +304,25 @@ function readJsonMessages(text) {
 
 function readAndroid(text) {
   const messages = new Map();
-  for (const match of text.matchAll(/<string\s+name="([^"]+)"[^>]*>([\s\S]*?)<\/string>/g)) {
+  const translatable = (attrs) => !/\btranslatable\s*=\s*"false"/.test(attrs);
+  for (const match of text.matchAll(/<string\b([^>]*)>([\s\S]*?)<\/string>/g)) {
+    if (!translatable(match[1])) continue;
+    const name = match[1].match(/\bname="([^"]+)"/);
+    if (!name) continue;
     let value = match[2].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
     value = unescapeQuoted(value.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16))));
     if (value.length >= 2 && value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
-    messages.set(match[1], { text: value.trim() });
+    messages.set(name[1], { text: value.trim() });
   }
-  for (const block of text.matchAll(/<plurals\s+name="([^"]+)"[^>]*>([\s\S]*?)<\/plurals>/g)) {
+  for (const block of text.matchAll(/<plurals\b([^>]*)>([\s\S]*?)<\/plurals>/g)) {
+    if (!translatable(block[1])) continue;
+    const name = block[1].match(/\bname="([^"]+)"/);
+    if (!name) continue;
     const forms = {};
     for (const item of block[2].matchAll(/<item\s+quantity="([^"]+)"[^>]*>([\s\S]*?)<\/item>/g)) {
       forms[item[1]] = unescapeQuoted(item[2]).trim();
     }
-    messages.set(block[1], { plural: forms });
+    messages.set(name[1], { plural: forms });
   }
   return messages;
 }
@@ -259,26 +351,87 @@ function xcValue(node) {
   return null;
 }
 
-function readXcstrings(text, locale) {
+function readXcstrings(text, locale, side) {
   const document = JSON.parse(text);
   const messages = new Map();
   const wanted = [locale, languageOf(locale)];
+  const sourceLanguage = document.sourceLanguage || 'en';
   for (const [key, entry] of Object.entries(document.strings ?? {})) {
-    const localizations = entry.localizations ?? {};
+    const localizations = entry?.localizations ?? {};
     const tag = wanted.find((candidate) => localizations[candidate]);
-    if (!tag) continue;
-    const value = xcValue(localizations[tag]);
-    if (value) messages.set(key, value);
+    const value = tag ? xcValue(localizations[tag]) : null;
+    if (value) {
+      messages.set(key, value);
+      continue;
+    }
+    if (side === 'source' && languageOf(locale) === languageOf(sourceLanguage)) {
+      messages.set(key, { text: key });
+    } else {
+      messages.set(key, { missing: true });
+    }
   }
   return messages;
 }
 
-export function readCatalog(file, format, locale) {
+function readScriptCatalog(text) {
+  const source = text
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/(^|[^:])\/\/.*$/gm, '$1');
+  if (/\.\.\.|=>|\bfunction\b/.test(source)) {
+    throw new Error('This dictionary uses code the zero-dependency check cannot read. Install dependencies and run nativeskill validate.');
+  }
+  const start = source.search(/\{/);
+  if (start < 0) throw new Error('No object literal in the dictionary file.');
+  const messages = new Map();
+  let index = start;
+  const stack = [messages];
+  const path = [];
+  while (index < source.length) {
+    const rest = source.slice(index);
+    const keyMatch = rest.match(/^\s*(?:["']([^"']+)["']|([A-Za-z_$][\w$]*))\s*:/);
+    if (keyMatch && stack.at(-1) instanceof Map) {
+      const key = keyMatch[1] ?? keyMatch[2];
+      index += keyMatch[0].length;
+      const value = source.slice(index).match(/^\s*/);
+      index += value[0].length;
+      if (source[index] === '{') {
+        const child = new Map();
+        stack.at(-1).set([...path, key].join('.'), child);
+        stack.push(child);
+        path.push(key);
+        index += 1;
+        continue;
+      }
+      const string = source.slice(index).match(/^(["'`])([\s\S]*?)\1/);
+      if (!string) throw new Error('Only string values are supported in ' + [...path, key].join('.'));
+      stack.at(-1).set([...path, key].join('.'), { text: string[2] });
+      index += string[0].length;
+      continue;
+    }
+    if (source[index] === '}') {
+      stack.pop();
+      path.pop();
+      index += 1;
+      if (!stack.length) break;
+      continue;
+    }
+    index += 1;
+  }
+  const flat = new Map();
+  for (const [key, value] of messages) {
+    if (value instanceof Map) continue;
+    flat.set(key, value);
+  }
+  return groupSuffixPlurals(flat);
+}
+
+export function readCatalog(file, format, locale, side = 'target') {
   const text = readFileSync(file, 'utf8');
   const detected = format === 'auto' ? detectFormat(file) : format;
   if (detected === 'android') return readAndroid(text);
   if (detected === 'strings') return readStrings(text);
-  if (detected === 'xcstrings') return readXcstrings(text, locale);
+  if (detected === 'xcstrings') return readXcstrings(text, locale, side);
+  if (detected === 'script') return readScriptCatalog(text);
   return readJsonMessages(text);
 }
 
@@ -286,6 +439,7 @@ function detectFormat(file) {
   if (file.endsWith('.xml')) return 'android';
   if (file.endsWith('.strings')) return 'strings';
   if (file.endsWith('.xcstrings')) return 'xcstrings';
+  if (/\.(tsx?|jsx?|mjs|cjs)$/.test(file)) return 'script';
   return 'json';
 }
 
@@ -297,15 +451,17 @@ function comparePlural(source, target, locale, add, key) {
   if (unused.length) add('plural-unused', 'warning', key, 'Unused categories: ' + unused.join(', ') + '.');
   for (const [category, text] of Object.entries(target)) {
     const base = source[category] ?? source.other;
-    if (typeof base === 'string') compareText(base, text, locale, add, key + '.' + category);
+    if (typeof base === 'string') {
+      compareText(base, text, locale, add, key + '.' + category, { exactCategory: categoryIsExact(locale, category) });
+    }
   }
 }
 
 export function checkCatalogs({ source, target, locale, sourceLocale = 'en', format = 'auto' }) {
   if (!source || !target || !locale) throw new Error('Provide --source, --target, and --locale');
   const mode = format;
-  const left = readCatalog(source, mode, sourceLocale);
-  const right = readCatalog(target, mode, locale);
+  const left = readCatalog(source, mode, sourceLocale, 'source');
+  const right = readCatalog(target, mode, locale, 'target');
   const findings = [];
   const add = (code, severity, key, message) => addFinding(findings, code, severity, key, message);
   const languageChanges = languageOf(sourceLocale) !== languageOf(locale);
@@ -316,7 +472,7 @@ export function checkCatalogs({ source, target, locale, sourceLocale = 'en', for
       add('extra-key', 'warning', key, 'This key is absent from the source catalog.');
       continue;
     }
-    if (!targetMessage) {
+    if (!targetMessage || targetMessage.missing) {
       add('missing-key', 'error', key, 'This source message has no target entry.');
       continue;
     }

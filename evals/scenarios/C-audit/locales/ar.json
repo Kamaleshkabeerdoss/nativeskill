@@ -1,0 +1,23 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "مساحة العمل",
+  "signIn": "تسجيل الدخول",
+  "signOut": "تسجيل الخروج",
+  "createAccount": "إنشاء حساب",
+  "welcome": "مرحبًا، {name}",
+  "save": "حفظ",
+  "dialogCancel": "إلغاء",
+  "stopRenewal": "إلغاء",
+  "stopRenewalHelp": "يستمر الوصول حتى {date}.",
+  "payNow": "ادفع {amount}",
+  "allowCamera": "السماح",
+  "denyCamera": "عدم السماح",
+  "receiptCount": "{count, plural, one {# إيصال} other {# إيصالات}}",
+  "download": "تحميل",
+  "empty": "لا توجد إيصالات بعد?",
+  "language": "اللغة",
+  "saveDraft": "حفظ المسودة",
+  "deleteForever": "حذف",
+  "clearFilters": "مسح عوامل التصفية",
+  "archive": "أرشفة"
+}

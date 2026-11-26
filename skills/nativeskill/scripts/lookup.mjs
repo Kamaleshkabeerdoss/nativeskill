@@ -55,7 +55,12 @@ export function inspectConcept(id) {
 }
 const wordingSummary = (entries) => {
   const sourceCount = entries.filter(({ status }) => status === 'source-attested').length;
-  return { status: sourceCount ? 'source-attested' : entries.length ? 'draft' : 'uncovered', sourceCount, entries };
+  const texts = [...new Set(entries.map(({ text }) => text))];
+  const statuses = [...new Set(entries.map(({ status }) => status))];
+  const disagreement = texts.length > 1 || statuses.length > 1 || entries.some(({ preferred }) => preferred === false);
+  const status = !entries.length ? 'uncovered' : disagreement ? 'mixed' : statuses[0];
+  const preferred = entries.find((entry) => entry.preferred) ?? null;
+  return { status, disagreement, sourceCount, preferred, entries };
 };
 
 export function lookupWording(localeTag, conceptId, role) {

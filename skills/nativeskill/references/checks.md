@@ -8,7 +8,11 @@ node <skill-dir>/scripts/scan.mjs lib app/src
 node <skill-dir>/scripts/lookup.mjs ta auth.sign_out button
 ```
 
-`check.mjs` exits 0 when there are no errors, 1 when there are errors, and 2 when the arguments are wrong. Add `--json` for a machine-readable report. `--format` is `auto`, `json`, `android`, `strings`, or `xcstrings`. `auto` treats `.xml` as Android, `.strings` as iOS strings, `.xcstrings` as a string catalog, and everything else as JSON or ARB.
+`check.mjs` exits 0 when there are no errors, 1 when there are errors, and 2 when the arguments are wrong. Add `--json` for a machine-readable report. `--format` is `auto`, `json`, `android`, `strings`, or `xcstrings`. `auto` treats `.xml` as Android, `.strings` as iOS strings, `.xcstrings` as a string catalog, `.ts` and `.js` as a simple `export` object of strings, and everything else as JSON or ARB.
+
+`.ts` and `.js` catalogs that spread another object, call a function, or compute a key are not read here. Those need `nativeskill validate` after `npm install`, because that command uses the TypeScript parser. `nativeskill check` itself does not import TypeScript.
+
+Android `translatable="false"` strings are skipped. An exact plural category (Arabic `one` is only 1; French `one` is 0 and 1) may omit the number. A string catalog with source strings and no target locale fails with `missing-key`.
 
 Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` and `--locale` pick the columns.
 
@@ -20,7 +24,10 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `extra-key` | warning | The target has a key the source does not. |
 | `empty-message` | error | The translation is blank. |
 | `value-type-mismatch` | error | One side is a plural and the other is a single string. |
-| `placeholder-mismatch` | error | `{name}`, `{{name}}`, `{{- name}}`, `{name, plural}`, `%1$s`, `%@`, or `%d` changed. |
+| `placeholder-mismatch` | error | A named or printf placeholder was added, removed, or retyped. |
+| `placeholder-order` | error | Unnumbered `%@` / `%d` placeholders swapped. Keep the order, or number them `%1$@` and `%2$d`. A numbered swap that keeps each argument's type is allowed. |
+| `selector-mismatch` | error | An ICU `select` branch was renamed or removed. |
+| `exact-choice-missing` | error | An exact plural such as `=0` was added or removed. |
 | `markup-mismatch` | error | Rich-text tags changed. |
 | `icu-syntax` | error | A brace, a plural, or a placeholder is not closed, or a plural has no `other`. |
 | `plural-missing` | error | A plural is missing a CLDR category for this locale. |

@@ -1246,5 +1246,685 @@
     "text": "Tambah",
     "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
     "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "Jetzt bezahlen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "ادفع الآن",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "立即支付",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "立即付款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "今すぐ支払う",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "Pagar ahora",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "Payer maintenant",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "Bayar sekarang",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "Weiter zur Zahlung",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "前往付款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "前往付款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "支払いに進む",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "Ir al pago",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "Passer au paiement",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "Lanjut ke pembayaran",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "Zahlung ausstehend",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "付款处理中",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "付款處理中",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "支払い待ち",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "Pago pendiente",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "Paiement en attente",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "Pembayaran tertunda",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "Zahlung abgelehnt",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "付款被拒绝",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "付款被拒絕",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "支払いが拒否されました",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "Pago rechazado",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "Paiement refusé",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "Pembayaran ditolak",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "Zahlung wiederholen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "重试付款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "重試付款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "支払いを再試行",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "Reintentar el pago",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "Réessayer le paiement",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "Coba bayar lagi",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "Zahlung abbrechen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "取消这笔付款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "取消這筆付款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "この支払いをキャンセル",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "Cancelar este pago",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "Annuler ce paiement",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "Batalkan pembayaran ini",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "Abo jetzt beenden",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "立即结束订阅",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "立即結束訂閱",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "今すぐ解約",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "Finalizar la suscripción ahora",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "Résilier l'abonnement maintenant",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "Akhiri langganan sekarang",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "Erstattung angefordert",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "已申请退款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "已申請退款",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "返金をリクエストしました",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "Reembolso solicitado",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "Remboursement demandé",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "Pengembalian dana diminta",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "Erstattung abgeschlossen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "退款已完成",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "退款已完成",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "返金が完了しました",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "Reembolso completado",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "Remboursement effectué",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "Pengembalian dana selesai",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "重新发送验证码",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "重新傳送驗證碼",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "コードを再送",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "Code erneut senden",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "Reenviar código",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "Renvoyer le code",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "Kirim ulang kode",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "验证码已过期",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "驗證碼已過期",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "コードの有効期限が切れました",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "Code abgelaufen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "El código ha caducado",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "Le code a expiré",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "Kode sudah kedaluwarsa",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "Cambiar contraseña",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "Modifier le mot de passe",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "Ubah kata sandi",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "auth.verify_email",
+    "role": "button",
+    "text": "மின்னஞ்சலை உறுதிசெய்",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "auth.session_expired",
+    "role": "status",
+    "text": "அமர்வு முடிந்தது. தொடர மீண்டும் உள்நுழையவும்.",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "form.required_field",
+    "role": "inline-validation",
+    "text": "यह फ़ील्ड आवश्यक है",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "form.clear_input",
+    "role": "tooltip",
+    "text": "清除文字",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
   }
 ]

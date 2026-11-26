@@ -1,0 +1,23 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "कार्यक्षेत्र",
+  "signIn": "साइन इन करें",
+  "signOut": "साइन आउट करें",
+  "createAccount": "खाता बनाएँ",
+  "welcome": "स्वागत है, {name}",
+  "save": "सहेजें",
+  "dialogCancel": "रद्द करें",
+  "stopRenewal": "रद्द करें",
+  "stopRenewalHelp": "पहुँच {date} तक जारी रहेगी।",
+  "payNow": "भुगतान करें",
+  "allowCamera": "अनुमति दें",
+  "denyCamera": "अभी नहीं",
+  "receiptCount": "{count, plural, other {# रसीदें}}",
+  "download": "डाउनलोड करें",
+  "empty": "अभी कोई रसीद नहीं।",
+  "language": "भाषा",
+  "saveDraft": "मसौदा सहेजें",
+  "deleteForever": "मिटाएँ",
+  "clearFilters": "फ़िल्टर हटाएँ",
+  "archive": "संग्रहित करें"
+}

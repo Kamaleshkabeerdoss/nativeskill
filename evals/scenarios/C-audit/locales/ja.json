@@ -1,0 +1,23 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "ワークスペース",
+  "signIn": "サインイン",
+  "signOut": "サインアウト",
+  "createAccount": "アカウント作成",
+  "welcome": "ようこそ、{name} さん",
+  "save": "保存します",
+  "dialogCancel": "キャンセル",
+  "stopRenewal": "キャンセル",
+  "stopRenewalHelp": "{date} まで利用できます。",
+  "payNow": "{amount} を支払う",
+  "allowCamera": "許可",
+  "denyCamera": "許可しない",
+  "receiptCount": "{count, plural, one {領収書 # 件} other {領収書 # 件}}",
+  "download": "ダウンロード",
+  "empty": "領収書はまだありません。",
+  "language": "言語",
+  "saveDraft": "下書きを保存",
+  "deleteForever": "完全に削除",
+  "clearFilters": "フィルタをクリア",
+  "archive": "アーカイブ"
+}

@@ -1,0 +1,19 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "பணியிடம்",
+  "signIn": "உள்நுழை",
+  "signOut": "வெளியேறு",
+  "createAccount": "கணக்கை உருவாக்கு",
+  "welcome": "வணக்கம், {name}",
+  "save": "சேமி",
+  "dialogCancel": "ரத்துசெய்",
+  "stopRenewal": "புதுப்பிப்பை நிறுத்து",
+  "stopRenewalHelp": "{date} வரை அணுகல் தொடரும்.",
+  "payNow": "{amount} செலுத்து",
+  "allowCamera": "அனுமதிக்கவும்",
+  "denyCamera": "வேண்டாம்",
+  "receiptCount": "{count, plural, one {# ரசீது} other {# ரசீதுகள்}}",
+  "download": "பதிவிறக்கு",
+  "empty": "இன்னும் ரசீதுகள் இல்லை.",
+  "language": "மொழி"
+}

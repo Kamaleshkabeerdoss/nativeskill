@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { parseArgs } from 'node:util';
 import { inspectConcept, inspectLanguage, inspectLocale, lookupWording, registry } from './locales.mjs';
-import { validate } from './validate.mjs';
 import { checkCatalogs } from '../../../skills/nativeskill/scripts/check.mjs';
 
 const help = `
@@ -41,7 +40,7 @@ function print(output, json, format) {
   console.log(json ? JSON.stringify(output, null, 2) : format(output));
 }
 
-function main([command, ...args]) {
+async function main([command, ...args]) {
   if (!command || ['--help', '-h', 'help'].includes(command)) {
     console.log(help);
     return;
@@ -89,6 +88,7 @@ function main([command, ...args]) {
     return;
   }
   if (command === 'validate') {
+    const { validate } = await import('./validate.mjs');
     const { values } = parseArgs({ args, options: validation });
     if (values.help) return console.log(help);
     if (!values.source || !values.target || !values.locale) throw new Error('Provide --source, --target, and --locale');
@@ -129,7 +129,7 @@ function main([command, ...args]) {
 }
 
 try {
-  main(process.argv.slice(2));
+  await main(process.argv.slice(2));
 } catch (error) {
   console.error('nativeskill: ' + error.message);
   process.exitCode = 2;

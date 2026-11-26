@@ -1,0 +1,226 @@
+[
+  {
+    "id": "ta-welcome-placeholder",
+    "file": "ta.json",
+    "key": "welcome",
+    "problem": "The placeholder was translated to {பெயர்}. Placeholders stay byte-exact, so this must remain {name}. check.mjs reports icu-syntax because the name is no longer the Latin token.",
+    "replacement": "வணக்கம், {name}"
+  },
+  {
+    "id": "ta-stopRenewal-wrong-action",
+    "file": "ta.json",
+    "key": "stopRenewal",
+    "problem": "billing.stop_renewal uses ரத்துசெய், the same word as dialogCancel (dialog.cancel_action). Stopping renewal keeps access until the period ends. It does not dismiss a dialog.",
+    "replacement": "தானியங்கி புதுப்பிப்பை நிறுத்து"
+  },
+  {
+    "id": "ta-stopRenewalHelp-untranslated",
+    "file": "ta.json",
+    "key": "stopRenewalHelp",
+    "problem": "The whole sentence is still the English source. It is not a brand. {date} stays as written.",
+    "replacement": "{date} வரை அணுகல் தொடரும்."
+  },
+  {
+    "id": "ta-saveDraft-successfully",
+    "file": "ta.json",
+    "key": "saveDraft",
+    "problem": "வெற்றிகரமாக (“successfully”) is glued to the button, and சேமிக்கவும் is the long polite form. The rest of the file uses a short verb. form.save_draft stores unpublished work.",
+    "replacement": "வரைவைச் சேமி"
+  },
+  {
+    "id": "ta-deleteForever-not-permanent",
+    "file": "ta.json",
+    "key": "deleteForever",
+    "problem": "நீக்கு is ordinary delete (item.delete). This control is item.delete_permanently, and the label does not say the deletion cannot be undone.",
+    "replacement": "நிரந்தரமாக நீக்கு"
+  },
+  {
+    "id": "ta-archive-means-copy",
+    "file": "ta.json",
+    "key": "archive",
+    "problem": "காப்பிடு is the pinned Android Settings archive string and it means copy. item.archive keeps the item so it can be restored.",
+    "replacement": "காப்பகப்படுத்து"
+  },
+  {
+    "id": "ar-stopRenewal-wrong-action",
+    "file": "ar.json",
+    "key": "stopRenewal",
+    "problem": "إلغاء is the dialog cancel, the same word as dialogCancel. This control stops future automatic renewal. Access continues until {date}. The accurate draft is 22 characters against Cancel at 6, so the button has to grow rather than fall back to إلغاء.",
+    "replacement": "إيقاف التجديد التلقائي"
+  },
+  {
+    "id": "ar-receiptCount-plural",
+    "file": "ar.json",
+    "key": "receiptCount",
+    "problem": "Arabic cardinals are zero, one, two, few, many, and other. This plural has only one and other, and the 3–10 noun إيصالات is sitting on other, which is the form for 100 and above. The noun has to change shape.",
+    "replacement": "{count, plural, zero {# إيصال} one {# إيصال} two {إيصالان} few {# إيصالات} many {# إيصالًا} other {# إيصال}}"
+  },
+  {
+    "id": "ar-download-upload-word",
+    "file": "ar.json",
+    "key": "download",
+    "problem": "تحميل is the usual word for upload or loading. content.download is a file coming onto the device. The download word is تنزيل.",
+    "replacement": "تنزيل"
+  },
+  {
+    "id": "ar-empty-punctuation",
+    "file": "ar.json",
+    "key": "empty",
+    "problem": "The empty state is the statement “No receipts yet.” The Arabic sentence ends with a Latin question mark. The other Arabic sentence in this file already ends with a period.",
+    "replacement": "لا توجد إيصالات بعد."
+  },
+  {
+    "id": "ar-deleteForever-not-permanent",
+    "file": "ar.json",
+    "key": "deleteForever",
+    "problem": "حذف is generic delete. item.delete_permanently has to say the deletion is final.",
+    "replacement": "حذف نهائي"
+  },
+  {
+    "id": "ja-save-masu",
+    "file": "ja.json",
+    "key": "save",
+    "problem": "保存します is a polite sentence. A button is the noun 保存, with no ます. saveDraft in the same file already uses 保存.",
+    "replacement": "保存"
+  },
+  {
+    "id": "ja-stopRenewal-wrong-action",
+    "file": "ja.json",
+    "key": "stopRenewal",
+    "problem": "キャンセル is the dialog cancel, the same word as dialogCancel. This button stops automatic renewal and leaves access until the date.",
+    "replacement": "自動更新を停止"
+  },
+  {
+    "id": "ja-receiptCount-plural",
+    "file": "ja.json",
+    "key": "receiptCount",
+    "problem": "Japanese cardinals are other only. The one branch is an English category this locale does not use. Both branches already say the same thing.",
+    "replacement": "{count, plural, other {領収書 # 件}}"
+  },
+  {
+    "id": "zh-stopRenewal-wrong-action",
+    "file": "zh.json",
+    "key": "stopRenewal",
+    "problem": "取消 is the dialog cancel, the same word as dialogCancel. This control stops renewal. The file is Simplified Chinese, so the button is 停止续订.",
+    "replacement": "停止续订"
+  },
+  {
+    "id": "zh-stopRenewalHelp-formality",
+    "file": "zh.json",
+    "key": "stopRenewalHelp",
+    "problem": "One sentence uses both 您 and 你. Billing copy keeps a single address, 您. The second clause repeats the same fact with the other pronoun and adds a line the English does not say.",
+    "replacement": "您的访问权限持续到 {date}。"
+  },
+  {
+    "id": "zh-clearFilters-dictionary",
+    "file": "zh.json",
+    "key": "clearFilters",
+    "problem": "过滤器 is a physical or technical filter. search.clear_filters on a results toolbar uses 筛选. Clearing filters does not delete receipts.",
+    "replacement": "清除筛选"
+  },
+  {
+    "id": "de-workspace-untranslated",
+    "file": "de.json",
+    "key": "workspace",
+    "problem": "Workspace is still the English source. It is not the product name. Northwind stays untranslated.",
+    "replacement": "Arbeitsbereich"
+  },
+  {
+    "id": "de-stopRenewal-wrong-action",
+    "file": "de.json",
+    "key": "stopRenewal",
+    "problem": "Abbrechen is the dialog cancel, the same word as dialogCancel. This button stops the next renewal and keeps access until {date}. Verlängerung stoppen is the longer draft and check.mjs flags it at 20 characters against Cancel at 6. The help line already names the date, so the button is the shorter draft.",
+    "replacement": "Nicht verlängern"
+  },
+  {
+    "id": "de-stopRenewalHelp-du",
+    "file": "de.json",
+    "key": "stopRenewalHelp",
+    "problem": "The only direct address in the file is du, on a billing sentence. The product has no du voice on the other screens. Billing uses Sie. The verb is the Sie form behalten.",
+    "replacement": "Sie behalten den Zugriff bis {date}."
+  },
+  {
+    "id": "de-download-sie",
+    "file": "de.json",
+    "key": "download",
+    "problem": "Herunterladen Sie glues Sie to an infinitive. That form is ungrammatical. The button is the bare infinitive Herunterladen.",
+    "replacement": "Herunterladen"
+  },
+  {
+    "id": "ms-stopRenewal-wrong-action",
+    "file": "ms.json",
+    "key": "stopRenewal",
+    "problem": "Batal is the dialog cancel, the same word as dialogCancel. This button stops automatic renewal. Access continues until {date}. The draft is 30 characters against Cancel at 6, so the control has to grow. The button stays the renewal sentence.",
+    "replacement": "Hentikan pembaharuan automatik"
+  },
+  {
+    "id": "ms-denyCamera-nafi",
+    "file": "ms.json",
+    "key": "denyCamera",
+    "problem": "Nafi is Android’s generic deny and reads like a legal finding. This control is the camera prompt “Don’t allow”. Tolak is the attested decline on that prompt.",
+    "replacement": "Tolak"
+  },
+  {
+    "id": "ms-receiptCount-plural",
+    "file": "ms.json",
+    "key": "receiptCount",
+    "problem": "Malay cardinals are other only. The one branch is an unused English category. The noun stays resit in the single other branch.",
+    "replacement": "{count, plural, other {# resit}}"
+  },
+  {
+    "id": "ms-download-indonesian",
+    "file": "ms.json",
+    "key": "download",
+    "problem": "Unduh is Indonesian. This file is Bahasa Malaysia. The Malay download verb is Muat turun.",
+    "replacement": "Muat turun"
+  },
+  {
+    "id": "ms-deleteForever-not-permanent",
+    "file": "ms.json",
+    "key": "deleteForever",
+    "problem": "Padam is ordinary delete. The control is item.delete_permanently. The Malay phrase says the deletion is permanent.",
+    "replacement": "Padam secara kekal"
+  },
+  {
+    "id": "ms-archive-noun",
+    "file": "ms.json",
+    "key": "archive",
+    "problem": "Arkib is the Android Settings noun. The control is a verb button for item.archive.",
+    "replacement": "Arkibkan"
+  },
+  {
+    "id": "hi-stopRenewal-wrong-action",
+    "file": "hi.json",
+    "key": "stopRenewal",
+    "problem": "रद्द करें is the dialog cancel, the same word as dialogCancel. This button stops automatic renewal and keeps access until {date}. The polite आप form stays रोकें.",
+    "replacement": "स्वतः नवीनीकरण रोकें"
+  },
+  {
+    "id": "hi-payNow-placeholder",
+    "file": "hi.json",
+    "key": "payNow",
+    "problem": "{amount} was dropped, so the button no longer says what will be charged. billing.pay_now submits payment at this step. The catalog draft अभी भुगतान करें also drops the amount, so the proposal keeps the token.",
+    "replacement": "{amount} का भुगतान करें"
+  },
+  {
+    "id": "hi-denyCamera-not-now",
+    "file": "hi.json",
+    "key": "denyCamera",
+    "problem": "अभी नहीं is Android’s skip string and means “not now”. This control is permissions.deny_access on a camera prompt (“Don’t allow”). The matching attested prompt decline is न दें.",
+    "replacement": "न दें"
+  },
+  {
+    "id": "hi-receiptCount-plural",
+    "file": "hi.json",
+    "key": "receiptCount",
+    "problem": "Hindi cardinals are one and other. Only other is present, and its noun रसीदें is plural, so a count of 1 is forced into the plural.",
+    "replacement": "{count, plural, one {# रसीद} other {# रसीदें}}"
+  },
+  {
+    "id": "hi-deleteForever-not-permanent",
+    "file": "hi.json",
+    "key": "deleteForever",
+    "problem": "मिटाएँ is the attested ordinary delete (item.delete). This control is item.delete_permanently and does not say the deletion cannot be undone.",
+    "replacement": "हमेशा के लिए मिटाएँ"
+  }
+]

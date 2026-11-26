@@ -15,7 +15,7 @@ Bundled labels are evidence of what another product shipped, or an unreviewed dr
 ## Rules
 
 1. Name the intent and the UI role before you write a word. Roles include button, link, title, field label, error, and status. The catalog is [references/intent.md](references/intent.md). Contested words go through the lookup below.
-2. Keep placeholders byte-exact. `{count}`, `{amount}`, `%1$s`, `%@`, `%d`, and `{{name}}` stay character for character, including the index and the brace style. Do not translate the name inside, do not drop one, and do not turn `{{name}}` into `{name}`.
+2. Keep placeholders byte-exact. `{count}`, `{amount}`, `%1$s`, `%@`, `%d`, and `{{name}}` stay character for character, including the index and the brace style. Do not translate the name inside, do not drop one, and do not turn `{{name}}` into `{name}`. Unnumbered `%@` and `%d` keep their order. Swapping them crashes iOS. If the sentence order must change, number them `%1$@` and `%2$d`.
 3. Use that locale's CLDR plural categories. English `one`/`other` is not Arabic (`zero`, `one`, `two`, `few`, `many`, `other`) and not Malay, Indonesian, Japanese, or Chinese (`other` only). Include every category the locale uses. Never build the sentence by gluing a number to a noun.
 4. One formality for the whole language. Do not mix French `tu` and `vous`, German `du` and `Sie`, or Hindi `तू` and `आप`. Match the formality the app already uses. If it has none, pick one, name it in the report, and use it everywhere.
 5. Leave brand names, legal entity names, trademarks, and product codes untranslated when the product treats them as proper nouns. A bundled example loses to the project's glossary.
@@ -108,6 +108,23 @@ Do this after the first draft and before the report. The check script cannot hea
 4. Check gender and number. Arabic and Hindi agree with the person the product addresses. Do not leave a masculine verb if the string speaks to a mixed audience and the locale note says to avoid it.
 5. Check length on the real control. A German or Tamil line that is correct and three times the English still fails if the button clips it. Shorten the draft.
 6. Read the string next to its neighbors. One file, one register. If sign-in says `vous` and the new error says `tu`, fix the new string.
+7. If `check.mjs` reports `length-blowup`, do not stop. Shorten the button without collapsing it into the dialog word. When the body already says what happens ("access continues until {date}"), the button can be the short verb. Record the shorter line. If it still cannot fit, say in the report that the control must grow, and do not switch to Cancel/Abbrechen/إلغاء/取消/キャンセル/Batal/ரத்துசெய்/रद्द करें.
+
+## Audit checklist
+
+On an audit, check every locale for these even when the string is grammatical:
+
+- The subscription or renewal control uses the same word as dialog Cancel.
+- Arabic download is `تحميل` (that is upload or loading). Download is `تنزيل`.
+- Chinese filters say `过滤器`. UI says `筛选` or `篩選`.
+- Tamil archive is `காப்பிடு` (that means copy).
+- Hindi skip or deny is `अभी नहीं` (that means not now).
+- German has `Sie` glued to an infinitive (`Herunterladen Sie`) or `du` next to `Sie`.
+- Japanese buttons end in `します` or `してください`.
+- One Chinese sentence uses both `您` and `你`.
+- A Malay file uses Indonesian `Unduh`, `Hapus`, or `Mendaftar`.
+- A placeholder was translated or dropped (`{name}`, `{amount}`, `%1$s`, `{{name}}`).
+- A whole English sentence is still in a non-English file, and it is not a brand.
 
 ## Report
 

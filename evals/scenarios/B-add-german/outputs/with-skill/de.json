@@ -1,0 +1,19 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "Arbeitsbereich",
+  "signIn": "Anmelden",
+  "signOut": "Abmelden",
+  "createAccount": "Registrieren",
+  "welcome": "Willkommen, {name}",
+  "save": "Speichern",
+  "dialogCancel": "Abbrechen",
+  "stopRenewal": "Verlängerung stoppen",
+  "stopRenewalHelp": "Der Zugriff gilt bis {date}.",
+  "payNow": "{amount} bezahlen",
+  "allowCamera": "Zulassen",
+  "denyCamera": "Ablehnen",
+  "receiptCount": "{count, plural, one {# Quittung} other {# Quittungen}}",
+  "download": "Herunterladen",
+  "empty": "Noch keine Quittungen.",
+  "language": "Sprache"
+}

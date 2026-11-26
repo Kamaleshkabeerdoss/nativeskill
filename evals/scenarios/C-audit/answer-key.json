@@ -1,0 +1,222 @@
+{
+  "note": "Hidden answer key. Audit agents must not read this file.",
+  "bugs": [
+    {
+      "id": "ta-placeholder",
+      "file": "ta.json",
+      "key": "welcome",
+      "bug": "Placeholder renamed from {name} to {பெயர்}",
+      "fix": "Restore {name}"
+    },
+    {
+      "id": "ta-intent",
+      "file": "ta.json",
+      "key": "stopRenewal",
+      "bug": "Same word as dialog cancel",
+      "fix": "A stop-renewal verb, not ரத்துசெய்"
+    },
+    {
+      "id": "ta-english",
+      "file": "ta.json",
+      "key": "stopRenewalHelp",
+      "bug": "English sentence left untranslated",
+      "fix": "Tamil sentence keeping {date}"
+    },
+    {
+      "id": "ta-success",
+      "file": "ta.json",
+      "key": "saveDraft",
+      "bug": "வெற்றிகரமாக and an over-long polite button",
+      "fix": "Short verb without successfully"
+    },
+    {
+      "id": "ta-permanent",
+      "file": "ta.json",
+      "key": "deleteForever",
+      "bug": "Plain delete, permanence gone",
+      "fix": "Say it is permanent"
+    },
+    {
+      "id": "ta-archive",
+      "file": "ta.json",
+      "key": "archive",
+      "bug": "காப்பிடு means copy",
+      "fix": "An archive verb such as காப்பகப்படுத்து"
+    },
+    {
+      "id": "ar-intent",
+      "file": "ar.json",
+      "key": "stopRenewal",
+      "bug": "إلغاء is dialog cancel",
+      "fix": "Stop-renewal wording"
+    },
+    {
+      "id": "ar-plural",
+      "file": "ar.json",
+      "key": "receiptCount",
+      "bug": "Missing zero, two, few, many",
+      "fix": "All six Arabic categories"
+    },
+    {
+      "id": "ar-download",
+      "file": "ar.json",
+      "key": "download",
+      "bug": "تحميل is not the MSA download button",
+      "fix": "تنزيل"
+    },
+    {
+      "id": "ar-question",
+      "file": "ar.json",
+      "key": "empty",
+      "bug": "Latin question mark",
+      "fix": "Arabic ؟ or no question if it is a statement"
+    },
+    {
+      "id": "ar-permanent",
+      "file": "ar.json",
+      "key": "deleteForever",
+      "bug": "Plain delete",
+      "fix": "حذف نهائي or equivalent"
+    },
+    {
+      "id": "ja-masu",
+      "file": "ja.json",
+      "key": "save",
+      "bug": "します on a button",
+      "fix": "保存"
+    },
+    {
+      "id": "ja-intent",
+      "file": "ja.json",
+      "key": "stopRenewal",
+      "bug": "キャンセル duplicates the dialog",
+      "fix": "自動更新を停止 or equivalent"
+    },
+    {
+      "id": "ja-plural",
+      "file": "ja.json",
+      "key": "receiptCount",
+      "bug": "one branch Japanese does not use",
+      "fix": "other only"
+    },
+    {
+      "id": "zh-intent",
+      "file": "zh.json",
+      "key": "stopRenewal",
+      "bug": "取消 duplicates the dialog",
+      "fix": "停止续订 or equivalent"
+    },
+    {
+      "id": "zh-formality",
+      "file": "zh.json",
+      "key": "stopRenewalHelp",
+      "bug": "您 and 你 in one sentence",
+      "fix": "One address"
+    },
+    {
+      "id": "zh-filter",
+      "file": "zh.json",
+      "key": "clearFilters",
+      "bug": "过滤器 is the dictionary calque",
+      "fix": "清除筛选"
+    },
+    {
+      "id": "de-english",
+      "file": "de.json",
+      "key": "workspace",
+      "bug": "Workspace left in English",
+      "fix": "Arbeitsbereich"
+    },
+    {
+      "id": "de-intent",
+      "file": "de.json",
+      "key": "stopRenewal",
+      "bug": "Abbrechen duplicates the dialog",
+      "fix": "Verlängerung stoppen or equivalent"
+    },
+    {
+      "id": "de-du",
+      "file": "de.json",
+      "key": "stopRenewalHelp",
+      "bug": "du in a Sie product",
+      "fix": "Sie or a pronoun-free sentence"
+    },
+    {
+      "id": "de-grammar",
+      "file": "de.json",
+      "key": "download",
+      "bug": "Herunterladen Sie is ungrammatical",
+      "fix": "Herunterladen"
+    },
+    {
+      "id": "ms-intent",
+      "file": "ms.json",
+      "key": "stopRenewal",
+      "bug": "Batal duplicates the dialog",
+      "fix": "Stop-renewal wording"
+    },
+    {
+      "id": "ms-indonesian",
+      "file": "ms.json",
+      "key": "download",
+      "bug": "Unduh is Indonesian",
+      "fix": "Muat turun"
+    },
+    {
+      "id": "ms-plural",
+      "file": "ms.json",
+      "key": "receiptCount",
+      "bug": "one branch Malay does not use",
+      "fix": "other only"
+    },
+    {
+      "id": "ms-deny",
+      "file": "ms.json",
+      "key": "denyCamera",
+      "bug": "Nafi is legalistic on a prompt",
+      "fix": "Tolak"
+    },
+    {
+      "id": "ms-permanent",
+      "file": "ms.json",
+      "key": "deleteForever",
+      "bug": "Padam does not say permanent",
+      "fix": "Padam secara kekal"
+    },
+    {
+      "id": "hi-intent",
+      "file": "hi.json",
+      "key": "stopRenewal",
+      "bug": "रद्द करें duplicates the dialog",
+      "fix": "Stop-renewal wording"
+    },
+    {
+      "id": "hi-deny",
+      "file": "hi.json",
+      "key": "denyCamera",
+      "bug": "अभी नहीं means not now",
+      "fix": "A deny, such as न दें or अस्वीकारें"
+    },
+    {
+      "id": "hi-placeholder",
+      "file": "hi.json",
+      "key": "payNow",
+      "bug": "{amount} dropped",
+      "fix": "Restore {amount}"
+    },
+    {
+      "id": "hi-plural",
+      "file": "hi.json",
+      "key": "receiptCount",
+      "bug": "Missing one",
+      "fix": "one and other"
+    },
+    {
+      "id": "hi-permanent",
+      "file": "hi.json",
+      "key": "deleteForever",
+      "bug": "मिटाएँ does not say permanent",
+      "fix": "Say it cannot be undone"
+    }
+  ]
+}

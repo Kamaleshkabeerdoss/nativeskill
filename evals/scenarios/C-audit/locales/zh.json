@@ -1,0 +1,23 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "工作区",
+  "signIn": "登录",
+  "signOut": "退出",
+  "createAccount": "创建账户",
+  "welcome": "欢迎，{name}",
+  "save": "保存",
+  "dialogCancel": "取消",
+  "stopRenewal": "取消",
+  "stopRenewalHelp": "您的访问权限持续到 {date}，你可以继续使用。",
+  "payNow": "支付 {amount}",
+  "allowCamera": "允许",
+  "denyCamera": "不允许",
+  "receiptCount": "{count, plural, other {# 张收据}}",
+  "download": "下载",
+  "empty": "还没有收据。",
+  "language": "语言",
+  "saveDraft": "保存草稿",
+  "deleteForever": "永久删除",
+  "clearFilters": "清除过滤器",
+  "archive": "归档"
+}

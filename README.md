@@ -67,7 +67,7 @@ node packages/cli/src/cli.mjs check \
   --locale ms --source-locale en
 ```
 
-After a publish, the same command is `npx nativeskill check` with those flags. `--format` is `auto`, `json`, `android`, `strings`, or `xcstrings`. Exit 0 means no errors. The zero-dependency script under `skills/nativeskill/scripts/check.mjs` is what the bin calls, so an installed skill can run it without the package.
+After a publish, the same command is `npx nativeskill check` with those flags. `--format` is `auto`, `json`, `android`, `strings`, or `xcstrings`. Exit 0 means no errors. `check` does not load TypeScript. A fresh clone can run it before `npm install`. `nativeskill validate` reads JS and TS dictionaries that contain spreads or functions, and that command needs `npm install` because it uses the TypeScript parser. Simple `export default { title: "Save" }` files are read by `check` directly.
 
 ## Check a catalog
 
@@ -97,7 +97,7 @@ After install, the same commands use `<skill-dir>/scripts/check.mjs`. Formats: A
 
 ## What is bundled
 
-110 languages and 449 regional profiles, with CLDR plural categories and direction. 3,348 source-attested UI labels from pinned MIT, BSD, and Apache catalogs: OOUI, VisualEditor, Universal Language Selector, Django, Flutter, Android framework strings, Android Settings, and devise-i18n. Drafts cover account and billing actions those catalogs do not. Drafts are not attestations. The provenance table is [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md).
+110 languages and 449 regional profiles. Every one has CLDR plural categories and direction. Phrase coverage is narrower. 3,288 source-attested labels are bundled. 2,603 of those come from Wikimedia editor catalogs (OOUI, VisualEditor, the language picker). 685 come from Django, Flutter, Android, and devise-i18n. Drafts fill account, billing, permission, dialog, and form actions for the ten style-guide locales when no compatible catalog had the line. Drafts are not attestations. The provenance table is [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md).
 
 Third-party strings keep their own licenses. See [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md) and [skills/nativeskill/THIRD_PARTY_NOTICES.md](skills/nativeskill/THIRD_PARTY_NOTICES.md). GPL and AGPL catalogs, including Telegram, are not bundled. Original NativeSkill material is [MIT](LICENSE).
 

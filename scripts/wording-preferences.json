@@ -1,0 +1,19 @@
+[
+  {"locale":"hi","concept":"dialog.dismiss","role":"button","text":"रद्द करें","preferred":false,"note":"Means cancel, not dismiss. Prefer बंद करें."},
+  {"locale":"hi","concept":"dialog.dismiss","role":"button","text":"बंद करें","preferred":true,"note":"Preferred Close."},
+  {"locale":"hi","concept":"form.apply_changes","role":"button","text":"बदलाव प्रकाशित करें","preferred":false,"note":"Means publish changes. Do not use it for Apply."},
+  {"locale":"hi","concept":"form.save_changes","role":"button","text":"सहेजें","preferred":true,"note":"Preferred Save. The Django line सुरक्षित कीजिये is stiffer."},
+  {"locale":"hi","concept":"form.save_changes","role":"button","text":"सुरक्षित कीजिये","preferred":false,"note":"Stiff and easy to misread. Prefer सहेजें."},
+  {"locale":"ta","concept":"dialog.dismiss","role":"button","text":"அகற்று","preferred":false,"note":"Means remove, not dismiss. Prefer மூடுக for close."},
+  {"locale":"ta","concept":"auth.sign_in","role":"button","text":"உள்ளே போ","preferred":false,"note":"Means go inside. Apps use உள்நுழை."},
+  {"locale":"ta","concept":"dialog.cancel_action","role":"button","text":"கைவிடுக","preferred":false,"note":"Means abandon. Prefer ரத்துசெய் for a dialog Cancel."},
+  {"locale":"ta","concept":"dialog.cancel_action","role":"button","text":"ரத்துசெய்","preferred":true,"note":"Preferred dialog Cancel."},
+  {"locale":"ar","concept":"item.delete","role":"button","text":"شطب","preferred":false,"note":"Means cross out. Prefer احذف."},
+  {"locale":"ar","concept":"item.delete","role":"button","text":"احذف","preferred":true,"note":"Preferred Delete."},
+  {"locale":"ar","concept":"auth.sign_out","role":"button","text":"تسجيل الخروج","preferred":true,"note":"Preferred Sign out. اخرج is an abrupt imperative."},
+  {"locale":"ar-DZ","concept":"auth.sign_out","role":"button","text":"اخرج","preferred":false,"note":"Abrupt imperative. Prefer تسجيل الخروج."},
+  {"locale":"ms","concept":"dialog.dismiss","role":"button","text":"Abaikan","preferred":false,"note":"Means ignore. Prefer Tutup for close."},
+  {"locale":"ms","concept":"dialog.dismiss","role":"button","text":"Tutup","preferred":true,"note":"Preferred Close."},
+  {"locale":"de","concept":"dialog.dismiss","role":"button","text":"Ausblenden","preferred":false,"note":"Means hide or fade out. Prefer Schließen."},
+  {"locale":"de","concept":"dialog.dismiss","role":"button","text":"Schließen","preferred":true,"note":"Preferred Close."}
+]

@@ -1,0 +1,67 @@
+{
+  "@@locale": "en",
+  "appTitle": "Northwind",
+  "signIn": "Sign in",
+  "createAccount": "Create account",
+  "signOut": "Sign out",
+  "email": "Email",
+  "password": "Password",
+  "forgotPassword": "Forgot password?",
+  "welcome": "Welcome, {name}",
+  "@welcome": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dialogTitle": "Discard unsaved changes?",
+  "dialogCancel": "Cancel",
+  "discardChanges": "Discard changes",
+  "save": "Save",
+  "saveDraft": "Save draft",
+  "renewTitle": "Cancel subscription?",
+  "renewBody": "You keep access until {date}. You will not be charged again.",
+  "@renewBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "stopRenewal": "Cancel",
+  "endNow": "End subscription now",
+  "payNow": "Pay {amount}",
+  "@payNow": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentPending": "Payment pending",
+  "savings": "Save {amount}",
+  "cameraTitle": "Camera access",
+  "cameraBody": "Northwind uses the camera to scan receipts.",
+  "allowCamera": "Allow",
+  "denyCamera": "Don't allow",
+  "receiptCount": "{count, plural, one {# receipt} other {# receipts}}",
+  "@receiptCount": {
+    "placeholders": {
+      "count": {
+        "type": "num"
+      }
+    }
+  },
+  "download": "Download",
+  "archive": "Archive",
+  "restore": "Restore",
+  "deleteForever": "Delete permanently",
+  "clearFilters": "Clear filters",
+  "noResults": "No receipts match these filters.",
+  "back": "Back",
+  "continueAction": "Continue",
+  "requiredEmail": "Enter an email address.",
+  "invalidEmail": "That email format is not valid.",
+  "language": "Language"
+}

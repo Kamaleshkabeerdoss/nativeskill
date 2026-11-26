@@ -1,0 +1,23 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "Ruang kerja",
+  "signIn": "Log masuk",
+  "signOut": "Log keluar",
+  "createAccount": "Daftar",
+  "welcome": "Selamat datang, {name}",
+  "save": "Simpan",
+  "dialogCancel": "Batal",
+  "stopRenewal": "Batal",
+  "stopRenewalHelp": "Akses kekal sehingga {date}.",
+  "payNow": "Bayar {amount}",
+  "allowCamera": "Benarkan",
+  "denyCamera": "Nafi",
+  "receiptCount": "{count, plural, one {# resit} other {# resit}}",
+  "download": "Unduh",
+  "empty": "Belum ada resit.",
+  "language": "Bahasa",
+  "saveDraft": "Simpan draf",
+  "deleteForever": "Padam",
+  "clearFilters": "Kosongkan penapis",
+  "archive": "Arkib"
+}

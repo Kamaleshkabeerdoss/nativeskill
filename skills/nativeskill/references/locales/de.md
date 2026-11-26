@@ -10,7 +10,7 @@ Pick one address for the whole language and write it in the report.
 - `du` only if the product already says `du` on every screen. Then body text is `du`, and buttons are still infinitives, not `Speicher`.
 - Never mix `Sie` in the error and `du` on the button. Never use `ihr` for a single user.
 
-Android ships `Archivieren` and `Wiederherstellen` for archive and restore. Those infinitives are the button shape to copy. `Abbrechen` is the dialog cancel. Stopping renewal is `Verlängerung stoppen` (draft), not `Abbrechen`.
+Android ships `Archivieren` and `Wiederherstellen` for archive and restore. Those infinitives are the button shape to copy. `Abbrechen` is the dialog cancel. `Kündigen` ends the contract. It is the wrong shortcut when the user keeps access until the period ends. Stopping renewal is `Verlängerung stoppen` (draft). If that is too long for the button and the body already names the date, `Nicht verlängern` is the shorter draft. Do not collapse it to `Abbrechen`.
 
 ## Buttons and compounds
 

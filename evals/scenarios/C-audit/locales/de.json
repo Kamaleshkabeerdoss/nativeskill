@@ -1,0 +1,23 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "Workspace",
+  "signIn": "Anmelden",
+  "signOut": "Abmelden",
+  "createAccount": "Konto erstellen",
+  "welcome": "Willkommen, {name}",
+  "save": "Speichern",
+  "dialogCancel": "Abbrechen",
+  "stopRenewal": "Abbrechen",
+  "stopRenewalHelp": "Du behältst den Zugriff bis {date}.",
+  "payNow": "Jetzt {amount} bezahlen",
+  "allowCamera": "Zulassen",
+  "denyCamera": "Nicht zulassen",
+  "receiptCount": "{count, plural, one {# Beleg} other {# Belege}}",
+  "download": "Herunterladen Sie",
+  "empty": "Noch keine Belege.",
+  "language": "Sprache",
+  "saveDraft": "Entwurf speichern",
+  "deleteForever": "Endgültig löschen",
+  "clearFilters": "Filter löschen",
+  "archive": "Archivieren"
+}

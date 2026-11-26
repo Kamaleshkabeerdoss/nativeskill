@@ -4,7 +4,7 @@
   "languageCount": 110,
   "regionalLocaleCount": 449,
   "wordingLanguageCount": 107,
-  "wordingExampleCount": 3348,
+  "wordingExampleCount": 3288,
   "tagOwners": {
     "ta": "ta",
     "hi": "hi",
@@ -140,7 +140,7 @@
       "path": "locales/hi.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 48
+      "wordingExamples": 49
     },
     {
       "id": "te",
@@ -311,7 +311,7 @@
       "path": "locales/zh.json",
       "regionalProfiles": 9,
       "wordingStatus": "source-attested",
-      "wordingExamples": 103
+      "wordingExamples": 100
     },
     {
       "id": "ja",
@@ -329,7 +329,7 @@
       "path": "locales/ko.json",
       "regionalProfiles": 3,
       "wordingStatus": "source-attested",
-      "wordingExamples": 45
+      "wordingExamples": 39
     },
     {
       "id": "ms",
@@ -338,7 +338,7 @@
       "path": "locales/ms.json",
       "regionalProfiles": 6,
       "wordingStatus": "source-attested",
-      "wordingExamples": 51
+      "wordingExamples": 52
     },
     {
       "id": "id",
@@ -347,7 +347,7 @@
       "path": "locales/id.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 49
+      "wordingExamples": 50
     },
     {
       "id": "th",
@@ -473,7 +473,7 @@
       "path": "locales/en.json",
       "regionalProfiles": 124,
       "wordingStatus": "source-attested",
-      "wordingExamples": 62
+      "wordingExamples": 56
     },
     {
       "id": "fr",
@@ -482,7 +482,7 @@
       "path": "locales/fr.json",
       "regionalProfiles": 46,
       "wordingStatus": "source-attested",
-      "wordingExamples": 50
+      "wordingExamples": 51
     },
     {
       "id": "de",
@@ -500,7 +500,7 @@
       "path": "locales/es.json",
       "regionalProfiles": 28,
       "wordingStatus": "source-attested",
-      "wordingExamples": 73
+      "wordingExamples": 55
     },
     {
       "id": "pt",
@@ -509,7 +509,7 @@
       "path": "locales/pt.json",
       "regionalProfiles": 12,
       "wordingStatus": "source-attested",
-      "wordingExamples": 69
+      "wordingExamples": 51
     },
     {
       "id": "it",
@@ -806,7 +806,7 @@
       "path": "locales/be.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 58
+      "wordingExamples": 50
     },
     {
       "id": "ar",
@@ -815,7 +815,7 @@
       "path": "locales/ar.json",
       "regionalProfiles": 28,
       "wordingStatus": "source-attested",
-      "wordingExamples": 63
+      "wordingExamples": 58
     },
     {
       "id": "he",

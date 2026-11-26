@@ -98,20 +98,47 @@ function sourceReferences(id, codes, profiles) {
   return references;
 }
 
+const englishByTerm = new Map();
+for (const source of wordingSources.values()) {
+  for (const [key, label] of source.terms ?? []) englishByTerm.set(source.id + '\0' + key, label);
+}
+const preferences = load('./wording-preferences.json');
+
+function dedupeAttested(entries, byTag) {
+  const groups = new Map();
+  for (const entry of entries) {
+    const language = new Intl.Locale(entry.locale).language;
+    const key = [entry.script, language, entry.concept, entry.role, entry.text, entry.source.id, entry.source.key].join('\0');
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(entry);
+  }
+  const out = [];
+  for (const group of groups.values()) {
+    if (group.length === 1) { out.push(group[0]); continue; }
+    const language = new Intl.Locale(group[0].locale).language;
+    const generic = group.find((entry) => entry.locale === language);
+    if (generic) out.push(generic);
+    else if (byTag.has(language)) out.push({ ...group[0], locale: language, script: byTag.get(language).script });
+    else out.push(group[0]);
+  }
+  return out;
+}
+
 function buildWording(id, profiles) {
   const byTag = new Map(profiles.map((profile) => [profile.tag, profile]));
-  const entries = (wordingCorpus[id] ?? []).map(({ locale, concept, role, text, source, file, key }) => {
+  const entries = dedupeAttested((wordingCorpus[id] ?? []).map(({ locale, concept, role, text, source, file, key, english }) => {
     const profile = byTag.get(locale);
     const origin = wordingSources.get(source);
     if (!profile || !origin || !rubric.has(concept)) throw new Error('Invalid wording entry: ' + id + '/' + key);
     return {
       locale, script: profile.script, concept, role, text, status: 'source-attested',
+      english: english || englishByTerm.get(source + '\0' + key) || null,
       source: {
         id: source, key, license: origin.license,
         url: 'https://github.com/' + origin.repo + '/blob/' + origin.revision + '/' + origin.catalog + '/' + file
       }
     };
-  });
+  }), byTag);
   const sourceCount = entries.length;
   for (const { locale, concept, role, text, note, url } of wordingDrafts.filter((draft) => byTag.has(draft.locale))) {
     if (!rubric.has(concept) || new URL(url).protocol !== 'https:') throw new Error('Invalid wording draft: ' + concept);
@@ -119,6 +146,12 @@ function buildWording(id, profiles) {
       locale, script: byTag.get(locale).script, concept, role, text,
       status: 'draft', note, source: { id: 'reference-only', url }
     });
+  }
+  for (const entry of entries) {
+    const preference = preferences.find((item) => item.locale === entry.locale && item.concept === entry.concept && item.role === entry.role && item.text === entry.text);
+    if (!preference) continue;
+    entry.preferred = preference.preferred;
+    entry.note = preference.note;
   }
   const status = sourceCount ? 'source-attested' : entries.length ? 'draft' : 'foundation';
   return { status, sourceCount, entries };

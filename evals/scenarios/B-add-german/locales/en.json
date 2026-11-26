@@ -1,0 +1,19 @@
+{
+  "appTitle": "Northwind",
+  "workspace": "Workspace",
+  "signIn": "Sign in",
+  "signOut": "Sign out",
+  "createAccount": "Create account",
+  "welcome": "Welcome, {name}",
+  "save": "Save",
+  "dialogCancel": "Cancel",
+  "stopRenewal": "Cancel",
+  "stopRenewalHelp": "Access continues until {date}.",
+  "payNow": "Pay {amount}",
+  "allowCamera": "Allow",
+  "denyCamera": "Don't allow",
+  "receiptCount": "{count, plural, one {# receipt} other {# receipts}}",
+  "download": "Download",
+  "empty": "No receipts yet.",
+  "language": "Language"
+}
