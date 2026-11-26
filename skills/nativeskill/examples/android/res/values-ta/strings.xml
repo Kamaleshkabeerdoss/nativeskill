@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_out">வெளியேறு</string>
+    <string name="pay_now">%1$s செலுத்து</string>
+    <plurals name="item_count">
+        <item quantity="one">%d உருப்படி</item>
+        <item quantity="other">%d உருப்படிகள்</item>
+    </plurals>
+</resources>

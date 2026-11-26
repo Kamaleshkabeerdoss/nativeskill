@@ -1,0 +1,14 @@
+{
+  "@@locale": "en",
+  "signOut": "Sign out",
+  "@signOut": {
+    "description": "Ends the current session. The account stays."
+  },
+  "payNow": "Pay {amount}",
+  "@payNow": {
+    "placeholders": {
+      "amount": {"type": "String"}
+    }
+  },
+  "itemCount": "{count, plural, one {# item} other {# items}}"
+}

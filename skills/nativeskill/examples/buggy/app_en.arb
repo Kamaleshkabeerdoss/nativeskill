@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "save": "Save",
+  "pay": "Pay {amount}",
+  "named": "Hello, {{name}}",
+  "androidStyle": "Pay %1$s",
+  "count": "{count, plural, one {# item} other {# items}}",
+  "copied": "Cancel",
+  "onlySource": "Settings",
+  "broken": "{count, plural, one {# item} other {# items}}"
+}

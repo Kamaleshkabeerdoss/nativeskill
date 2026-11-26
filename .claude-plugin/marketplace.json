@@ -1,0 +1,23 @@
+{
+  "name": "nativeskill",
+  "description": "Meaning-first app localization: add a language or audit translations that sound like machine translation.",
+  "owner": {
+    "name": "Kamalesh Kabeerdoss"
+  },
+  "plugins": [
+    {
+      "name": "nativeskill",
+      "description": "Add a language or audit existing UI translations. Decide the intent before the wording, keep placeholders and CLDR plurals, and label every proposal source-attested, draft, or uncovered.",
+      "version": "0.2.0",
+      "source": "./",
+      "skills": ["./skills/nativeskill"],
+      "author": {
+        "name": "Kamalesh Kabeerdoss"
+      },
+      "homepage": "https://github.com/Kamaleshkabeerdoss/nativeskill",
+      "repository": "https://github.com/Kamaleshkabeerdoss/nativeskill",
+      "license": "MIT",
+      "keywords": ["i18n", "l10n", "localization", "translation", "rtl", "flutter", "android", "ios"]
+    }
+  ]
+}

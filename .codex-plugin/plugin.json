@@ -1,0 +1,28 @@
+{
+  "name": "nativeskill",
+  "version": "0.2.0",
+  "description": "Meaning-first app localization: add a language or audit translations that sound like machine translation.",
+  "author": {
+    "name": "Kamalesh Kabeerdoss",
+    "url": "https://github.com/Kamaleshkabeerdoss"
+  },
+  "homepage": "https://github.com/Kamaleshkabeerdoss/nativeskill",
+  "repository": "https://github.com/Kamaleshkabeerdoss/nativeskill",
+  "license": "MIT",
+  "keywords": ["i18n", "l10n", "localization", "translation", "rtl", "skills"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "NativeSkill",
+    "shortDescription": "Add a language or fix translations that mean the wrong action.",
+    "longDescription": "NativeSkill helps coding agents add a locale or audit an existing catalog. It makes the agent name the UI intent before choosing words, keeps placeholders and CLDR plurals intact, and labels every proposal source-attested, draft, or uncovered.",
+    "developerName": "Kamalesh Kabeerdoss",
+    "category": "Productivity",
+    "capabilities": ["localization", "i18n"],
+    "websiteURL": "https://github.com/Kamaleshkabeerdoss/nativeskill",
+    "defaultPrompt": [
+      "Use NativeSkill to add Tamil and Malay from our English catalog.",
+      "Audit the Arabic strings. A few sound like machine translation.",
+      "The subscription Cancel button reads like a dialog Cancel. Fix the wording."
+    ]
+  }
+}

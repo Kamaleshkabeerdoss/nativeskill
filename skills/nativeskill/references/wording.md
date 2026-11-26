@@ -5,6 +5,8 @@
 - **Uncovered** means there is no matching entry for the locale, concept, and role requested. Check the app's glossary, consult a credible reference if available, and label the proposed wording as a draft.
 - A language-and-script match can supply a useful candidate for a regional locale. Keep country-specific claims and script variants separate. Native review is specific to the app copy, locale, and context.
 
+Pinned catalogs now include Android framework strings (Apache-2.0), devise-i18n account strings (MIT), and a small set of Telegram for Android strings (GPL-2.0-only, not relicensed). A draft note means the phrase was not taken from those files.
+
 ## Examples
 
 - A search field's **Clear text** tooltip can use `form.clear_input` with role `tooltip`. A button that clears an attachment selection uses `file.clear_selection`. A command that deletes a record is a different concept.

@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "note": "Gold before/after cases for the two workflows. Evidence labels are part of the answer. A draft is not a native-speaker review.",
+  "cases": [
+    {
+      "id": "subscription-cancel-is-not-dialog-cancel",
+      "workflow": "audit",
+      "locale": "ms-MY",
+      "intent": "billing.stop_renewal",
+      "uiRole": "button",
+      "screen": "Subscription settings. The button stops the next charge. Access continues until the period ends.",
+      "before": "Batal",
+      "after": "Hentikan pembaharuan automatik",
+      "evidence": "draft",
+      "why": "Batal is the Android and dialog cancel word. This control is billing.stop_renewal, not dialog.cancel_action."
+    },
+    {
+      "id": "dialog-cancel-stays",
+      "workflow": "audit",
+      "locale": "ms-MY",
+      "intent": "dialog.cancel_action",
+      "uiRole": "button",
+      "screen": "Discard-changes dialog. The button closes the dialog and keeps the saved record.",
+      "before": "Batal",
+      "after": "Batal",
+      "evidence": "source-attested",
+      "why": "The same Malay word is correct here. Do not replace it with the subscription phrase."
+    },
+    {
+      "id": "placeholder-renamed",
+      "workflow": "audit",
+      "locale": "ar",
+      "intent": "billing.pay_now",
+      "before": "ادفع {المبلغ}",
+      "after": "ادفع {amount}",
+      "source": "Pay {amount}",
+      "evidence": "draft",
+      "why": "The placeholder name is byte-exact. Translating amount to المبلغ fails placeholder-mismatch. The Arabic words around it can still be a draft."
+    },
+    {
+      "id": "arabic-plural-complete",
+      "workflow": "add-language",
+      "locale": "ar",
+      "before": "{count, plural, one {# عنصر} other {# عناصر}}",
+      "after": "{count, plural, zero {لا عناصر} one {# عنصر} two {# عنصران} few {# عناصر} many {# عنصر} other {# عناصر}}",
+      "evidence": "draft",
+      "why": "Arabic cardinal categories are zero, one, two, few, many, and other. one and other alone fail plural-missing. The words in each branch are drafts until reviewed."
+    },
+    {
+      "id": "hardcoded-subscription-button",
+      "workflow": "add-language",
+      "locale": "ta",
+      "before": "Text('Cancel subscription')",
+      "after": "Text(copy.stopRenewal)",
+      "intent": "billing.stop_renewal",
+      "catalog": "தானியங்கி புதுப்பிப்பை நிறுத்து",
+      "evidence": "draft",
+      "why": "The scanner reports the literal. The catalog key names the intent. The Tamil phrase is the unreviewed stop-renewal draft, not dialog cancel."
+    },
+    {
+      "id": "tamil-allow-is-a-noun",
+      "workflow": "audit",
+      "locale": "ta",
+      "intent": "permissions.allow_access",
+      "before": "அனுமதி",
+      "after": "அனுமதி",
+      "evidence": "source-attested",
+      "why": "Android shipped this noun for Allow. Reusing it is allowed only if the report says it is a noun. A verb replacement is a draft, not a new attestation."
+    }
+  ]
+}

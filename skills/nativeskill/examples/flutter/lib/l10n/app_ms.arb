@@ -1,0 +1,6 @@
+{
+  "@@locale": "ms",
+  "signOut": "Log keluar",
+  "payNow": "Bayar {amount}",
+  "itemCount": "{count, plural, other {# item}}"
+}

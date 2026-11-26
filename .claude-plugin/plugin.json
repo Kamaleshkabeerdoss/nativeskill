@@ -1,0 +1,10 @@
+{
+  "name": "nativeskill",
+  "description": "Add a language or audit existing UI translations. Decide the intent before the wording, so a subscription Cancel is not a dialog Cancel.",
+  "author": {
+    "name": "Kamalesh Kabeerdoss",
+    "url": "https://github.com/Kamaleshkabeerdoss"
+  },
+  "homepage": "https://github.com/Kamaleshkabeerdoss/nativeskill",
+  "license": "MIT"
+}

@@ -1,0 +1,18 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "sign_out": {
+      "localizations": {
+        "en": { "stringUnit": { "value": "Sign out" } },
+        "ms": { "stringUnit": { "value": "Log keluar" } }
+      }
+    },
+    "welcome": {
+      "localizations": {
+        "en": { "stringUnit": { "value": "Hello, %@" } },
+        "ms": { "stringUnit": { "value": "Helo, %@" } }
+      }
+    }
+  },
+  "version": "1.0"
+}

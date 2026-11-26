@@ -1,0 +1,11 @@
+{
+  "@@locale": "ar",
+  "save": "احفظ هذا التغيير الآن واحفظ هذا التغيير الآن واحفظ هذا التغيير",
+  "pay": "ادفع {المبلغ}",
+  "named": "مرحبا {name}",
+  "androidStyle": "ادفع",
+  "count": "{count, plural, one {# عنصر} other {# عناصر}}",
+  "copied": "Cancel",
+  "extra": "زائد",
+  "broken": "{count, plural, one {# عنصر}"
+}
