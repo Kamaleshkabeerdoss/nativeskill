@@ -10,7 +10,7 @@ Localize an app that already has a UI. Two jobs: add a language, or audit and fi
 
 `Cancel` on a dialog abandons that dialog (`dialog.cancel_action`). `Cancel` on a subscription either stops future renewal (`billing.stop_renewal`) or ends access today (`billing.end_subscription_now`). Malay Android ships `Batal` for the generic cancel. Putting `Batal` on "stop renewal" tells the user the wrong thing about their money. Look the intent up, then the wording.
 
-Bundled labels are evidence of what another product shipped, or an unreviewed draft. They are not a native-speaker review of this app. Every proposed string gets one of three labels: `source-attested`, `draft`, or `uncovered`.
+Bundled labels are evidence of what another product shipped, or an unreviewed draft. They are not a native-speaker review of this app. Every proposed string gets one of three labels: `source-attested`, `draft`, or `uncovered`. A lookup can also come back `mixed`; resolve it with the [Evidence](#evidence) table before you label the string.
 
 ## Rules
 
@@ -20,7 +20,7 @@ Bundled labels are evidence of what another product shipped, or an unreviewed dr
 4. One formality for the whole language. Do not mix French `tu` and `vous`, German `du` and `Sie`, or Hindi `तू` and `आप`. Match the formality the app already uses. If it has none, pick one, name it in the report, and use it everywhere.
 5. Leave brand names, legal entity names, trademarks, and product codes untranslated when the product treats them as proper nouns. A bundled example loses to the project's glossary.
 6. Format dates, numbers, and currency with the platform locale APIs (`intl`, `DateFormat`, `NumberFormatter`, `android.icu`). Do not hardcode `$`, `MM/DD/YYYY`, or a digit shape inside a string the app already formats.
-7. Label the evidence. `source-attested` means a pinned upstream UI shipped that phrase for this intent and role. `draft` means an unreviewed suggestion, including every sentence you compose. `uncovered` means lookup found nothing. Never say a native speaker, a linguist, or the upstream project reviewed this app's copy.
+7. Label the evidence. `source-attested` means a pinned upstream UI shipped that phrase for this intent and role, and no reviewer marked it `preferred: false`. `draft` means an unreviewed suggestion, including every sentence you compose. `uncovered` means lookup found nothing. Never say a native speaker, a linguist, or the upstream project reviewed this app's copy.
 8. Read the locale note before writing a language you have not already checked in this task: [ta](references/locales/ta.md), [ms](references/locales/ms.md), [ar](references/locales/ar.md), [hi](references/locales/hi.md), [zh](references/locales/zh.md), [ja](references/locales/ja.md), [de](references/locales/de.md), [es](references/locales/es.md), [fr](references/locales/fr.md), [id](references/locales/id.md). Machine-translation tells are in [references/signs.md](references/signs.md). RTL layout is in [references/rtl.md](references/rtl.md).
 
 Lookup, from the installed skill directory:
@@ -30,7 +30,7 @@ node <skill-dir>/scripts/lookup.mjs ms-MY billing.stop_renewal button
 node <skill-dir>/scripts/lookup.mjs ta auth.sign_out button
 ```
 
-Use a `source-attested` hit when the role matches the control you are translating. A `draft` hit is a starting point you must still mark `draft`. No hit means `uncovered`: write the smallest accurate phrase, mark it `draft`, and do not pretend it came from the catalog.
+Read `wording.status`, `wording.preferred`, and `wording.disagreement` before any entry text. A `preferred: false` entry is rejected even when it is `source-attested`. If `wording.preferred` is set and its meaning and role fit the control, use it. The full decision table is in [Evidence](#evidence).
 
 ## Detect the stack
 
@@ -163,11 +163,31 @@ Android uses `<plurals>` and `quantity`. i18next v4 uses `items_one` and `items_
 
 ## Evidence
 
-`lookup.mjs` prints JSON. Read `wording.status` and each entry's `text`, `role`, `status`, and `source`.
+`lookup.mjs` prints JSON. Read these fields of `wording` first, then each entry's `text`, `role`, `status`, `preferred`, `note`, and `source`.
 
-- `source-attested` plus a matching role: you may reuse the text. The report names the source id from [references/sources.md](references/sources.md). Reuse is still subject to the locale note. A noun shipped as a button stays a noun.
-- `draft`: the `note` says what the suggestion is for. Keep the label `draft` if you use it or if you rewrite it.
-- `uncovered`: there is no bundled phrase. Your sentence is a `draft`. Point at the intent id so a reviewer can see what you aimed at.
+| Field | Values | Meaning |
+| --- | --- | --- |
+| `status` | `source-attested`, `draft`, `mixed`, `uncovered` | `mixed` means the hits disagree: different texts, attested and draft together, or at least one entry marked `preferred: false`. |
+| `disagreement` | `true` / `false` | `true` whenever `status` is `mixed`. Do not pick the first entry. Work through the table below. |
+| `preferred` | an entry or `null` | The entry the catalog recommends for this locale and intent. It can be a `draft`. |
+| entry `preferred` | `true`, `false`, or absent | `false` means a reviewer of this catalog rejected that line for this intent. Its `note` says why and usually names the better word. |
+
+Decide in this order. Stop at the first row that applies.
+
+| Lookup result | What you do | Evidence label in the report |
+| --- | --- | --- |
+| An entry has `preferred: false` | Never reuse it, even if it is `source-attested`. Skip it in every row below. | Mention it as rejected only if the current catalog already uses it. |
+| `wording.preferred` is set, and its meaning and role fit the control | Use it. | The entry's own status: `source-attested` or `draft`. A preferred draft stays `draft`. |
+| `wording.preferred` is set, but the control is a different role or meaning | Do not force it. Treat the lookup as `uncovered` for this control. | `draft` |
+| `status` is `source-attested` and every usable entry has the same text | Use it when the role matches. Reuse is still subject to the locale note. A noun shipped as a button stays a noun. | `source-attested`, naming the source id from [references/sources.md](references/sources.md) |
+| `status` is `draft` | A starting point. Keep it or rewrite it. | `draft` |
+| `status` is `mixed`, nothing is preferred, and two or more usable entries remain | Open the screen and decide what the control does. Choose the candidate whose meaning fits, or write a better one. | `draft`, with both candidates and the reason in the report (`mixed: Hapuskan / Buang, chose Buang because ...`) |
+| `status` is `mixed` and only rejected entries remain | Use the replacement the rejected entry's `note` names, or write one. | `draft` |
+| `status` is `uncovered` | Write the smallest accurate phrase. Point at the intent id so a reviewer can see what you aimed at. | `draft` |
+
+Length variants of one meaning are not a conflict. `Keine Ergebnisse` and `Es wurden keine Ergebnisse gefunden.` both mean no results. Pick the one that fits the control and keep the attested label.
+
+Worked example, Tamil sign-in. `lookup.mjs ta auth.sign_in button` returns `status: mixed`. Django's `உள்ளே போ` is `source-attested` and `preferred: false`, because it means "go inside". `wording.preferred` is the draft `உள்நுழை`. The button gets `உள்நுழை`, labelled `draft`. It is not labelled `source-attested`, because the attested line was rejected.
 
 Account, billing, and permission strings are where a wrong action costs the user money or access. Prefer a short draft you can explain over a fluent sentence that blurs "stop renewal", "cancel this payment", and "close the dialog".
 
@@ -179,4 +199,5 @@ Screens that mirror in Arabic, Hebrew, Persian, Urdu, or other RTL locales still
 - Do not reuse one translation of Cancel, Save, or Remove for every intent that uses that English word.
 - Do not translate the inside of a placeholder, and do not concatenate fragments to make a plural.
 - Do not copy Hindi AOSP `skip_button_label` onto a skip action, and do not describe Tamil AOSP `allow` as a verb.
+- Do not reuse an entry marked `preferred: false` because it is `source-attested`. The rejection wins.
 - Do not promote a draft to `source-attested` because it sounds familiar or because a similar language uses it. Indonesian `Mendaftar` is not Malay `Daftar`. Simplified Chinese is not Traditional Chinese.
