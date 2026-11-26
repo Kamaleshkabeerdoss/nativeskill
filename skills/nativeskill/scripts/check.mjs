@@ -78,6 +78,7 @@ function parseMessage(text, start, closer) {
       index = skipSpace(text, index + 1);
       if (type === 'plural' || type === 'selectordinal' || type === 'select') {
         const options = [];
+        const branches = [];
         let usesPound = false;
         while (text[index] && text[index] !== '}') {
           index = skipSpace(text, index);
@@ -99,7 +100,10 @@ function parseMessage(text, start, closer) {
           if (nested.plurals.length) plurals.push(...nested.plurals);
           if (nested.selects.length) selects.push(...nested.selects);
           if (nested.exacts.length) exacts.push(...nested.exacts);
-          if (text.slice(index + 1, nested.index).includes('#')) usesPound = true;
+          const branch = text.slice(index + 1, nested.index);
+          const showsNumber = branch.includes('#') || branch.includes('{' + name + '}');
+          if (branch.includes('#')) usesPound = true;
+          branches.push({ option, showsNumber });
           options.push(option);
           index = skipSpace(text, nested.index + 1);
         }
@@ -109,7 +113,7 @@ function parseMessage(text, start, closer) {
         }
         if (type === 'select') selects.push({ name, choices: options });
         if (type === 'plural' || type === 'selectordinal') {
-          plurals.push({ name, type, categories: options.filter((option) => !option.startsWith('=')), usesPound });
+          plurals.push({ name, type, categories: options.filter((option) => !option.startsWith('=')), usesPound, branches });
           exacts.push({ name, type, values: options.filter((option) => option.startsWith('=')) });
         }
         placeholders.push(`{${name}, ${type}}`);
@@ -154,14 +158,21 @@ function isNumericToken(token) {
   return token === '{count}' || token.startsWith('{count,');
 }
 
-function categoryIsExact(locale, category) {
-  const rules = new Intl.PluralRules(locale);
+function categoryIsExact(locale, category, type = 'cardinal') {
+  const rules = new Intl.PluralRules(locale, { type });
   let hits = 0;
   for (let value = 0; value <= 200; value += 1) {
     if (rules.select(value) === category) hits += 1;
     if (hits > 1) return false;
   }
   return hits === 1;
+}
+
+function valuesFor(locale, category, type) {
+  const rules = new Intl.PluralRules(locale, { type });
+  const hits = [];
+  for (let value = 0; value <= 200 && hits.length < 4; value += 1) if (rules.select(value) === category) hits.push(value);
+  return hits.join(', ') + (hits.length === 4 ? ', …' : '');
 }
 
 function comparePrintf(sourceTokens, targetTokens, add, key) {
@@ -186,8 +197,14 @@ function comparePrintf(sourceTokens, targetTokens, add, key) {
   if (!changed) return true;
   const sourceOrder = left.map((item) => item.type).join(' ');
   const targetOrder = right.map((item) => item.type).join(' ');
-  if ([...sourceTypes.values()].sort().join() === [...targetTypes.values()].sort().join()) {
+  const sameTypes = [...sourceTypes.values()].sort().join() === [...targetTypes.values()].sort().join();
+  if (sameTypes && !targetHasPosition) {
     add('placeholder-order', 'error', key, 'Unnumbered placeholders changed order (' + sourceOrder + ' → ' + targetOrder + '). Keep the order or use %1$@ and %2$d.');
+  } else if (sameTypes) {
+    const retyped = positions
+      .filter((position) => sourceTypes.get(position) !== targetTypes.get(position))
+      .map((position) => '%' + position + '$' + sourceTypes.get(position) + ' became %' + position + '$' + targetTypes.get(position));
+    add('placeholder-mismatch', 'error', key, 'Numbered placeholders changed type: ' + retyped.join(', ') + '. Each argument keeps its source type. Move the token, not the type letter.');
   } else {
     add('placeholder-mismatch', 'error', key, 'Placeholders changed. Source has ' + (sourceTokens.join(' ') || 'none') + '. Target has ' + (targetTokens.join(' ') || 'none') + '.');
   }
@@ -247,6 +264,14 @@ export function compareText(source, target, locale, add, key, options = {}) {
     const unused = plural.categories.filter((category) => !required.includes(category));
     if (missing.length) add('plural-missing', 'error', key, plural.name + ' is missing ' + type + ' ' + missing.join(', ') + '.');
     if (unused.length) add('plural-unused', 'warning', key, plural.name + ' has ' + type + ' categories this locale does not use: ' + unused.join(', ') + '.');
+    const sourcePlural = left.plurals.find((item) => item.name === plural.name && item.type === plural.type);
+    if (!sourcePlural || !sourcePlural.branches.some((branch) => branch.showsNumber)) continue;
+    for (const { option, showsNumber } of plural.branches) {
+      if (showsNumber || option.startsWith('=') || !required.includes(option)) continue;
+      if (categoryIsExact(locale, option, type)) continue;
+      const values = valuesFor(locale, option, type);
+      add('plural-number-missing', 'warning', key, plural.name + ' ' + option + ' has no # but ' + locale + ' ' + option + ' covers ' + values + '. Every one of those counts shows this exact text. Add # unless the words are right for all of them.');
+    }
   }
 }
 

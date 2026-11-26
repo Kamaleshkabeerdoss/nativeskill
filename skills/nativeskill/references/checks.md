@@ -12,7 +12,7 @@ node <skill-dir>/scripts/lookup.mjs ta auth.sign_out button
 
 `.ts` and `.js` catalogs that spread another object, call a function, or compute a key are not read here. Those need `nativeskill validate` after `npm install`, because that command uses the TypeScript parser. `nativeskill check` itself does not import TypeScript.
 
-Android `translatable="false"` strings are skipped. An exact plural category (Arabic `one` is only 1; French `one` is 0 and 1) may omit the number. A string catalog with source strings and no target locale fails with `missing-key`.
+Android `translatable="false"` strings are skipped. A plural category that covers exactly one number may omit it: Arabic `zero`, `one`, and `two`, or German and English `one`. French `one` is not such a category, because it covers both 0 and 1. A French `one` without the number is an Android `placeholder-mismatch` and an ICU `plural-number-missing` warning. A string catalog with source strings and no target locale fails with `missing-key`.
 
 Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` and `--locale` pick the columns.
 
@@ -24,7 +24,7 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `extra-key` | warning | The target has a key the source does not. |
 | `empty-message` | error | The translation is blank. |
 | `value-type-mismatch` | error | One side is a plural and the other is a single string. |
-| `placeholder-mismatch` | error | A named or printf placeholder was added, removed, or retyped. |
+| `placeholder-mismatch` | error | A named or printf placeholder was added, removed, or retyped. A numbered `%1$s` that becomes `%1$d` is reported as a type change. |
 | `placeholder-order` | error | Unnumbered `%@` / `%d` placeholders swapped. Keep the order, or number them `%1$@` and `%2$d`. A numbered swap that keeps each argument's type is allowed. |
 | `selector-mismatch` | error | An ICU `select` branch was renamed or removed. |
 | `exact-choice-missing` | error | An exact plural such as `=0` was added or removed. |
@@ -33,6 +33,7 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `plural-missing` | error | A plural is missing a CLDR category for this locale. |
 | `plural-unused` | warning | A plural has a category this locale does not use. |
 | `possible-source-copy` | warning | The text equals the source and the language changed. Keep it only for a brand or a shared glossary term. |
+| `plural-number-missing` | warning | An ICU plural branch has no `#` (or `{count}`) although the source shows the number, and that category covers more than one number in this locale. French `one {un fichier}` also shows for 0. |
 | `length-blowup` | warning | The translation is more than three times the source and at least 12 characters longer. Check the control. |
 
 Plural categories come from `Intl.PluralRules` for the target locale. Exact choices such as `=0` are allowed on top of the categories. Android `<plurals>` quantities and i18next `_one` / `_other` suffixes (or a nested `one` / `other` object) are checked the same way.

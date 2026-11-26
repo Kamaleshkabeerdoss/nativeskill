@@ -93,3 +93,37 @@ test('the hardcoded-string scanner finds UI literals and ignores resource refere
   assert.equal(catalogs.status, 0, catalogs.stderr + catalogs.stdout);
   assert.equal(catalogs.report.findings.length, 0);
 });
+
+test('a numbered placeholder that changes type is a type error, not an order error', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-type-'));
+  writeFileSync(join(dir, 'en.strings'), '"n" = "%1$s has %2$d items";\n');
+  writeFileSync(join(dir, 'fr.strings'), '"n" = "%1$d a %2$s éléments";\n');
+  const report = checkCatalogs({ source: join(dir, 'en.strings'), target: join(dir, 'fr.strings'), locale: 'fr', sourceLocale: 'en', format: 'strings' });
+  const finding = report.findings.find(({ key }) => key === 'n');
+  assert.equal(finding.code, 'placeholder-mismatch');
+  assert.match(finding.message, /changed type: %1\$s became %1\$d, %2\$d became %2\$s/);
+  assert.doesNotMatch(finding.message, /Unnumbered/);
+  writeFileSync(join(dir, 'ok.strings'), '"n" = "%2$d éléments pour %1$s";\n');
+  const moved = checkCatalogs({ source: join(dir, 'en.strings'), target: join(dir, 'ok.strings'), locale: 'fr', sourceLocale: 'en', format: 'strings' });
+  assert.equal(moved.errors, 0);
+});
+
+test('an ICU plural branch without # warns when the category covers more than one number', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-pound-'));
+  const pair = (name, target, locale) => {
+    writeFileSync(join(dir, name + '-en.json'), JSON.stringify({ n: '{count, plural, one {# file} other {# files}}' }));
+    writeFileSync(join(dir, name + '.json'), JSON.stringify({ n: target }));
+    return checkCatalogs({ source: join(dir, name + '-en.json'), target: join(dir, name + '.json'), locale, sourceLocale: 'en', format: 'json' })
+      .findings.filter(({ code }) => code === 'plural-number-missing');
+  };
+  const french = pair('fr', '{count, plural, one {un fichier} many {# de fichiers} other {# fichiers}}', 'fr');
+  assert.equal(french.length, 1);
+  assert.match(french[0].message, /one has no # but fr one covers 0, 1/);
+  // Arabic zero, one, and two are each exactly one number, so the words can replace #.
+  assert.equal(pair('ar', '{count, plural, zero {لا ملفات} one {ملف واحد} two {ملفان} few {# ملفات} many {# ملفًا} other {# ملف}}', 'ar').length, 0);
+  assert.equal(pair('ar-other', '{count, plural, zero {لا ملفات} one {ملف واحد} two {ملفان} few {# ملفات} many {# ملفًا} other {ملفات}}', 'ar').length, 1);
+  // German one is exactly 1.
+  assert.equal(pair('de', '{count, plural, one {Eine Datei} other {# Dateien}}', 'de').length, 0);
+  // Exact =0 choices are never flagged.
+  assert.equal(pair('ja', '{count, plural, =0 {ファイルなし} other {# 件のファイル}}', 'ja').length, 0);
+});
