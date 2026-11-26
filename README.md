@@ -56,6 +56,6 @@ The npm registry release is pending. The skill and the bundled CLI data work loc
 
 ## Maintainer and license
 
-Maintained by [Kamalesh](https://github.com/Kamaleshkabeerdoss). Original NativeSkill materials use the [MIT License](LICENSE). Bundled Unicode data and linked dictionaries are covered in the [data notices](skills/nativeskill/THIRD_PARTY_NOTICES.md).
+Maintained by [Kamalesh Kabeerdoss](https://github.com/Kamaleshkabeerdoss). Original NativeSkill materials use the [MIT License](LICENSE). Bundled Unicode data and linked dictionaries are covered in the [data notices](skills/nativeskill/THIRD_PARTY_NOTICES.md).
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for locale updates, sources, and wording review.
