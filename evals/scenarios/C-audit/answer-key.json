@@ -217,6 +217,55 @@
       "key": "deleteForever",
       "bug": "मिटाएँ does not say permanent",
       "fix": "Say it cannot be undone"
+    },
+    {
+      "id": "ja-heldout-signout",
+      "file": "ja.json",
+      "key": "signOut",
+      "bug": "退会 means leaving the service or closing the account, not signing out",
+      "fix": "ログアウト or サインアウト, matching signIn サインイン",
+      "heldOut": true
+    },
+    {
+      "id": "zh-heldout-signout",
+      "file": "zh.json",
+      "key": "signOut",
+      "bug": "注销 reads as deregistering or deleting the account in current apps (注销账号). Sign out is 退出登录 or 退出",
+      "fix": "退出登录",
+      "heldOut": true
+    },
+    {
+      "id": "de-heldout-placeholder",
+      "file": "de.json",
+      "key": "welcome",
+      "bug": "Placeholder capitalised to {Name}, a German noun-capitalisation reflex. Flutter cannot find the argument",
+      "fix": "Willkommen, {name}",
+      "heldOut": true
+    },
+    {
+      "id": "ms-heldout-filter",
+      "file": "ms.json",
+      "key": "clearFilters",
+      "bug": "English loan filter and Indonesian-leaning Bersihkan. Malaysian UI says penapis",
+      "fix": "Kosongkan penapis",
+      "heldOut": true
+    },
+    {
+      "id": "hi-heldout-allow",
+      "file": "hi.json",
+      "key": "allowCamera",
+      "bug": "हाँ is Yes. A permission Allow names the grant",
+      "fix": "अनुमति दें",
+      "heldOut": true
+    },
+    {
+      "id": "ar-heldout-archive",
+      "file": "ar.json",
+      "key": "archive",
+      "bug": "أرشيف is the noun archive (the place). The button needs the action",
+      "fix": "أرشفة",
+      "heldOut": true
     }
-  ]
+  ],
+  "heldOutNote": "Items with heldOut: true were seeded in round 3. None of them is named in SKILL.md, signs.md, or a locale note, so they measure transfer rather than recall of the notes. Score them separately. Round 1 and 2 outputs predate them and did not see these strings."
 }

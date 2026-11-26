@@ -4,7 +4,7 @@
   "signIn": "Anmelden",
   "signOut": "Abmelden",
   "createAccount": "Konto erstellen",
-  "welcome": "Willkommen, {name}",
+  "welcome": "Willkommen, {Name}",
   "save": "Speichern",
   "dialogCancel": "Abbrechen",
   "stopRenewal": "Abbrechen",

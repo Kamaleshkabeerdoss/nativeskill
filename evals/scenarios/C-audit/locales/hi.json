@@ -10,7 +10,7 @@
   "stopRenewal": "रद्द करें",
   "stopRenewalHelp": "पहुँच {date} तक जारी रहेगी।",
   "payNow": "भुगतान करें",
-  "allowCamera": "अनुमति दें",
+  "allowCamera": "हाँ",
   "denyCamera": "अभी नहीं",
   "receiptCount": "{count, plural, other {# रसीदें}}",
   "download": "डाउनलोड करें",

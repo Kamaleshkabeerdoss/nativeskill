@@ -2,7 +2,7 @@
   "appTitle": "Northwind",
   "workspace": "工作区",
   "signIn": "登录",
-  "signOut": "退出",
+  "signOut": "注销",
   "createAccount": "创建账户",
   "welcome": "欢迎，{name}",
   "save": "保存",

@@ -2,7 +2,7 @@
   "appTitle": "Northwind",
   "workspace": "ワークスペース",
   "signIn": "サインイン",
-  "signOut": "サインアウト",
+  "signOut": "退会",
   "createAccount": "アカウント作成",
   "welcome": "ようこそ、{name} さん",
   "save": "保存します",

@@ -66,6 +66,30 @@
       "after": "அனுமதி",
       "evidence": "source-attested",
       "why": "Android shipped this noun for Allow. Reusing it is allowed only if the report says it is a noun. A verb replacement is a draft, not a new attestation."
+    },
+    {
+      "id": "japanese-close-is-not-done",
+      "workflow": "add-language",
+      "locale": "ja",
+      "intent": "dialog.dismiss",
+      "uiRole": "button",
+      "screen": "Two controls that are both 'Close' or 'Done' in English. A notice banner's button dismisses the notice and changes nothing. The last step of a setup wizard has a button that completes the task.",
+      "before": "完了 on the notice banner",
+      "after": "閉じる on the notice banner; 完了 stays on the wizard's final step",
+      "evidence": "source-attested",
+      "why": "lookup ja dialog.dismiss returns 閉じる as preferred and marks VisualEditor's 完了 preferred: false for dismiss, because 完了 means the task is done. Keep the two controls distinct. 完了 is right for the wizard, which is a different intent."
+    },
+    {
+      "id": "tamil-sign-in-rejected-line-replaced",
+      "workflow": "add-language",
+      "locale": "ta",
+      "intent": "auth.sign_in",
+      "uiRole": "button",
+      "screen": "Sign-in screen. The primary button signs an existing user in.",
+      "before": "உள்ளே போ",
+      "after": "உள்நுழை",
+      "evidence": "draft",
+      "why": "lookup ta auth.sign_in is mixed. Django's உள்ளே போ is source-attested but preferred: false, because it means go inside. The preferred line உள்நுழை is a draft, so the label is draft, not source-attested. An output that still contains உள்ளே போ fails this case."
     }
   ]
 }
