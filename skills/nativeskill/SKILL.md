@@ -98,6 +98,17 @@ node <skill-dir>/scripts/scan.mjs <app-dir>
 
 On `.xcstrings`, pass the same file as both `--source` and `--target`. The source locale and `--locale` select the columns.
 
+## Read it as a native speaker
+
+Do this after the first draft and before the report. The check script cannot hear a calque.
+
+1. Open the locale note and [references/signs.md](references/signs.md). Walk every new or changed string, out loud if you can.
+2. Ask, for each one: would a native speaker of this locale tap this on this screen, or does it sound translated from English? Rewrite the ones that sound translated. The rewrite is still a `draft` unless a source-attested line already says it.
+3. Check the button shape the note requires. Tamil buttons are short verbs, not English nouns. German buttons are infinitives (`Speichern`), not `Sie speichern`. Japanese buttons are `保存` or `ダウンロード`, not `保存します`. Chinese uses `您` or `你` for the whole file, never both. Arabic stays MSA, uses `،` and `؟`, and does not use English title case.
+4. Check gender and number. Arabic and Hindi agree with the person the product addresses. Do not leave a masculine verb if the string speaks to a mixed audience and the locale note says to avoid it.
+5. Check length on the real control. A German or Tamil line that is correct and three times the English still fails if the button clips it. Shorten the draft.
+6. Read the string next to its neighbors. One file, one register. If sign-in says `vous` and the new error says `tu`, fix the new string.
+
 ## Report
 
 End every add and every audit with this table:
@@ -137,7 +148,7 @@ Android uses `<plurals>` and `quantity`. i18next v4 uses `items_one` and `items_
 
 `lookup.mjs` prints JSON. Read `wording.status` and each entry's `text`, `role`, `status`, and `source`.
 
-- `source-attested` plus a matching role: you may reuse the text, and the report says `source-attested` and the source id (`aosp`, `django-admin`, `devise-i18n`, `telegram`, `flutter`, and the Wikimedia catalogs).
+- `source-attested` plus a matching role: you may reuse the text. The report names the source id from [references/sources.md](references/sources.md). Reuse is still subject to the locale note. A noun shipped as a button stays a noun.
 - `draft`: the `note` says what the suggestion is for. Keep the label `draft` if you use it or if you rewrite it.
 - `uncovered`: there is no bundled phrase. Your sentence is a `draft`. Point at the intent id so a reviewer can see what you aimed at.
 

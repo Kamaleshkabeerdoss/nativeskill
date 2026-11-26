@@ -8,12 +8,19 @@ const root = dirname(fileURLToPath(import.meta.url));
 const examples = join(root, '../examples');
 const check = join(root, 'check.mjs');
 const scan = join(root, 'scan.mjs');
+const bin = join(root, '../../../packages/cli/src/cli.mjs');
 
 function run(script, args) {
   const result = spawnSync(process.execPath, [script, ...args], { encoding: 'utf8' });
   if (result.stdout) result.report = JSON.parse(result.stdout);
   return result;
 }
+
+test('nativeskill check is the publishable bin for the same checker', () => {
+  const result = run(bin, ['check', '--json', '--source', join(examples, 'flutter/lib/l10n/app_en.arb'), '--target', join(examples, 'flutter/lib/l10n/app_ms.arb'), '--locale', 'ms', '--source-locale', 'en']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(result.report.errors, 0);
+});
 
 test('clean Flutter, Android, strings, and xcstrings catalogs pass', () => {
   const pairs = [

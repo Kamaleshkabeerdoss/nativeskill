@@ -2,6 +2,7 @@
 import { parseArgs } from 'node:util';
 import { inspectConcept, inspectLanguage, inspectLocale, lookupWording, registry } from './locales.mjs';
 import { validate } from './validate.mjs';
+import { checkCatalogs } from '../../../skills/nativeskill/scripts/check.mjs';
 
 const help = `
 NativeSkill CLI
@@ -11,12 +12,17 @@ NativeSkill CLI
   nativeskill inspect --language <code> [--json]
   nativeskill inspect --concept <id> [--json]
   nativeskill validate --source <file> --target <file> --locale <tag> [--json]
+  nativeskill check --source <file> --target <file> --locale <tag> [--json]
 
 Validate options
   --source-locale <tag>      Flag source copies when the language changes
   --source-export <name>     Name the source JS or TS dictionary export
   --target-export <name>     Name the target JS or TS dictionary export
   --format <mode>            auto, icu, or i18next (default: auto)
+
+Check options
+  --source-locale <tag>      Source language (default: en)
+  --format <mode>            auto, json, android, strings, or xcstrings
 `.trim();
 
 const yesNo = { type: 'boolean' };
@@ -26,6 +32,9 @@ const inspect = { ...common, locale: value, language: value, concept: value };
 const validation = {
   ...common, source: value, target: value, locale: value, 'source-locale': value,
   'source-export': value, 'target-export': value, format: value
+};
+const checkOptions = {
+  ...common, source: value, target: value, locale: value, 'source-locale': value, format: value
 };
 
 function print(output, json, format) {
@@ -93,6 +102,24 @@ function main([command, ...args]) {
       ...findings.map(({ severity, code, file, path, message }) => (
         severity + ' ' + code + ' ' + file + ' [' + path.join('.') + '] ' + message
       )),
+      errors + ' errors, ' + warnings + ' warnings'
+    ].join('\n'));
+    process.exitCode = result.errors ? 1 : 0;
+    return;
+  }
+  if (command === 'check') {
+    const { values } = parseArgs({ args, options: checkOptions });
+    if (values.help) return console.log(help);
+    const format = values.format ?? 'auto';
+    if (!['auto', 'json', 'android', 'strings', 'xcstrings'].includes(format)) {
+      throw new Error('Choose auto, json, android, strings, or xcstrings for --format');
+    }
+    const result = checkCatalogs({
+      source: values.source, target: values.target, locale: values.locale, format,
+      sourceLocale: values['source-locale'] ?? 'en'
+    });
+    print(result, values.json, ({ findings, errors, warnings }) => [
+      ...findings.map(({ severity, code, key, message }) => severity + ' ' + code + ' ' + key + ' ' + message),
       errors + ' errors, ' + warnings + ' warnings'
     ].join('\n'));
     process.exitCode = result.errors ? 1 : 0;

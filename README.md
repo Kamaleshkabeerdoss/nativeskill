@@ -56,6 +56,19 @@ Audit:
 
 The playbook the agent follows is [skills/nativeskill/SKILL.md](skills/nativeskill/SKILL.md). Locale notes, platform steps, and the machine-translation tell list live under `skills/nativeskill/references/`.
 
+## `npx nativeskill check`
+
+The package name is `nativeskill` and the bin is `nativeskill`. It is ready to publish and is not on npm yet. From a checkout:
+
+```sh
+node packages/cli/src/cli.mjs check \
+  --source skills/nativeskill/examples/flutter/lib/l10n/app_en.arb \
+  --target skills/nativeskill/examples/flutter/lib/l10n/app_ms.arb \
+  --locale ms --source-locale en
+```
+
+After a publish, the same command is `npx nativeskill check` with those flags. `--format` is `auto`, `json`, `android`, `strings`, or `xcstrings`. Exit 0 means no errors. The zero-dependency script under `skills/nativeskill/scripts/check.mjs` is what the bin calls, so an installed skill can run it without the package.
+
 ## Check a catalog
 
 From this repo:
@@ -84,9 +97,9 @@ After install, the same commands use `<skill-dir>/scripts/check.mjs`. Formats: A
 
 ## What is bundled
 
-110 languages and 449 regional profiles, with CLDR plural categories and direction. 3,333 source-attested UI labels from pinned revisions of OOUI, VisualEditor, Universal Language Selector, Django, Flutter, Android framework strings, devise-i18n, and Telegram for Android. Drafts cover the account and billing actions those catalogs do not, for Tamil, Malay, Arabic, and Hindi first. Drafts are not attestations.
+110 languages and 449 regional profiles, with CLDR plural categories and direction. 3,348 source-attested UI labels from pinned MIT, BSD, and Apache catalogs: OOUI, VisualEditor, Universal Language Selector, Django, Flutter, Android framework strings, Android Settings, and devise-i18n. Drafts cover account and billing actions those catalogs do not. Drafts are not attestations. The provenance table is [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md).
 
-Third-party strings keep their own licenses. See [skills/nativeskill/THIRD_PARTY_NOTICES.md](skills/nativeskill/THIRD_PARTY_NOTICES.md). Telegram labels are GPL-2.0-only and are not relicensed as MIT. Original NativeSkill material is [MIT](LICENSE).
+Third-party strings keep their own licenses. See [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md) and [skills/nativeskill/THIRD_PARTY_NOTICES.md](skills/nativeskill/THIRD_PARTY_NOTICES.md). GPL and AGPL catalogs, including Telegram, are not bundled. Original NativeSkill material is [MIT](LICENSE).
 
 ## Maintainer
 

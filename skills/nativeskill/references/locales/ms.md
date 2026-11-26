@@ -1,19 +1,42 @@
 # Malay (`ms`)
 
-Latin script, left to right, for `ms` and `ms-MY`. Cardinal plurals are `other` only. An English `one` branch does not belong in a Malay plural. Dewan Bahasa dan Pustaka (https://prpm.dbp.gov.my/) is the terminology reference for Malaysia. It does not make a sentence attested.
+Latin script, left to right, for `ms` and `ms-MY`. This is Bahasa Malaysia, not Indonesian. Cardinal plurals are `other` only. Copying an English `one` branch into Malay is wrong. Dewan Bahasa (https://prpm.dbp.gov.my/) is a terminology dictionary. A sentence you build from it is still a draft.
 
-## Voice
+## Not Indonesian
 
-Malaysia Malay, not Indonesian. Django ships `Log masuk` for sign in and `Log keluar` for sign out. devise ships `Daftar` for sign up. Android ships `Benarkan` for Allow, `Tolak` on the accessibility deny button, and `Batal` for the generic Cancel. Indonesian devise uses `Mendaftar` for the same sign-up intent. Do not copy it into Malay.
+| Action | Malay | Indonesian, do not copy |
+| --- | --- | --- |
+| Sign in | Log masuk (Django, attested) | Masuk |
+| Sign out | Log keluar (attested) | Keluar |
+| Sign up | Daftar (devise, attested) | Mendaftar |
+| Download | Muat turun (draft) | Unduh |
+| Delete permanently | Padam secara kekal (draft) | Hapus permanen |
+| Allow | Benarkan (Android, attested) | Izinkan |
 
-## Traps
+If the file is `id`, use the Indonesian column. If it is `ms`, use the Malay column. A shared word (`Tambah`, `Simpan`) can appear in both. Do not assume the rest of the file can be copied.
 
-- `Batal` is the dialog and Android cancel word. It is the wrong word for `billing.stop_renewal`. The draft for stopping future renewal, while access continues until the period ends, is `Hentikan pembaharuan automatik`. It is unreviewed.
-- `Bayar sekarang` is an unreviewed draft for `billing.pay_now` (submit the payment). It is not the button that only opens the payment screen.
-- Android's generic `deny` is `Nafi`, which reads as a legal term. The accessibility dialog's `Tolak` is the prompt button. Both are source-attested. Prefer `Tolak` on a permission prompt and say so.
-- `Hantar saya arahan kata laluan set semula` is the attested devise sentence for sending reset instructions. It is stiff. You may shorten it only as a `draft`, and it still has to mean "send the reset instructions", not "your password has changed".
-- There is no source-attested "change password while signed in". The draft is `Tukar kata laluan`. The longer devise line belongs to the reset step.
+## Buttons
 
-## Format
+Short, sentence case or the capitalization the file already uses. No English Title Case On Every Word. No `berjaya` ("successfully") on the button.
 
-No special plural suffix. "1 item" and "5 items" share the `other` string, with the number in the placeholder. Use Western digits. Format dates as the app's locale formatter does for Malaysia, not as US `MM/DD`.
+| Control | Natural | Translated |
+| --- | --- | --- |
+| Dialog cancel | Batal (Android, attested) | Membatalkan |
+| Stop renewal | Hentikan pembaharuan automatik (draft) | Batal |
+| Pay now | Bayar sekarang (draft) | Membayar sekarang |
+| Deny on a prompt | Tolak (accessibility dialog, attested) | Nafi |
+| Archive as a verb | Arkibkan (draft) | Arkib |
+
+Android's generic deny is `Nafi`, which sounds like a legal finding. The accessibility dialog ships `Tolak` for the same decline. Prefer `Tolak` on a permission prompt and say which attested string you used.
+
+`Arkib` (Settings) is a noun. On a verb button, the draft `Arkibkan` is the better shape. Keep the evidence label honest.
+
+`Hantar saya arahan kata laluan set semula` is the attested devise line for sending reset instructions. It is grammatical and stiff. Shortening it is a new draft, and it must still mean "send the instructions", not "your password has changed".
+
+## Punctuation and format
+
+Malay uses `.` and `?` like English. Buttons have no period. Quotes follow the file, usually `"..."`.
+
+Plurals do not change the noun. `{count} item` is one `other` string. Do not write `1 item` / `banyak item` as two English-style branches.
+
+Dates for Malaysia are day month year from the `ms-MY` formatter (`4 Mac 2026`), not `03/04/2026`. Currency is `RM` from the formatter when the charge is in ringgit. Do not write `RM` by hand in one string and let the formatter do it in the next. Placeholders stay `{amount}` and `%1$s`.

@@ -438,5 +438,813 @@
     "text": "यह कोड समाप्त हो गया",
     "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The code expired. That is different from a wrong code.",
     "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "Save draft",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Stores unfinished work. It does not publish.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "Discard changes",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Drops unsaved edits. The saved item stays.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "Delete permanently",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible. Do not use this for a reversible archive.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "content.download",
+    "role": "button",
+    "text": "Download",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Moves a file to the device.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "Clear filters",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Removes filters only. It does not delete content.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "Save {amount}",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep the {amount} placeholder. This is a discount, not the Save button.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "Stop renewal",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Stops future charges. Access continues until the period ends. Not a dialog Cancel.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "Change password",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Signed-in password change, not the forgot-password email.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "en",
+    "concept": "item.add",
+    "role": "button",
+    "text": "Add",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds an item to the current collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "வரைவைச் சேமி",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Short button. The work stays unpublished.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "மாற்றங்களை கைவிடு",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Drops unsaved edits only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "நிரந்தரமாக நீக்கு",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible deletion. Not archive.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "item.archive",
+    "role": "button",
+    "text": "காப்பகப்படுத்து",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Android Tamil archive is காப்பிடு, which means copy. Do not reuse it.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "content.download",
+    "role": "button",
+    "text": "பதிவிறக்கு",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Download onto the device. Not upload.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "வடிகட்டிகளை அழி",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Clears filters. Does not delete items.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "{amount} சேமிப்பு",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}. Not the Save button.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "item.add",
+    "role": "button",
+    "text": "சேர்",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the current collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "Simpan draf",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unpublished. Not Simpan for a finished form.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "Buang perubahan",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "Padam secara kekal",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "content.download",
+    "role": "button",
+    "text": "Muat turun",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Download. Muat naik is upload.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "Kosongkan penapis",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "Jimat {amount}",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "item.add",
+    "role": "button",
+    "text": "Tambah",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the current collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "item.archive",
+    "role": "button",
+    "text": "Arkibkan",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The attested Android word Arkib is a noun. Use this verb on a button, as a draft.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "حفظ المسودة",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. MSA. Unpublished draft.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "تجاهل التغييرات",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "حذف نهائي",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "content.download",
+    "role": "button",
+    "text": "تنزيل",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Download. تحميل often means upload or load.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "مسح عوامل التصفية",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "وفّر {amount}",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "تغيير كلمة المرور",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Signed-in change. The same words were removed from the GPL catalog and are a draft here.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "item.add",
+    "role": "button",
+    "text": "إضافة",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection. Verbal noun, natural on an Arabic button.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "मसौदा सहेजें",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unpublished. आप form.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "बदलाव छोड़ें",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "हमेशा के लिए मिटाएँ",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "content.download",
+    "role": "button",
+    "text": "डाउनलोड करें",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The English loan is what Hindi UI uses for this action.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "फ़िल्टर हटाएँ",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "{amount} की बचत",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "item.add",
+    "role": "button",
+    "text": "जोड़ें",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "Entwurf speichern",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Infinitive button. Not veröffentlichen.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "Änderungen verwerfen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits. Sie-neutral infinitive.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "Endgültig löschen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible. Not Archivieren.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "content.download",
+    "role": "button",
+    "text": "Herunterladen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Infinitive, not a conjugated Sie form.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "Filter löschen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "{amount} sparen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}. Not Speichern.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "Verlängerung stoppen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Stops future renewal. Not Abbrechen.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "Passwort ändern",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Signed-in change. Infinitive.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "de",
+    "concept": "item.add",
+    "role": "button",
+    "text": "Hinzufügen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "下書きを保存",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Noun plus 保存. Not します.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "変更を破棄",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "完全に削除",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "content.download",
+    "role": "button",
+    "text": "ダウンロード",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Katakana loan is the normal button. Not ダウンロードします.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "フィルタをクリア",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "{amount}お得",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}. Storefront style, not 保存.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "自動更新を停止",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Stops renewal. Not キャンセル.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "パスワードを変更",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Signed-in change.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ja",
+    "concept": "item.add",
+    "role": "button",
+    "text": "追加",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "保存草稿",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Simplified. Unpublished.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "放弃更改",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "永久删除",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "content.download",
+    "role": "button",
+    "text": "下载",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Download.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "清除筛选",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only. 筛选 not 过滤器.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "立省{amount}",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "停止续订",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Stops renewal. Not 取消.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "更改密码",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Signed-in change.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-CN",
+    "concept": "item.add",
+    "role": "button",
+    "text": "添加",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "儲存草稿",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Traditional. Not the Simplified characters.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "放棄變更",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "永久刪除",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "content.download",
+    "role": "button",
+    "text": "下載",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Download.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "清除篩選",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "省下{amount}",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "form.invalid_format",
+    "role": "inline-validation",
+    "text": "格式無效。",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Simplified 格式无效。 is attested. This Traditional form is a draft.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "停止續訂",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Stops renewal.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "變更密碼",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Signed-in change.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "zh-TW",
+    "concept": "item.add",
+    "role": "button",
+    "text": "新增",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "Guardar borrador",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unpublished.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "Descartar cambios",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "Eliminar permanentemente",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "content.download",
+    "role": "button",
+    "text": "Descargar",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Download.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "Borrar filtros",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "Ahorra {amount}",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "Detener la renovación",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Not Cancelar.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "es",
+    "concept": "item.add",
+    "role": "button",
+    "text": "Añadir",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "Enregistrer le brouillon",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. vous-neutral infinitive.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "Abandonner les modifications",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "Supprimer définitivement",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "content.download",
+    "role": "button",
+    "text": "Télécharger",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Download.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "Effacer les filtres",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "Économisez {amount}",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. vous. Keep {amount}.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "Arrêter le renouvellement",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Not Annuler.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "fr",
+    "concept": "item.add",
+    "role": "button",
+    "text": "Ajouter",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "form.save_draft",
+    "role": "button",
+    "text": "Simpan draf",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Not the Malay wording by default, though this one coincides. Confirm the rest of the file is Indonesian.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "form.discard_changes",
+    "role": "button",
+    "text": "Buang perubahan",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unsaved edits.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "item.delete_permanently",
+    "role": "button",
+    "text": "Hapus permanen",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Irreversible. Hapus, not Padam.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "content.download",
+    "role": "button",
+    "text": "Unduh",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Unduh, not Muat turun.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "search.clear_filters",
+    "role": "button",
+    "text": "Hapus filter",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Filters only.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.discount_savings",
+    "role": "label",
+    "text": "Hemat {amount}",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Keep {amount}.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "Hentikan perpanjangan",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Stops renewal.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "item.add",
+    "role": "button",
+    "text": "Tambah",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Adds to the collection.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
   }
 ]

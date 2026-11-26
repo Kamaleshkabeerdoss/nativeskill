@@ -1,10 +1,14 @@
 {
-  "name": "@nativeskill/cli",
-  "version": "0.1.0",
-  "description": "Offline locale profiles and translation catalog checks for NativeSkill",
+  "name": "nativeskill",
+  "version": "0.2.0",
+  "description": "Meaning-first localization checks and locale profiles for NativeSkill",
   "license": "MIT",
   "type": "module",
   "engines": {"node": ">=22.20.0"},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kamaleshkabeerdoss/nativeskill.git"
+  },
   "bin": {"nativeskill": "packages/cli/src/cli.mjs"},
   "files": [
     "packages/cli/src",
@@ -23,6 +27,5 @@
     "@formatjs/icu-messageformat-parser": "2.11.4",
     "typescript": "5.9.3"
   },
-  "devDependencies": {"cldr-core": "49.0.0"},
-  "private": true
+  "devDependencies": {"cldr-core": "49.0.0"}
 }

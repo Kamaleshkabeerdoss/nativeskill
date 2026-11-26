@@ -294,7 +294,7 @@
       ],
       [
         "loading",
-        "Loading…",
+        "Loading\u2026",
         "status.loading",
         "status"
       ],
@@ -362,55 +362,6 @@
     ]
   },
   {
-    "id": "telegram",
-    "repo": "DrKLO/Telegram",
-    "revision": "21f7d109da6ab3506c9e9577f98c6a38771ab335",
-    "license": "GPL-2.0-only",
-    "licenseFile": "LICENSE",
-    "notice": "telegram.txt",
-    "catalog": "TMessagesProj/src/main/res",
-    "format": "android-xml",
-    "manual": true,
-    "terms": [
-      [
-        "StarsSubscriptionCancel",
-        "Cancel Subscription",
-        "billing.stop_renewal",
-        "button"
-      ],
-      [
-        "ChangePassword",
-        "Change Password",
-        "auth.change_password",
-        "button"
-      ],
-      [
-        "ResetPassword",
-        "Reset password",
-        "auth.reset_password",
-        "button"
-      ],
-      [
-        "ForgotPassword",
-        "Forgot password?",
-        "auth.reset_password",
-        "link"
-      ],
-      [
-        "SignUp",
-        "Sign Up",
-        "auth.create_account",
-        "button"
-      ],
-      [
-        "Add",
-        "Add",
-        "item.add",
-        "button"
-      ]
-    ]
-  },
-  {
     "id": "flutter",
     "repo": "flutter/flutter",
     "revision": "ae9b586f34a8443573f82ef57c3bf914a908cbf7",
@@ -422,11 +373,18 @@
     "include": [
       "ar",
       "bo",
+      "de",
       "en",
+      "es",
       "fil",
+      "fr",
+      "hi",
+      "id",
       "ja",
       "lo",
+      "ms",
       "ta",
+      "zh",
       "zu"
     ],
     "terms": [
@@ -465,6 +423,12 @@
         "Back",
         "navigation.go_back",
         "tooltip"
+      ],
+      [
+        "invalidDateFormatLabel",
+        "Invalid format.",
+        "form.invalid_format",
+        "inline-validation"
       ]
     ]
   },
@@ -489,6 +453,31 @@
         "No results found",
         "search.no_results",
         "status"
+      ]
+    ]
+  },
+  {
+    "id": "aosp-settings",
+    "repo": "aosp-mirror/platform_packages_apps_Settings",
+    "revision": "7c598253ff60f06f8e6fe046f18fd88e9daa72d3",
+    "license": "Apache-2.0",
+    "licenseFile": "NOTICE",
+    "notice": "aosp-settings.txt",
+    "catalog": "res",
+    "format": "android-xml",
+    "manual": true,
+    "terms": [
+      [
+        "archive",
+        "Archive",
+        "item.archive",
+        "button"
+      ],
+      [
+        "restore",
+        "Restore",
+        "item.restore",
+        "button"
       ]
     ]
   }

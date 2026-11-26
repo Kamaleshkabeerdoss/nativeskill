@@ -1,0 +1,12 @@
+Android Open Source Project, Settings app
+Pinned revision: aosp-mirror/platform_packages_apps_Settings 7c598253ff60f06f8e6fe046f18fd88e9daa72d3
+Path: res/values*/strings.xml
+Copyright (c) 2005-2008, The Android Open Source Project
+
+These labels are Apache License 2.0, the same license as the framework strings.
+The full license text is in aosp.txt. They are not relicensed under MIT.
+
+Mapped labels:
+- archive: button that archives an app, keeping the user's data
+- restore: button that brings that archived app back
+Tamil "archive" in this revision means "copy" and is not included.
