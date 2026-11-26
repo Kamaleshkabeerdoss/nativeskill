@@ -640,6 +640,14 @@
     "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
   },
   {
+    "locale": "ms",
+    "concept": "item.delete",
+    "role": "button",
+    "text": "Padam",
+    "note": "Unreviewed draft for Delete. Owner choice, matches Google/Microsoft Malaysian UI. No MIT, BSD, or Apache catalog bundled here attests it. Permanent deletion is Padam secara kekal.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
     "locale": "ar",
     "concept": "form.save_draft",
     "role": "button",

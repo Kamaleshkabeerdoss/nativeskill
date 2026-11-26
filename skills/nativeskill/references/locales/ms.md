@@ -10,6 +10,7 @@ Latin script, left to right, for `ms` and `ms-MY`. This is Bahasa Malaysia, not 
 | Sign out | Log keluar (attested) | Keluar |
 | Sign up | Daftar (devise, attested) | Mendaftar |
 | Download | Muat turun (draft) | Unduh |
+| Delete | Padam (draft, preferred) | Hapus |
 | Delete permanently | Padam secara kekal (draft) | Hapus permanen |
 | Allow | Benarkan (Android, attested) | Izinkan |
 
@@ -26,6 +27,8 @@ Short, sentence case or the capitalization the file already uses. No English Tit
 | Pay now | Bayar sekarang (draft) | Membayar sekarang |
 | Deny on a prompt | Tolak (accessibility dialog, attested) | Nafi |
 | Archive as a verb | Arkibkan (draft) | Arkib |
+
+Delete is `Padam`, the word Google and Microsoft Malaysian UI use. It is a draft: no licence-compatible catalog bundled here attests it. The bundled Django `Buang` (throw away) and VisualEditor `Hapuskan` (abolish, close to Indonesian `Hapus`) are marked `preferred: false`. Permanent deletion is `Padam secara kekal`.
 
 Android's generic deny is `Nafi`, which sounds like a legal finding. The accessibility dialog ships `Tolak` for the same decline. Prefer `Tolak` on a permission prompt and say which attested string you used.
 

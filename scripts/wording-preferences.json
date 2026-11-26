@@ -20,7 +20,6 @@
   {"locale": "ta", "concept": "item.delete", "role": "button", "text": "நீக்கு", "preferred": true, "note": "Preferred Delete. Bare stem, the button shape ta.md asks for. நீக்குக is the older optative and is not wrong."},
   {"locale": "ta", "concept": "dialog.dismiss", "role": "button", "text": "மூடுக", "preferred": true, "note": "Preferred Close."},
   {"locale": "ta", "concept": "navigation.continue", "role": "button", "text": "தொடர்", "preferred": true, "note": "Preferred Continue for a file of bare-stem buttons. Use தொடரவும் only if the file already uses the polite -உம் form everywhere."},
-  {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Buang", "preferred": true, "note": "Preferred over Hapuskan between the two bundled lines. Hapuskan reads as abolish and sits close to Indonesian Hapus, which the audit checklist flags. Malaysian Google and Microsoft UI often use Padam; a reviewer may prefer it."},
   {"locale": "ms", "concept": "item.archive", "role": "button", "text": "Arkibkan", "preferred": true, "note": "Preferred archive verb (draft). Arkib is the noun."},
   {"locale": "ms", "concept": "permissions.deny_access", "role": "button", "text": "Tolak", "preferred": true, "note": "Preferred decline on a prompt. Nafi sounds legal."},
   {"locale": "ar", "concept": "dialog.cancel_action", "role": "button", "text": "إلغاء", "preferred": true, "note": "Preferred dialog Cancel. The article form الإلغاء is heavier on a button."},
@@ -40,5 +39,8 @@
   {"locale": "es", "concept": "dialog.dismiss", "role": "button", "text": "Cerrar", "preferred": true, "note": "Preferred Close."},
   {"locale": "es", "concept": "dialog.dismiss", "role": "button", "text": "Descartar", "preferred": false, "note": "Means discard. Not a dismiss."},
   {"locale": "es", "concept": "auth.sign_in", "role": "button", "text": "Iniciar sesión", "preferred": true, "note": "Preferred Sign in. Identificarse is dated."},
-  {"locale": "es", "concept": "auth.sign_out", "role": "button", "text": "Cerrar sesión", "preferred": true, "note": "Preferred Sign out. Terminar sesión is less common."}
+  {"locale": "es", "concept": "auth.sign_out", "role": "button", "text": "Cerrar sesión", "preferred": true, "note": "Preferred Sign out. Terminar sesión is less common."},
+  {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Padam", "preferred": true, "note": "Preferred Delete (draft). Owner choice, matches Google/Microsoft Malaysian UI."},
+  {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Buang", "preferred": false, "note": "Owner choice, matches Google/Microsoft Malaysian UI. Prefer Padam. Buang reads as throw away."},
+  {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Hapuskan", "preferred": false, "note": "Owner choice, matches Google/Microsoft Malaysian UI. Prefer Padam. Hapuskan reads as abolish and sits close to Indonesian Hapus."}
 ]

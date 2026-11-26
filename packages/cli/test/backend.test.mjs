@@ -175,7 +175,10 @@ test('lookup marks rejected lines and points at the preferred replacement', () =
   assert.equal(tamil.entries.find(({ text }) => text === 'உள்ளே போ').preferred, false);
   assert.equal(lookupWording('hi', 'form.apply_changes', 'button').wording.preferred.text, 'लागू करें');
   assert.equal(lookupWording('de', 'form.save_changes', 'button').wording.preferred.text, 'Speichern');
-  assert.equal(lookupWording('ms', 'item.delete', 'button').wording.preferred.text, 'Buang');
+  const malay = lookupWording('ms', 'item.delete', 'button').wording;
+  assert.equal(malay.preferred.text, 'Padam');
+  assert.equal(malay.preferred.status, 'draft');
+  for (const text of ['Buang', 'Hapuskan']) assert.equal(malay.entries.find((entry) => entry.text === text).preferred, false);
   const japanese = lookupWording('ja', 'dialog.dismiss', 'button').wording;
   assert.equal(japanese.preferred.text, '閉じる');
   assert.equal(japanese.entries.find(({ text }) => text === '完了').preferred, false);

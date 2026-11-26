@@ -181,7 +181,7 @@ Decide in this order. Stop at the first row that applies.
 | `wording.preferred` is set, but the control is a different role or meaning | Do not force it. Treat the lookup as `uncovered` for this control. | `draft` |
 | `status` is `source-attested` and every usable entry has the same text | Use it when the role matches. Reuse is still subject to the locale note. A noun shipped as a button stays a noun. | `source-attested`, naming the source id from [references/sources.md](references/sources.md) |
 | `status` is `draft` | A starting point. Keep it or rewrite it. | `draft` |
-| `status` is `mixed`, nothing is preferred, and two or more usable entries remain | Open the screen and decide what the control does. Choose the candidate whose meaning fits, or write a better one. | `draft`, with both candidates and the reason in the report (`mixed: Hapuskan / Buang, chose Buang because ...`) |
+| `status` is `mixed`, nothing is preferred, and two or more usable entries remain | Open the screen and decide what the control does. Choose the candidate whose meaning fits, or write a better one. | `draft`, with both candidates and the reason in the report (`mixed: <A> / <B>, chose <B> because ...`) |
 | `status` is `mixed` and only rejected entries remain | Use the replacement the rejected entry's `note` names, or write one. | `draft` |
 | `status` is `uncovered` | Write the smallest accurate phrase. Point at the intent id so a reviewer can see what you aimed at. | `draft` |
 
