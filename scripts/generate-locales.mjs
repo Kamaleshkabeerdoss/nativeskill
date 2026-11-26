@@ -8,6 +8,10 @@ const load = (path) => json(new URL(path, import.meta.url));
 const launch = load('./launch-languages.json');
 const extra = load('./extra-locales.json');
 const languageReferences = load('./language-references.json');
+const wordingCorpus = load('./wording-corpus.json');
+const wordingDrafts = load('./wording-drafts.json');
+const wordingSources = new Map(load('./wording-sources.json').map((source) => [source.id, source]));
+const rubric = new Set(json(asset('concepts.json')).concepts.map(({ id }) => id));
 const sourceTags = json(cldr('availableLocales.json')).availableLocales.full;
 const available = new Set(sourceTags);
 const likely = json(cldr('supplemental/likelySubtags.json')).supplemental.likelySubtags;
@@ -94,6 +98,32 @@ function sourceReferences(id, codes, profiles) {
   return references;
 }
 
+function buildWording(id, profiles) {
+  const byTag = new Map(profiles.map((profile) => [profile.tag, profile]));
+  const entries = (wordingCorpus[id] ?? []).map(({ locale, concept, role, text, source, file, key }) => {
+    const profile = byTag.get(locale);
+    const origin = wordingSources.get(source);
+    if (!profile || !origin || !rubric.has(concept)) throw new Error('Invalid wording entry: ' + id + '/' + key);
+    return {
+      locale, script: profile.script, concept, role, text, status: 'source-attested',
+      source: {
+        id: source, key, license: origin.license,
+        url: 'https://github.com/' + origin.repo + '/blob/' + origin.revision + '/' + origin.catalog + '/' + file
+      }
+    };
+  });
+  const sourceCount = entries.length;
+  for (const { locale, concept, role, text, note, url } of wordingDrafts.filter((draft) => byTag.has(draft.locale))) {
+    if (!rubric.has(concept) || new URL(url).protocol !== 'https:') throw new Error('Invalid wording draft: ' + concept);
+    entries.push({
+      locale, script: byTag.get(locale).script, concept, role, text,
+      status: 'draft', note, source: { id: 'reference-only', url }
+    });
+  }
+  const status = sourceCount ? 'source-attested' : entries.length ? 'draft' : 'foundation';
+  return { status, sourceCount, entries };
+}
+
 const entries = [];
 const tagOwners = Object.create(null);
 let regionalLocaleCount = 0;
@@ -111,18 +141,23 @@ for (const [group, entriesInGroup] of Object.entries(launch)) {
     }
     const pack = {
       schema: 1, id, name, group, codes, profiles,
-      wording: { status: 'foundation', entries: [] },
+      wording: buildWording(id, profiles),
       references: sourceReferences(id, codes, profiles)
     };
     const path = 'locales/' + id + '.json';
     writeFileSync(asset(path), JSON.stringify(pack) + '\n');
-    entries.push({ id, name, group, path, regionalProfiles: regions.size, wordingStatus: pack.wording.status });
+    entries.push({ id, name, group, path, regionalProfiles: regions.size, wordingStatus: pack.wording.status, wordingExamples: pack.wording.sourceCount });
   }
 }
 if (entries.length !== 110 || regionalLocaleCount < 150) {
   throw new Error('Launch target requires 110 languages and at least 150 distinct regional profiles');
 }
-const registry = { schema: 1, cldrVersion: version, languageCount: entries.length, regionalLocaleCount, tagOwners, languages: entries };
+const wordingLanguageCount = entries.filter(({ wordingExamples }) => wordingExamples > 0).length;
+const wordingExampleCount = entries.reduce((sum, { wordingExamples }) => sum + wordingExamples, 0);
+const registry = {
+  schema: 1, cldrVersion: version, languageCount: entries.length, regionalLocaleCount,
+  wordingLanguageCount, wordingExampleCount, tagOwners, languages: entries
+};
 writeFileSync(asset('registry.json'), JSON.stringify(registry, null, 2) + '\n');
 copyFileSync(cldr('LICENSE'), new URL('../skills/nativeskill/LICENSE-UNICODE.txt', import.meta.url));
 console.log('Generated ' + entries.length + ' language packs and ' + regionalLocaleCount + ' regional profiles.');

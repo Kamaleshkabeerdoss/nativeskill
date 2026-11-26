@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ooui",
+    "repo": "wikimedia/oojs-ui",
+    "revision": "2580161f7d921436502ec6a7547e4c45bff510e7",
+    "license": "MIT",
+    "licenseFile": "LICENSE-MIT",
+    "notice": "ooui.txt",
+    "catalog": "i18n",
+    "format": "json",
+    "terms": [
+      ["ooui-copytextlayout-copy", "Copy", "content.copy", "button"],
+      ["ooui-outline-control-remove", "Remove item", "item.remove_from_list", "tooltip"],
+      ["ooui-dialog-message-reject", "Cancel", "dialog.cancel_action", "button"],
+      ["ooui-dialog-process-back", "Back", "navigation.go_back", "button"],
+      ["ooui-dialog-process-dismiss", "Dismiss", "dialog.dismiss", "button"],
+      ["ooui-dialog-process-retry", "Try again", "status.retry", "button"],
+      ["ooui-dialog-process-continue", "Continue", "navigation.continue", "button"],
+      ["ooui-selectfile-button-select", "Select a file", "file.select", "button"],
+      ["ooui-popup-widget-close-button-aria-label", "Close", "dialog.dismiss", "accessible-name"]
+    ]
+  },
+  {
+    "id": "visualeditor",
+    "repo": "wikimedia/VisualEditor",
+    "revision": "2a036d962beec1499db1bfcc375abbada048a80f",
+    "license": "MIT",
+    "licenseFile": "LICENSE.txt",
+    "notice": "visualeditor.txt",
+    "catalog": "i18n",
+    "format": "json",
+    "terms": [
+      ["visualeditor-clipboard-copy", "Copy", "content.copy", "menu-item"],
+      ["visualeditor-clipboard-cut", "Cut", "content.cut", "menu-item"],
+      ["visualeditor-clipboard-paste", "Paste", "content.paste", "menu-item"],
+      ["visualeditor-content-select-all", "Select all", "content.select_all", "menu-item"],
+      ["visualeditor-contextitemwidget-label-close", "Close", "dialog.dismiss", "button"],
+      ["visualeditor-contextitemwidget-label-remove", "Delete", "item.delete", "button"],
+      ["visualeditor-contextitemwidget-label-secondary", "Edit", "item.edit", "button"],
+      ["visualeditor-dialog-action-apply", "Apply changes", "form.apply_changes", "button"],
+      ["visualeditor-dialog-action-done", "Done", "navigation.finish", "button"],
+      ["visualeditor-find-and-replace-find-text", "Find", "content.find_in_text", "field-label"],
+      ["visualeditor-completionwidget-noresults", "No results", "search.no_results", "status"],
+      ["visualeditor-historybutton-undo-tooltip", "Undo", "item.undo", "tooltip"]
+    ]
+  },
+  {
+    "id": "visualeditor-mediawiki",
+    "repo": "wikimedia/mediawiki-extensions-VisualEditor",
+    "revision": "a10c727c981195b78b51fc758af53c5747abe1f8",
+    "license": "MIT",
+    "licenseFile": "LICENSE.txt",
+    "notice": "visualeditor-mediawiki.txt",
+    "catalog": "i18n/ve-mw",
+    "format": "json",
+    "terms": [
+      ["tooltip-ca-ve-edit", "Edit this page", "content.edit_page", "tooltip"],
+      ["visualeditor-ca-editsource", "Edit source", "content.edit_source", "tab"],
+      ["visualeditor-ca-editsource-section", "edit source", "content.edit_source", "link"],
+      ["visualeditor-dialog-media-save", "Save", "form.save_changes", "button"],
+      ["visualeditor-dialog-media-search-tab-upload", "Upload", "content.upload", "tab"],
+      ["visualeditor-savedialog-label-publish-short", "Publish", "content.publish", "button"]
+    ]
+  },
+  {
+    "id": "django-admin",
+    "repo": "django/django",
+    "revision": "d922c68f24e10cab085a6f2200825d3cc29cfd75",
+    "license": "BSD-3-Clause",
+    "licenseFile": "LICENSE",
+    "notice": "django.txt",
+    "catalog": "django/contrib/admin/locale",
+    "format": "po",
+    "terms": [
+      ["Log in", "Log in", "auth.sign_in", "button"],
+      ["Log out", "Log out", "auth.sign_out", "button"],
+      ["Delete", "Delete", "item.delete", "button"],
+      ["Save", "Save", "form.save_changes", "button"],
+      ["Search", "Search", "search.query", "button"]
+    ]
+  },
+  {
+    "id": "django-forms",
+    "repo": "django/django",
+    "revision": "d922c68f24e10cab085a6f2200825d3cc29cfd75",
+    "license": "BSD-3-Clause",
+    "licenseFile": "LICENSE",
+    "notice": "django.txt",
+    "catalog": "django/conf/locale",
+    "format": "po",
+    "terms": [
+      ["Clear", "Clear", "file.clear_selection", "checkbox-label"]
+    ]
+  },
+  {
+    "id": "flutter",
+    "repo": "flutter/flutter",
+    "revision": "ae9b586f34a8443573f82ef57c3bf914a908cbf7",
+    "license": "BSD-3-Clause",
+    "licenseFile": "LICENSE",
+    "notice": "flutter.txt",
+    "catalog": "packages/flutter_localizations/lib/src/l10n",
+    "format": "arb",
+    "include": ["ar", "bo", "en", "fil", "ja", "lo", "ta", "zu"],
+    "terms": [
+      ["cancelButtonLabel", "Cancel", "dialog.cancel_action", "button"],
+      ["closeButtonLabel", "Close", "dialog.dismiss", "button"],
+      ["clearButtonTooltip", "Clear text", "form.clear_input", "tooltip"],
+      ["continueButtonLabel", "Continue", "navigation.continue", "button"],
+      ["searchFieldLabel", "Search", "search.query", "field-label"],
+      ["backButtonTooltip", "Back", "navigation.go_back", "tooltip"]
+    ]
+  },
+  {
+    "id": "uls",
+    "repo": "wikimedia/jquery.uls",
+    "revision": "b7774c42131677bbbe039f4d76cba3d2a5cd438a",
+    "license": "MIT",
+    "licenseFile": "MIT-LICENSE",
+    "notice": "uls.txt",
+    "catalog": "i18n",
+    "format": "json",
+    "terms": [
+      ["uls-search-placeholder", "Search for a language", "language.search", "field-label"],
+      ["uls-no-results-found", "No results found", "search.no_results", "status"]
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { parseArgs } from 'node:util';
-import { inspectConcept, inspectLanguage, inspectLocale, registry } from './locales.mjs';
+import { inspectConcept, inspectLanguage, inspectLocale, lookupWording, registry } from './locales.mjs';
 import { validate } from './validate.mjs';
 
 const help = `
@@ -53,15 +53,19 @@ function main([command, ...args]) {
       throw new Error('Provide --locale, --language, or --concept. A locale can be paired with a concept.');
     }
     if (values.locale) {
-      const result = inspectLocale(values.locale);
-      if (values.concept) {
-        result.concept = inspectConcept(values.concept);
-        result.wording.entries = result.wording.entries.filter(({ concept }) => concept === values.concept);
-      }
+      const result = values.concept
+        ? lookupWording(values.locale, values.concept)
+        : inspectLocale(values.locale);
       print(result, values.json, ({ name, profile, wording, references, concept }) => [
         name + ' · ' + profile.tag + ' · ' + profile.script + ' · ' + profile.direction,
         'Wording status: ' + wording.status,
-        ...(concept ? [concept.id + ' · ' + concept.intent, 'Preserve: ' + concept.preserve.join('; ')] : []),
+        ...(concept ? [
+          concept.id + ' · ' + concept.intent,
+          'Preserve: ' + concept.preserve.join(' '),
+          ...wording.entries.map(({ text, role, locale, status, source }) => (
+            text + ' · ' + role + ' · ' + locale + ' · ' + status + ' · ' + source.url
+          ))
+        ] : []),
         ...references.map(({ kind, url }) => kind + ' ' + url)
       ].join('\n'));
     } else if (values.language) {

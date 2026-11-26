@@ -8,12 +8,10 @@ For example, **Cancel** can close a dialog, cancel a payment, or stop a subscrip
 
 ## Install the skill
 
-This repository is private. With repository access, clone it to your machine, then run the skill installer from the app you want to localize. Node.js 22.20 or later is required for the installer and CLI.
+From the app you want to localize, run the skill installer with Node.js 22.20 or later.
 
 ```sh
-gh repo clone Kamaleshkabeerdoss/nativeskill /path/to/nativeskill
-cd /path/to/your-app
-npx skills add /path/to/nativeskill --skill nativeskill
+npx skills add Kamaleshkabeerdoss/nativeskill --skill nativeskill
 ```
 
 Select your coding agent when prompted. You can also copy the entire [skill folder](skills/nativeskill/) to your agent's skill directory.
@@ -28,9 +26,19 @@ Select your coding agent when prompted. You can also copy the entire [skill fold
 
 ## Language coverage
 
-The [registry](skills/nativeskill/assets/registry.json) covers **110 languages and 449 regional profiles**. Each language pack links to at least one dictionary or terminology source. The [50 UI concepts](skills/nativeskill/assets/concepts.json) describe the product behavior and facts the translation needs to preserve.
+The [registry](skills/nativeskill/assets/registry.json) covers **110 languages and 449 regional profiles**. Each language pack links to at least one dictionary or terminology source. The [64 UI concepts](skills/nativeskill/assets/concepts.json) describe the product behavior and facts the translation needs to preserve.
 
-The packs are at **Foundation** status. They provide script, direction, plural metadata, and scoped references. Verified wording requires native review for the specific locale and usage.
+The packs include **3,174 source-attested UI examples across 107 of the 110 languages**. Counts include separate source contexts and regional variants. Dogri, Hmong, and Samoan currently have locale metadata and dictionary links. NativeSkill drafts and upstream examples are labeled separately. Verified product wording requires native review for the actual app and locale.
+
+## Look up wording
+
+The installed skill includes an offline lookup. From your app's root, using the standard project install path:
+
+```sh
+node .agents/skills/nativeskill/scripts/lookup.mjs ta-MY auth.sign_out button
+```
+
+The result includes the intended action, the wording, its UI role, the locale match, and the source. Review the button's actual behavior before reusing a label. See [wording evidence](skills/nativeskill/references/wording.md).
 
 ## Optional CLI
 

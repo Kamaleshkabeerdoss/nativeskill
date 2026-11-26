@@ -1,0 +1,18 @@
+[
+  {
+    "locale": "ta",
+    "concept": "form.clear_input",
+    "role": "button",
+    "text": "உள்ளீட்டை அழிக்கவும்",
+    "note": "Draft for emptying typed input. Use the project glossary for the exact field name. Deleting an existing record is a different action.",
+    "url": "https://ta.wiktionary.org/wiki/%E0%AE%85%E0%AE%B4%E0%AE%BF"
+  },
+  {
+    "locale": "ta",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "சாத்தியமான வாடிக்கையாளர்கள்",
+    "note": "Descriptive draft for the CRM noun meaning potential customers. Check the product's definition and the audience's familiarity with CRM terms.",
+    "url": "https://help.zoho.com/portal/en/kb/crm/sales-force-automation/leads/articles/leads-26-4-2026"
+  }
+]

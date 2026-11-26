@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
-import { inspectConcept, inspectLanguage, inspectLocale, registry } from '../src/locales.mjs';
+import { inspectConcept, inspectLanguage, inspectLocale, lookupWording, registry } from '../src/locales.mjs';
 
 const cli = fileURLToPath(new URL('../src/cli.mjs', import.meta.url));
 const launch = JSON.parse(readFileSync(new URL('../../../scripts/launch-languages.json', import.meta.url), 'utf8'));
@@ -41,8 +41,52 @@ test('the registry preserves the exact requested 110 languages and has scoped re
     assert.ok(pack.references.some(({ kind, scope }) => kind.includes('dictionary') && pack.codes.includes(scope)), id);
     assert.ok(pack.references.some(({ id }) => id === 'iana'));
     assert.ok(pack.references.some(({ id }) => id === 'cldr-scripts'));
-    assert.equal(pack.wording.status, 'foundation');
+    assert.equal(pack.wording.sourceCount, pack.wording.entries.filter(({ status }) => status === 'source-attested').length);
+    for (const entry of pack.wording.entries) {
+      assert.ok(pack.profiles.some(({ tag, script }) => tag === entry.locale && script === entry.script), id);
+      assert.match(entry.source.url, /^https:\/\//);
+      if (entry.status === 'source-attested') assert.match(entry.source.url, /\/blob\/[0-9a-f]{40}\//);
+    }
   }
+});
+
+test('bundled wording distinguishes draft, attestation, and gaps by locale and UI role', () => {
+  assert.ok(registry.wordingLanguageCount >= 107);
+  assert.ok(registry.wordingExampleCount >= 3174);
+
+  const tamil = lookupWording('ta-MY', 'auth.sign_out', 'button').wording;
+  assert.equal(tamil.status, 'source-attested');
+  assert.ok(tamil.entries.some(({ status, locale, match, source }) => (
+    status === 'source-attested' && locale === 'ta' && match === 'language-script' && source.key === 'Log out'
+  )));
+  assert.equal(lookupWording('ta', 'form.clear_input', 'button').wording.status, 'draft');
+  assert.equal(lookupWording('ta', 'form.clear_input', 'tooltip').wording.status, 'source-attested');
+  assert.equal(lookupWording('ta', 'crm.sales_leads', 'navigation-label').wording.status, 'draft');
+  assert.equal(lookupWording('ta', 'billing.stop_renewal', 'button').wording.status, 'uncovered');
+
+  const traditional = inspectLocale('zh-TW').wording.entries;
+  assert.ok(traditional.length);
+  assert.ok(traditional.every(({ script, locale }) => script === 'Hant' && !locale.startsWith('zh-Hans')));
+  const nynorsk = inspectLocale('nn-NO').wording.entries;
+  assert.ok(nynorsk.length);
+  assert.ok(nynorsk.every(({ locale }) => new Intl.Locale(locale).language === 'nn'));
+});
+
+test('the installed skill has a dependency-free lookup through a project symlink', (t) => {
+  const directory = mkdtempSync(join(tmpdir(), 'nativeskill-skill-'));
+  t.after(() => rmSync(directory, { force: true, recursive: true }));
+  const original = new URL('../../../skills/nativeskill/', import.meta.url);
+  const installed = join(directory, 'nativeskill');
+  const agentLink = join(directory, 'linked-skill');
+  cpSync(original, installed, { recursive: true });
+  symlinkSync(installed, agentLink, 'dir');
+  const output = spawnSync(process.execPath, [
+    join(agentLink, 'scripts/lookup.mjs'), 'ta', 'form.save_changes', 'button'
+  ], { cwd: directory, encoding: 'utf8' });
+  assert.equal(output.status, 0, output.stderr);
+  const report = JSON.parse(output.stdout);
+  assert.equal(report.wording.status, 'source-attested');
+  assert.ok(report.wording.entries.some(({ source }) => source.key === 'Save'));
 });
 
 test('locale lookups use a script and keep regional, macrolanguage, and member distinctions', () => {

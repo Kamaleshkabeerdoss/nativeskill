@@ -9,11 +9,14 @@
   "files": [
     "packages/cli/src",
     "skills/nativeskill/assets",
+    "skills/nativeskill/licenses",
+    "skills/nativeskill/scripts",
     "skills/nativeskill/LICENSE-UNICODE.txt",
     "skills/nativeskill/THIRD_PARTY_NOTICES.md"
   ],
   "scripts": {
     "test": "node --test packages/cli/test/*.test.mjs",
+    "import:wording": "node scripts/import-wording.mjs",
     "generate:locales": "node scripts/generate-locales.mjs"
   },
   "dependencies": {

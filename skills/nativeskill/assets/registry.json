@@ -3,6 +3,8 @@
   "cldrVersion": "49.0.0",
   "languageCount": 110,
   "regionalLocaleCount": 449,
+  "wordingLanguageCount": 107,
+  "wordingExampleCount": 3174,
   "tagOwners": {
     "ta": "ta",
     "hi": "hi",
@@ -128,7 +130,8 @@
       "group": "South Asian",
       "path": "locales/ta.json",
       "regionalProfiles": 4,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 36
     },
     {
       "id": "hi",
@@ -136,7 +139,8 @@
       "group": "South Asian",
       "path": "locales/hi.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "te",
@@ -144,7 +148,8 @@
       "group": "South Asian",
       "path": "locales/te.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "ml",
@@ -152,7 +157,8 @@
       "group": "South Asian",
       "path": "locales/ml.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "kn",
@@ -160,7 +166,8 @@
       "group": "South Asian",
       "path": "locales/kn.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 29
     },
     {
       "id": "bn",
@@ -168,7 +175,8 @@
       "group": "South Asian",
       "path": "locales/bn.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "mr",
@@ -176,7 +184,8 @@
       "group": "South Asian",
       "path": "locales/mr.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 29
     },
     {
       "id": "gu",
@@ -184,7 +193,8 @@
       "group": "South Asian",
       "path": "locales/gu.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 23
     },
     {
       "id": "pa",
@@ -192,7 +202,8 @@
       "group": "South Asian",
       "path": "locales/pa.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "ur",
@@ -200,7 +211,8 @@
       "group": "South Asian",
       "path": "locales/ur.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 32
     },
     {
       "id": "ne",
@@ -208,7 +220,8 @@
       "group": "South Asian",
       "path": "locales/ne.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "si",
@@ -216,7 +229,8 @@
       "group": "South Asian",
       "path": "locales/si.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 7
     },
     {
       "id": "or",
@@ -224,7 +238,8 @@
       "group": "South Asian",
       "path": "locales/or.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 25
     },
     {
       "id": "as",
@@ -232,7 +247,8 @@
       "group": "South Asian",
       "path": "locales/as.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 25
     },
     {
       "id": "sa",
@@ -240,7 +256,8 @@
       "group": "South Asian",
       "path": "locales/sa.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 16
     },
     {
       "id": "mai",
@@ -248,7 +265,8 @@
       "group": "South Asian",
       "path": "locales/mai.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 19
     },
     {
       "id": "sd",
@@ -256,7 +274,8 @@
       "group": "South Asian",
       "path": "locales/sd.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 27
     },
     {
       "id": "kok",
@@ -264,7 +283,8 @@
       "group": "South Asian",
       "path": "locales/kok.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 29
     },
     {
       "id": "doi",
@@ -272,7 +292,8 @@
       "group": "South Asian",
       "path": "locales/doi.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "foundation",
+      "wordingExamples": 0
     },
     {
       "id": "ks",
@@ -280,7 +301,8 @@
       "group": "South Asian",
       "path": "locales/ks.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 25
     },
     {
       "id": "zh",
@@ -288,7 +310,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/zh.json",
       "regionalProfiles": 9,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 74
     },
     {
       "id": "ja",
@@ -296,7 +319,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/ja.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 41
     },
     {
       "id": "ko",
@@ -304,7 +328,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/ko.json",
       "regionalProfiles": 3,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 45
     },
     {
       "id": "ms",
@@ -312,7 +337,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/ms.json",
       "regionalProfiles": 6,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "id",
@@ -320,7 +346,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/id.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "th",
@@ -328,7 +355,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/th.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "vi",
@@ -336,7 +364,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/vi.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "fil",
@@ -344,7 +373,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/fil.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 24
     },
     {
       "id": "my",
@@ -352,7 +382,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/my.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "km",
@@ -360,7 +391,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/km.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 32
     },
     {
       "id": "lo",
@@ -368,7 +400,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/lo.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 11
     },
     {
       "id": "jv",
@@ -376,7 +409,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/jv.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 26
     },
     {
       "id": "su",
@@ -384,7 +418,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/su.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 21
     },
     {
       "id": "ceb",
@@ -392,7 +427,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/ceb.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 3
     },
     {
       "id": "mn",
@@ -400,7 +436,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/mn.json",
       "regionalProfiles": 3,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 25
     },
     {
       "id": "bo",
@@ -408,7 +445,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/bo.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 9
     },
     {
       "id": "hmn",
@@ -416,7 +454,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/hmn.json",
       "regionalProfiles": 7,
-      "wordingStatus": "foundation"
+      "wordingStatus": "foundation",
+      "wordingExamples": 0
     },
     {
       "id": "ban",
@@ -424,7 +463,8 @@
       "group": "East and Southeast Asian",
       "path": "locales/ban.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 27
     },
     {
       "id": "en",
@@ -432,7 +472,8 @@
       "group": "European",
       "path": "locales/en.json",
       "regionalProfiles": 124,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 47
     },
     {
       "id": "fr",
@@ -440,7 +481,8 @@
       "group": "European",
       "path": "locales/fr.json",
       "regionalProfiles": 46,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "de",
@@ -448,7 +490,8 @@
       "group": "European",
       "path": "locales/de.json",
       "regionalProfiles": 7,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 36
     },
     {
       "id": "es",
@@ -456,7 +499,8 @@
       "group": "European",
       "path": "locales/es.json",
       "regionalProfiles": 28,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 58
     },
     {
       "id": "pt",
@@ -464,7 +508,8 @@
       "group": "European",
       "path": "locales/pt.json",
       "regionalProfiles": 12,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 69
     },
     {
       "id": "it",
@@ -472,7 +517,8 @@
       "group": "European",
       "path": "locales/it.json",
       "regionalProfiles": 4,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "nl",
@@ -480,7 +526,8 @@
       "group": "European",
       "path": "locales/nl.json",
       "regionalProfiles": 7,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "ru",
@@ -488,7 +535,8 @@
       "group": "European",
       "path": "locales/ru.json",
       "regionalProfiles": 6,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "uk",
@@ -496,7 +544,8 @@
       "group": "European",
       "path": "locales/uk.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "pl",
@@ -504,7 +553,8 @@
       "group": "European",
       "path": "locales/pl.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "sv",
@@ -512,7 +562,8 @@
       "group": "European",
       "path": "locales/sv.json",
       "regionalProfiles": 3,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "no",
@@ -520,7 +571,8 @@
       "group": "European",
       "path": "locales/no.json",
       "regionalProfiles": 4,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 62
     },
     {
       "id": "da",
@@ -528,7 +580,8 @@
       "group": "European",
       "path": "locales/da.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "fi",
@@ -536,7 +589,8 @@
       "group": "European",
       "path": "locales/fi.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "is",
@@ -544,7 +598,8 @@
       "group": "European",
       "path": "locales/is.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "el",
@@ -552,7 +607,8 @@
       "group": "European",
       "path": "locales/el.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "cs",
@@ -560,7 +616,8 @@
       "group": "European",
       "path": "locales/cs.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "sk",
@@ -568,7 +625,8 @@
       "group": "European",
       "path": "locales/sk.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 33
     },
     {
       "id": "hu",
@@ -576,7 +634,8 @@
       "group": "European",
       "path": "locales/hu.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "ro",
@@ -584,7 +643,8 @@
       "group": "European",
       "path": "locales/ro.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 36
     },
     {
       "id": "bg",
@@ -592,7 +652,8 @@
       "group": "European",
       "path": "locales/bg.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 32
     },
     {
       "id": "hr",
@@ -600,7 +661,8 @@
       "group": "European",
       "path": "locales/hr.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "sr",
@@ -608,7 +670,8 @@
       "group": "European",
       "path": "locales/sr.json",
       "regionalProfiles": 8,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 41
     },
     {
       "id": "bs",
@@ -616,7 +679,8 @@
       "group": "European",
       "path": "locales/bs.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "sl",
@@ -624,7 +688,8 @@
       "group": "European",
       "path": "locales/sl.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "sq",
@@ -632,7 +697,8 @@
       "group": "European",
       "path": "locales/sq.json",
       "regionalProfiles": 3,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 32
     },
     {
       "id": "mk",
@@ -640,7 +706,8 @@
       "group": "European",
       "path": "locales/mk.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "lt",
@@ -648,7 +715,8 @@
       "group": "European",
       "path": "locales/lt.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "lv",
@@ -656,7 +724,8 @@
       "group": "European",
       "path": "locales/lv.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "et",
@@ -664,7 +733,8 @@
       "group": "European",
       "path": "locales/et.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 33
     },
     {
       "id": "ca",
@@ -672,7 +742,8 @@
       "group": "European",
       "path": "locales/ca.json",
       "regionalProfiles": 4,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 33
     },
     {
       "id": "eu",
@@ -680,7 +751,8 @@
       "group": "European",
       "path": "locales/eu.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "gl",
@@ -688,7 +760,8 @@
       "group": "European",
       "path": "locales/gl.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "ga",
@@ -696,7 +769,8 @@
       "group": "European",
       "path": "locales/ga.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 12
     },
     {
       "id": "cy",
@@ -704,7 +778,8 @@
       "group": "European",
       "path": "locales/cy.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "mt",
@@ -712,7 +787,8 @@
       "group": "European",
       "path": "locales/mt.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 7
     },
     {
       "id": "lb",
@@ -720,7 +796,8 @@
       "group": "European",
       "path": "locales/lb.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "be",
@@ -728,7 +805,8 @@
       "group": "European",
       "path": "locales/be.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 58
     },
     {
       "id": "ar",
@@ -736,7 +814,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/ar.json",
       "regionalProfiles": 28,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 47
     },
     {
       "id": "he",
@@ -744,7 +823,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/he.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "fa",
@@ -752,7 +832,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/fa.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 38
     },
     {
       "id": "tr",
@@ -760,7 +841,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/tr.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "ku",
@@ -768,7 +850,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/ku.json",
       "regionalProfiles": 5,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 57
     },
     {
       "id": "ps",
@@ -776,7 +859,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/ps.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 29
     },
     {
       "id": "az",
@@ -784,7 +868,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/az.json",
       "regionalProfiles": 3,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 35
     },
     {
       "id": "kk",
@@ -792,7 +877,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/kk.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 33
     },
     {
       "id": "uz",
@@ -800,7 +886,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/uz.json",
       "regionalProfiles": 3,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "ky",
@@ -808,7 +895,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/ky.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "tk",
@@ -816,7 +904,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/tk.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 21
     },
     {
       "id": "tg",
@@ -824,7 +913,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/tg.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 6
     },
     {
       "id": "hy",
@@ -832,7 +922,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/hy.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     },
     {
       "id": "ka",
@@ -840,7 +931,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/ka.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 31
     },
     {
       "id": "ug",
@@ -848,7 +940,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/ug.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 6
     },
     {
       "id": "yi",
@@ -856,7 +949,8 @@
       "group": "Middle Eastern and Central Asian",
       "path": "locales/yi.json",
       "regionalProfiles": 3,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 24
     },
     {
       "id": "sw",
@@ -864,7 +958,8 @@
       "group": "African",
       "path": "locales/sw.json",
       "regionalProfiles": 4,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 19
     },
     {
       "id": "af",
@@ -872,7 +967,8 @@
       "group": "African",
       "path": "locales/af.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 30
     },
     {
       "id": "am",
@@ -880,7 +976,8 @@
       "group": "African",
       "path": "locales/am.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 6
     },
     {
       "id": "so",
@@ -888,7 +985,8 @@
       "group": "African",
       "path": "locales/so.json",
       "regionalProfiles": 4,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 29
     },
     {
       "id": "ha",
@@ -896,7 +994,8 @@
       "group": "African",
       "path": "locales/ha.json",
       "regionalProfiles": 5,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 22
     },
     {
       "id": "yo",
@@ -904,7 +1003,8 @@
       "group": "African",
       "path": "locales/yo.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 3
     },
     {
       "id": "ig",
@@ -912,7 +1012,8 @@
       "group": "African",
       "path": "locales/ig.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 27
     },
     {
       "id": "zu",
@@ -920,7 +1021,8 @@
       "group": "African",
       "path": "locales/zu.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 9
     },
     {
       "id": "xh",
@@ -928,7 +1030,8 @@
       "group": "African",
       "path": "locales/xh.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 1
     },
     {
       "id": "mg",
@@ -936,7 +1039,8 @@
       "group": "African",
       "path": "locales/mg.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 25
     },
     {
       "id": "rw",
@@ -944,7 +1048,8 @@
       "group": "African",
       "path": "locales/rw.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 23
     },
     {
       "id": "om",
@@ -952,7 +1057,8 @@
       "group": "African",
       "path": "locales/om.json",
       "regionalProfiles": 2,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 23
     },
     {
       "id": "sn",
@@ -960,7 +1066,8 @@
       "group": "African",
       "path": "locales/sn.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 21
     },
     {
       "id": "wo",
@@ -968,7 +1075,8 @@
       "group": "African",
       "path": "locales/wo.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 3
     },
     {
       "id": "mi",
@@ -976,7 +1084,8 @@
       "group": "Additional",
       "path": "locales/mi.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 2
     },
     {
       "id": "sm",
@@ -984,7 +1093,8 @@
       "group": "Additional",
       "path": "locales/sm.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "foundation",
+      "wordingExamples": 0
     },
     {
       "id": "haw",
@@ -992,7 +1102,8 @@
       "group": "Additional",
       "path": "locales/haw.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 2
     },
     {
       "id": "eo",
@@ -1000,7 +1111,8 @@
       "group": "Additional",
       "path": "locales/eo.json",
       "regionalProfiles": 1,
-      "wordingStatus": "foundation"
+      "wordingStatus": "source-attested",
+      "wordingExamples": 34
     }
   ]
 }
