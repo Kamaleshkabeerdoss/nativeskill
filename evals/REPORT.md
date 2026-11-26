@@ -11,9 +11,9 @@ Independent judge notes for scenarios A and B are in [scenarios/JUDGE.md](scenar
 | 3. Arabic `one` without a number | `%d` missing from `عنصر واحد` was `placeholder-mismatch`. | Allowed when the category matches exactly one integer from 0 to 200. French `one` is 0 and 1, so a numberless French `one` is still an error. |
 | 4. Select and `=0` | A dropped `female` branch and a dropped `=0` branch were clean. | `selector-mismatch` and `exact-choice-missing`. |
 | 5. Empty string catalog | A catalog whose target locale had no translations could report nothing. | Every source string with no target localization is `missing-key`. |
-| 6. `nativeskill check` and TypeScript | `cli.mjs` imported `validate.mjs`, which imports TypeScript, so `check` failed before `npm install`. | `validate` is loaded only for the `validate` command. With `node_modules/typescript` moved aside, `nativeskill check` on the Flutter fixture printed `0 errors, 0 warnings`. Simple `export default { title: "..." }` files are read by `check`. Spreads and functions still need `nativeskill validate` after `npm install`. |
+| 6. Checkout checker and TypeScript | The checkout CLI loaded the TypeScript parser before it ran a check, causing a failure on a fresh checkout. | The checkout CLI loads the parser only for the separate validator. With TypeScript absent, the Flutter fixture still reported `0 errors, 0 warnings`. The checker can also read simple catalogs such as `export default { title: "Save" }`. |
 
-These cases are locked in `skills/nativeskill/scripts/check.test.mjs`. `npm test` is 14 passing tests.
+These cases are covered in `skills/nativeskill/scripts/check.test.mjs`. The full suite passed 14 tests at the time of this evaluation.
 
 ## Lookup and bad mappings
 

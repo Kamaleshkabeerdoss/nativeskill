@@ -21,28 +21,11 @@ Tamil sign-out is the other kind of hit. `node skills/nativeskill/scripts/lookup
 
 ## Install
 
-The skill folder is `skills/nativeskill`. Node.js 22.20 or later.
-
-**Cursor, Claude Code, Codex, and other agents that use the skills CLI**
+Run this from the app you want to localize with Node.js 22.20 or later. Select Codex, Cursor, Claude Code, or another supported agent when prompted.
 
 ```sh
 npx skills add Kamaleshkabeerdoss/nativeskill --skill nativeskill
 ```
-
-**Claude Code plugin**
-
-```text
-/plugin marketplace add Kamaleshkabeerdoss/nativeskill
-/plugin install nativeskill@nativeskill
-```
-
-The marketplace manifest is `.claude-plugin/marketplace.json`.
-
-**Codex**
-
-`.codex-plugin/plugin.json` points at `skills/`. Install the repo as a Codex plugin, or use the same `npx skills add` command.
-
-You can also copy `skills/nativeskill/` into the agent's skills directory.
 
 ## Use it
 
@@ -56,22 +39,11 @@ Audit:
 
 The playbook the agent follows is [skills/nativeskill/SKILL.md](skills/nativeskill/SKILL.md). Locale notes, platform steps, and the machine-translation tell list live under `skills/nativeskill/references/`.
 
-## `npx nativeskill check`
-
-The package name is `nativeskill` and the bin is `nativeskill`. It is ready to publish and is not on npm yet. From a checkout:
-
-```sh
-node packages/cli/src/cli.mjs check \
-  --source skills/nativeskill/examples/flutter/lib/l10n/app_en.arb \
-  --target skills/nativeskill/examples/flutter/lib/l10n/app_ms.arb \
-  --locale ms --source-locale en
-```
-
-After a publish, the same command is `npx nativeskill check` with those flags. `--format` is `auto`, `json`, `android`, `strings`, or `xcstrings`. Exit 0 means no errors. `check` does not load TypeScript. A fresh clone can run it before `npm install`. `nativeskill validate` reads JS and TS dictionaries that contain spreads or functions, and that command needs `npm install` because it uses the TypeScript parser. Simple `export default { title: "Save" }` files are read by `check` directly.
-
 ## Check a catalog
 
-From this repo:
+The skill includes a Node.js catalog checker and a source scanner that run without extra dependencies. The checker supports ARB, JSON, i18next, Android `strings.xml`, iOS `.strings` and `.xcstrings`. Your agent can run both scripts from the installed skill folder. [Check commands and report codes](skills/nativeskill/references/checks.md)
+
+Try them on the examples in this repo:
 
 ```sh
 node skills/nativeskill/scripts/check.mjs \
@@ -90,10 +62,6 @@ node skills/nativeskill/scripts/scan.mjs \
 ```
 
 The Flutter and Android examples pass. The buggy Arabic catalog is supposed to fail: renamed placeholder, `{{name}}` turned into `{name}`, dropped `%1$s`, unclosed plural, missing Arabic plural categories, a missing key, an extra key, an unchanged "Cancel", and a length blowup. The scanner reports `Cancel subscription` and `Pay now` and ignores `@string/` references.
-
-After install, the same commands use `<skill-dir>/scripts/check.mjs`. Formats: ARB, JSON, i18next, Android `strings.xml`, iOS `.strings`, and `.xcstrings`. No npm packages are required for the scripts.
-
-`npm test` in this repo runs the catalog tests and the skill script tests.
 
 ## What is bundled
 

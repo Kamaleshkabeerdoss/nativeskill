@@ -1,6 +1,6 @@
 # Checks
 
-Both scripts live in the skill folder and use only Node. They do not install packages.
+The checker, scanner and lookup live in the skill folder and use only Node.js.
 
 ```sh
 node <skill-dir>/scripts/check.mjs --source app_en.arb --target app_ar.arb --locale ar --source-locale en
@@ -10,7 +10,7 @@ node <skill-dir>/scripts/lookup.mjs ta auth.sign_out button
 
 `check.mjs` exits 0 when there are no errors, 1 when there are errors, and 2 when the arguments are wrong. Add `--json` for a machine-readable report. `--format` is `auto`, `json`, `android`, `strings`, or `xcstrings`. `auto` treats `.xml` as Android, `.strings` as iOS strings, `.xcstrings` as a string catalog, `.ts` and `.js` as a simple `export` object of strings, and everything else as JSON or ARB.
 
-`.ts` and `.js` catalogs that spread another object, call a function, or compute a key are not read here. Those need `nativeskill validate` after `npm install`, because that command uses the TypeScript parser. `nativeskill check` itself does not import TypeScript.
+For catalogs that use object spreads, function calls or computed keys, run the app's catalog validation.
 
 Android `translatable="false"` strings are skipped. A plural category that covers exactly one number may omit it: Arabic `zero`, `one`, and `two`, or German and English `one`. French `one` is not such a category, because it covers both 0 and 1. A French `one` without the number is an Android `placeholder-mismatch` and an ICU `plural-number-missing` warning. A string catalog with source strings and no target locale fails with `missing-key`.
 

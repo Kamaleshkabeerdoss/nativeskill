@@ -19,7 +19,7 @@ function run(script, args) {
   return result;
 }
 
-test('nativeskill check is the publishable bin for the same checker', () => {
+test('the checkout CLI runs the same catalog checker', () => {
   const result = run(bin, ['check', '--json', '--source', join(examples, 'flutter/lib/l10n/app_en.arb'), '--target', join(examples, 'flutter/lib/l10n/app_ms.arb'), '--locale', 'ms', '--source-locale', 'en']);
   assert.equal(result.status, 0, result.stderr);
   assert.equal(result.report.errors, 0);
