@@ -40,7 +40,9 @@ Same model for baseline and skill. The skill run was required to read `SKILL.md`
 
 The judge's scores. Both split dialog Cancel from stop-renewal in Tamil and Arabic, registered the locales, added a switcher, and mirrored Arabic. The baseline German button was `Kündigen`, which can mean the contract ends now. The skill used `Verlängerung stoppen`, which matches "access continues until {date}" and is long enough that the checker warned. The baseline Tamil was shorter and, in the judge's view, more idiomatic. The skill Tamil reused `உள்ளே போ` for sign-in, which this round now marks as not preferred. The skill wired the ARB files through the localization delegate. The baseline left most translations in a hard-coded map.
 
-Verdict: the skill helps the intent split and the wiring. It does not beat an unaided model on Tamil naturalness. German is safer with the skill and less conventional.
+A second skill run, after the length rule, shortened the buttons to `புதுப்பிப்பை நிறுத்து`, `إيقاف التجديد`, and `Nicht verlängern`. Those stay distinct from dialog Cancel and are closer to the baseline's shorter Tamil and Arabic. `Nicht verlängern` does not mean the contract ends today. `Kündigen` can.
+
+Verdict: the skill helps the intent split and the wiring. It does not beat an unaided model on Tamil naturalness until it is told to shorten. German is safer with the skill.
 
 ### B. Add German next to existing locales
 
