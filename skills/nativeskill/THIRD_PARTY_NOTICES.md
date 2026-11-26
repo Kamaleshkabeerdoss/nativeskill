@@ -13,5 +13,8 @@ Selected UI labels retain a pinned source URL, original message key, locale, and
 - Wikimedia OOUI and VisualEditor catalogs, MIT ([OOUI](licenses/ooui.txt), [VisualEditor](licenses/visualeditor.txt), [MediaWiki VisualEditor](licenses/visualeditor-mediawiki.txt)).
 - Wikimedia Universal Language Selector, MIT ([notice](licenses/uls.txt)).
 - Django and Flutter localization catalogs, BSD 3-Clause ([Django](licenses/django.txt), [Flutter](licenses/flutter.txt)).
+- Android Open Source Project framework strings, Apache 2.0 ([notice](licenses/aosp.txt)).
+- devise-i18n account strings, MIT ([notice](licenses/devise-i18n.txt)).
+- Telegram for Android strings that are included, GPL-2.0-only ([notice](licenses/telegram.txt)). Those labels stay under GPL-2.0-only. They are not relicensed as MIT.
 
 The dictionary sites cited by the language registry remain lookup links. NativeSkill drafts are original suggestions and reference links do not imply approval of the exact phrase.

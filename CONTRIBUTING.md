@@ -10,4 +10,6 @@
 
 Map a message in `scripts/wording-sources.json` only if its source UI action and role fit the concept. Use the checked-in wording corpus for normal locale generation. To update upstream samples, extract each pinned source archive into a directory named `<repository>-<revision>`. Flutter needs the listed ARB files and its LICENSE. Run `npm run import:wording -- /path/to/extracted-sources`, then `npm run generate:locales` and `npm test`. The importer requires the checked-in locale registry, checks mapped English source labels, skips empty or fuzzy entries, and copies the relevant notices.
 
-Put independently authored drafts in `scripts/wording-drafts.json`. Supply a scope note and a reference link. Keep evidence distinct from native review.
+Put independently authored drafts in `scripts/wording-drafts.json`. Supply a scope note and a reference link. Keep evidence distinct from native review. A draft is an unreviewed suggestion. Do not mark it source-attested.
+
+Sources with `"manual": true` in `scripts/wording-sources.json` were checked in from pinned upstream files and are preserved when `npm run import:wording` rebuilds the other catalogs. Do not relabel a string when the translation does not preserve the English action. Hindi AOSP `skip_button_label` means "not now", and Hindi Django "This field is required." does not mean a form field, so those pairs are excluded.

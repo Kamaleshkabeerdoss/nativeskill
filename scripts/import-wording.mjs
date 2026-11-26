@@ -26,9 +26,13 @@ function readMessages(path, format) {
   return messages;
 }
 
+const previousCorpus = existsSync(local('./wording-corpus.json')) ? json(local('./wording-corpus.json')) : {};
+const manualIds = new Set(sources.filter((source) => source.manual).map((source) => source.id));
 const corpus = {};
 for (const source of sources) {
+  if (source.manual) continue;
   const { id, repo, revision, licenseFile, notice, terms, catalog, format } = source;
+  const excluded = new Set((source.exclude ?? []).map(({ locale, key }) => locale + '\0' + key));
   const directory = join(upstream, repo.split('/').at(-1) + '-' + revision);
   const catalogs = join(directory, catalog);
   const englishPath = (format === 'arb') ? 'material_en.arb' : 'en.json';
@@ -56,11 +60,19 @@ for (const source of sources) {
     if (po && !existsSync(path)) continue;
     const messages = readMessages(path, format);
     for (const [key, label, concept, role] of terms) {
-      const text = typeof messages[key] === 'string' ? messages[key].trim() : '';
+      if (excluded.has(locale + '\0' + key)) continue;
+      let text = typeof messages[key] === 'string' ? messages[key].trim() : '';
+      if (!text && format === 'po' && new Intl.Locale(locale).language === 'en') text = label;
       if (!text || text.length > 100 || /[{}<>]|[$%]\d|%\(|\r|\n/.test(text)) continue;
       if (new Intl.Locale(locale).language !== 'en' && text === label) continue;
       (corpus[owner] ??= []).push({ locale, concept, role, text, source: id, file, key });
     }
+  }
+}
+
+for (const [owner, items] of Object.entries(previousCorpus)) {
+  for (const item of items) {
+    if (manualIds.has(item.source)) (corpus[owner] ??= []).push(item);
   }
 }
 

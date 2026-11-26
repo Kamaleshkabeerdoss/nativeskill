@@ -9,15 +9,60 @@
     "catalog": "i18n",
     "format": "json",
     "terms": [
-      ["ooui-copytextlayout-copy", "Copy", "content.copy", "button"],
-      ["ooui-outline-control-remove", "Remove item", "item.remove_from_list", "tooltip"],
-      ["ooui-dialog-message-reject", "Cancel", "dialog.cancel_action", "button"],
-      ["ooui-dialog-process-back", "Back", "navigation.go_back", "button"],
-      ["ooui-dialog-process-dismiss", "Dismiss", "dialog.dismiss", "button"],
-      ["ooui-dialog-process-retry", "Try again", "status.retry", "button"],
-      ["ooui-dialog-process-continue", "Continue", "navigation.continue", "button"],
-      ["ooui-selectfile-button-select", "Select a file", "file.select", "button"],
-      ["ooui-popup-widget-close-button-aria-label", "Close", "dialog.dismiss", "accessible-name"]
+      [
+        "ooui-copytextlayout-copy",
+        "Copy",
+        "content.copy",
+        "button"
+      ],
+      [
+        "ooui-outline-control-remove",
+        "Remove item",
+        "item.remove_from_list",
+        "tooltip"
+      ],
+      [
+        "ooui-dialog-message-reject",
+        "Cancel",
+        "dialog.cancel_action",
+        "button"
+      ],
+      [
+        "ooui-dialog-process-back",
+        "Back",
+        "navigation.go_back",
+        "button"
+      ],
+      [
+        "ooui-dialog-process-dismiss",
+        "Dismiss",
+        "dialog.dismiss",
+        "button"
+      ],
+      [
+        "ooui-dialog-process-retry",
+        "Try again",
+        "status.retry",
+        "button"
+      ],
+      [
+        "ooui-dialog-process-continue",
+        "Continue",
+        "navigation.continue",
+        "button"
+      ],
+      [
+        "ooui-selectfile-button-select",
+        "Select a file",
+        "file.select",
+        "button"
+      ],
+      [
+        "ooui-popup-widget-close-button-aria-label",
+        "Close",
+        "dialog.dismiss",
+        "accessible-name"
+      ]
     ]
   },
   {
@@ -30,18 +75,78 @@
     "catalog": "i18n",
     "format": "json",
     "terms": [
-      ["visualeditor-clipboard-copy", "Copy", "content.copy", "menu-item"],
-      ["visualeditor-clipboard-cut", "Cut", "content.cut", "menu-item"],
-      ["visualeditor-clipboard-paste", "Paste", "content.paste", "menu-item"],
-      ["visualeditor-content-select-all", "Select all", "content.select_all", "menu-item"],
-      ["visualeditor-contextitemwidget-label-close", "Close", "dialog.dismiss", "button"],
-      ["visualeditor-contextitemwidget-label-remove", "Delete", "item.delete", "button"],
-      ["visualeditor-contextitemwidget-label-secondary", "Edit", "item.edit", "button"],
-      ["visualeditor-dialog-action-apply", "Apply changes", "form.apply_changes", "button"],
-      ["visualeditor-dialog-action-done", "Done", "navigation.finish", "button"],
-      ["visualeditor-find-and-replace-find-text", "Find", "content.find_in_text", "field-label"],
-      ["visualeditor-completionwidget-noresults", "No results", "search.no_results", "status"],
-      ["visualeditor-historybutton-undo-tooltip", "Undo", "item.undo", "tooltip"]
+      [
+        "visualeditor-clipboard-copy",
+        "Copy",
+        "content.copy",
+        "menu-item"
+      ],
+      [
+        "visualeditor-clipboard-cut",
+        "Cut",
+        "content.cut",
+        "menu-item"
+      ],
+      [
+        "visualeditor-clipboard-paste",
+        "Paste",
+        "content.paste",
+        "menu-item"
+      ],
+      [
+        "visualeditor-content-select-all",
+        "Select all",
+        "content.select_all",
+        "menu-item"
+      ],
+      [
+        "visualeditor-contextitemwidget-label-close",
+        "Close",
+        "dialog.dismiss",
+        "button"
+      ],
+      [
+        "visualeditor-contextitemwidget-label-remove",
+        "Delete",
+        "item.delete",
+        "button"
+      ],
+      [
+        "visualeditor-contextitemwidget-label-secondary",
+        "Edit",
+        "item.edit",
+        "button"
+      ],
+      [
+        "visualeditor-dialog-action-apply",
+        "Apply changes",
+        "form.apply_changes",
+        "button"
+      ],
+      [
+        "visualeditor-dialog-action-done",
+        "Done",
+        "navigation.finish",
+        "button"
+      ],
+      [
+        "visualeditor-find-and-replace-find-text",
+        "Find",
+        "content.find_in_text",
+        "field-label"
+      ],
+      [
+        "visualeditor-completionwidget-noresults",
+        "No results",
+        "search.no_results",
+        "status"
+      ],
+      [
+        "visualeditor-historybutton-undo-tooltip",
+        "Undo",
+        "item.undo",
+        "tooltip"
+      ]
     ]
   },
   {
@@ -54,12 +159,42 @@
     "catalog": "i18n/ve-mw",
     "format": "json",
     "terms": [
-      ["tooltip-ca-ve-edit", "Edit this page", "content.edit_page", "tooltip"],
-      ["visualeditor-ca-editsource", "Edit source", "content.edit_source", "tab"],
-      ["visualeditor-ca-editsource-section", "edit source", "content.edit_source", "link"],
-      ["visualeditor-dialog-media-save", "Save", "form.save_changes", "button"],
-      ["visualeditor-dialog-media-search-tab-upload", "Upload", "content.upload", "tab"],
-      ["visualeditor-savedialog-label-publish-short", "Publish", "content.publish", "button"]
+      [
+        "tooltip-ca-ve-edit",
+        "Edit this page",
+        "content.edit_page",
+        "tooltip"
+      ],
+      [
+        "visualeditor-ca-editsource",
+        "Edit source",
+        "content.edit_source",
+        "tab"
+      ],
+      [
+        "visualeditor-ca-editsource-section",
+        "edit source",
+        "content.edit_source",
+        "link"
+      ],
+      [
+        "visualeditor-dialog-media-save",
+        "Save",
+        "form.save_changes",
+        "button"
+      ],
+      [
+        "visualeditor-dialog-media-search-tab-upload",
+        "Upload",
+        "content.upload",
+        "tab"
+      ],
+      [
+        "visualeditor-savedialog-label-publish-short",
+        "Publish",
+        "content.publish",
+        "button"
+      ]
     ]
   },
   {
@@ -72,11 +207,36 @@
     "catalog": "django/contrib/admin/locale",
     "format": "po",
     "terms": [
-      ["Log in", "Log in", "auth.sign_in", "button"],
-      ["Log out", "Log out", "auth.sign_out", "button"],
-      ["Delete", "Delete", "item.delete", "button"],
-      ["Save", "Save", "form.save_changes", "button"],
-      ["Search", "Search", "search.query", "button"]
+      [
+        "Log in",
+        "Log in",
+        "auth.sign_in",
+        "button"
+      ],
+      [
+        "Log out",
+        "Log out",
+        "auth.sign_out",
+        "button"
+      ],
+      [
+        "Delete",
+        "Delete",
+        "item.delete",
+        "button"
+      ],
+      [
+        "Save",
+        "Save",
+        "form.save_changes",
+        "button"
+      ],
+      [
+        "Search",
+        "Search",
+        "search.query",
+        "button"
+      ]
     ]
   },
   {
@@ -89,7 +249,165 @@
     "catalog": "django/conf/locale",
     "format": "po",
     "terms": [
-      ["Clear", "Clear", "file.clear_selection", "checkbox-label"]
+      [
+        "Clear",
+        "Clear",
+        "file.clear_selection",
+        "checkbox-label"
+      ],
+      [
+        "This field is required.",
+        "This field is required.",
+        "form.required_field",
+        "inline-validation"
+      ]
+    ],
+    "exclude": [
+      {
+        "locale": "hi",
+        "key": "This field is required."
+      }
+    ]
+  },
+  {
+    "id": "aosp",
+    "repo": "aosp-mirror/platform_frameworks_base",
+    "revision": "1cdfff555f4a21f71ccc978290e2e212e2f8b168",
+    "license": "Apache-2.0",
+    "licenseFile": "NOTICE",
+    "notice": "aosp.txt",
+    "catalog": "core/res/res",
+    "format": "android-xml",
+    "manual": true,
+    "terms": [
+      [
+        "allow",
+        "Allow",
+        "permissions.allow_access",
+        "button"
+      ],
+      [
+        "deny",
+        "Deny",
+        "permissions.deny_access",
+        "button"
+      ],
+      [
+        "loading",
+        "Loading…",
+        "status.loading",
+        "status"
+      ],
+      [
+        "skip_button_label",
+        "Skip",
+        "navigation.skip_step",
+        "button"
+      ],
+      [
+        "submit",
+        "Submit",
+        "form.submit",
+        "button"
+      ],
+      [
+        "share",
+        "Share",
+        "content.share",
+        "button"
+      ]
+    ]
+  },
+  {
+    "id": "devise-i18n",
+    "repo": "tigrish/devise-i18n",
+    "revision": "6bc267898c3873b82a7463925160d5dbf85ee04d",
+    "license": "MIT",
+    "licenseFile": "LICENSE.txt",
+    "notice": "devise-i18n.txt",
+    "catalog": "rails/locales",
+    "format": "yaml",
+    "manual": true,
+    "terms": [
+      [
+        "devise.registrations.new.sign_up",
+        "Sign up",
+        "auth.create_account",
+        "button"
+      ],
+      [
+        "devise.passwords.new.forgot_your_password",
+        "Forgot your password?",
+        "auth.reset_password",
+        "link"
+      ],
+      [
+        "devise.passwords.new.send_me_reset_password_instructions",
+        "Send me reset password instructions",
+        "auth.reset_password",
+        "button"
+      ],
+      [
+        "devise.mailer.confirmation_instructions.action",
+        "Confirm my account",
+        "auth.verify_email",
+        "button"
+      ],
+      [
+        "devise.failure.timeout",
+        "Your session expired. Please sign in again to continue.",
+        "auth.session_expired",
+        "status"
+      ]
+    ]
+  },
+  {
+    "id": "telegram",
+    "repo": "DrKLO/Telegram",
+    "revision": "21f7d109da6ab3506c9e9577f98c6a38771ab335",
+    "license": "GPL-2.0-only",
+    "licenseFile": "LICENSE",
+    "notice": "telegram.txt",
+    "catalog": "TMessagesProj/src/main/res",
+    "format": "android-xml",
+    "manual": true,
+    "terms": [
+      [
+        "StarsSubscriptionCancel",
+        "Cancel Subscription",
+        "billing.stop_renewal",
+        "button"
+      ],
+      [
+        "ChangePassword",
+        "Change Password",
+        "auth.change_password",
+        "button"
+      ],
+      [
+        "ResetPassword",
+        "Reset password",
+        "auth.reset_password",
+        "button"
+      ],
+      [
+        "ForgotPassword",
+        "Forgot password?",
+        "auth.reset_password",
+        "link"
+      ],
+      [
+        "SignUp",
+        "Sign Up",
+        "auth.create_account",
+        "button"
+      ],
+      [
+        "Add",
+        "Add",
+        "item.add",
+        "button"
+      ]
     ]
   },
   {
@@ -101,14 +419,53 @@
     "notice": "flutter.txt",
     "catalog": "packages/flutter_localizations/lib/src/l10n",
     "format": "arb",
-    "include": ["ar", "bo", "en", "fil", "ja", "lo", "ta", "zu"],
+    "include": [
+      "ar",
+      "bo",
+      "en",
+      "fil",
+      "ja",
+      "lo",
+      "ta",
+      "zu"
+    ],
     "terms": [
-      ["cancelButtonLabel", "Cancel", "dialog.cancel_action", "button"],
-      ["closeButtonLabel", "Close", "dialog.dismiss", "button"],
-      ["clearButtonTooltip", "Clear text", "form.clear_input", "tooltip"],
-      ["continueButtonLabel", "Continue", "navigation.continue", "button"],
-      ["searchFieldLabel", "Search", "search.query", "field-label"],
-      ["backButtonTooltip", "Back", "navigation.go_back", "tooltip"]
+      [
+        "cancelButtonLabel",
+        "Cancel",
+        "dialog.cancel_action",
+        "button"
+      ],
+      [
+        "closeButtonLabel",
+        "Close",
+        "dialog.dismiss",
+        "button"
+      ],
+      [
+        "clearButtonTooltip",
+        "Clear text",
+        "form.clear_input",
+        "tooltip"
+      ],
+      [
+        "continueButtonLabel",
+        "Continue",
+        "navigation.continue",
+        "button"
+      ],
+      [
+        "searchFieldLabel",
+        "Search",
+        "search.query",
+        "field-label"
+      ],
+      [
+        "backButtonTooltip",
+        "Back",
+        "navigation.go_back",
+        "tooltip"
+      ]
     ]
   },
   {
@@ -121,8 +478,18 @@
     "catalog": "i18n",
     "format": "json",
     "terms": [
-      ["uls-search-placeholder", "Search for a language", "language.search", "field-label"],
-      ["uls-no-results-found", "No results found", "search.no_results", "status"]
+      [
+        "uls-search-placeholder",
+        "Search for a language",
+        "language.search",
+        "field-label"
+      ],
+      [
+        "uls-no-results-found",
+        "No results found",
+        "search.no_results",
+        "status"
+      ]
     ]
   }
 ]

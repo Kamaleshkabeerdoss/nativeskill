@@ -14,5 +14,429 @@
     "text": "சாத்தியமான வாடிக்கையாளர்கள்",
     "note": "Descriptive draft for the CRM noun meaning potential customers. Check the product's definition and the audience's familiarity with CRM terms.",
     "url": "https://help.zoho.com/portal/en/kb/crm/sales-force-automation/leads/articles/leads-26-4-2026"
+  },
+  {
+    "locale": "ta",
+    "concept": "auth.create_account",
+    "role": "button",
+    "text": "கணக்கை உருவாக்கு",
+    "note": "Unreviewed draft for creating a new account. The linked file is Telegram's English \"Sign Up\", which this Tamil phrase is not taken from. Not a native-speaker review.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "ta",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "கடவுச்சொல்லை மாற்று",
+    "note": "Unreviewed draft for changing the password while signed in. Password recovery is auth.reset_password. Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "ta",
+    "concept": "auth.reset_password",
+    "role": "link",
+    "text": "கடவுச்சொல்லை மறந்துவிட்டீர்களா?",
+    "note": "Unreviewed draft for starting password recovery. It does not mean the password has already changed.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "தானியங்கி புதுப்பிப்பை நிறுத்து",
+    "note": "Unreviewed draft for stopping future automatic renewal while access continues until the paid period ends. Do not use it for dialog Cancel or for ending access today. Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "இப்போது செலுத்து",
+    "note": "Unreviewed draft for submitting payment at this step. It is not the button that only opens the payment screen. Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "ms",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "Tukar kata laluan",
+    "note": "Unreviewed draft for changing the password while signed in. Devise Malay \"Tukar kata laluan saya\" is the reset-form button and stays on auth.reset_password. Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "Hentikan pembaharuan automatik",
+    "note": "Unreviewed draft for stopping future automatic renewal. Access continues until the date the product states. Do not use Batal from a dialog. Not source-attested. Confirm against DBP and the product glossary.",
+    "url": "https://prpm.dbp.gov.my/"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "Bayar sekarang",
+    "note": "Unreviewed draft for submitting payment now. It does not merely open the payment step. Not source-attested.",
+    "url": "https://prpm.dbp.gov.my/"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "Pembayaran belum selesai",
+    "note": "Unreviewed draft. The payment has no final outcome. Do not imply success or failure. Not source-attested.",
+    "url": "https://prpm.dbp.gov.my/"
+  },
+  {
+    "locale": "hi",
+    "concept": "auth.change_password",
+    "role": "button",
+    "text": "पासवर्ड बदलें",
+    "note": "Unreviewed draft for changing the password while signed in. Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "स्वतः नवीनीकरण रोकें",
+    "note": "Unreviewed draft for stopping future automatic renewal. Do not use it for a dialog Cancel or for ending access immediately. Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.pay_now",
+    "role": "button",
+    "text": "अभी भुगतान करें",
+    "note": "Unreviewed draft for submitting payment at this step. Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "hi",
+    "concept": "navigation.skip_step",
+    "role": "button",
+    "text": "छोड़ें",
+    "note": "Unreviewed draft. AOSP Hindi skip_button_label is \"अभी नहीं\" (not now) and is not attested for this intent. Not source-attested.",
+    "url": "https://github.com/aosp-mirror/platform_frameworks_base/blob/1cdfff555f4a21f71ccc978290e2e212e2f8b168/core/res/res/values-hi/strings.xml"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.stop_renewal",
+    "role": "button",
+    "text": "إيقاف التجديد التلقائي",
+    "note": "Unreviewed Modern Standard Arabic draft for stopping future renewal while access continues until the paid period ends. Telegram's Arabic catalog in this revision does not translate \"Cancel Subscription\". Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "الدفع قيد الانتظار",
+    "note": "Unreviewed draft. The payment has no final outcome. Not source-attested.",
+    "url": "https://github.com/DrKLO/Telegram/blob/21f7d109da6ab3506c9e9577f98c6a38771ab335/TMessagesProj/src/main/res/values/strings.xml"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "கட்டணத்திற்குச் செல்",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Opens the payment step. It does not charge the user.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "Pergi ke pembayaran",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Opens the payment step. It does not charge the user.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "الانتقال إلى الدفع",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Opens the payment step. It does not charge the user.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.go_to_payment",
+    "role": "button",
+    "text": "भुगतान पर जाएँ",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Opens the payment step. It does not charge the user.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "கட்டணம் நிராகரிக்கப்பட்டது",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The provider declined the payment. Do not invent a reason.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "Pembayaran ditolak",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The provider declined the payment. Do not invent a reason.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "تم رفض الدفع",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The provider declined the payment. Do not invent a reason.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.payment_declined",
+    "role": "status",
+    "text": "भुगतान अस्वीकार किया गया",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The provider declined the payment. Do not invent a reason.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "கட்டணத்தை மீண்டும் முயல்க",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Starts another payment attempt. It does not say the previous charge failed unless the screen already says that.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "Cuba bayar semula",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Starts another payment attempt.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "إعادة محاولة الدفع",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Starts another payment attempt.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.retry_payment",
+    "role": "button",
+    "text": "भुगतान फिर से आज़माएँ",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Starts another payment attempt.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "இந்தக் கட்டணத்தை ரத்துசெய்",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Cancels this payment attempt. It does not stop later renewals.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "Batalkan pembayaran ini",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Cancels this payment attempt. It does not stop later renewals.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "إلغاء عملية الدفع هذه",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Cancels this payment attempt. It does not stop later renewals.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.cancel_payment",
+    "role": "button",
+    "text": "यह भुगतान रद्द करें",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Cancels this payment attempt. It does not stop later renewals.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "சந்தாவை இப்போது முடி",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Ends access now. Does not promise a refund.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "Tamatkan langganan sekarang",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Ends access now. Does not promise a refund.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "إنهاء الاشتراك الآن",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Ends access now. Does not promise a refund.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.end_subscription_now",
+    "role": "button",
+    "text": "सदस्यता अभी समाप्त करें",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Ends access now. Does not promise a refund.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "பணத்திரும்பப் பெறும் கோரிக்கை பதிவாகியது",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The request is recorded. The money is not necessarily back.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "Permintaan bayaran balik telah dihantar",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The request is recorded. The money is not necessarily back.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "تم تقديم طلب الاسترداد",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The request is recorded. The money is not necessarily back.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.refund_requested",
+    "role": "status",
+    "text": "रिफंड का अनुरोध दर्ज हो गया",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The request is recorded. The money is not necessarily back.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "பணம் திருப்பியளிக்கப்பட்டது",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The refund has completed. Keep the amount and destination when the app provides them.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "Bayaran balik selesai",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The refund has completed. Keep the amount and destination when the app provides them.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "اكتمل الاسترداد",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The refund has completed. Keep the amount and destination when the app provides them.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.refund_completed",
+    "role": "status",
+    "text": "रिफंड पूरा हो गया",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The refund has completed. Keep the amount and destination when the app provides them.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "கட்டணம் இன்னும் முடியவில்லை",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. No final outcome. Do not imply success or failure.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "billing.payment_pending",
+    "role": "status",
+    "text": "भुगतान अभी पूरा नहीं हुआ",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. No final outcome. Do not imply success or failure.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "குறியீட்டை மீண்டும் அனுப்பு",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Sends another code. Does not say the previous code still works.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "Hantar kod semula",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Sends another code. Does not say the previous code still works.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "إعادة إرسال الرمز",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Sends another code. Does not say the previous code still works.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "auth.resend_code",
+    "role": "button",
+    "text": "कोड फिर से भेजें",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Sends another code. Does not say the previous code still works.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "இந்தக் குறியீடு காலாவதியானது",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The code expired. That is different from a wrong code.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ms",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "Kod ini sudah tamat tempoh",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The code expired. That is different from a wrong code.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "انتهت صلاحية الرمز",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The code expired. That is different from a wrong code.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "auth.code_expired",
+    "role": "status",
+    "text": "यह कोड समाप्त हो गया",
+    "note": "Unreviewed draft. Not source-attested and not a native-speaker review. The code expired. That is different from a wrong code.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
   }
 ]

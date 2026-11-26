@@ -62,7 +62,10 @@ test('bundled wording distinguishes draft, attestation, and gaps by locale and U
   assert.equal(lookupWording('ta', 'form.clear_input', 'button').wording.status, 'draft');
   assert.equal(lookupWording('ta', 'form.clear_input', 'tooltip').wording.status, 'source-attested');
   assert.equal(lookupWording('ta', 'crm.sales_leads', 'navigation-label').wording.status, 'draft');
-  assert.equal(lookupWording('ta', 'billing.stop_renewal', 'button').wording.status, 'uncovered');
+  const renewal = lookupWording('ta', 'billing.stop_renewal', 'button').wording;
+  assert.equal(renewal.status, 'draft');
+  assert.ok(renewal.entries.every(({ status }) => status === 'draft'));
+  assert.equal(lookupWording('ms-MY', 'permissions.allow_access', 'button').wording.status, 'source-attested');
 
   const traditional = inspectLocale('zh-TW').wording.entries;
   assert.ok(traditional.length);
@@ -116,7 +119,8 @@ test('context retrieval distinguishes dialog dismiss and cancellation of renewal
   assert.equal(output.status, 0, output.stderr);
   const report = JSON.parse(output.stdout);
   assert.notEqual(report.concept.intent, concept.intent);
-  assert.deepEqual(report.wording.entries, []);
+  assert.equal(report.wording.status, 'draft');
+  assert.ok(report.wording.entries.every(({ status, concept: id }) => status === 'draft' && id === 'billing.stop_renewal'));
   assert.equal(report.profile.tag, 'ms-MY');
 });
 
