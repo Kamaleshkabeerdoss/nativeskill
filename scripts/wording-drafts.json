@@ -1926,5 +1926,37 @@
     "text": "清除文字",
     "note": "Unreviewed draft. Not source-attested and not a native-speaker review. Core UI draft for the style-guide locale.",
     "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "auth.sign_in",
+    "role": "button",
+    "text": "உள்நுழை",
+    "note": "Unreviewed draft for the sign-in button. Replaces the not-preferred Django line உள்ளே போ (go inside). Not a native-speaker review.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "form.apply_changes",
+    "role": "button",
+    "text": "लागू करें",
+    "note": "Unreviewed draft for Apply. Replaces the not-preferred VisualEditor line बदलाव प्रकाशित करें (publish changes). Not a native-speaker review.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "ar",
+    "concept": "dialog.dismiss",
+    "role": "button",
+    "text": "إغلاق",
+    "note": "Unreviewed draft for Close. A verbal noun, so it does not pick a gender the way the attested imperative أغلق does. Not a native-speaker review.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "hi",
+    "concept": "permissions.deny_access",
+    "role": "button",
+    "text": "अनुमति न दें",
+    "note": "Unreviewed draft for the Don't allow button on a permission prompt. The attested अस्वीकारें is a rare verb form and न दें is a fragment. Not a native-speaker review.",
+    "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
   }
 ]

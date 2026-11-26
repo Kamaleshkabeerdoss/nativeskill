@@ -117,8 +117,12 @@ function dedupeAttested(entries, byTag) {
     if (group.length === 1) { out.push(group[0]); continue; }
     const language = new Intl.Locale(group[0].locale).language;
     const generic = group.find((entry) => entry.locale === language);
+    const scripted = language + '-' + group[0].script;
     if (generic) out.push(generic);
-    else if (byTag.has(language)) out.push({ ...group[0], locale: language, script: byTag.get(language).script });
+    else if (byTag.has(scripted)) out.push({ ...group[0], locale: scripted });
+    // Collapse to the bare language only when its default script is the entry's script.
+    // zh-TW and zh-HK share Hant text; bare zh is Hans and must not receive it.
+    else if (byTag.get(language)?.script === group[0].script) out.push({ ...group[0], locale: language });
     else out.push(group[0]);
   }
   return out;
@@ -150,6 +154,7 @@ function buildWording(id, profiles) {
   for (const entry of entries) {
     const preference = preferences.find((item) => item.locale === entry.locale && item.concept === entry.concept && item.role === entry.role && item.text === entry.text);
     if (!preference) continue;
+    preference.used = true;
     entry.preferred = preference.preferred;
     entry.note = preference.note;
   }
@@ -160,10 +165,12 @@ function buildWording(id, profiles) {
 const entries = [];
 const tagOwners = Object.create(null);
 let regionalLocaleCount = 0;
+const byTagAll = new Set();
 for (const [group, entriesInGroup] of Object.entries(launch)) {
   for (const [id, name, members = []] of entriesInGroup) {
     const codes = [id, ...members];
     const profiles = codes.flatMap((code) => profilesFor(code, id));
+    for (const { tag } of profiles) byTagAll.add(tag);
     const regions = new Set(profiles.filter(({ region }) => region).map(({ tag, script, region }) => (
       [new Intl.Locale(tag).language, script, region].join('-')
     )));
@@ -184,6 +191,10 @@ for (const [group, entriesInGroup] of Object.entries(launch)) {
 }
 if (entries.length !== 110 || regionalLocaleCount < 150) {
   throw new Error('Launch target requires 110 languages and at least 150 distinct regional profiles');
+}
+const unusedPreferences = preferences.filter((item) => !item.used && byTagAll.has(item.locale));
+if (unusedPreferences.length) {
+  throw new Error('Preference matches no wording entry: ' + unusedPreferences.map(({ locale, concept, text }) => locale + ' ' + concept + ' ' + text).join(', '));
 }
 const wordingLanguageCount = entries.filter(({ wordingExamples }) => wordingExamples > 0).length;
 const wordingExampleCount = entries.reduce((sum, { wordingExamples }) => sum + wordingExamples, 0);

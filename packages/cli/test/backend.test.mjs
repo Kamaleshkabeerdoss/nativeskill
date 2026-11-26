@@ -165,3 +165,25 @@ test('unsupported spreads fail explicitly for a static dictionary', (t) => {
   assert.equal(result.status, 2);
   assert.match(result.stderr, /spreads and computed keys/);
 });
+
+test('lookup marks rejected lines and points at the preferred replacement', () => {
+  const tamil = lookupWording('ta', 'auth.sign_in', 'button').wording;
+  assert.equal(tamil.status, 'mixed');
+  assert.equal(tamil.disagreement, true);
+  assert.equal(tamil.preferred.text, 'உள்நுழை');
+  assert.equal(tamil.preferred.status, 'draft');
+  assert.equal(tamil.entries.find(({ text }) => text === 'உள்ளே போ').preferred, false);
+  assert.equal(lookupWording('hi', 'form.apply_changes', 'button').wording.preferred.text, 'लागू करें');
+  assert.equal(lookupWording('de', 'form.save_changes', 'button').wording.preferred.text, 'Speichern');
+  assert.equal(lookupWording('ms', 'item.delete', 'button').wording.preferred.text, 'Buang');
+  const japanese = lookupWording('ja', 'dialog.dismiss', 'button').wording;
+  assert.equal(japanese.preferred.text, '閉じる');
+  assert.equal(japanese.entries.find(({ text }) => text === '完了').preferred, false);
+});
+
+test('Traditional Chinese labels are not filed under Simplified zh', () => {
+  const simplified = lookupWording('zh-CN', 'search.no_results').wording.entries.map(({ text }) => text);
+  assert.ok(!simplified.includes('找不到結果'), simplified.join(', '));
+  const traditional = lookupWording('zh-TW', 'search.no_results').wording.entries.map(({ text }) => text);
+  assert.ok(traditional.includes('找不到結果'), traditional.join(', '));
+});
