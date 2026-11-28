@@ -8,7 +8,7 @@
     {
       "name": "nativeskill",
       "description": "Add a language or audit existing UI translations. Decide the intent before the wording, keep placeholders and CLDR plurals, and label every proposal source-attested, draft, or uncovered.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "source": "./",
       "skills": ["./skills/nativeskill"],
       "author": {

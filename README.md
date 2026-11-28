@@ -41,7 +41,7 @@ The playbook the agent follows is [skills/nativeskill/SKILL.md](skills/nativeski
 
 ## Check a catalog
 
-The skill includes a Node.js catalog checker and a source scanner that run without extra dependencies. The checker supports ARB, JSON, i18next, Android `strings.xml`, iOS `.strings` and `.xcstrings`, and typed TS/JS dictionaries (`export const ms: Dict = {...}` with arrow functions, spreads and section aliases), which it parses without running them. Your agent can run both scripts from the installed skill folder. [Check commands and report codes](skills/nativeskill/references/checks.md)
+The skill includes a Node.js catalog checker and a source scanner that run without extra dependencies. The checker supports ARB, JSON, i18next, Android `strings.xml`, iOS `.strings` and `.xcstrings`, and typed TS/JS dictionaries (`export const ms: Dict = {...}` with arrow functions, spreads and section aliases, or one table keyed by locale such as `Record<Locale, Dict>`, with overlays merged by a resolver function), which it parses without running them. It exits 1 when a P1 finding remains or coverage is under 80% (`--fail-on`, `--strict`, `--min-coverage` change that); warnings below the threshold still need reading. Your agent can run both scripts from the installed skill folder. [Check commands and report codes](skills/nativeskill/references/checks.md)
 
 Try them on the examples in this repo:
 

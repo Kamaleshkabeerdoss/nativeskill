@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.3.1
+
+A second run on the same real project (a SaaS dashboard, its chat widget and its marketing site) found three release blockers in 0.3.0. The widget and marketing shapes are anonymised in [evals/real-world/locale-tables-2026-11](evals/real-world/locale-tables-2026-11/README.md).
+
+### Fixed
+
+- The read error for a file with several exports said `Pass --export <name>`, a flag `check.mjs` did not have. Errors now name the caller's real flag (`--source-export`, `--target-export`, `--source-key`, `--target-key`, `--resolve`), and `check.mjs` accepts `--export` as an alias for both sides. A new test checks that every flag in the help texts, the docs and the error suggestions exists and that following a suggestion works.
+- `english-in-branch` now compares every branch, the main count branch included, so `n ? 'Import {n} into knowledge base' : '<translated>'` is reported. A branch counts as English when it equals a source branch or reads like one; one finding per key, in place of `possible-source-copy`.
+- Exit 0 no longer passes a locale that is mostly English. `check.mjs` exits 1 when a finding at or above `--fail-on` remains (default P1, `--strict` is P2) or coverage is under `--min-coverage` (default 80, 0 turns it off), and its last line says why (`exit` in `--json`). SKILL.md no longer says exit 0 means the audit is done: read the triage line and work through P2.
+
+### Catalogs
+
+- TS/JS tables keyed by locale: `{ en: {...}, ms: {...} }`, `Record<Locale, Dict>` built from unexported constants, and overlays merged by a resolver such as `resolveStrings(lang)` (found by itself when exported, or `--resolve`). The entry follows `--source-locale` / `--locale`, or `--source-key` / `--target-key`; the same file can be source and target. The text output starts with what was read.
+- Evaluated without running code: top-level `TABLE['ar-SA'] = TABLE['ar-AE']`, `??` / `||` fallbacks, static computed keys, local helpers called with literal arguments, `Object.fromEntries`, `.map` / `.slice` / `.join` on literal arrays, and spreads inside arrays. Anything else is an error or a `dynamic-value` that names the construct.
+- A local helper called with words, such as `plural(n, 'file', 'files')`, is a `dynamic-value` naming the helper and the words, instead of being read as `{n} {n}`.
+- JSON arrays are read as `key.0`, `key.1`. JSON syntax errors name the file, line and column; a missing file says so. Unknown options say `Unknown option --x` in every script, and unknown locale tags are rejected.
+
+### Fewer false positives
+
+- `possible-source-copy` leaves URLs, e-mail addresses, placeholder-only text, known brands, CamelCase names and acronyms in `suppressed` (reason `brand-or-url`).
+- A literal `</body>` in a sentence is no longer rich-text markup. When only one side mentions it, the new P2 `code-mismatch` says the translation probably describes older English.
+- `hand-rolled-plural` ignores plural categories no count from 0 to 1000 reaches, so fr, es, pt and it no longer fire.
+- Thai `count-noun-order` names the real noun and is P3 until a Thai speaker confirms the rule.
+- The 您/你 checks skip sample visitor questions (`skipKeys` in `audit-patterns.json`); `english-residue` skips product names such as "Outlook on the web".
+- `scan.mjs` skips files of per-locale exports and `n === 1 ? 'x' : 'x'` with identical branches.
+- `--verbose` lists suppressed findings in the text output.
+
 ## 0.3.0
 
 Driven by a real audit of a typed TypeScript dictionary (about 1,700 keys, 9 locales). The anonymised case is in [evals/real-world/saas-ts-dict-2026-11](evals/real-world/saas-ts-dict-2026-11/README.md); every finding in it is now a hard test.
