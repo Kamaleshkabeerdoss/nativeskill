@@ -88,6 +88,7 @@ const pad = (text, width) => String(text).padEnd(width);
 export function formatText(result, { verbose = false, groupAt = 5 } = {}) {
   const lines = [];
   const { summary } = result;
+  if (result.read) lines.push('Read: source ' + (result.read.source ?? result.source) + ' · target ' + (result.read.target ?? result.target));
   if (summary) {
     lines.push('Triage: P1 ' + BUCKETS.P1 + ' ' + summary.buckets.P1 + ' · P2 ' + BUCKETS.P2 + ' ' + summary.buckets.P2 + ' · P3 ' + BUCKETS.P3 + ' ' + summary.buckets.P3);
     lines.push('Coverage ' + summary.locale + ': ' + summary.translated + ' of ' + (summary.keys - summary.deliberate) + ' keys translated (' + summary.coveragePct + '%), ' +
@@ -120,12 +121,28 @@ export function formatText(result, { verbose = false, groupAt = 5 } = {}) {
       if (printedGroups.has(id)) continue;
       printedGroups.add(id);
       const group = summary.groups.find((item) => item.code + '\0' + item.section === id);
-      lines.push(finding.severity + (finding.bucket ? ' ' + finding.bucket : '') + ' ' + finding.code + ' ' + group.count + ' keys in ' + group.section + ' (' + group.keys.slice(0, 3).join(', ') + ', …). --verbose lists them.');
+      const ids = [...new Set(result.findings.filter((item) => item.code + '\0' + sectionOf(item.key) === id)
+        .map((item) => item.message.match(/^\[([\w-]+)\]/)?.[1]).filter(Boolean))];
+      lines.push(finding.severity + (finding.bucket ? ' ' + finding.bucket : '') + ' ' + finding.code + ' ' + group.count + ' keys in ' + group.section +
+        (ids.length ? ' [' + ids.slice(0, 4).join(', ') + (ids.length > 4 ? ', …' : '') + ']' : '') +
+        ' (' + group.keys.slice(0, 3).join(', ') + ', …). --verbose lists them.');
       continue;
     }
     lines.push(finding.severity + (finding.bucket ? ' ' + finding.bucket : '') + ' ' + finding.code + ' ' + finding.key + ' ' + finding.message);
   }
+  if (verbose && result.suppressed?.length) {
+    lines.push('Suppressed (' + result.suppressed.length + '):');
+    for (const item of result.suppressed) lines.push('  ' + item.code + ' ' + item.key + ' (' + item.suppressedBy + ')');
+  }
   lines.push(result.errors + ' errors, ' + result.warnings + ' warnings' +
-    (result.suppressed?.length ? ', ' + result.suppressed.length + ' suppressed by ' + (result.config ?? 'flags') : ''));
+    (result.suppressed?.length ? ', ' + result.suppressed.length + ' suppressed by ' + (result.config ?? 'flags') + (verbose ? '' : ' (--verbose lists them)') : ''));
+  if (result.exit && summary) {
+    const below = ['P1', 'P2', 'P3'].slice(['P1', 'P2', 'P3'].indexOf(result.exit.failOn) + 1).reduce((total, bucket) => total + (summary.buckets[bucket] ?? 0), 0);
+    if (result.exit.code) lines.push('Exit 1: ' + result.exit.reasons.join('; ') + '.');
+    else {
+      lines.push('Exit 0: nothing at or above ' + result.exit.failOn + (result.exit.minCoverage ? ', coverage ' + summary.coveragePct + '% (minimum ' + result.exit.minCoverage + '%)' : '') + '.' +
+        (below ? ' ' + below + ' lower-priority finding(s) remain: read them before calling this locale done.' : ''));
+    }
+  }
   return lines.join('\n');
 }

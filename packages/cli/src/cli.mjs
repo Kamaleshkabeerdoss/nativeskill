@@ -120,7 +120,7 @@ async function main([command, ...args]) {
       sourceLocale: values['source-locale'] ?? 'en'
     });
     print(result, values.json, (output) => formatText(output));
-    process.exitCode = result.errors ? 1 : 0;
+    process.exitCode = result.exit.code;
     return;
   }
   throw new Error('Unknown command. Run nativeskill --help.');

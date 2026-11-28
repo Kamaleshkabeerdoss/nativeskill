@@ -90,9 +90,13 @@ function invokedDirectly() {
 if (invokedDirectly()) {
   const args = process.argv.slice(2).filter((arg) => arg !== '--json');
   const json = process.argv.includes('--json');
-  if (!args.length || args.includes('--help')) {
+  const unknown = args.find((arg) => arg.startsWith('-') && arg !== '--help' && arg !== '-h');
+  if (!args.length || args.includes('--help') || args.includes('-h')) {
     console.log('Usage: node scan.mjs [--json] <file-or-directory>...');
     process.exitCode = args.length ? 0 : 2;
+  } else if (unknown) {
+    console.error('nativeskill: Unknown option ' + unknown + '. Usage: node scan.mjs [--json] <file-or-directory>...');
+    process.exitCode = 2;
   } else {
     try {
       const findings = scanPaths(args);

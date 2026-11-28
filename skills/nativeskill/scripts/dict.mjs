@@ -241,9 +241,10 @@ class Parser {
   }
 
   program() {
-    const module = { bindings: new Map(), imports: new Map(), exports: new Map(), reexports: new Map() };
+    const module = { bindings: new Map(), imports: new Map(), exports: new Map(), reexports: new Map(), assignments: [] };
     while (this.peek().type !== 'eof') {
       if (this.eat(';')) continue;
+      if (this.functionDeclaration(module, false)) continue;
       if (this.is('import') && !this.is('(', 1) && !this.is('.', 1)) { this.importStatement(module); continue; }
       if (this.is('export')) { this.exportStatement(module); continue; }
       if (this.is('const') || this.is('let') || this.is('var')) { this.declaration(module, false); continue; }
@@ -259,10 +260,45 @@ class Parser {
         continue;
       }
       if (this.is('interface') || (this.is('declare'))) { this.skipDeclarationBlock(); continue; }
+      if (this.peek().type === 'name' && (this.is('[', 1) || this.is('.', 1)) && this.assignment(module)) continue;
       if (this.is('type') && this.peek(1).type === 'name' && !this.peek(1).newline) { this.skipStatement(); continue; }
       this.skipStatement();
     }
+    // `TABLE['ar-SA'] = TABLE['ar-AE']` and `TABLE.extra = {...}` after a declaration extend that object.
+    for (const { target, value } of module.assignments) {
+      if (target.object.type !== 'id') continue;
+      const object = module.bindings.get(target.object.name);
+      const key = target.property ?? (['string', 'number'].includes(target.computed?.type) ? String(target.computed.value) : null);
+      if (object?.type === 'object' && key !== null) object.properties.push({ key, computed: null, value });
+    }
     return module;
+  }
+
+  // `function name(...) {...}` and `async function`. Returns false when the next tokens are not one.
+  functionDeclaration(module, exported) {
+    const offset = this.is('async') && this.is('function', 1) ? 1 : 0;
+    if (!this.is('function', offset) || this.peek(offset + 1).type !== 'name' || this.peek(offset + 1).value === '(') return false;
+    const name = this.peek(offset + 1).value;
+    const node = this.primary();
+    module.bindings.set(name, node);
+    if (exported) module.exports.set(name, node);
+    return true;
+  }
+
+  // A top-level `NAME[...] = value` or `NAME.key = value`. Anything else is skipped as before.
+  assignment(module) {
+    const start = this.index;
+    try {
+      const target = this.postfix(this.primary());
+      if (target.type === 'member' && this.is('=') ) {
+        this.next();
+        module.assignments.push({ target, value: this.expression() });
+        this.eat(';');
+        return true;
+      }
+    } catch { /* not an assignment we understand */ }
+    this.index = start;
+    return false;
   }
 
   skipDeclarationBlock() {
@@ -306,6 +342,7 @@ class Parser {
       return;
     }
     if (this.is('const') || this.is('let') || this.is('var')) { this.declaration(module, true); return; }
+    if (this.functionDeclaration(module, true)) return;
     if (this.is('type') && this.is('{', 1)) { this.skipStatement(); return; }
     if (this.is('*')) { this.skipStatement(); return; }
     if (this.eat('{')) {
@@ -684,12 +721,13 @@ function jsonToNode(value) {
 }
 
 // A scope resolves names: function parameters first, then block locals, then module bindings and imports.
-function scopeFor(module, params = new Set(), locals = new Map(), parent = null) {
-  return { module, params, locals, parent };
+function scopeFor(module, params = new Set(), locals = new Map(), parent = null, bound = null) {
+  return { module, params, locals, parent, bound };
 }
 
 function lookupName(scope, name, seen = new Set()) {
   for (let current = scope; current; current = current.parent) {
+    if (current.bound?.has(name)) return current.bound.get(name);
     if (current.params.has(name)) return { param: name };
     if (current.locals.has(name)) return { node: current.locals.get(name), scope: current };
   }
@@ -777,14 +815,16 @@ function combine(parts) {
     all = next;
   }
   if (!all.includes(primary)) all = [primary, ...all.slice(0, MAX_VARIANTS - 1)];
-  return { primary, all: [...new Set(all)] };
+  const dynamic = parts.find((part) => part.dynamic)?.dynamic;
+  return dynamic ? { primary, all: [...new Set(all)], dynamic } : { primary, all: [...new Set(all)] };
 }
 
 function union(primary, ...groups) {
   const all = [];
   for (const group of groups) for (const item of group.all) if (!all.includes(item) && all.length < MAX_VARIANTS) all.push(item);
   if (!all.includes(primary)) all.unshift(primary);
-  return { primary, all };
+  const dynamic = groups.find((group) => group.dynamic)?.dynamic;
+  return dynamic ? { primary, all, dynamic } : { primary, all };
 }
 
 const single = (text) => ({ primary: text, all: [text] });
@@ -812,6 +852,11 @@ function guess(node, scope) {
     if (paramSide(node.left) && numericSide(node.right) !== null) value = numericSide(node.right);
     else if (paramSide(node.right) && numericSide(node.left) !== null) { value = numericSide(node.left); flipped = true; }
     if (value === null) {
+      const left = staticKey(node.left, scope);
+      const right = staticKey(node.right, scope);
+      if (left !== null && right !== null && ['===', '==', '!==', '!='].includes(node.operator)) {
+        return node.operator.startsWith('!') ? left !== right : left === right;
+      }
       if (['===', '==', '!==', '!='].includes(node.operator) && (node.left.type === 'string' || node.right.type === 'string')) {
         return node.operator.startsWith('!');
       }
@@ -850,7 +895,11 @@ function textOf(node, scope, depth = 0) {
     case 'id': {
       const hit = lookupNameSafe(scope, node.name);
       if (hit?.param) return single('{' + hit.param + '}');
-      if (hit?.node && ['string', 'template', 'binary', 'cond'].includes(hit.node.type)) return textOf(hit.node, hit.scope, depth + 1);
+      if (hit?.node && ['string', 'template', 'binary', 'cond', 'number'].includes(hit.node.type)) return textOf(hit.node, hit.scope, depth + 1);
+      if (hit?.node && ['member', 'call', 'resolved'].includes(hit.node.type)) {
+        const value = safeValue(hit.node, hit.scope);
+        if (value?.kind === 'text') return { primary: value.text, all: value.variants ?? [value.text] };
+      }
       return single('{' + placeholderName(node.name) + '}');
     }
     case 'cond': {
@@ -893,7 +942,7 @@ function textOf(node, scope, depth = 0) {
       const root = rootName(node);
       const hit = root ? lookupNameSafe(scope, root) : null;
       if (hit?.param) return single('{' + placeholderName(path ?? hit.param) + '}');
-      if (path && hit?.node) {
+      if ((path && hit?.node) || node.computed) {
         try {
           const value = valueOf(node, scope);
           if (value.kind === 'text') return { primary: value.text, all: value.variants ?? [value.text] };
@@ -909,6 +958,21 @@ function textOf(node, scope, depth = 0) {
       }
       if (callee.type === 'member' && callee.property === 'join' && callee.object.type === 'array') {
         return combine(callee.object.elements.map((item) => textOf(item, scope, depth + 1)));
+      }
+      if (!names.length) {
+        const value = safeValue(node, scope);
+        if (value?.kind === 'text') return { primary: value.text, all: value.variants ?? [value.text] };
+      }
+      // A local helper such as plural(n, 'file', 'files') picks words at run time.
+      const helper = callee.type === 'id' ? lookupNameSafe(scope, callee.name) : null;
+      const wordArgs = node.args.filter((arg) => (arg.type === 'string' || arg.type === 'template') && /\p{L}/u.test(textOf(arg, scope, depth + 1).primary));
+      if (callee.type === 'id' && wordArgs.length && (helper?.node?.type === 'function' || helper?.external || !helper)) {
+        const where = helper?.external ? ' from ' + helper.external : '';
+        const text = single('{' + placeholderName(callee.name) + '}');
+        text.dynamic = 'calls the helper ' + callee.name + '()' + where + ' with words in its arguments (' +
+          wordArgs.map((arg) => JSON.stringify(textOf(arg, scope, depth + 1).primary)).join(', ') +
+          '), so the words it returns cannot be read statically. Check this entry by hand, or use Intl.PluralRules or ICU plural syntax';
+        return text;
       }
       if (names.length === 1) return single('{' + names[0] + '}');
       return single('{' + placeholderName(dotted(callee) ?? 'value') + '}');
@@ -929,6 +993,7 @@ function functionText(node, scope) {
   } else {
     result = textOf(node.body, inner);
   }
+  if (result.dynamic) return { kind: 'dynamic', reason: result.dynamic };
   const numericBranch = /(?:[=!]==?|[<>]=?)\s*[0-2]\b|\b[0-2]\s*(?:[=!]==?|[<>]=?)/.test(node.text) &&
     /\?|\bif\b|\bswitch\b/.test(node.text);
   return {
@@ -937,13 +1002,127 @@ function functionText(node, scope) {
   };
 }
 
+function safeValue(node, scope) {
+  try { return valueOf(node, scope); } catch { return null; }
+}
+
+// The literal value of a key expression such as 'ar-AE', 3, a bound argument or a constant. Null when unknown.
+function staticKey(node, scope, depth = 0) {
+  if (!node || depth > 20) return null;
+  switch (node.type) {
+    case 'string': case 'number': return node.value;
+    case 'template': {
+      let out = node.quasis[0];
+      for (let index = 0; index < node.expressions.length; index += 1) {
+        const part = staticKey(node.expressions[index], scope, depth + 1);
+        if (part === null) return null;
+        out += part + node.quasis[index + 1];
+      }
+      return out;
+    }
+    case 'id': {
+      const hit = lookupNameSafe(scope, node.name);
+      return hit?.node ? staticKey(hit.node, hit.scope, depth + 1) : null;
+    }
+    case 'resolved': return node.value?.kind === 'text' ? node.value.text : null;
+    case 'binary': {
+      if (node.operator !== '??' && node.operator !== '||') return null;
+      return staticKey(node.left, scope, depth + 1) ?? staticKey(node.right, scope, depth + 1);
+    }
+    case 'member': {
+      const value = safeValue(node, scope);
+      return value?.kind === 'text' ? value.text : null;
+    }
+    default: return null;
+  }
+}
+
+// Evaluates a local helper with its arguments bound, e.g. `labels(['Inbox', 'Bots'])`.
+function callFunction(fn, fnScope, args, depth) {
+  const bound = new Map();
+  fn.params.forEach((param, index) => bound.set(param, args[index] ?? { node: { type: 'undefined' }, scope: fnScope }));
+  const locals = fn.body.type === 'block' ? fn.body.locals : new Map();
+  const inner = scopeFor(fnScope.module, new Set(), locals, fnScope, bound);
+  const body = fn.body.type === 'block' ? fn.body.returns.at(-1) : fn.body;
+  if (!body) return { kind: 'missing' };
+  return valueOf(body, inner, depth + 1);
+}
+
+function functionAt(node, scope) {
+  if (node?.type === 'function') return { node, scope };
+  if (node?.type === 'id') {
+    const hit = lookupNameSafe(scope, node.name);
+    if (hit?.node?.type === 'function') return hit;
+  }
+  return null;
+}
+
+function propertyOf(base, key, depth) {
+  const property = [...base.node.properties].reverse()
+    .find((item) => item.value && (item.key === key || (item.computed && String(staticKey(item.computed, base.scope)) === key)));
+  if (property) {
+    const value = valueOf(property.value, base.scope, depth + 1);
+    return base.alias ? { ...value, alias: (value.alias && value.alias !== base.alias ? value.alias : base.alias + '.' + key) } : value;
+  }
+  // The property may come from a spread inside the base object.
+  for (const item of [...base.node.properties].reverse()) {
+    if (!item.spread) continue;
+    const spread = valueOf(item.spread, base.scope, depth + 1);
+    if (spread.kind !== 'object' && spread.kind !== 'merge') continue;
+    const inner = memberOf(spread, key, depth + 1);
+    if (inner.kind !== 'missing') return base.alias ? { ...inner, alias: inner.alias ?? base.alias + '.' + key } : inner;
+  }
+  return { kind: 'missing' };
+}
+
+// The elements of an array value with `...spread` arrays expanded. Null when a spread is not a static array.
+function arrayItems(value, depth = 0) {
+  const items = [];
+  for (const element of value.node.elements) {
+    if (element.type !== 'spread') { items.push({ node: element, scope: value.scope }); continue; }
+    const inner = valueOf(element.argument, value.scope, depth + 1);
+    if (inner.kind !== 'array') return null;
+    const nested = arrayItems(inner, depth + 1);
+    if (!nested) return null;
+    items.push(...nested);
+  }
+  return items;
+}
+
+function memberOf(base, key, depth) {
+  if (base.kind === 'missing' || base.nullish) return { kind: 'missing' };
+  if (base.kind === 'array') {
+    const items = arrayItems(base, depth);
+    if (!items) return { kind: 'dynamic', reason: 'spread of an array the checker cannot read' };
+    if (key === 'length') return { kind: 'nontext', number: items.length };
+    const item = /^\d+$/.test(key) ? items[Number(key)] : undefined;
+    return item ? valueOf(item.node, item.scope, depth + 1) : { kind: 'missing' };
+  }
+  if (base.kind === 'merge') {
+    for (const part of [...base.parts].reverse()) {
+      const inner = memberOf(part, key, depth + 1);
+      if (inner.kind !== 'missing') return inner;
+    }
+    return { kind: 'missing' };
+  }
+  if (base.kind !== 'object') return { kind: 'dynamic', reason: 'computed value' };
+  return propertyOf(base, key, depth);
+}
+
 function valueOf(node, scope, depth = 0) {
   if (depth > 60) throw new DictionaryError('Dictionary nesting is too deep or circular');
   switch (node?.type) {
     case 'object': return { kind: 'object', node, scope };
     case 'array': return { kind: 'array', node, scope };
-    case 'string': case 'template': return { kind: 'text', text: textOf(node, scope).primary, variants: undefined };
-    case 'number': case 'boolean': case 'null': return { kind: 'nontext' };
+    case 'string': case 'template': {
+      const text = textOf(node, scope);
+      if (text.dynamic) return { kind: 'dynamic', reason: text.dynamic };
+      return { kind: 'text', text: text.primary, variants: undefined };
+    }
+    case 'number': return { kind: 'nontext', number: Number(node.value) };
+    case 'boolean': return { kind: 'nontext' };
+    case 'null': return { kind: 'nontext', nullish: true };
+    case 'undefined': return { kind: 'missing' };
     case 'function': {
       const body = node.body.type === 'block' ? node.body.returns.at(-1) : node.body;
       if (body && (body.type === 'array' || body.type === 'object')) {
@@ -953,7 +1132,22 @@ function valueOf(node, scope, depth = 0) {
       return functionText(node, scope);
     }
     case 'cond': case 'binary': {
+      if (node.type === 'binary' && (node.operator === '??' || node.operator === '||') && !paramsIn(node.left, scope).size) {
+        // A static left side: `LOCALES[lang] ?? LOCALES['en-IN']`, `l[i] ?? 'WhatsApp'`.
+        const left = valueOf(node.left, scope, depth + 1);
+        const empty = left.kind === 'missing' || left.nullish || (node.operator === '||' && left.kind === 'text' && left.text === '');
+        if (empty) return valueOf(node.right, scope, depth + 1);
+        if (left.kind !== 'dynamic') return left;
+      }
+      if (node.type === 'cond') {
+        const pick = guess(node.test, scope);
+        if (pick !== null) {
+          const chosen = valueOf(pick ? node.consequent : node.alternate, scope, depth + 1);
+          if (chosen.kind === 'object' || chosen.kind === 'array' || chosen.kind === 'merge') return chosen;
+        }
+      }
       const text = textOf(node, scope);
+      if (text.dynamic) return { kind: 'dynamic', reason: text.dynamic };
       return { kind: 'text', text: text.primary, variants: text.all.length > 1 ? text.all : undefined };
     }
     case 'id': {
@@ -970,22 +1164,13 @@ function valueOf(node, scope, depth = 0) {
       return hit.imported ? { ...value, alias: value.alias ?? node.name } : value;
     }
     case 'member': {
-      const base = valueOf(node.object, scope, depth + 1);
-      if (base.kind !== 'object' || node.computed) return { kind: 'dynamic', reason: 'computed value' };
-      const property = [...base.node.properties].reverse().find((item) => item.key === node.property && item.value);
-      if (property) {
-        const value = valueOf(property.value, base.scope, depth + 1);
-        return base.alias ? { ...value, alias: (value.alias && value.alias !== base.alias ? value.alias : base.alias + '.' + node.property) } : value;
+      let key = node.property;
+      if (node.computed) {
+        key = staticKey(node.computed, scope);
+        if (key === null) return { kind: 'dynamic', reason: 'computed value' };
+        key = String(key);
       }
-      // The property may come from a spread inside the base object.
-      for (const item of [...base.node.properties].reverse()) {
-        if (!item.spread) continue;
-        const spread = valueOf(item.spread, base.scope, depth + 1);
-        if (spread.kind !== 'object') continue;
-        const inner = valueOf({ type: 'member', object: { type: 'resolved', value: spread }, property: node.property }, base.scope, depth + 1);
-        if (inner.kind !== 'missing') return base.alias ? { ...inner, alias: inner.alias ?? base.alias + '.' + node.property } : inner;
-      }
-      return { kind: 'missing' };
+      return memberOf(valueOf(node.object, scope, depth + 1), key, depth);
     }
     case 'resolved': return node.value;
     case 'call': {
@@ -993,6 +1178,50 @@ function valueOf(node, scope, depth = 0) {
       if (/^Object\.freeze$|^defineMessages$|^defineDictionary$|^satisfies$/i.test(callee) && node.args.length === 1) return valueOf(node.args[0], scope, depth + 1);
       if (/^Object\.assign$|merge/i.test(callee)) {
         return { kind: 'merge', parts: node.args.map((arg) => valueOf(arg, scope, depth + 1)), deep: /merge/i.test(callee) };
+      }
+      if (callee === 'Object.fromEntries' && node.args.length === 1) {
+        const list = valueOf(node.args[0], scope, depth + 1);
+        if (list.kind !== 'array') return { kind: 'dynamic', reason: 'Object.fromEntries of ' + (list.reason ?? 'a non-array') };
+        const properties = [];
+        for (const element of list.node.elements) {
+          const pair = valueOf(element, list.scope, depth + 1);
+          const key = pair.kind === 'array' ? staticKey(pair.node.elements[0], pair.scope) : null;
+          if (key === null) return { kind: 'dynamic', reason: 'Object.fromEntries with keys that are not static' };
+          properties.push({ key: String(key), computed: null, value: { type: 'resolved', value: valueOf(pair.node.elements[1] ?? { type: 'undefined' }, pair.scope, depth + 1) } });
+        }
+        return { kind: 'object', node: { type: 'object', properties }, scope };
+      }
+      if (node.callee.type === 'member' && ['map', 'slice', 'join'].includes(node.callee.property)) {
+        const base = valueOf(node.callee.object, scope, depth + 1);
+        const items = base.kind === 'array' ? arrayItems(base, depth) : null;
+        if (items) {
+          const elements = items.map((item) => ({ type: 'resolved', value: valueOf(item.node, item.scope, depth + 1) }));
+          if (node.callee.property === 'slice') {
+            const from = node.args[0] ? staticKey(node.args[0], scope) : 0;
+            const to = node.args[1] ? staticKey(node.args[1], scope) : undefined;
+            if (from !== null && to !== null) return { kind: 'array', node: { type: 'array', elements: elements.slice(Number(from), to === undefined ? undefined : Number(to)) }, scope };
+          }
+          if (node.callee.property === 'join') {
+            const separator = node.args[0] ? staticKey(node.args[0], scope) : ',';
+            const texts = elements.map((element) => element.value);
+            if (separator !== null && texts.every((item) => item.kind === 'text')) return { kind: 'text', text: texts.map((item) => item.text).join(separator) };
+          }
+          const fn = node.callee.property === 'map' && functionAt(node.args[0], scope);
+          if (fn) {
+            const mapped = elements.map((element, index) => ({
+              type: 'resolved',
+              value: callFunction(fn.node, fn.scope, [{ node: element, scope }, { node: { type: 'number', value: index }, scope }], depth + 1)
+            }));
+            return { kind: 'array', node: { type: 'array', elements: mapped }, scope };
+          }
+        }
+      }
+      const helper = node.callee.type === 'id' && functionAt(node.callee, scope);
+      if (helper) {
+        if (node.args.some((arg) => arg.type === 'spread')) return { kind: 'dynamic', reason: 'calls ' + callee + ' with a spread argument' };
+        const value = callFunction(helper.node, helper.scope, node.args.map((arg) => ({ node: arg, scope })), depth + 1);
+        if (value.kind !== 'dynamic') return value;
+        return { kind: 'dynamic', reason: 'calls ' + callee + '(): ' + value.reason };
       }
       return { kind: 'dynamic', reason: 'calls ' + (callee || 'a function') };
     }
@@ -1014,7 +1243,14 @@ function walk(value, path, entries, alias, depth = 0) {
       if (property.spread) {
         const spread = valueOf(property.spread, value.scope);
         if (spread.kind === 'object' || spread.kind === 'merge') walk(spread, path, entries, spread.alias ?? label, depth + 1);
+        else if (spread.kind === 'missing' || spread.nullish) continue;
         else entries.set(here + (here ? '.' : '') + '…', { dynamic: true, reason: 'spread of ' + (spread.reason ?? 'a non-object') });
+        continue;
+      }
+      if (property.computed && staticKey(property.computed, value.scope) !== null) {
+        const key = String(staticKey(property.computed, value.scope));
+        const child = valueOf(property.value, value.scope);
+        walk(child, [...path, key], entries, child.alias ?? label, depth + 1);
         continue;
       }
       if (property.computed) {
@@ -1029,7 +1265,9 @@ function walk(value, path, entries, alias, depth = 0) {
   } else if (value.kind === 'merge') {
     for (const part of value.parts) walk(part, path, entries, part.alias ?? label, depth + 1);
   } else if (value.kind === 'array') {
-    value.node.elements.forEach((element, index) => walk(valueOf(element, value.scope), [...path, String(index)], entries, label, depth + 1));
+    const items = arrayItems(value, depth);
+    if (!items) entries.set(here + (here ? '.' : '') + '…', { dynamic: true, reason: 'spread of an array the checker cannot read' });
+    else items.forEach((item, index) => walk(valueOf(item.node, item.scope), [...path, String(index)], entries, label, depth + 1));
   } else if (value.kind === 'text') {
     const entry = { text: value.text };
     if (value.variants) entry.variants = value.variants;
@@ -1043,53 +1281,179 @@ function walk(value, path, entries, alias, depth = 0) {
   }
 }
 
-function pickExport(module, file, exportName, locale) {
+function pickExport(module, file, exportName, locale, flags = DEFAULT_FLAGS) {
   if (module.json) return { node: jsonToNode(module.json), scope: scopeFor(module) };
   const names = [...module.exports.keys(), ...module.reexports.keys()];
   if (exportName) {
-    const found = exportNode(module, exportName);
-    if (!found) throw new DictionaryError(file + ': no export named ' + exportName + '. Exports: ' + (names.join(', ') || 'none'));
-    return found;
+    const found = topLevel(module, exportName);
+    if (!found) {
+      throw new DictionaryError(file + ': no export or top-level constant named ' + exportName + '. Exports: ' + (names.join(', ') || 'none') +
+        '. Top-level constants: ' + ([...module.bindings.keys()].join(', ') || 'none') + '.');
+    }
+    return { ...found, name: exportName };
   }
-  if (module.exports.has('default')) return exportNode(module, 'default');
-  const isObject = (name) => {
+  if (module.exports.has('default')) return { ...exportNode(module, 'default'), name: 'default' };
+  const isObject = (name, find = exportNode) => {
     try {
-      const found = exportNode(module, name);
+      const found = find(module, name);
       const value = found && valueOf(found.node, found.scope);
       return value && (value.kind === 'object' || value.kind === 'merge');
     } catch { return false; }
   };
-  const objects = names.filter(isObject);
-  if (objects.length === 1) return exportNode(module, objects[0]);
+  const objects = names.filter((name) => isObject(name));
+  if (objects.length === 1) return { ...exportNode(module, objects[0]), name: objects[0] };
   const stem = basename(file).replace(/\.[^.]+$/, '');
-  const wanted = [stem, locale, locale && new Intl.Locale(locale).language].filter(Boolean)
+  const wanted = [stem, locale, locale && knownLocale(locale) && new Intl.Locale(knownLocale(locale)).language].filter(Boolean)
     .map((name) => name.replace(/[^A-Za-z0-9_$]/g, '_'));
   for (const name of wanted) {
     const match = objects.find((item) => item.toLowerCase() === name.toLowerCase());
-    if (match) return exportNode(module, match);
+    if (match) return { ...exportNode(module, match), name: match };
   }
-  if (!objects.length) throw new DictionaryError(file + ': found no exported object literal. Export the dictionary as a plain object.');
-  throw new DictionaryError(file + ': several exported objects (' + objects.join(', ') + '). Pass --export <name>.');
+  if (!objects.length) {
+    const local = [...module.bindings.keys()].filter((name) => !module.exports.has(name) && isObject(name, (m, n) => topLevel(m, n)));
+    const functions = [...module.exports.keys()].filter((name) => module.exports.get(name)?.type === 'function');
+    let hint = 'Export the dictionary as a plain object';
+    if (local.length) hint += ', or pass ' + flags.export + ' <name> to read a top-level constant (' + local.join(', ') + ')';
+    if (functions.length) hint += ', or pass ' + flags.resolve + ' <function> to evaluate one of ' + functions.join(', ') + ' for a locale';
+    throw new DictionaryError(file + ': found no exported object literal. ' + hint + '.');
+  }
+  throw new DictionaryError(file + ': several exported objects (' + objects.join(', ') + '). Pass ' + flags.export + ' <name> to pick one' +
+    (locale ? '' : ', or ' + flags.locale + ' <tag> when one is named after the locale') + '.');
 }
 
-// Returns Map<key, { text, variants?, fn?, alias? } | { dynamic, reason }>.
-export function readDictionary(file, { exportName, locale } = {}) {
+const DEFAULT_FLAGS = { export: '--export', key: '--key', resolve: '--resolve', locale: '--locale' };
+
+// The canonical form of a BCP 47 tag whose language Intl knows ('en-IN', 'fil'), or null ('xx', 'hello').
+export function knownLocale(tag) {
+  if (typeof tag !== 'string' || !/^[A-Za-z]{2,3}(?:[-_][A-Za-z0-9]{2,8})*$/.test(tag)) return null;
+  try {
+    const [canonical] = Intl.getCanonicalLocales(tag.replace(/_/g, '-'));
+    const { language } = new Intl.Locale(canonical);
+    const name = new Intl.DisplayNames(['en'], { type: 'language', fallback: 'none' }).of(language);
+    return name ? canonical : null;
+  } catch {
+    return null;
+  }
+}
+
+// `{ en: {...}, ja: {...} }`, `Record<Locale, Dict>`: at least two keys, every key a locale, values objects.
+function localeRecordKeys(value) {
+  if (value?.kind !== 'object') return null;
+  const keys = [];
+  for (const property of value.node.properties) {
+    if (property.spread) continue;
+    const key = property.computed ? staticKey(property.computed, value.scope) : property.key;
+    if (key === null || !knownLocale(String(key))) return null;
+    if (!keys.includes(String(key))) keys.push(String(key));
+  }
+  if (keys.length < 2) return null;
+  const first = safeValue(value.node.properties.find((property) => !property.spread).value, value.scope);
+  return first && (first.kind === 'object' || first.kind === 'merge') ? keys : null;
+}
+
+function chooseKey(keys, locale, file, what, flags) {
+  const list = keys.join(', ');
+  if (!locale) throw new DictionaryError(file + ': ' + what + ' is keyed by locale (' + list + '). Pass ' + flags.key + ' <key> or ' + flags.locale + ' <tag> to pick one.');
+  const want = (knownLocale(locale) ?? locale).toLowerCase();
+  const exact = keys.find((key) => (knownLocale(key) ?? key).toLowerCase() === want);
+  if (exact) return exact;
+  const language = want.split('-')[0];
+  const same = keys.filter((key) => (knownLocale(key) ?? key).toLowerCase().split('-')[0] === language);
+  if (same.length === 1) return same[0];
+  if (same.length > 1) throw new DictionaryError(file + ': ' + what + ' has several keys for ' + locale + ' (' + same.join(', ') + '). Pass ' + flags.key + ' <key> to pick one.');
+  throw new DictionaryError(file + ': ' + what + ' has no key for ' + locale + '. Keys: ' + list + '. Pass ' + flags.key + ' <key> to pick one.');
+}
+
+function topLevel(module, name) {
+  const exported = exportNode(module, name);
+  if (exported) return exported;
+  if (module.bindings?.has(name)) return { node: module.bindings.get(name), scope: scopeFor(module) };
+  return null;
+}
+
+// Every locale key used by the module's locale tables, imported ones included.
+function moduleLocaleKeys(module) {
+  const keys = [];
+  for (const name of [...(module.bindings?.keys() ?? []), ...(module.imports?.keys() ?? [])]) {
+    const found = localeRecordKeys(safeValue({ type: 'id', name }, scopeFor(module)));
+    for (const key of found ?? []) if (!keys.includes(key)) keys.push(key);
+  }
+  return keys;
+}
+
+// An exported function such as `resolveStrings(language)` that indexes locale tables and returns an object.
+function autoResolver(module) {
+  if (!module.exports?.size) return null;
+  const candidates = [];
+  for (const [name, node] of module.exports) {
+    if (node.type !== 'function' || !node.params.length) continue;
+    const body = node.body.type === 'block' ? node.body.returns.at(-1) : node.body;
+    if (body?.type !== 'object' || !/\[\s*[A-Za-z_$][\w$]*\s*\]/.test(node.text)) continue;
+    candidates.push(name);
+  }
+  if (candidates.length !== 1 || !moduleLocaleKeys(module).length) return null;
+  return candidates[0];
+}
+
+// Returns Map<key, { text, variants?, fn?, alias? } | { dynamic, reason }>. The map's `selected` property says
+// what was read, e.g. `EXTRA["ja"]` or `resolveStrings("ta-IN")`.
+export function readDictionary(file, options = {}) {
+  const { exportName, locale, localeKey } = options;
+  const flags = { ...DEFAULT_FLAGS, ...options.flags };
   const path = resolve(file);
   const module = parseModule(path);
-  const root = pickExport(module, path, exportName, locale);
-  const value = valueOf(root.node, root.scope);
-  if (value.kind !== 'object' && value.kind !== 'merge') throw new DictionaryError(path + ': the export is not an object.');
+  let value;
+  let selected;
+  const resolver = options.resolve ?? (!exportName && !module.json ? autoResolver(module) : null);
+  if (resolver) {
+    const fn = topLevel(module, resolver);
+    if (!fn || fn.node.type !== 'function') {
+      throw new DictionaryError(path + ': ' + flags.resolve + ' ' + resolver + ' names no top-level function in this file.');
+    }
+    const keys = moduleLocaleKeys(module);
+    if (!keys.length && !localeKey) throw new DictionaryError(path + ': ' + resolver + '() reads no table keyed by locale that the checker can see. Pass ' + flags.key + ' <key> with the value to call it with.');
+    const key = localeKey ?? chooseKey(keys, locale, path, 'the tables read by ' + resolver + '()', flags);
+    value = callFunction(fn.node, fn.scope, [{ node: { type: 'string', value: key }, scope: fn.scope }], 0);
+    selected = resolver + '(' + JSON.stringify(key) + ')';
+    if (value.kind === 'dynamic') throw new DictionaryError(path + ': cannot evaluate ' + selected + ': ' + value.reason + '. Point ' + flags.export + ' at the tables instead.');
+  } else {
+    const root = pickExport(module, path, exportName, locale, flags);
+    value = valueOf(root.node, root.scope);
+    selected = root.name;
+    const keys = localeRecordKeys(value);
+    if (keys) {
+      const key = localeKey ?? chooseKey(keys, locale, path, root.name ?? 'the export', flags);
+      if (!keys.includes(key)) throw new DictionaryError(path + ': ' + (root.name ?? 'the export') + ' has no key ' + key + '. Keys: ' + keys.join(', ') + '.');
+      value = memberOf(value, key, 0);
+      selected = (root.name ?? 'default') + '[' + JSON.stringify(key) + ']';
+    } else if (localeKey) {
+      throw new DictionaryError(path + ': ' + flags.key + ' ' + localeKey + ' was given, but ' + (root.name ?? 'the export') + ' is not keyed by locale.');
+    }
+  }
+  if (value.kind !== 'object' && value.kind !== 'merge') {
+    throw new DictionaryError(path + ': ' + (selected ?? 'the export') + ' is not an object' + (value.reason ? ' (' + value.reason + ')' : '') + '.');
+  }
   const entries = new Map();
-  walk(value, [], entries, value.kind === 'object' && root.node.type === 'id' ? null : null);
+  walk(value, [], entries, null);
+  Object.defineProperty(entries, 'selected', { value: selected, enumerable: false });
   return entries;
 }
 
+// True for a file of strings: one dictionary, a file with one dictionary per locale export, or a locale table.
 export function looksLikeDictionary(file) {
-  try {
-    const entries = readDictionary(file);
+  const textual = (entries) => {
     const texts = [...entries.values()].filter((entry) => !entry.dynamic && /\p{L}/u.test(entry.text));
     return texts.length >= 3 && texts.length >= entries.size * 0.6;
+  };
+  try {
+    return textual(readDictionary(file));
   } catch {
+    try {
+      const module = parseModule(resolve(file));
+      for (const name of module.exports.keys()) {
+        try { if (textual(readDictionary(file, { exportName: name, localeKey: undefined, locale: 'en' }))) return true; } catch { /* next */ }
+      }
+    } catch { /* not readable */ }
     return false;
   }
 }
@@ -1112,16 +1476,34 @@ function invokedDirectly() {
   }
 }
 
+export const DICT_USAGE = 'Usage: node dict.mjs <dictionary.ts|.js> [--export <name>] [--locale <tag>] [--key <key>] [--resolve <function>] [--branches]';
+export const DICT_OPTIONS = { '--export': 'exportName', '--locale': 'locale', '--key': 'localeKey', '--resolve': 'resolve' };
+
 if (invokedDirectly()) {
   const args = process.argv.slice(2);
-  if (!args.length || args.includes('--help')) {
-    console.log('Usage: node dict.mjs <dictionary.ts|.js> [--export <name>] [--locale <tag>] [--branches]\n\nPrints the dictionary as flat JSON. Function parameters become {name} placeholders. --branches adds every other branch as key#n.');
+  if (!args.length || args.includes('--help') || args.includes('-h')) {
+    console.log(DICT_USAGE + '\n\nPrints the dictionary as flat JSON. Function parameters become {name} placeholders. --branches adds every other branch as key#n.\n' +
+      '--export picks an export or top-level constant, --key an entry of a table keyed by locale ({ en: {...}, ms: {...} }; --locale picks it too),\n' +
+      '--resolve evaluates a function such as resolveStrings(locale) that merges locale tables.');
     process.exitCode = args.length ? 0 : 2;
   } else {
     try {
-      const file = args.find((arg, index) => !arg.startsWith('--') && !['--export', '--locale'].includes(args[index - 1]));
-      const option = (name) => { const index = args.indexOf(name); return index >= 0 ? args[index + 1] : undefined; };
-      console.log(JSON.stringify(flatten(file, { exportName: option('--export'), locale: option('--locale'), branches: args.includes('--branches') }), null, 2));
+      const options = { branches: false };
+      const files = [];
+      for (let index = 0; index < args.length; index += 1) {
+        const arg = args[index];
+        if (arg === '--branches') { options.branches = true; continue; }
+        if (DICT_OPTIONS[arg]) {
+          const value = args[++index];
+          if (value === undefined || value.startsWith('--')) throw new Error('Missing value for ' + arg);
+          options[DICT_OPTIONS[arg]] = value;
+          continue;
+        }
+        if (arg.startsWith('-')) throw new Error('Unknown option ' + arg + '. ' + DICT_USAGE);
+        files.push(arg);
+      }
+      if (files.length !== 1) throw new Error(DICT_USAGE);
+      console.log(JSON.stringify(flatten(files[0], options), null, 2));
     } catch (error) {
       console.error('nativeskill: ' + error.message);
       process.exitCode = error instanceof DictionaryError ? 3 : 2;

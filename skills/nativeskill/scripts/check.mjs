@@ -1,6 +1,6 @@
-import { readFileSync, realpathSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { DictionaryError, readDictionary } from './dict.mjs';
+import { DictionaryError, knownLocale, readDictionary } from './dict.mjs';
 import { applySettings, resolveSettings } from './config.mjs';
 import { bucketOf, formatText, summarize } from './report.mjs';
 import { auditCatalog } from './audit.mjs';
@@ -314,7 +314,11 @@ function flattenJson(value, path, out) {
     if (!path.at(-1)?.startsWith('@')) out.set(path.join('.'), { text: value });
     return;
   }
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return;
+  if (Array.isArray(value)) {
+    value.forEach((child, index) => flattenJson(child, [...path, String(index)], out));
+    return;
+  }
+  if (!value || typeof value !== 'object') return;
   const quantities = Object.keys(value);
   if (path.length && quantities.length && quantities.every((key) => pluralOrder.includes(key) && typeof value[key] === 'string')) {
     out.set(path.join('.'), { plural: Object.fromEntries(quantities.map((key) => [key, value[key]])) });
@@ -343,9 +347,23 @@ function groupSuffixPlurals(messages) {
   return grouped;
 }
 
-function readJsonMessages(text) {
+function parseJson(text, file) {
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    const position = Number(error.message.match(/position (\d+)/)?.[1]);
+    let where = '';
+    if (Number.isFinite(position)) {
+      const before = text.slice(0, position).split('\n');
+      where = ':' + before.length + ':' + (before.at(-1).length + 1);
+    }
+    throw new DictionaryError(file + where + ': not valid JSON (' + error.message.replace(/\s*\(line \d+ column \d+\)/, '') + ').');
+  }
+}
+
+function readJsonMessages(text, file = 'catalog') {
   const messages = new Map();
-  flattenJson(JSON.parse(text), [], messages);
+  flattenJson(parseJson(text, file), [], messages);
   return groupSuffixPlurals(messages);
 }
 
@@ -420,20 +438,48 @@ function readXcstrings(text, locale, side) {
   return messages;
 }
 
-function readScriptCatalog(file, locale, exportName) {
+function readScriptCatalog(file, locale, pick) {
   const messages = new Map();
-  for (const [key, entry] of readDictionary(file, { exportName, locale })) messages.set(key, entry);
-  return groupSuffixPlurals(messages);
+  const entries = readDictionary(file, { ...pick, locale });
+  for (const [key, entry] of entries) messages.set(key, entry);
+  const grouped = groupSuffixPlurals(messages);
+  if (entries.selected) Object.defineProperty(grouped, 'selected', { value: entries.selected, enumerable: false });
+  return grouped;
 }
 
-export function readCatalog(file, format, locale, side = 'target', exportName) {
+const SIDE_FLAGS = {
+  source: { export: '--source-export', key: '--source-key', resolve: '--resolve', locale: '--source-locale' },
+  target: { export: '--target-export', key: '--target-key', resolve: '--resolve', locale: '--locale' }
+};
+
+// `pick` is { exportName, localeKey, resolve } for TS/JS dictionaries; a string is taken as the export name.
+export function readCatalog(file, format, locale, side = 'target', pick = {}) {
+  if (typeof pick === 'string') pick = { exportName: pick };
+  if (!existsSync(file)) throw new DictionaryError(file + ': no such file.');
   const detected = format === 'auto' ? detectFormat(file) : format;
-  if (detected === 'script') return readScriptCatalog(file, locale, exportName);
+  if (detected === 'script') return readScriptCatalog(file, locale, { flags: SIDE_FLAGS[side] ?? SIDE_FLAGS.target, ...pick });
   const text = readFileSync(file, 'utf8');
   if (detected === 'android') return readAndroid(text);
   if (detected === 'strings') return readStrings(text);
   if (detected === 'xcstrings') return readXcstrings(text, locale, side);
-  return readJsonMessages(text);
+  return readJsonMessages(text, file);
+}
+
+const BUCKET_ORDER = ['P1', 'P2', 'P3'];
+
+// Exit 1 when a finding at or above `failOn` remains, or when coverage is below `minCoverage` percent.
+export function exitPolicy(summary, { failOn = 'P1', minCoverage = 80, languageChanges = true } = {}) {
+  const reasons = [];
+  const failing = BUCKET_ORDER.slice(0, BUCKET_ORDER.indexOf(failOn) + 1).filter((bucket) => summary.buckets[bucket]);
+  if (failing.length) reasons.push(failing.map((bucket) => summary.buckets[bucket] + ' ' + bucket).join(' + ') + ' finding(s) at or above --fail-on ' + failOn);
+  if (languageChanges && minCoverage > 0 && summary.coveragePct < minCoverage) {
+    reasons.push('coverage ' + summary.coveragePct + '% is below --min-coverage ' + minCoverage + '%');
+  }
+  return { code: reasons.length ? EXIT.findings : EXIT.ok, failOn, minCoverage, reasons };
+}
+
+function checkLocale(tag, flag) {
+  if (!knownLocale(tag)) throw new Error('Unknown locale tag ' + JSON.stringify(tag) + ' for ' + flag + '. Use a BCP 47 tag such as ms, pt-BR, zh-Hant or fil.');
 }
 
 function detectFormat(file) {
@@ -459,12 +505,20 @@ function comparePlural(source, target, locale, add, key) {
 }
 
 export function checkCatalogs(options) {
-  const { source, target, locale, sourceLocale = 'en', format = 'auto', sourceExport, targetExport } = options;
+  const { source, target, locale, sourceLocale = 'en', format = 'auto' } = options;
   if (!source || !target || !locale) throw new Error('Provide --source, --target, and --locale');
+  checkLocale(locale, '--locale');
+  checkLocale(sourceLocale, '--source-locale');
+  const failOn = options.failOn ?? (options.strict ? 'P2' : 'P1');
+  if (!BUCKET_ORDER.includes(failOn)) throw new Error('Choose P1, P2 or P3 for --fail-on');
+  const minCoverage = options.minCoverage === undefined ? 80 : Number(options.minCoverage);
+  if (!Number.isFinite(minCoverage) || minCoverage < 0 || minCoverage > 100) throw new Error('--min-coverage takes a percentage from 0 to 100');
   const settings = resolveSettings(options);
   const mode = format;
-  const left = readCatalog(source, mode, sourceLocale, 'source', sourceExport);
-  const right = readCatalog(target, mode, locale, 'target', targetExport);
+  const sourcePick = { exportName: options.sourceExport ?? options.export, localeKey: options.sourceKey, resolve: options.sourceResolve ?? options.resolve };
+  const targetPick = { exportName: options.targetExport ?? options.export, localeKey: options.targetKey, resolve: options.targetResolve ?? options.resolve };
+  const left = readCatalog(source, mode, sourceLocale, 'source', sourcePick);
+  const right = readCatalog(target, mode, locale, 'target', targetPick);
   const findings = [];
   const add = (code, severity, key, message) => addFinding(findings, code, severity, key, message);
   const languageChanges = languageOf(sourceLocale) !== languageOf(locale);
@@ -500,7 +554,7 @@ export function checkCatalogs(options) {
     compareText(sourceMessage.text, targetMessage.text, locale, add, key);
     checkBranches(sourceMessage, targetMessage, locale, add, key, languageChanges);
   }
-  if (settings.oldSource) checkSourceChanged(readCatalog(settings.oldSource, mode, sourceLocale, 'source', sourceExport), left, right, add);
+  if (settings.oldSource) checkSourceChanged(readCatalog(settings.oldSource, mode, sourceLocale, 'source', sourcePick), left, right, add);
   checkGlossary(readGlossary(settings.glossary), left, right, locale, add);
   if (languageChanges && options.audit !== false) auditCatalog(left, right, locale, add);
   findings.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
@@ -508,9 +562,11 @@ export function checkCatalogs(options) {
   const { kept, suppressed } = applySettings(findings, settings, (key) => left.get(key)?.text ?? null);
   const errors = kept.filter(({ severity }) => severity === 'error').length;
   const summary = summarize({ left, right, findings: kept, suppressed, locale });
+  const exit = exitPolicy(summary, { failOn, minCoverage, languageChanges });
   return {
     schema: 2, source, target, locale, config: settings.configPath,
-    errors, warnings: kept.length - errors, summary, findings: kept, suppressed
+    read: left.selected || right.selected ? { source: left.selected ?? null, target: right.selected ?? null } : undefined,
+    errors, warnings: kept.length - errors, exit, summary, findings: kept, suppressed
   };
 }
 
@@ -522,23 +578,87 @@ function invokedDirectly() {
   }
 }
 
+// Every option check.mjs accepts. `to` names the option it sets; a list collects repeats.
+export const CHECK_OPTIONS = {
+  '--source': { to: 'source' },
+  '--target': { to: 'target' },
+  '--locale': { to: 'locale' },
+  '--source-locale': { to: 'sourceLocale' },
+  '--format': { to: 'format' },
+  '--export': { to: 'export' },
+  '--source-export': { to: 'sourceExport' },
+  '--target-export': { to: 'targetExport' },
+  '--source-key': { to: 'sourceKey' },
+  '--target-key': { to: 'targetKey' },
+  '--source-locale-key': { to: 'sourceKey' },
+  '--target-locale-key': { to: 'targetKey' },
+  '--resolve': { to: 'resolve' },
+  '--source-resolve': { to: 'sourceResolve' },
+  '--target-resolve': { to: 'targetResolve' },
+  '--config': { to: 'config' },
+  '--old-source': { to: 'oldSource' },
+  '--glossary': { to: 'glossary' },
+  '--fail-on': { to: 'failOn' },
+  '--min-coverage': { to: 'minCoverage' },
+  '--allow-missing': { to: 'allowMissing', list: true },
+  '--keep-english': { to: 'keepEnglish', list: true },
+  '--ignore-key': { to: 'ignoreKeys', list: true },
+  '--json': { to: 'json', flag: true },
+  '--no-config': { to: 'noConfig', flag: true },
+  '--verbose': { to: 'verbose', flag: true },
+  '--no-audit': { to: 'audit', flag: true, value: false },
+  '--strict': { to: 'strict', flag: true }
+};
+
+export function parseCheckArgs(args) {
+  const options = { format: 'auto', sourceLocale: 'en', json: false, allowMissing: [], keepEnglish: [], ignoreKeys: [] };
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    const [name, inline] = arg.startsWith('--') && arg.includes('=') ? [arg.slice(0, arg.indexOf('=')), arg.slice(arg.indexOf('=') + 1)] : [arg, undefined];
+    const spec = CHECK_OPTIONS[name];
+    if (!spec) {
+      throw new Error((name.startsWith('-') ? 'Unknown option ' + name : 'Unexpected argument ' + JSON.stringify(name) + '; every value follows its option, e.g. --target ' + name) + '. Run node check.mjs --help for the list.');
+    }
+    if (spec.flag) { options[spec.to] = spec.value ?? true; continue; }
+    const value = inline ?? args[++index];
+    if (value === undefined || (inline === undefined && value.startsWith('--'))) throw new Error('Missing value for ' + name);
+    if (spec.list) options[spec.to].push(value);
+    else options[spec.to] = value;
+  }
+  if (!['auto', 'json', 'android', 'strings', 'xcstrings', 'script'].includes(options.format)) {
+    throw new Error('Choose auto, json, android, strings, xcstrings, or script for --format');
+  }
+  return options;
+}
+
 function printUsage() {
   console.log(`Usage: node check.mjs --source <file> --target <file> --locale <tag> [--source-locale <tag>]
-       [--format auto|json|android|strings|xcstrings|script] [--source-export <name>] [--target-export <name>] [--json]
-       [--old-source <previous English catalog>] [--glossary <glossary.json>]
-       [--verbose] [--no-audit] [--config <file> | --no-config] [--allow-missing <key-prefix>]... [--keep-english <term>]... [--ignore-key <pattern>]...
+       [--format auto|json|android|strings|xcstrings|script] [--json] [--verbose]
+       [--fail-on P1|P2|P3 | --strict] [--min-coverage <percent>]
+       [--old-source <previous English catalog>] [--glossary <glossary.json>] [--no-audit]
+       [--config <file> | --no-config] [--allow-missing <key-prefix>]... [--keep-english <term>]... [--ignore-key <pattern>]...
+
+TS/JS dictionaries (read without running them):
+  --source-export <name>, --target-export <name>   which export or top-level constant to read; --export sets both
+  --source-key <key>, --target-key <key>           which entry of a table keyed by locale, e.g. { en: {...}, ms: {...} }
+                                                   (aliases --source-locale-key, --target-locale-key). Without them the
+                                                   key matching --source-locale / --locale is used.
+  --resolve <function>                             evaluate a function such as resolveStrings(locale) that merges
+                                                   locale tables; an exported one is found by itself.
+  The same file can be --source and --target.
 
 Checks missing and extra keys, placeholder changes, ICU syntax, CLDR plural categories, length blowups, and strings copied unchanged from the source.
-Formats: ARB, JSON, i18next, Android strings.xml, iOS .strings, .xcstrings, and TS/JS dictionaries
-(typed objects, arrow functions, spreads and imported sections; read without running them).
+Formats: ARB, JSON, i18next, Android strings.xml, iOS .strings, .xcstrings, and TS/JS dictionaries.
 
-Output starts with a coverage summary per section. Warnings that repeat more than 5 times in one section are
-grouped into one line; --verbose lists every key. --json always has every finding plus "summary".
+Output starts with a triage line (P1 broken, P2 wrong words or untranslated, P3 review) and a coverage summary per
+section. Warnings that repeat more than 5 times in one section are grouped into one line; --verbose lists every key
+and every suppressed finding. --json always has every finding, "summary", "suppressed" and "exit".
 
 Settings: .nativeskillrc (JSON) is read from the target's folder or a parent: allowMissing, keepEnglish, ignoreKeys.
-Suppressed findings are counted and listed under "suppressed" in --json.
 
-Exit codes: 0 no errors, 1 errors found, 2 wrong arguments, 3 a catalog could not be read.`);
+Exit codes: 0 nothing at or above --fail-on (default P1, --strict means P2) and coverage at or above --min-coverage
+(default 80; 0 turns it off). Warnings below the threshold can remain at exit 0: read the summary and triage them.
+1 the threshold was crossed (the last line says why), 2 wrong arguments, 3 a catalog could not be read.`);
 }
 
 if (invokedDirectly()) {
@@ -548,46 +668,19 @@ if (invokedDirectly()) {
       printUsage();
       process.exitCode = args.length ? 0 : 2;
     } else {
-      const options = { format: 'auto', sourceLocale: 'en', json: false, allowMissing: [], keepEnglish: [], ignoreKeys: [] };
-      for (let index = 0; index < args.length; index += 1) {
-        const name = args[index];
-        if (name === '--json') { options.json = true; continue; }
-        if (name === '--no-config') { options.noConfig = true; continue; }
-        if (name === '--verbose') { options.verbose = true; continue; }
-        if (name === '--no-audit') { options.audit = false; continue; }
-        const value = args[++index];
-        if (!value || value.startsWith('--')) throw new Error('Missing value for ' + name);
-        if (name === '--source') options.source = value;
-        else if (name === '--target') options.target = value;
-        else if (name === '--locale') options.locale = value;
-        else if (name === '--source-locale') options.sourceLocale = value;
-        else if (name === '--format') options.format = value;
-        else if (name === '--source-export') options.sourceExport = value;
-        else if (name === '--config') options.config = value;
-        else if (name === '--old-source') options.oldSource = value;
-        else if (name === '--glossary') options.glossary = value;
-        else if (name === '--allow-missing') options.allowMissing.push(value);
-        else if (name === '--keep-english') options.keepEnglish.push(value);
-        else if (name === '--ignore-key') options.ignoreKeys.push(value);
-        else if (name === '--target-export') options.targetExport = value;
-        else throw new Error('Unknown argument ' + name);
-      }
-      if (!['auto', 'json', 'android', 'strings', 'xcstrings', 'script'].includes(options.format)) {
-        throw new Error('Choose auto, json, android, strings, xcstrings, or script for --format');
-      }
+      const options = parseCheckArgs(args);
       const result = checkCatalogs(options);
       if (options.json) console.log(JSON.stringify(result, null, 2));
-      else {
-        console.log(formatText(result, { verbose: options.verbose }));
-      }
-      if (result.errors) process.exitCode = 1;
+      else console.log(formatText(result, { verbose: options.verbose }));
+      process.exitCode = result.exit.code;
     }
   } catch (error) {
     if (error instanceof DictionaryError || error instanceof SyntaxError || error.code === 'ENOENT') {
       console.error('nativeskill: could not read the catalog. ' + error.message);
-      if (error instanceof DictionaryError) {
-        console.error('The checker reads plain objects, arrow functions, template literals, ternaries, spreads and imported sections. ' +
-          'For anything else, print the dictionary as JSON (node scripts/dict.mjs <file> --export <name> > target.json, or your own build step) and check the JSON.');
+      if (error instanceof DictionaryError && !/no such file|not valid JSON/.test(error.message)) {
+        console.error('The checker reads plain objects, tables keyed by locale, arrow functions, template literals, ternaries, spreads, ' +
+          'imported sections and simple local helpers. For anything else, print the dictionary as JSON from your own build step ' +
+          '(or node scripts/dict.mjs <file> --export <name> --locale <tag>) and check the JSON.');
       }
       process.exitCode = EXIT.unreadable;
     } else {

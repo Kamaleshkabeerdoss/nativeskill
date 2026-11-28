@@ -57,3 +57,22 @@ test('unreadable dictionaries raise a DictionaryError with a line number', () =>
   const dir = files({ 'bad.ts': "export default {\n  a: 'unclosed,\n}\n" });
   assert.throws(() => readDictionary(join(dir, 'bad.ts')), (error) => error instanceof DictionaryError && /bad\.ts:2: Unclosed string/.test(error.message));
 });
+
+test('tables keyed by locale: selection by locale or key, assignments, overlays and precise errors', () => {
+  const dir = files({
+    't.ts': "const en = { hi: 'Hi', bye: 'Bye' }\nconst ms = { ...en, hi: 'Hai' }\nexport const T: Record<string, typeof en> = { en, ms, 'pt-BR': { hi: 'Oi', bye: 'Tchau' } }\nT['pt-PT'] = { hi: 'Olá', bye: 'Adeus' }\n",
+    'r.ts': "const BASE = { en: { a: 'A', b: 'B' }, ta: { a: 'அ' } }\nconst EXTRA = { ta: { b: 'ஆ' }, ms: { b: 'Bm' } }\nexport function pick(lang: string) {\n  return { ...BASE.en, ...(BASE[lang] ?? {}), ...(EXTRA[lang] ?? {}) }\n}\n",
+    'd.ts': "import { load } from 'some-package'\nexport const T = { en: { a: 'A' }, ms: load('ms') }\n"
+  });
+  assert.equal(readDictionary(join(dir, 't.ts'), { locale: 'ms' }).get('bye').text, 'Bye');
+  assert.equal(readDictionary(join(dir, 't.ts'), { locale: 'ms-MY' }).selected, 'T["ms"]');
+  assert.equal(readDictionary(join(dir, 't.ts'), { localeKey: 'pt-PT' }).get('hi').text, 'Olá');
+  assert.throws(() => readDictionary(join(dir, 't.ts'), { locale: 'pt' }), /several keys for pt \(pt-BR, pt-PT\)\. Pass --key <key>/);
+  assert.throws(() => readDictionary(join(dir, 't.ts'), { locale: 'ja' }), /has no key for ja\. Keys: en, ms, pt-BR, pt-PT/);
+  assert.throws(() => readDictionary(join(dir, 't.ts')), /keyed by locale \(en, ms, pt-BR, pt-PT\)\. Pass --key <key> or --locale <tag>/);
+  const ta = readDictionary(join(dir, 'r.ts'), { locale: 'ta' });
+  assert.equal(ta.selected, 'pick("ta")');
+  assert.deepEqual(Object.fromEntries([...ta].map(([key, entry]) => [key, entry.text])), { a: 'அ', b: 'ஆ' });
+  assert.equal(readDictionary(join(dir, 'r.ts'), { locale: 'ms' }).get('a').text, 'A');
+  assert.throws(() => readDictionary(join(dir, 'd.ts'), { locale: 'ms' }), /T\["ms"\] is not an object \(calls load\)/);
+});

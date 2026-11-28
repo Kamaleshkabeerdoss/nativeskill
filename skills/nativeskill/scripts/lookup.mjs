@@ -82,8 +82,12 @@ function invokedDirectly() {
 
 if (invokedDirectly()) {
   try {
+    const usage = 'Usage: node lookup.mjs <locale> <concept> [ui-role]';
+    if (process.argv.includes('--help') || process.argv.includes('-h')) { console.log(usage); process.exit(0); }
+    const option = process.argv.slice(2).find((arg) => arg.startsWith('-'));
+    if (option) throw new Error('Unknown option ' + option + '. ' + usage);
     const [, , locale, concept, role, ...rest] = process.argv;
-    if (!locale || !concept || rest.length) throw new Error('Usage: node lookup.mjs <locale> <concept> [ui-role]');
+    if (!locale || !concept || rest.length) throw new Error(usage);
     console.log(JSON.stringify(lookupWording(locale, concept, role), null, 2));
   } catch (error) {
     console.error('nativeskill: ' + error.message);

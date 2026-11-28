@@ -43,7 +43,7 @@ Look at the repo before you choose a format.
 | `res/values/strings.xml`, `locales_config.xml` | Android | [android.md](references/platforms/android.md) |
 | `i18next`, `useTranslation`, `locales/en/common.json` | Web | [react-i18next.md](references/platforms/react-i18next.md) |
 | `I18nManager`, `expo-localization`, React Native plus one of the above | React Native | [react-native.md](references/platforms/react-native.md) |
-| `export const en = { ... }` or `export default { ... }` in `.ts` / `.js`, with arrow functions and no i18n library | Typed TS/JS dictionary | [typescript-dictionary.md](references/platforms/typescript-dictionary.md) |
+| `export const en = { ... }`, `export default { ... }`, or a table keyed by locale (`{ en: {...}, ms: {...} }`, `Record<Locale, Dict>`) in `.ts` / `.js`, with arrow functions and no i18n library | Typed TS/JS dictionary | [typescript-dictionary.md](references/platforms/typescript-dictionary.md) |
 
 Write new strings in the format that stack already uses. Do not add a second catalog system beside the first. Register the locale in the place that stack actually reads: Flutter `supportedLocales` / generated locales, iOS `knownRegions` and the string catalog, Android `locales_config.xml`, i18next `supportedLngs`.
 
@@ -55,7 +55,7 @@ Write new strings in the format that stack already uses. Do not add a second cat
 4. Look up contested intents, especially account, billing, and permission actions. Reuse a matching `source-attested` phrase. Otherwise write a draft and label it.
 5. Create the target file. Copy keys exactly. Translate values. For plurals, emit the categories [references/checks.md](references/checks.md) lists for that locale, not a copy of the English branches.
 6. Register the locale using the platform guide. A file that nothing loads is not an added language.
-7. Run the check below. Fix every error. Run it again. Stop when it exits 0.
+7. Run the check below. Fix every P1 finding. Run it again. Exit 0 only means nothing is at or above `--fail-on` (P1 by default) and coverage is at least `--min-coverage` (80% by default). Then read the triage line and the P2 findings, and fix or explain each one.
 8. Deliver the report. Do not describe the new language as reviewed.
 
 Worked split, Malay subscription settings:
@@ -74,7 +74,7 @@ Worked split, Malay subscription settings:
 2. Run the check before you edit, so missing keys, placeholder drift, broken ICU, incomplete plurals, length blowups, and unchanged source copies are listed first.
 3. Read what remains against [references/signs.md](references/signs.md) and the locale note. A string can pass the check and still be the wrong action, the wrong formality, or a calque.
 4. For each problem, keep the key, the current text, the intent, the proposed text, and the evidence label. Apply the edit when the user asked for a fix. A review-only request gets the table and no file changes.
-5. Run the check again. The audit is finished when it exits 0 and every change is in the report.
+5. Run the check again. Exit 0 is not the end of the audit: P2 and P3 warnings can remain at exit 0. Read the triage line and the summary, work through P2 (wrong meaning or still English) and say in the report what is left in P3. The audit is finished when every P2 finding is fixed or explained, and every change is in the report. `--strict` (`--fail-on P2`) makes the exit code reflect that.
 
 Common audit catches:
 
@@ -93,7 +93,16 @@ node <skill-dir>/scripts/check.mjs --source <source-catalog> --target <target-ca
 node <skill-dir>/scripts/scan.mjs <app-dir>
 ```
 
-`check.mjs` has no dependencies. It reads ARB, JSON, i18next (including `{{name}}` and `_one`/`_other` keys), Android `strings.xml` including `<plurals>`, iOS `.strings`, `.xcstrings`, and TS/JS dictionaries. A dictionary is read without running it: arrow functions become their text with `{param}` placeholders named as in the source, every branch of a ternary or `if` is checked, and `section: en.section` aliases and spreads are followed into the imported file. Exit 0 means no errors. Warnings still print. Exit 1 means at least one error. Exit 2 means the arguments are wrong. Exit 3 means a catalog could not be read; the message names the file, the line, and what to do. Fix the catalog, then run the same command again. Do not edit the script to hide a finding. Sections that are English on purpose and brand names go in `.nativeskillrc` (`allowMissing`, `keepEnglish`), described in [checks.md](references/checks.md); suppressed findings stay listed in the output.
+`check.mjs` has no dependencies. It reads ARB, JSON, i18next (including `{{name}}` and `_one`/`_other` keys), Android `strings.xml` including `<plurals>`, iOS `.strings`, `.xcstrings`, and TS/JS dictionaries. A dictionary is read without running it: arrow functions become their text with `{param}` placeholders named as in the source, every branch of a ternary or `if` is checked, `section: en.section` aliases and spreads are followed into the imported file, and tables keyed by locale and the function that merges them are evaluated for one locale ([typescript-dictionary.md](references/platforms/typescript-dictionary.md)).
+
+Exit codes:
+
+- 0: no finding at or above `--fail-on` (default P1, which is every error) and coverage at or above `--min-coverage` (default 80; `--min-coverage 0` turns it off). P2 and P3 warnings can remain. Exit 0 does not mean the locale is done.
+- 1: the threshold was crossed. The last line of the output says which (`Exit 1: coverage 37% is below --min-coverage 80%`). `--json` has the same in `exit.reasons`.
+- 2: the arguments are wrong (an unknown option, an unknown locale tag, a missing value).
+- 3: a catalog could not be read. The message names the file, the line for JSON and syntax errors, and the flag or change that fixes it.
+
+After every run, read the triage line and the coverage summary before anything else, then work down the buckets: P1, then P2, then P3. Fix the catalog, then run the same command again. Do not edit the script to hide a finding. Sections that are English on purpose and brand names go in `.nativeskillrc` (`allowMissing`, `keepEnglish`), described in [checks.md](references/checks.md). Suppressed findings are counted in the text output, listed one per line with `--verbose`, and kept in `suppressed` in `--json`.
 
 `examples/flutter` and `examples/android` are clean fixtures and must pass. `examples/buggy` is an Arabic catalog seeded with a renamed placeholder, a `{{name}}` turned into `{name}`, a dropped `%1$s`, an unclosed plural, Arabic categories missing, a missing key, an extra key, an unchanged "Cancel", and a length blowup. Use it to see the codes. The codes and the CLDR rule are in [references/checks.md](references/checks.md).
 
