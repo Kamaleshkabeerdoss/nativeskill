@@ -1,9 +1,11 @@
 import { readdirSync, readFileSync, realpathSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { looksLikeDictionary } from './dict.mjs';
 
-const extensions = new Set(['.dart', '.kt', '.java', '.swift', '.tsx', '.jsx', '.xml', '.vue']);
-const skipDirectories = new Set(['node_modules', 'build', '.dart_tool', 'dist', '.git', 'Pods', 'coverage']);
+const extensions = new Set(['.dart', '.kt', '.java', '.swift', '.ts', '.tsx', '.mts', '.js', '.jsx', '.mjs', '.vue', '.xml']);
+const scriptFile = /\.(?:[cm]?tsx?|[cm]?jsx?)$/;
+const skipDirectories = new Set(['node_modules', 'build', '.dart_tool', 'dist', '.git', 'Pods', 'coverage', '.next', 'out']);
 
 function extensionOf(file) {
   const index = file.lastIndexOf('.');
@@ -43,9 +45,10 @@ const patterns = [
   { kind: 'named-copy', re: /\b(?:title|label|hint|message|placeholder|contentDescription|semanticsLabel)\s*[:=]\s*["']([^"'\n]+)["']/g }
 ];
 
-export function scanText(file, text) {
+export function scanText(file, text, { dictionary = false } = {}) {
   const findings = [];
-  for (const { kind, re } of patterns) {
+  // A locale dictionary is where copy belongs, so its literals are not hardcoded text.
+  for (const { kind, re } of dictionary ? [] : patterns) {
     re.lastIndex = 0;
     for (const match of text.matchAll(re)) {
       if (!visible(match[1])) continue;
@@ -59,7 +62,10 @@ export function scanText(file, text) {
 }
 
 export function scanPaths(paths) {
-  return paths.flatMap((path) => filesUnder(path).flatMap((file) => scanText(relative(process.cwd(), file), readFileSync(file, 'utf8'))));
+  return paths.flatMap((path) => filesUnder(path).flatMap((file) => {
+    const dictionary = scriptFile.test(file) && looksLikeDictionary(file);
+    return scanText(relative(process.cwd(), file), readFileSync(file, 'utf8'), { dictionary });
+  }));
 }
 
 function invokedDirectly() {

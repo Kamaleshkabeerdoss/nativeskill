@@ -43,12 +43,13 @@ Look at the repo before you choose a format.
 | `res/values/strings.xml`, `locales_config.xml` | Android | [android.md](references/platforms/android.md) |
 | `i18next`, `useTranslation`, `locales/en/common.json` | Web | [react-i18next.md](references/platforms/react-i18next.md) |
 | `I18nManager`, `expo-localization`, React Native plus one of the above | React Native | [react-native.md](references/platforms/react-native.md) |
+| `export const en = { ... }` or `export default { ... }` in `.ts` / `.js`, with arrow functions and no i18n library | Typed TS/JS dictionary | [typescript-dictionary.md](references/platforms/typescript-dictionary.md) |
 
 Write new strings in the format that stack already uses. Do not add a second catalog system beside the first. Register the locale in the place that stack actually reads: Flutter `supportedLocales` / generated locales, iOS `knownRegions` and the string catalog, Android `locales_config.xml`, i18next `supportedLngs`.
 
 ## Add a language
 
-1. Find the source catalog and the source locale. Record the format: ARB, JSON or i18next, `strings.xml`, `.strings`, or `.xcstrings`.
+1. Find the source catalog and the source locale. Record the format: ARB, JSON or i18next, `strings.xml`, `.strings`, `.xcstrings`, or a TS/JS dictionary object.
 2. Find hardcoded user-facing strings. Run `node <skill-dir>/scripts/scan.mjs <app-dir>`. Move each hit into the catalog under a key that names the intent (`billing.stopRenewal`, not `cancel2`). Leave logs, test names, and analytics events alone.
 3. Walk every source string. Decide the intent from the screen and the control. A key named `cancel` is not an intent. Open the widget if the key is ambiguous.
 4. Look up contested intents, especially account, billing, and permission actions. Reuse a matching `source-attested` phrase. Otherwise write a draft and label it.
@@ -92,7 +93,7 @@ node <skill-dir>/scripts/check.mjs --source <source-catalog> --target <target-ca
 node <skill-dir>/scripts/scan.mjs <app-dir>
 ```
 
-`check.mjs` has no dependencies. It reads ARB, JSON, i18next (including `{{name}}` and `_one`/`_other` keys), Android `strings.xml` including `<plurals>`, iOS `.strings`, and `.xcstrings`. Exit 0 means no errors. Warnings still print. Exit 1 means at least one error. Fix the catalog, then run the same command again. Do not edit the script to hide a finding.
+`check.mjs` has no dependencies. It reads ARB, JSON, i18next (including `{{name}}` and `_one`/`_other` keys), Android `strings.xml` including `<plurals>`, iOS `.strings`, `.xcstrings`, and TS/JS dictionaries. A dictionary is read without running it: arrow functions become their text with `{param}` placeholders named as in the source, every branch of a ternary or `if` is checked, and `section: en.section` aliases and spreads are followed into the imported file. Exit 0 means no errors. Warnings still print. Exit 1 means at least one error. Exit 2 means the arguments are wrong. Exit 3 means a catalog could not be read; the message names the file, the line, and what to do. Fix the catalog, then run the same command again. Do not edit the script to hide a finding.
 
 `examples/flutter` and `examples/android` are clean fixtures and must pass. `examples/buggy` is an Arabic catalog seeded with a renamed placeholder, a `{{name}}` turned into `{name}`, a dropped `%1$s`, an unclosed plural, Arabic categories missing, a missing key, an extra key, an unchanged "Cancel", and a length blowup. Use it to see the codes. The codes and the CLDR rule are in [references/checks.md](references/checks.md).
 

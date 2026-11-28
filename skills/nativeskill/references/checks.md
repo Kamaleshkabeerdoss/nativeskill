@@ -8,9 +8,9 @@ node <skill-dir>/scripts/scan.mjs lib app/src
 node <skill-dir>/scripts/lookup.mjs ta auth.sign_out button
 ```
 
-`check.mjs` exits 0 when there are no errors, 1 when there are errors, and 2 when the arguments are wrong. Add `--json` for a machine-readable report. `--format` is `auto`, `json`, `android`, `strings`, or `xcstrings`. `auto` treats `.xml` as Android, `.strings` as iOS strings, `.xcstrings` as a string catalog, `.ts` and `.js` as a simple `export` object of strings, and everything else as JSON or ARB.
+`check.mjs` exits 0 when there are no errors, 1 when there are errors, 2 when the arguments are wrong, and 3 when a catalog could not be read. Add `--json` for a machine-readable report. `--format` is `auto`, `json`, `android`, `strings`, `xcstrings`, or `script`. `auto` treats `.xml` as Android, `.strings` as iOS strings, `.xcstrings` as a string catalog, `.ts` / `.tsx` / `.js` / `.mjs` / `.cjs` as a TS/JS dictionary, and everything else as JSON or ARB.
 
-For catalogs that use object spreads, function calls or computed keys, run the app's catalog validation.
+TS/JS dictionaries are parsed, not executed, by `scripts/dict.mjs` (no dependencies). It reads `export const ms: Dict = {...}`, `export default`, `module.exports`, `as const`, `satisfies`, arrow and `function` values, template literals, ternaries, `if` / `switch` returns, spreads, `section: en.section` aliases and relative imports, including JSON. Parameters become `{name}` placeholders spelled as in the source. The checked text is the branch a count such as 5 takes; the other branches are kept and checked too. When a file exports several objects, pass `--source-export` / `--target-export`. A value that needs running code (a call into a package, a computed key) is reported as `dynamic-value` instead of guessed. `node scripts/dict.mjs <file> [--export name] [--branches]` prints the flat JSON the checker sees.
 
 Android `translatable="false"` strings are skipped. A plural category that covers exactly one number may omit it: Arabic `zero`, `one`, and `two`, or German and English `one`. French `one` is not such a category, because it covers both 0 and 1. A French `one` without the number is an Android `placeholder-mismatch` and an ICU `plural-number-missing` warning. A string catalog with source strings and no target locale fails with `missing-key`.
 
@@ -35,6 +35,7 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `possible-source-copy` | warning | The text equals the source and the language changed. Keep it only for a brand or a shared glossary term. |
 | `plural-number-missing` | warning | An ICU plural branch has no `#` (or `{count}`) although the source shows the number, and that category covers more than one number in this locale. French `one {un fichier}` also shows for 0. |
 | `length-blowup` | warning | The translation is more than three times the source and at least 12 characters longer. Check the control. |
+| `dynamic-value` | warning | A TS/JS dictionary value could not be resolved without running code. Check it by hand. |
 
 Plural categories come from `Intl.PluralRules` for the target locale. Exact choices such as `=0` are allowed on top of the categories. Android `<plurals>` quantities and i18next `_one` / `_other` suffixes (or a nested `one` / `other` object) are checked the same way.
 
@@ -42,7 +43,7 @@ ARB metadata keys that start with `@` are ignored. iOS `.strings` comments are i
 
 ## What the scanner flags
 
-`scan.mjs` looks in Dart, Kotlin, Java, Swift, TSX, JSX, XML, and Vue for string literals in `Text(...)`, `setText(...)`, `title` / `label` / `hint` / `placeholder`, and `android:text` / `android:hint` / `android:contentDescription`. It skips `@string/` references, URLs, hex colors, and tokens with no spaces. It exits 1 when it finds any. Catalog files are not source code. A hit is a candidate, not proof. Confirm it is user-facing before you extract it.
+`scan.mjs` looks in Dart, Kotlin, Java, Swift, TS, TSX, JS, JSX, XML, and Vue for string literals in `Text(...)`, `setText(...)`, `title` / `label` / `hint` / `placeholder`, and `android:text` / `android:hint` / `android:contentDescription`. It skips `@string/` references, URLs, hex colors, and tokens with no spaces. It exits 1 when it finds any. Catalog files are not source code: a `.ts` / `.js` file that is itself a locale dictionary is skipped for literals. A hit is a candidate, not proof. Confirm it is user-facing before you extract it.
 
 ## Fixtures
 

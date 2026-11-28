@@ -127,3 +127,25 @@ test('an ICU plural branch without # warns when the category covers more than on
   // Exact =0 choices are never flagged.
   assert.equal(pair('ja', '{count, plural, =0 {ファイルなし} other {# 件のファイル}}', 'ja').length, 0);
 });
+
+test('TS dictionaries are checked directly, and an unreadable one exits 3 with a real next step', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-ts-'));
+  writeFileSync(join(dir, 'en.ts'), "export const en = {\n  files: (count: number) => `${count} file${count === 1 ? '' : 's'}`,\n  save: 'Save',\n}\n");
+  writeFileSync(join(dir, 'ms.ts'), "import { en } from './en'\nexport const ms: typeof en = {\n  files: (total) => `${total} fail`,\n  save: 'Simpan',\n}\n");
+  const result = run(check, ['--json', '--source', join(dir, 'en.ts'), '--target', join(dir, 'ms.ts'), '--locale', 'ms']);
+  assert.equal(result.status, 1, result.stderr);
+  assert.match(result.report.findings.find(({ key }) => key === 'files').message, /Source has \{count\}\. Target has \{total\}/);
+  writeFileSync(join(dir, 'bad.ts'), "export default {\n  save: 'Save,\n}\n");
+  const bad = spawnSync(process.execPath, [check, '--source', join(dir, 'en.ts'), '--target', join(dir, 'bad.ts'), '--locale', 'ms'], { encoding: 'utf8' });
+  assert.equal(bad.status, 3);
+  assert.match(bad.stderr, /bad\.ts:2: Unclosed string/);
+  assert.doesNotMatch(bad.stderr, /nativeskill validate/);
+});
+
+test('the scanner reads TS/JS source but skips files that are locale dictionaries', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-scan-ts-'));
+  writeFileSync(join(dir, 'en.ts'), "export const en = { title: 'Inbox', hint: 'Connect your address', label: 'Save changes' }\n");
+  writeFileSync(join(dir, 'Page.tsx'), "export const Page = () => <Field label='Your email address' />\n");
+  const result = run(scan, ['--json', dir]);
+  assert.deepEqual(result.report.findings.map(({ text }) => text), ['Your email address']);
+});

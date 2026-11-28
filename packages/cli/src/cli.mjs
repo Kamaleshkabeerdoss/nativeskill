@@ -21,7 +21,7 @@ Validate options
 
 Check options
   --source-locale <tag>      Source language (default: en)
-  --format <mode>            auto, json, android, strings, or xcstrings
+  --format <mode>            auto, json, android, strings, xcstrings, or script (TS/JS dictionary)
 `.trim();
 
 const yesNo = { type: 'boolean' };
@@ -111,8 +111,8 @@ async function main([command, ...args]) {
     const { values } = parseArgs({ args, options: checkOptions });
     if (values.help) return console.log(help);
     const format = values.format ?? 'auto';
-    if (!['auto', 'json', 'android', 'strings', 'xcstrings'].includes(format)) {
-      throw new Error('Choose auto, json, android, strings, or xcstrings for --format');
+    if (!['auto', 'json', 'android', 'strings', 'xcstrings', 'script'].includes(format)) {
+      throw new Error('Choose auto, json, android, strings, xcstrings, or script for --format');
     }
     const result = checkCatalogs({
       source: values.source, target: values.target, locale: values.locale, format,

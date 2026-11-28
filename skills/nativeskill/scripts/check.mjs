@@ -1,5 +1,8 @@
 import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { DictionaryError, readDictionary } from './dict.mjs';
+
+export const EXIT = { ok: 0, findings: 1, usage: 2, unreadable: 3 };
 
 const pluralOrder = ['zero', 'one', 'two', 'few', 'many', 'other'];
 
@@ -398,65 +401,19 @@ function readXcstrings(text, locale, side) {
   return messages;
 }
 
-function readScriptCatalog(text) {
-  const source = text
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/(^|[^:])\/\/.*$/gm, '$1');
-  if (/\.\.\.|=>|\bfunction\b/.test(source)) {
-    throw new Error('This dictionary uses code the zero-dependency check cannot read. Install dependencies and run nativeskill validate.');
-  }
-  const start = source.search(/\{/);
-  if (start < 0) throw new Error('No object literal in the dictionary file.');
+function readScriptCatalog(file, locale, exportName) {
   const messages = new Map();
-  let index = start;
-  const stack = [messages];
-  const path = [];
-  while (index < source.length) {
-    const rest = source.slice(index);
-    const keyMatch = rest.match(/^\s*(?:["']([^"']+)["']|([A-Za-z_$][\w$]*))\s*:/);
-    if (keyMatch && stack.at(-1) instanceof Map) {
-      const key = keyMatch[1] ?? keyMatch[2];
-      index += keyMatch[0].length;
-      const value = source.slice(index).match(/^\s*/);
-      index += value[0].length;
-      if (source[index] === '{') {
-        const child = new Map();
-        stack.at(-1).set([...path, key].join('.'), child);
-        stack.push(child);
-        path.push(key);
-        index += 1;
-        continue;
-      }
-      const string = source.slice(index).match(/^(["'`])([\s\S]*?)\1/);
-      if (!string) throw new Error('Only string values are supported in ' + [...path, key].join('.'));
-      stack.at(-1).set([...path, key].join('.'), { text: string[2] });
-      index += string[0].length;
-      continue;
-    }
-    if (source[index] === '}') {
-      stack.pop();
-      path.pop();
-      index += 1;
-      if (!stack.length) break;
-      continue;
-    }
-    index += 1;
-  }
-  const flat = new Map();
-  for (const [key, value] of messages) {
-    if (value instanceof Map) continue;
-    flat.set(key, value);
-  }
-  return groupSuffixPlurals(flat);
+  for (const [key, entry] of readDictionary(file, { exportName, locale })) messages.set(key, entry);
+  return groupSuffixPlurals(messages);
 }
 
-export function readCatalog(file, format, locale, side = 'target') {
-  const text = readFileSync(file, 'utf8');
+export function readCatalog(file, format, locale, side = 'target', exportName) {
   const detected = format === 'auto' ? detectFormat(file) : format;
+  if (detected === 'script') return readScriptCatalog(file, locale, exportName);
+  const text = readFileSync(file, 'utf8');
   if (detected === 'android') return readAndroid(text);
   if (detected === 'strings') return readStrings(text);
   if (detected === 'xcstrings') return readXcstrings(text, locale, side);
-  if (detected === 'script') return readScriptCatalog(text);
   return readJsonMessages(text);
 }
 
@@ -464,7 +421,7 @@ function detectFormat(file) {
   if (file.endsWith('.xml')) return 'android';
   if (file.endsWith('.strings')) return 'strings';
   if (file.endsWith('.xcstrings')) return 'xcstrings';
-  if (/\.(tsx?|jsx?|mjs|cjs)$/.test(file)) return 'script';
+  if (/\.(?:[cm]?tsx?|[cm]?jsx?)$/.test(file)) return 'script';
   return 'json';
 }
 
@@ -482,11 +439,11 @@ function comparePlural(source, target, locale, add, key) {
   }
 }
 
-export function checkCatalogs({ source, target, locale, sourceLocale = 'en', format = 'auto' }) {
+export function checkCatalogs({ source, target, locale, sourceLocale = 'en', format = 'auto', sourceExport, targetExport }) {
   if (!source || !target || !locale) throw new Error('Provide --source, --target, and --locale');
   const mode = format;
-  const left = readCatalog(source, mode, sourceLocale, 'source');
-  const right = readCatalog(target, mode, locale, 'target');
+  const left = readCatalog(source, mode, sourceLocale, 'source', sourceExport);
+  const right = readCatalog(target, mode, locale, 'target', targetExport);
   const findings = [];
   const add = (code, severity, key, message) => addFinding(findings, code, severity, key, message);
   const languageChanges = languageOf(sourceLocale) !== languageOf(locale);
@@ -494,7 +451,13 @@ export function checkCatalogs({ source, target, locale, sourceLocale = 'en', for
     const sourceMessage = left.get(key);
     const targetMessage = right.get(key);
     if (!sourceMessage) {
+      if (targetMessage.dynamic) continue;
       add('extra-key', 'warning', key, 'This key is absent from the source catalog.');
+      continue;
+    }
+    if (sourceMessage.dynamic || targetMessage?.dynamic) {
+      const entry = targetMessage?.dynamic ? targetMessage : sourceMessage;
+      add('dynamic-value', 'warning', key, 'Could not resolve this value without running code (' + entry.reason + '). Check it by hand.');
       continue;
     }
     if (!targetMessage || targetMessage.missing) {
@@ -528,10 +491,14 @@ function invokedDirectly() {
 }
 
 function printUsage() {
-  console.log(`Usage: node check.mjs --source <file> --target <file> --locale <tag> [--source-locale <tag>] [--format auto|json|android|strings|xcstrings] [--json]
+  console.log(`Usage: node check.mjs --source <file> --target <file> --locale <tag> [--source-locale <tag>]
+       [--format auto|json|android|strings|xcstrings|script] [--source-export <name>] [--target-export <name>] [--json]
 
 Checks missing and extra keys, placeholder changes, ICU syntax, CLDR plural categories, length blowups, and strings copied unchanged from the source.
-Formats: ARB, JSON, i18next, Android strings.xml, iOS .strings, and .xcstrings.`);
+Formats: ARB, JSON, i18next, Android strings.xml, iOS .strings, .xcstrings, and TS/JS dictionaries
+(typed objects, arrow functions, spreads and imported sections; read without running them).
+
+Exit codes: 0 no errors, 1 errors found, 2 wrong arguments, 3 a catalog could not be read.`);
 }
 
 if (invokedDirectly()) {
@@ -552,10 +519,12 @@ if (invokedDirectly()) {
         else if (name === '--locale') options.locale = value;
         else if (name === '--source-locale') options.sourceLocale = value;
         else if (name === '--format') options.format = value;
+        else if (name === '--source-export') options.sourceExport = value;
+        else if (name === '--target-export') options.targetExport = value;
         else throw new Error('Unknown argument ' + name);
       }
-      if (!['auto', 'json', 'android', 'strings', 'xcstrings'].includes(options.format)) {
-        throw new Error('Choose auto, json, android, strings, or xcstrings for --format');
+      if (!['auto', 'json', 'android', 'strings', 'xcstrings', 'script'].includes(options.format)) {
+        throw new Error('Choose auto, json, android, strings, xcstrings, or script for --format');
       }
       const result = checkCatalogs(options);
       if (options.json) console.log(JSON.stringify(result, null, 2));
@@ -568,7 +537,16 @@ if (invokedDirectly()) {
       if (result.errors) process.exitCode = 1;
     }
   } catch (error) {
-    console.error('nativeskill: ' + error.message);
-    process.exitCode = 2;
+    if (error instanceof DictionaryError || error instanceof SyntaxError || error.code === 'ENOENT') {
+      console.error('nativeskill: could not read the catalog. ' + error.message);
+      if (error instanceof DictionaryError) {
+        console.error('The checker reads plain objects, arrow functions, template literals, ternaries, spreads and imported sections. ' +
+          'For anything else, print the dictionary as JSON (node scripts/dict.mjs <file> --export <name> > target.json, or your own build step) and check the JSON.');
+      }
+      process.exitCode = EXIT.unreadable;
+    } else {
+      console.error('nativeskill: ' + error.message);
+      process.exitCode = EXIT.usage;
+    }
   }
 }
