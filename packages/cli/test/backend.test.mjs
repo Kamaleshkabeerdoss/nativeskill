@@ -59,9 +59,22 @@ test('bundled wording distinguishes draft, attestation, and gaps by locale and U
   assert.ok(tamil.entries.some(({ status, locale, match, source }) => (
     status === 'source-attested' && locale === 'ta' && match === 'language-script' && source.key === 'Log out'
   )));
-  assert.equal(lookupWording('ta', 'form.clear_input', 'button').wording.status, 'draft');
+  // A rejected machine translation sits next to the draft, so these are mixed, and nothing is attested.
+  for (const [concept, role, rejected] of [['form.clear_input', 'button', 'தெளிவு'], ['crm.sales_leads', 'navigation-label', 'வழிநடத்துகிறது'], ['navigation.go_back', 'button', 'மீண்டும்']]) {
+    const wording = lookupWording('ta', concept, role).wording;
+    assert.equal(wording.status, 'mixed', concept);
+    assert.ok(wording.entries.every(({ status }) => status === 'draft'), concept);
+    assert.ok(wording.entries.some(({ text, preferred }) => text === rejected && preferred === false), concept);
+  }
+  assert.equal(lookupWording('ta', 'navigation.go_back', 'button').wording.preferred.text, 'பின்செல்');
   assert.equal(lookupWording('ta', 'form.clear_input', 'tooltip').wording.status, 'source-attested');
-  assert.equal(lookupWording('ta', 'crm.sales_leads', 'navigation-label').wording.status, 'draft');
+  const genericError = lookupWording('ms', 'status.generic_error', 'status').wording;
+  assert.ok(genericError.entries.some(({ text, status, source }) => text === 'Ada masalah' && status === 'source-attested' && source.id === 'ooui'));
+  assert.ok(genericError.entries.some(({ text, preferred }) => text === 'Sesuatu telah berlaku' && preferred === false));
+  for (const [locale, concept, role] of [['vi', 'api.scope', 'field-label'], ['ar', 'auth.revoke_access', 'button'], ['ms', 'crm.sales_leads', 'navigation-label']]) {
+    const wording = lookupWording(locale, concept, role).wording;
+    assert.ok(wording.entries.length && wording.entries.every(({ status }) => status === 'draft'), locale + ' ' + concept + ' has only drafts');
+  }
   const renewal = lookupWording('ta', 'billing.stop_renewal', 'button').wording;
   assert.equal(renewal.status, 'draft');
   assert.ok(renewal.entries.every(({ status }) => status === 'draft'));

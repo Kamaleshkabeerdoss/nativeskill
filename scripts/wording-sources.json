@@ -62,6 +62,12 @@
         "Close",
         "dialog.dismiss",
         "accessible-name"
+      ],
+      [
+        "ooui-dialog-process-error",
+        "Something went wrong",
+        "status.generic_error",
+        "status"
       ]
     ]
   },

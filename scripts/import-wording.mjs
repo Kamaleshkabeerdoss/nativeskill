@@ -2,8 +2,13 @@
 import { copyFileSync, existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const upstream = process.argv[2];
-if (!upstream) throw new Error('Usage: node scripts/import-wording.mjs <extracted-upstream-directory>');
+// --only <id>[,<id>] re-imports those sources and keeps every other source's rows from the current corpus,
+// so one pinned archive is enough to refresh one source.
+const args = process.argv.slice(2);
+const onlyAt = args.indexOf('--only');
+const only = onlyAt >= 0 ? new Set(args.splice(onlyAt, 2)[1]?.split(',')) : null;
+const upstream = args[0];
+if (!upstream || (only && !only.size)) throw new Error('Usage: node scripts/import-wording.mjs <extracted-upstream-directory> [--only <source-id>]');
 const json = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const local = (path) => new URL(path, import.meta.url);
 const assets = (path) => local('../skills/nativeskill/assets/' + path);
@@ -27,10 +32,11 @@ function readMessages(path, format) {
 }
 
 const previousCorpus = existsSync(local('./wording-corpus.json')) ? json(local('./wording-corpus.json')) : {};
-const manualIds = new Set(sources.filter((source) => source.manual).map((source) => source.id));
+const manualIds = new Set(sources.filter((source) => source.manual || (only && !only.has(source.id))).map((source) => source.id));
+if (only) for (const id of only) if (!sources.some((source) => source.id === id)) throw new Error('Unknown source ' + id);
 const corpus = {};
 for (const source of sources) {
-  if (source.manual) continue;
+  if (manualIds.has(source.id)) continue;
   const { id, repo, revision, licenseFile, notice, terms, catalog, format } = source;
   const excluded = new Set((source.exclude ?? []).map(({ locale, key }) => locale + '\0' + key));
   const directory = join(upstream, repo.split('/').at(-1) + '-' + revision);

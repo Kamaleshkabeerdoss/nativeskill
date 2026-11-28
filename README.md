@@ -65,7 +65,7 @@ The Flutter and Android examples pass. The buggy Arabic catalog is supposed to f
 
 ## What is bundled
 
-110 languages and 449 regional profiles. Every one has CLDR plural categories and direction. Phrase coverage is narrower. 3,288 source-attested labels are bundled. 2,603 of those come from Wikimedia editor catalogs (OOUI, VisualEditor, the language picker). 685 come from Django, Flutter, Android, and devise-i18n. Drafts fill account, billing, permission, dialog, and form actions for the ten style-guide locales when no compatible catalog had the line. Drafts are not attestations. The provenance table is [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md).
+110 languages and 449 regional profiles. Every one has CLDR plural categories and direction. Phrase coverage is narrower. 3,379 source-attested labels are bundled. 2,694 of those come from Wikimedia editor catalogs (OOUI, VisualEditor, the language picker). 685 come from Django, Flutter, Android, and devise-i18n. Drafts fill account, billing, permission, dialog, and form actions for the ten style-guide locales when no compatible catalog had the line. Drafts are not attestations. The provenance table is [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md).
 
 Third-party strings keep their own licenses. See [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md) and [skills/nativeskill/THIRD_PARTY_NOTICES.md](skills/nativeskill/THIRD_PARTY_NOTICES.md). GPL and AGPL catalogs, including Telegram, are not bundled. Original NativeSkill material is [MIT](LICENSE).
 

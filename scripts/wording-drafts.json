@@ -1974,5 +1974,197 @@
     "text": "Daftar",
     "note": "Short Indonesian sign-up button, as common in Indonesian apps as devise's Mendaftar. Cited from Discourse's Indonesian catalog (GPL-2.0, so cited, not imported). Not a native-speaker review.",
     "url": "https://github.com/discourse/discourse/blob/ac77474119d494def39d3f7d24487d1cddfbac04/config/locales/client.id.yml#L239"
+  },
+  {
+    "locale": "ms",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "Prospek",
+    "note": "Draft for the CRM record of a potential customer (\"prospect\"). The link defines the English CRM term; the Malay word is not taken from it. Not a native-speaker review.",
+    "url": "https://help.zoho.com/portal/en/kb/crm/sales-force-automation/leads/articles/leads-26-4-2026"
+  },
+  {
+    "locale": "id",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "Prospek",
+    "note": "Draft for the CRM record of a potential customer. The link defines the English CRM term. Not a native-speaker review.",
+    "url": "https://help.zoho.com/portal/en/kb/crm/sales-force-automation/leads/articles/leads-26-4-2026"
+  },
+  {
+    "locale": "vi",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "Khách hàng tiềm năng",
+    "note": "Draft: \"potential customers\". Long for a nav item; check the control. The link defines the English CRM term.",
+    "url": "https://help.zoho.com/portal/en/kb/crm/sales-force-automation/leads/articles/leads-26-4-2026"
+  },
+  {
+    "locale": "ar",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "العملاء المحتملون",
+    "note": "Draft: \"potential customers\". The link defines the English CRM term. Not a native-speaker review.",
+    "url": "https://help.zoho.com/portal/en/kb/crm/sales-force-automation/leads/articles/leads-26-4-2026"
+  },
+  {
+    "locale": "th",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "ลูกค้าเป้าหมาย",
+    "note": "Draft: \"target customers\", a common Thai CRM rendering. The link defines the English CRM term. Not a native-speaker review.",
+    "url": "https://help.zoho.com/portal/en/kb/crm/sales-force-automation/leads/articles/leads-26-4-2026"
+  },
+  {
+    "locale": "ta",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "வழிநடத்துகிறது",
+    "note": "Machine translation of the verb \"leads\" (guides). Rejected for the CRM noun.",
+    "url": "https://help.zoho.com/portal/en/kb/crm/sales-force-automation/leads/articles/leads-26-4-2026"
+  },
+  {
+    "locale": "ar",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "الرصاص",
+    "note": "Means the metal lead (and bullets). Rejected.",
+    "url": "https://en.wiktionary.org/wiki/رصاص"
+  },
+  {
+    "locale": "vi",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "Dẫn đầu",
+    "note": "Means \"to lead / be in first place\". Rejected.",
+    "url": "https://en.wiktionary.org/wiki/dẫn_đầu"
+  },
+  {
+    "locale": "ms",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "Petunjuk",
+    "note": "Means \"clue, hint, instruction\". Rejected for the CRM noun.",
+    "url": "https://en.wiktionary.org/wiki/petunjuk"
+  },
+  {
+    "locale": "id",
+    "concept": "crm.sales_leads",
+    "role": "navigation-label",
+    "text": "Petunjuk",
+    "note": "Means \"clue, hint, instruction\". Rejected for the CRM noun.",
+    "url": "https://en.wiktionary.org/wiki/petunjuk"
+  },
+  {
+    "locale": "vi",
+    "concept": "api.scope",
+    "role": "field-label",
+    "text": "Phạm vi",
+    "note": "Draft: \"range, scope\". The RFC link defines OAuth scope; the dictionary link is the word. Not a native-speaker review.",
+    "url": "https://en.wiktionary.org/wiki/phạm_vi"
+  },
+  {
+    "locale": "id",
+    "concept": "api.scope",
+    "role": "field-label",
+    "text": "Cakupan",
+    "note": "Draft: \"coverage, range, scope\". Not a native-speaker review.",
+    "url": "https://en.wiktionary.org/wiki/cakupan"
+  },
+  {
+    "locale": "ar",
+    "concept": "api.scope",
+    "role": "field-label",
+    "text": "نطاق",
+    "note": "Draft: \"range, extent, scope\". Not a native-speaker review.",
+    "url": "https://en.wiktionary.org/wiki/نطاق"
+  },
+  {
+    "locale": "vi",
+    "concept": "api.scope",
+    "role": "field-label",
+    "text": "Ống kính",
+    "note": "Means a camera lens. Rejected.",
+    "url": "https://en.wiktionary.org/wiki/ống_kính"
+  },
+  {
+    "locale": "vi",
+    "concept": "auth.revoke_access",
+    "role": "button",
+    "text": "Thu hồi",
+    "note": "Draft: \"take back, retrieve\", the usual verb for revoking access. The RFC defines token revocation. Not a native-speaker review.",
+    "url": "https://en.wiktionary.org/wiki/thu_hồi"
+  },
+  {
+    "locale": "ar",
+    "concept": "auth.revoke_access",
+    "role": "button",
+    "text": "إبطال",
+    "note": "Draft: \"invalidation, annulment\". Distinct from the dialog Cancel word إلغاء. Not a native-speaker review.",
+    "url": "https://en.wiktionary.org/wiki/إبطال"
+  },
+  {
+    "locale": "th",
+    "concept": "auth.revoke_access",
+    "role": "button",
+    "text": "เพิกถอน",
+    "note": "Draft: formal \"revoke, abrogate\". Not a native-speaker review.",
+    "url": "https://en.wiktionary.org/wiki/เพิกถอน"
+  },
+  {
+    "locale": "ms",
+    "concept": "auth.revoke_access",
+    "role": "button",
+    "text": "Tarik balik akses",
+    "note": "Draft: \"take back access\". Not a native-speaker review.",
+    "url": "https://en.wiktionary.org/wiki/tarik_balik"
+  },
+  {
+    "locale": "id",
+    "concept": "auth.revoke_access",
+    "role": "button",
+    "text": "Cabut akses",
+    "note": "Draft: cabut is \"pull out, unplug\"; \"cabut akses\" is common for revoking access. Not a native-speaker review.",
+    "url": "https://en.wiktionary.org/wiki/cabut"
+  },
+  {
+    "locale": "ar",
+    "concept": "auth.revoke_access",
+    "role": "button",
+    "text": "إلغاء",
+    "note": "Dialog Cancel word (\"cancellation\"). Understood, but reserve it for dialog.cancel_action.",
+    "url": "https://en.wiktionary.org/wiki/إلغاء"
+  },
+  {
+    "locale": "ms",
+    "concept": "status.generic_error",
+    "role": "status",
+    "text": "Sesuatu telah berlaku",
+    "note": "Means \"something has happened\"; the failure is lost. OOUI's attested Ada masalah keeps it.",
+    "url": "https://github.com/wikimedia/oojs-ui/blob/2580161f7d921436502ec6a7547e4c45bff510e7/i18n/ms.json"
+  },
+  {
+    "locale": "ta",
+    "concept": "navigation.go_back",
+    "role": "button",
+    "text": "பின்செல்",
+    "note": "Draft Back button: பின் (back, rear) + செல் (go). Unreviewed. The pinned catalogs have no Tamil Back button.",
+    "url": "https://en.wiktionary.org/wiki/பின்"
+  },
+  {
+    "locale": "ta",
+    "concept": "navigation.go_back",
+    "role": "button",
+    "text": "மீண்டும்",
+    "note": "Means \"again\". Rejected for Back.",
+    "url": "https://en.wiktionary.org/wiki/மீண்டும்"
+  },
+  {
+    "locale": "ta",
+    "concept": "form.clear_input",
+    "role": "button",
+    "text": "தெளிவு",
+    "note": "The noun \"clarity\". Rejected for Clear.",
+    "url": "https://en.wiktionary.org/wiki/தெளிவு"
   }
 ]

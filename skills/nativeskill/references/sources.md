@@ -4,7 +4,7 @@ Every bundled label is either source-attested from a pinned file or a draft. Dra
 
 | Source id | Project | Revision | License | What we take |
 | --- | --- | --- | --- | --- |
-| `ooui` | wikimedia/oojs-ui | `2580161f7d921436502ec6a7547e4c45bff510e7` | MIT | Dialog, navigation, file, and retry buttons |
+| `ooui` | wikimedia/oojs-ui | `2580161f7d921436502ec6a7547e4c45bff510e7` | MIT | Dialog, navigation, file, and retry buttons; "Something went wrong" (`status.generic_error`) |
 | `visualeditor` | wikimedia/VisualEditor | `2a036d962beec1499db1bfcc375abbada048a80f` | MIT | Editing menu and find |
 | `visualeditor-mediawiki` | wikimedia/mediawiki-extensions-VisualEditor | `a10c727c981195b78b51fc758af53c5747abe1f8` | MIT | Edit, save, upload, publish |
 | `uls` | wikimedia/jquery.uls | `b7774c42131677bbbe039f4d76cba3d2a5cd438a` | MIT | Language search |
@@ -20,9 +20,13 @@ Notices are in `skills/nativeskill/licenses/`. Unicode CLDR metadata is under `L
 ## Left out on purpose
 
 - Telegram for Android was removed. Those strings are GPL-2.0-only and do not belong in this MIT repo. Account and billing lines that only existed there are drafts now.
+- MediaWiki's OAuth extension has revoke and scope strings, but it is GPL-2.0-or-later, so `auth.revoke_access` and `api.scope` are drafts. Their links are dictionary entries and the RFCs that define the English terms.
+- Discourse is GPL-2.0. Its Indonesian header uses `Daftar` for sign up; the Indonesian `Daftar` draft cites that line as usage evidence. Nothing from Discourse is vendored.
 - Pretix was not imported. The project is AGPL-3.0 with extra commercial terms.
 - Hindi Android `skip_button_label` means "not now", so it is not `navigation.skip_step`.
 - Hindi Django "This field is required." uses क्षेत्र (region) and is not a form-field error.
 - Tamil Settings `archive` is காப்பிடு, which means copy. It is not `item.archive`. The Tamil archive button is a draft: காப்பகப்படுத்து.
+
+Drafts can also be marked rejected (`preferred: false`) when a real catalog shipped them with the wrong sense: Tamil `மீண்டும்` (again) for Back, `தெளிவு` (clarity) for Clear, sales "lead" as `الرصاص` (the metal), `Dẫn đầu`, `Petunjuk`, Vietnamese `Ống kính` (lens) for scope, Malay `Sesuatu telah berlaku` for "Something went wrong". Their links point at a dictionary entry for the wrong sense.
 
 A `source-attested` hit means that product shipped those words for that action. It does not mean they are the most natural words for a different app. Read the locale note before you reuse a noun on a button.

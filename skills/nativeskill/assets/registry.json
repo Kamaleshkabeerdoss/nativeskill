@@ -4,7 +4,7 @@
   "languageCount": 110,
   "regionalLocaleCount": 449,
   "wordingLanguageCount": 107,
-  "wordingExampleCount": 3288,
+  "wordingExampleCount": 3379,
   "tagOwners": {
     "ta": "ta",
     "hi": "hi",
@@ -131,7 +131,7 @@
       "path": "locales/ta.json",
       "regionalProfiles": 4,
       "wordingStatus": "source-attested",
-      "wordingExamples": 45
+      "wordingExamples": 46
     },
     {
       "id": "hi",
@@ -140,7 +140,7 @@
       "path": "locales/hi.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 49
+      "wordingExamples": 50
     },
     {
       "id": "te",
@@ -149,7 +149,7 @@
       "path": "locales/te.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 31
+      "wordingExamples": 32
     },
     {
       "id": "ml",
@@ -158,7 +158,7 @@
       "path": "locales/ml.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 31
+      "wordingExamples": 32
     },
     {
       "id": "kn",
@@ -167,7 +167,7 @@
       "path": "locales/kn.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 29
+      "wordingExamples": 30
     },
     {
       "id": "bn",
@@ -176,7 +176,7 @@
       "path": "locales/bn.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "mr",
@@ -185,7 +185,7 @@
       "path": "locales/mr.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 29
+      "wordingExamples": 30
     },
     {
       "id": "gu",
@@ -194,7 +194,7 @@
       "path": "locales/gu.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 23
+      "wordingExamples": 24
     },
     {
       "id": "pa",
@@ -203,7 +203,7 @@
       "path": "locales/pa.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "ur",
@@ -212,7 +212,7 @@
       "path": "locales/ur.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 32
+      "wordingExamples": 33
     },
     {
       "id": "ne",
@@ -221,7 +221,7 @@
       "path": "locales/ne.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "si",
@@ -239,7 +239,7 @@
       "path": "locales/or.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 25
+      "wordingExamples": 26
     },
     {
       "id": "as",
@@ -248,7 +248,7 @@
       "path": "locales/as.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 25
+      "wordingExamples": 26
     },
     {
       "id": "sa",
@@ -275,7 +275,7 @@
       "path": "locales/sd.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 27
+      "wordingExamples": 28
     },
     {
       "id": "kok",
@@ -302,7 +302,7 @@
       "path": "locales/ks.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 25
+      "wordingExamples": 26
     },
     {
       "id": "zh",
@@ -311,7 +311,7 @@
       "path": "locales/zh.json",
       "regionalProfiles": 9,
       "wordingStatus": "source-attested",
-      "wordingExamples": 100
+      "wordingExamples": 102
     },
     {
       "id": "ja",
@@ -320,7 +320,7 @@
       "path": "locales/ja.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 56
+      "wordingExamples": 57
     },
     {
       "id": "ko",
@@ -329,7 +329,7 @@
       "path": "locales/ko.json",
       "regionalProfiles": 3,
       "wordingStatus": "source-attested",
-      "wordingExamples": 39
+      "wordingExamples": 40
     },
     {
       "id": "ms",
@@ -338,7 +338,7 @@
       "path": "locales/ms.json",
       "regionalProfiles": 6,
       "wordingStatus": "source-attested",
-      "wordingExamples": 52
+      "wordingExamples": 53
     },
     {
       "id": "id",
@@ -347,7 +347,7 @@
       "path": "locales/id.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 50
+      "wordingExamples": 51
     },
     {
       "id": "th",
@@ -356,7 +356,7 @@
       "path": "locales/th.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "vi",
@@ -365,7 +365,7 @@
       "path": "locales/vi.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "fil",
@@ -374,7 +374,7 @@
       "path": "locales/fil.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 24
+      "wordingExamples": 25
     },
     {
       "id": "my",
@@ -383,7 +383,7 @@
       "path": "locales/my.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 31
+      "wordingExamples": 32
     },
     {
       "id": "km",
@@ -392,7 +392,7 @@
       "path": "locales/km.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 32
+      "wordingExamples": 33
     },
     {
       "id": "lo",
@@ -410,7 +410,7 @@
       "path": "locales/jv.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 26
+      "wordingExamples": 27
     },
     {
       "id": "su",
@@ -419,7 +419,7 @@
       "path": "locales/su.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 21
+      "wordingExamples": 22
     },
     {
       "id": "ceb",
@@ -437,7 +437,7 @@
       "path": "locales/mn.json",
       "regionalProfiles": 3,
       "wordingStatus": "source-attested",
-      "wordingExamples": 25
+      "wordingExamples": 26
     },
     {
       "id": "bo",
@@ -464,7 +464,7 @@
       "path": "locales/ban.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 27
+      "wordingExamples": 28
     },
     {
       "id": "en",
@@ -473,7 +473,7 @@
       "path": "locales/en.json",
       "regionalProfiles": 124,
       "wordingStatus": "source-attested",
-      "wordingExamples": 56
+      "wordingExamples": 57
     },
     {
       "id": "fr",
@@ -482,7 +482,7 @@
       "path": "locales/fr.json",
       "regionalProfiles": 46,
       "wordingStatus": "source-attested",
-      "wordingExamples": 51
+      "wordingExamples": 52
     },
     {
       "id": "de",
@@ -491,7 +491,7 @@
       "path": "locales/de.json",
       "regionalProfiles": 7,
       "wordingStatus": "source-attested",
-      "wordingExamples": 51
+      "wordingExamples": 52
     },
     {
       "id": "es",
@@ -500,7 +500,7 @@
       "path": "locales/es.json",
       "regionalProfiles": 28,
       "wordingStatus": "source-attested",
-      "wordingExamples": 55
+      "wordingExamples": 56
     },
     {
       "id": "pt",
@@ -509,7 +509,7 @@
       "path": "locales/pt.json",
       "regionalProfiles": 12,
       "wordingStatus": "source-attested",
-      "wordingExamples": 51
+      "wordingExamples": 53
     },
     {
       "id": "it",
@@ -518,7 +518,7 @@
       "path": "locales/it.json",
       "regionalProfiles": 4,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "nl",
@@ -527,7 +527,7 @@
       "path": "locales/nl.json",
       "regionalProfiles": 7,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "ru",
@@ -536,7 +536,7 @@
       "path": "locales/ru.json",
       "regionalProfiles": 6,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "uk",
@@ -545,7 +545,7 @@
       "path": "locales/uk.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "pl",
@@ -554,7 +554,7 @@
       "path": "locales/pl.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "sv",
@@ -563,7 +563,7 @@
       "path": "locales/sv.json",
       "regionalProfiles": 3,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "no",
@@ -572,7 +572,7 @@
       "path": "locales/no.json",
       "regionalProfiles": 4,
       "wordingStatus": "source-attested",
-      "wordingExamples": 62
+      "wordingExamples": 64
     },
     {
       "id": "da",
@@ -581,7 +581,7 @@
       "path": "locales/da.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "fi",
@@ -590,7 +590,7 @@
       "path": "locales/fi.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "is",
@@ -599,7 +599,7 @@
       "path": "locales/is.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 31
+      "wordingExamples": 32
     },
     {
       "id": "el",
@@ -608,7 +608,7 @@
       "path": "locales/el.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "cs",
@@ -617,7 +617,7 @@
       "path": "locales/cs.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "sk",
@@ -626,7 +626,7 @@
       "path": "locales/sk.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 33
+      "wordingExamples": 34
     },
     {
       "id": "hu",
@@ -635,7 +635,7 @@
       "path": "locales/hu.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "ro",
@@ -644,7 +644,7 @@
       "path": "locales/ro.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 36
+      "wordingExamples": 37
     },
     {
       "id": "bg",
@@ -653,7 +653,7 @@
       "path": "locales/bg.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 32
+      "wordingExamples": 33
     },
     {
       "id": "hr",
@@ -662,7 +662,7 @@
       "path": "locales/hr.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "sr",
@@ -671,7 +671,7 @@
       "path": "locales/sr.json",
       "regionalProfiles": 8,
       "wordingStatus": "source-attested",
-      "wordingExamples": 41
+      "wordingExamples": 42
     },
     {
       "id": "bs",
@@ -680,7 +680,7 @@
       "path": "locales/bs.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 31
+      "wordingExamples": 32
     },
     {
       "id": "sl",
@@ -689,7 +689,7 @@
       "path": "locales/sl.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "sq",
@@ -698,7 +698,7 @@
       "path": "locales/sq.json",
       "regionalProfiles": 3,
       "wordingStatus": "source-attested",
-      "wordingExamples": 32
+      "wordingExamples": 33
     },
     {
       "id": "mk",
@@ -707,7 +707,7 @@
       "path": "locales/mk.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "lt",
@@ -716,7 +716,7 @@
       "path": "locales/lt.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "lv",
@@ -725,7 +725,7 @@
       "path": "locales/lv.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "et",
@@ -734,7 +734,7 @@
       "path": "locales/et.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 33
+      "wordingExamples": 34
     },
     {
       "id": "ca",
@@ -743,7 +743,7 @@
       "path": "locales/ca.json",
       "regionalProfiles": 4,
       "wordingStatus": "source-attested",
-      "wordingExamples": 33
+      "wordingExamples": 34
     },
     {
       "id": "eu",
@@ -752,7 +752,7 @@
       "path": "locales/eu.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 31
+      "wordingExamples": 32
     },
     {
       "id": "gl",
@@ -761,7 +761,7 @@
       "path": "locales/gl.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "ga",
@@ -779,7 +779,7 @@
       "path": "locales/cy.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "mt",
@@ -797,7 +797,7 @@
       "path": "locales/lb.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 31
+      "wordingExamples": 32
     },
     {
       "id": "be",
@@ -806,7 +806,7 @@
       "path": "locales/be.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 50
+      "wordingExamples": 52
     },
     {
       "id": "ar",
@@ -815,7 +815,7 @@
       "path": "locales/ar.json",
       "regionalProfiles": 28,
       "wordingStatus": "source-attested",
-      "wordingExamples": 58
+      "wordingExamples": 59
     },
     {
       "id": "he",
@@ -824,7 +824,7 @@
       "path": "locales/he.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "fa",
@@ -833,7 +833,7 @@
       "path": "locales/fa.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 38
+      "wordingExamples": 39
     },
     {
       "id": "tr",
@@ -842,7 +842,7 @@
       "path": "locales/tr.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "ku",
@@ -851,7 +851,7 @@
       "path": "locales/ku.json",
       "regionalProfiles": 5,
       "wordingStatus": "source-attested",
-      "wordingExamples": 57
+      "wordingExamples": 58
     },
     {
       "id": "ps",
@@ -860,7 +860,7 @@
       "path": "locales/ps.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 29
+      "wordingExamples": 30
     },
     {
       "id": "az",
@@ -869,7 +869,7 @@
       "path": "locales/az.json",
       "regionalProfiles": 3,
       "wordingStatus": "source-attested",
-      "wordingExamples": 35
+      "wordingExamples": 36
     },
     {
       "id": "kk",
@@ -878,7 +878,7 @@
       "path": "locales/kk.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 33
+      "wordingExamples": 34
     },
     {
       "id": "uz",
@@ -896,7 +896,7 @@
       "path": "locales/ky.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "tk",
@@ -905,7 +905,7 @@
       "path": "locales/tk.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 21
+      "wordingExamples": 22
     },
     {
       "id": "tg",
@@ -923,7 +923,7 @@
       "path": "locales/hy.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     },
     {
       "id": "ka",
@@ -932,7 +932,7 @@
       "path": "locales/ka.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 31
+      "wordingExamples": 32
     },
     {
       "id": "ug",
@@ -950,7 +950,7 @@
       "path": "locales/yi.json",
       "regionalProfiles": 3,
       "wordingStatus": "source-attested",
-      "wordingExamples": 24
+      "wordingExamples": 25
     },
     {
       "id": "sw",
@@ -968,7 +968,7 @@
       "path": "locales/af.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 30
+      "wordingExamples": 31
     },
     {
       "id": "am",
@@ -986,7 +986,7 @@
       "path": "locales/so.json",
       "regionalProfiles": 4,
       "wordingStatus": "source-attested",
-      "wordingExamples": 29
+      "wordingExamples": 30
     },
     {
       "id": "ha",
@@ -995,7 +995,7 @@
       "path": "locales/ha.json",
       "regionalProfiles": 5,
       "wordingStatus": "source-attested",
-      "wordingExamples": 22
+      "wordingExamples": 23
     },
     {
       "id": "yo",
@@ -1013,7 +1013,7 @@
       "path": "locales/ig.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 27
+      "wordingExamples": 28
     },
     {
       "id": "zu",
@@ -1040,7 +1040,7 @@
       "path": "locales/mg.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 25
+      "wordingExamples": 26
     },
     {
       "id": "rw",
@@ -1049,7 +1049,7 @@
       "path": "locales/rw.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 23
+      "wordingExamples": 24
     },
     {
       "id": "om",
@@ -1058,7 +1058,7 @@
       "path": "locales/om.json",
       "regionalProfiles": 2,
       "wordingStatus": "source-attested",
-      "wordingExamples": 23
+      "wordingExamples": 24
     },
     {
       "id": "sn",
@@ -1067,7 +1067,7 @@
       "path": "locales/sn.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 21
+      "wordingExamples": 22
     },
     {
       "id": "wo",
@@ -1112,7 +1112,7 @@
       "path": "locales/eo.json",
       "regionalProfiles": 1,
       "wordingStatus": "source-attested",
-      "wordingExamples": 34
+      "wordingExamples": 35
     }
   ]
 }

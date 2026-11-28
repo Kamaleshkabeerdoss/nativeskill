@@ -43,5 +43,18 @@
   {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Padam", "preferred": true, "note": "Preferred Delete (draft). Owner choice, matches Google/Microsoft Malaysian UI."},
   {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Buang", "preferred": false, "note": "Owner choice, matches Google/Microsoft Malaysian UI. Prefer Padam. Buang reads as throw away."},
   {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Hapuskan", "preferred": false, "note": "Owner choice, matches Google/Microsoft Malaysian UI. Prefer Padam. Hapuskan reads as abolish and sits close to Indonesian Hapus."},
-  {"locale": "id", "concept": "auth.create_account", "role": "button", "text": "Daftar", "preferred": true, "note": "Preferred short sign-up button. Mendaftar (devise) is also correct Indonesian; do not flag either."}
+  {"locale": "id", "concept": "auth.create_account", "role": "button", "text": "Daftar", "preferred": true, "note": "Preferred short sign-up button. Mendaftar (devise) is also correct Indonesian; do not flag either."},
+  {"locale": "ta", "concept": "crm.sales_leads", "role": "navigation-label", "text": "வழிநடத்துகிறது", "preferred": false, "note": "Rejected. Machine translation of the verb \"leads\" (guides). Rejected for the CRM noun."},
+  {"locale": "ar", "concept": "crm.sales_leads", "role": "navigation-label", "text": "الرصاص", "preferred": false, "note": "Rejected. Means the metal lead (and bullets). Rejected."},
+  {"locale": "vi", "concept": "crm.sales_leads", "role": "navigation-label", "text": "Dẫn đầu", "preferred": false, "note": "Rejected. Means \"to lead / be in first place\". Rejected."},
+  {"locale": "ms", "concept": "crm.sales_leads", "role": "navigation-label", "text": "Petunjuk", "preferred": false, "note": "Rejected. Means \"clue, hint, instruction\". Rejected for the CRM noun."},
+  {"locale": "id", "concept": "crm.sales_leads", "role": "navigation-label", "text": "Petunjuk", "preferred": false, "note": "Rejected. Means \"clue, hint, instruction\". Rejected for the CRM noun."},
+  {"locale": "vi", "concept": "api.scope", "role": "field-label", "text": "Ống kính", "preferred": false, "note": "Rejected. Means a camera lens. Rejected."},
+  {"locale": "ar", "concept": "auth.revoke_access", "role": "button", "text": "إلغاء", "preferred": false, "note": "Rejected. Dialog Cancel word (\"cancellation\"). Understood, but reserve it for dialog.cancel_action."},
+  {"locale": "ms", "concept": "status.generic_error", "role": "status", "text": "Sesuatu telah berlaku", "preferred": false, "note": "Rejected. Means \"something has happened\"; the failure is lost. OOUI's attested Ada masalah keeps it."},
+  {"locale": "ta", "concept": "navigation.go_back", "role": "button", "text": "மீண்டும்", "preferred": false, "note": "Rejected. Means \"again\". Rejected for Back."},
+  {"locale": "ta", "concept": "form.clear_input", "role": "button", "text": "தெளிவு", "preferred": false, "note": "Rejected. The noun \"clarity\". Rejected for Clear."},
+  {"locale": "ar", "concept": "auth.revoke_access", "role": "button", "text": "إبطال", "preferred": true, "note": "Preferred revoke (draft). إلغاء is the dialog Cancel word."},
+  {"locale": "vi", "concept": "api.scope", "role": "field-label", "text": "Phạm vi", "preferred": true, "note": "Preferred scope (draft). Ống kính is a camera lens."},
+  {"locale": "ta", "concept": "navigation.go_back", "role": "button", "text": "பின்செல்", "preferred": true, "note": "Preferred Back button (draft). மீண்டும் means again."}
 ]
