@@ -1,0 +1,236 @@
+{
+  "schema": 1,
+  "$comment": "Wrong-word patterns for check.mjs (code wrong-word). Each pattern fires when the target locale's language is in `locales`, the English matches `source` (if given), and the translation matches `target`. `short` limits it to button-like strings (2 words or fewer, no sentence punctuation). `fileMix` patterns fire when two forms are used in one catalog. Suggestions marked draft are not source-attested.",
+  "patterns": [
+    {
+      "id": "renewal-uses-dialog-cancel",
+      "locales": [
+        "ms",
+        "id",
+        "ar",
+        "zh",
+        "ja",
+        "de",
+        "ta",
+        "hi"
+      ],
+      "source": "\\bcancel\\w*\\b.*\\b(?:period|renew\\w*|subscription|plan|billing|trial)\\b|\\b(?:subscription|plan|renewal)\\b.*\\bcancel",
+      "target": "^\\s*(?:Batal|إلغاء|取消|キャンセル|Abbrechen|ரத்துசெய்|रद्द करें)(?=[\\s.,:]|$)",
+      "message": "A subscription or renewal string uses the dialog Cancel word, which reads as \"close this dialog\". Say what stops: the renewal, or that it ends at the period.",
+      "suggest": {
+        "ms": "Akan dibatalkan pada akhir tempoh / Hentikan pembaharuan automatik (draft)",
+        "id": "Berakhir pada akhir periode (draft)"
+      }
+    },
+    {
+      "id": "ar-download-is-upload",
+      "locales": [
+        "ar"
+      ],
+      "source": "\\bdownload",
+      "target": "تحميل",
+      "message": "تحميل is read as upload or loading. Download is تنزيل.",
+      "suggest": {
+        "ar": "تنزيل"
+      }
+    },
+    {
+      "id": "zh-filter-device",
+      "locales": [
+        "zh"
+      ],
+      "source": "\\bfilter",
+      "target": "过滤器|過濾器",
+      "message": "过滤器 is a physical or technical filter. UI filtering is 筛选 (Simplified) or 篩選 (Traditional).",
+      "suggest": {
+        "zh": "筛选 / 篩選"
+      }
+    },
+    {
+      "id": "ta-archive-is-copy",
+      "locales": [
+        "ta"
+      ],
+      "source": "\\barchiv",
+      "target": "காப்பிடு",
+      "message": "காப்பிடு means copy. The archive verb is காப்பகப்படுத்து (draft).",
+      "suggest": {
+        "ta": "காப்பகப்படுத்து (draft)"
+      }
+    },
+    {
+      "id": "hi-skip-is-not-now",
+      "locales": [
+        "hi"
+      ],
+      "source": "\\b(?:skip|deny)\\b",
+      "target": "अभी नहीं",
+      "message": "अभी नहीं means \"not now\". It is neither skip nor deny.",
+      "suggest": {
+        "hi": "छोड़ें (skip, draft) / अस्वीकार करें (deny, draft)"
+      }
+    },
+    {
+      "id": "de-sie-glued-to-infinitive",
+      "locales": [
+        "de"
+      ],
+      "short": true,
+      "target": "^\\s*\\p{Lu}\\p{Ll}+(?:en|ern|eln) Sie\\b",
+      "message": "A button is an infinitive (Speichern), not a command with Sie (Speichern Sie).",
+      "suggest": {
+        "de": "the bare infinitive"
+      }
+    },
+    {
+      "id": "ja-button-is-a-sentence",
+      "locales": [
+        "ja"
+      ],
+      "short": true,
+      "target": "(?:します|してください|しましょう)[。]?$",
+      "message": "A Japanese button is a noun or dictionary form (保存), not a polite sentence (保存します).",
+      "suggest": {
+        "ja": "drop します / してください"
+      }
+    },
+    {
+      "id": "zh-nin-and-ni-in-one-string",
+      "locales": [
+        "zh"
+      ],
+      "target": "您[\\s\\S]*你|你[\\s\\S]*您",
+      "message": "One string uses both 您 and 你. Pick one form for the whole product.",
+      "suggest": {
+        "zh": "您 or 你, as the rest of the file"
+      }
+    },
+    {
+      "id": "ms-indonesian-word",
+      "locales": [
+        "ms"
+      ],
+      "target": "\\b(?:Unduh|Hapus|Kata sandi|Unggah)\\b",
+      "message": "Indonesian word in a Malay file. (Daftar is fine in both languages.)",
+      "suggest": {
+        "ms": "Muat turun / Padam / Kata laluan / Muat naik"
+      }
+    },
+    {
+      "id": "ta-back-means-again",
+      "locales": [
+        "ta"
+      ],
+      "source": "^\\s*(?:go )?back\\s*$",
+      "target": "மீண்டும்",
+      "message": "மீண்டும் means \"again\", not Back.",
+      "suggest": {
+        "ta": "பின்செல் (draft)"
+      }
+    },
+    {
+      "id": "ta-clear-means-clarity",
+      "locales": [
+        "ta"
+      ],
+      "source": "^\\s*clear(?: all| filters?| search| text)?\\s*$",
+      "target": "^\\s*தெளிவு",
+      "message": "தெளிவு is the noun \"clarity\". Clear (empty a field or filters) is the verb அழி.",
+      "suggest": {
+        "ta": "அழி (draft)"
+      }
+    },
+    {
+      "id": "ms-generic-error-loses-wrong",
+      "locales": [
+        "ms"
+      ],
+      "source": "something went wrong",
+      "target": "sesuatu (?:telah )?berlaku",
+      "message": "\"Sesuatu telah berlaku\" means \"something has happened\"; the error is lost.",
+      "suggest": {
+        "ms": "Ada masalah (OOUI, attested) / Berlaku ralat (draft)"
+      }
+    },
+    {
+      "id": "vi-scope-is-camera-lens",
+      "locales": [
+        "vi"
+      ],
+      "source": "\\bscopes?\\b",
+      "target": "ống kính",
+      "message": "Ống kính is a camera lens. An API or OAuth scope is phạm vi (draft).",
+      "suggest": {
+        "vi": "phạm vi (draft)"
+      }
+    },
+    {
+      "id": "lead-as-metal-verb-or-clue",
+      "locales": [
+        "ar",
+        "ta",
+        "vi",
+        "ms",
+        "id"
+      ],
+      "source": "\\bleads?\\b(?! to| the way)",
+      "target": "رصاص|الرصاص|வழிநடத்து|தடங்|dẫn đầu|petunjuk",
+      "message": "Sales \"lead\" (a potential customer) was translated as the metal, the verb \"to lead\", \"tracks\" or \"clue\".",
+      "suggest": {
+        "ar": "عملاء محتملون (draft)",
+        "ta": "சாத்தியமான வாடிக்கையாளர்கள் (draft)",
+        "vi": "khách hàng tiềm năng (draft)",
+        "ms": "prospek (draft)",
+        "id": "prospek (draft)"
+      }
+    },
+    {
+      "id": "ar-revoke-uses-cancel-word",
+      "locales": [
+        "ar"
+      ],
+      "source": "\\brevok",
+      "target": "^\\s*إلغاء",
+      "message": "إلغاء is the dialog Cancel word. Revoking a token or access reads better as إبطال or سحب.",
+      "suggest": {
+        "ar": "إبطال (draft)"
+      }
+    },
+    {
+      "id": "id-renews-on-without-on",
+      "locales": [
+        "id"
+      ],
+      "source": "^\\s*renews on\\b",
+      "target": "^\\s*Memperbarui\\s*$",
+      "message": "A date follows this label. \"Memperbarui\" is \"renewing\" with no \"on\".",
+      "suggest": {
+        "id": "Diperbarui pada (draft)"
+      }
+    }
+  ],
+  "fileMix": [
+    {
+      "id": "de-du-and-sie",
+      "locales": [
+        "de"
+      ],
+      "forms": {
+        "du": "\\b(?:du|dich|dir|dein\\w*)\\b",
+        "Sie": "\\b(?:Ihnen|Ihr(?:e|en|er|es)?)\\b|(?<!^|[.!?:]\\s)\\bSie\\b"
+      },
+      "message": "The file mixes du and Sie. Use one form everywhere."
+    },
+    {
+      "id": "zh-nin-and-ni",
+      "locales": [
+        "zh"
+      ],
+      "forms": {
+        "您": "您",
+        "你": "你"
+      },
+      "message": "The file mixes 您 and 你. Use one form everywhere."
+    }
+  ]
+}

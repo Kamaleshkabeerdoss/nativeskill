@@ -561,9 +561,9 @@
     {
       "id": "ta-back-means-again",
       "fix": 7,
-      "layer": "agent",
+      "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ta"
       ],
@@ -572,14 +572,20 @@
       ],
       "current": "மீண்டும்",
       "suggested": "பின்செல்",
-      "note": "மீண்டும் means 'again'. lookup.mjs ta navigation.go_back only has the tooltip 'முந்தைய பக்கம்', so the button is uncovered."
+      "note": "மீண்டும் means 'again'. lookup.mjs ta navigation.go_back only has the tooltip 'முந்தைய பக்கம்', so the button is uncovered.",
+      "today": null,
+      "want": {
+        "code": "wrong-word",
+        "severity": "warning",
+        "pattern": "ta-back-means-again"
+      }
     },
     {
       "id": "ta-clear-means-clarity",
       "fix": 7,
-      "layer": "agent",
+      "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ta"
       ],
@@ -588,14 +594,20 @@
       ],
       "current": "தெளிவு",
       "suggested": "அழி",
-      "note": "தெளிவு is the noun 'clarity'. lookup.mjs ta form.clear_input points at the அழி verb, so the data would have helped if the agent looked it up."
+      "note": "தெளிவு is the noun 'clarity'. lookup.mjs ta form.clear_input points at the அழி verb, so the data would have helped if the agent looked it up.",
+      "today": null,
+      "want": {
+        "code": "wrong-word",
+        "severity": "warning",
+        "pattern": "ta-clear-means-clarity"
+      }
     },
     {
       "id": "lead-mistranslated",
       "fix": 7,
-      "layer": "agent",
+      "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "hits": {
         "ta": [
           "nav.leads",
@@ -615,14 +627,20 @@
           "api.scopeLeadsRead"
         ]
       },
-      "note": "Sales 'lead' rendered as the verb 'to lead' (ta வழிநடத்துகிறது), 'tracks' (ta தடங்கள்), the metal lead (ar الرصاص), 'leading' (vi dẫn đầu) and 'clue' (ms/id petunjuk). crm.sales_leads exists in concepts.json but only ta has a (draft) entry."
+      "note": "Sales 'lead' rendered as the verb 'to lead' (ta வழிநடத்துகிறது), 'tracks' (ta தடங்கள்), the metal lead (ar الرصاص), 'leading' (vi dẫn đầu) and 'clue' (ms/id petunjuk). crm.sales_leads exists in concepts.json but only ta has a (draft) entry.",
+      "today": null,
+      "want": {
+        "code": "wrong-word",
+        "severity": "warning",
+        "pattern": "lead-as-metal-verb-or-clue"
+      }
     },
     {
       "id": "vi-scopes-means-camera-lens",
       "fix": 7,
-      "layer": "agent",
+      "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "vi"
       ],
@@ -631,14 +649,20 @@
       ],
       "current": "Ống kính {n}",
       "suggested": "{n} phạm vi",
-      "note": "Ống kính is a camera lens. Also count-after-noun."
+      "note": "Ống kính is a camera lens. Also count-after-noun.",
+      "today": null,
+      "want": {
+        "code": "wrong-word",
+        "severity": "warning",
+        "pattern": "vi-scope-is-camera-lens"
+      }
     },
     {
       "id": "ms-generic-error-loses-wrong",
-      "fix": 6,
-      "layer": "agent",
+      "fix": 7,
+      "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ms"
       ],
@@ -647,14 +671,20 @@
       ],
       "current": "Sesuatu telah berlaku.",
       "suggested": "Berlaku ralat.",
-      "note": "Back-translates as 'Something has happened.' No status.error concept exists in the data."
+      "note": "Back-translates as 'Something has happened.' No status.error concept exists in the data.",
+      "today": null,
+      "want": {
+        "code": "wrong-word",
+        "severity": "warning",
+        "pattern": "ms-generic-error-loses-wrong"
+      }
     },
     {
       "id": "ar-revoke-uses-cancel-word",
       "fix": 7,
-      "layer": "agent",
+      "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ar"
       ],
@@ -663,14 +693,20 @@
       ],
       "current": "إلغاء",
       "suggested": "إبطال",
-      "note": "Minor. إلغاء is understood, but ar.md already reserves it for dialog cancel; a token revoke reads better as إبطال. There is no revoke concept in the data."
+      "note": "Minor. إلغاء is understood, but ar.md already reserves it for dialog cancel; a token revoke reads better as إبطال. There is no revoke concept in the data.",
+      "today": null,
+      "want": {
+        "code": "wrong-word",
+        "severity": "warning",
+        "pattern": "ar-revoke-uses-cancel-word"
+      }
     },
     {
       "id": "ms-status-uses-dialog-cancel",
       "fix": 7,
-      "layer": "agent",
+      "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ms"
       ],
@@ -679,14 +715,20 @@
       ],
       "current": "Batal pada akhir tempoh",
       "suggested": "Akan dibatalkan pada akhir tempoh",
-      "note": "The skill's own first checklist item (renewal control uses the dialog Cancel word). Agent-layer today."
+      "note": "The skill's own first checklist item (renewal control uses the dialog Cancel word). Agent-layer today.",
+      "today": null,
+      "want": {
+        "code": "wrong-word",
+        "severity": "warning",
+        "pattern": "renewal-uses-dialog-cancel"
+      }
     },
     {
       "id": "id-renews-on-truncated",
       "fix": 7,
-      "layer": "agent",
+      "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "id"
       ],
@@ -695,7 +737,13 @@
       ],
       "current": "Memperbarui",
       "suggested": "Diperbarui pada",
-      "note": "A date follows the label; 'Memperbarui' is 'renewing' with no 'on'."
+      "note": "A date follows the label; 'Memperbarui' is 'renewing' with no 'on'.",
+      "today": null,
+      "want": {
+        "code": "wrong-word",
+        "severity": "warning",
+        "pattern": "id-renews-on-without-on"
+      }
     }
   ]
 }

@@ -113,19 +113,23 @@ Do this after the first draft and before the report. The check script cannot hea
 
 ## Audit checklist
 
-On an audit, check every locale for these even when the string is grammatical:
+Each line is a test. `check.mjs` reports the ones it can see as `wrong-word` with the pattern id in brackets ([assets/audit-patterns.json](assets/audit-patterns.json)); the rest you check by reading. On an audit, go through every locale even when the string is grammatical.
 
-- The subscription or renewal control uses the same word as dialog Cancel.
-- Arabic download is `تحميل` (that is upload or loading). Download is `تنزيل`.
-- Chinese filters say `过滤器`. UI says `筛选` or `篩選`.
-- Tamil archive is `காப்பிடு` (that means copy).
-- Hindi skip or deny is `अभी नहीं` (that means not now).
-- German has `Sie` glued to an infinitive (`Herunterladen Sie`) or `du` next to `Sie`.
-- Japanese buttons end in `します` or `してください`.
-- One Chinese sentence uses both `您` and `你`.
-- A Malay file uses Indonesian `Unduh`, `Hapus`, or `Kata sandi`. (`Daftar` is a correct sign-up button in Malay and in Indonesian.)
-- A placeholder was translated or dropped (`{name}`, `{amount}`, `%1$s`, `{{name}}`).
-- A whole English sentence is still in a non-English file, and it is not a brand.
+- FLAG if a subscription or renewal string uses the dialog Cancel word (`Batal`, `إلغاء`, `取消`, `キャンセル`, `Abbrechen`, `ரத்துசெய்`, `रद्द करें`). `[renewal-uses-dialog-cancel]`
+- FLAG if Arabic download is `تحميل` (upload or loading). Download is `تنزيل`. `[ar-download-is-upload]`
+- FLAG if Chinese UI filtering says `过滤器`. Use `筛选` or `篩選`. `[zh-filter-device]`
+- FLAG if Tamil archive is `காப்பிடு` (copy). `[ta-archive-is-copy]`
+- FLAG if Hindi skip or deny is `अभी नहीं` (not now). `[hi-skip-is-not-now]`
+- FLAG if a German button glues `Sie` to an infinitive (`Herunterladen Sie`), or the file mixes `du` and `Sie`. `[de-sie-glued-to-infinitive]` `[de-du-and-sie]`
+- FLAG if a Japanese button ends in `します` or `してください`. `[ja-button-is-a-sentence]`
+- FLAG if Chinese uses both `您` and `你`, in one string or one file. `[zh-nin-and-ni-in-one-string]` `[zh-nin-and-ni]`
+- FLAG if a Malay file uses Indonesian `Unduh`, `Hapus`, `Unggah` or `Kata sandi`. Do not flag `Daftar`: it is correct in Malay and in Indonesian. `[ms-indonesian-word]`
+- FLAG if a word has the wrong sense for the product: Tamil Back as `மீண்டும்` (again), Clear as `தெளிவு` (clarity); sales "lead" as the metal, "to lead", "tracks" or "clue" (`رصاص`, `வழிநடத்து`, `தடங்`, `dẫn đầu`, `petunjuk`); Vietnamese scope as `Ống kính` (camera lens); Malay "Something went wrong" as `Sesuatu telah berlaku` (something happened); Arabic revoke as `إلغاء`; Indonesian "Renews on" as a bare `Memperbarui`. The pattern ids are in the JSON.
+- FLAG if a placeholder was translated or dropped (`{name}`, `{amount}`, `%1$s`, `{{name}}`). `placeholder-mismatch`
+- FLAG if a whole English sentence, an English branch of a function, or `(s)` is still in a non-English file, and it is not a brand in `keepEnglish`. `possible-source-copy`, `english-in-branch`, `english-residue`
+- FLAG if a count sits after its noun in ms, id, vi, fil or ar, or has no classifier in Thai. `count-noun-order`
+
+A pattern that does not fit your product (a brand that happens to match) goes in `.nativeskillrc` `ignoreKeys`, and the report says so. `--no-audit` turns the patterns off.
 
 ## Report
 

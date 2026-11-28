@@ -39,6 +39,7 @@ function wantCode(entry) {
     const found = findingsFor(run(locale, options, entry.input), key).filter((f) => f.code === entry.want.code);
     assert.ok(found.length, `${locale} ${key} should report ${entry.want.code}`);
     if (entry.want.severity) assert.equal(found[0].severity, entry.want.severity, `${locale} ${key} severity`);
+    if (entry.want.pattern) assert.ok(found.some((f) => f.message.includes('[' + entry.want.pattern + ']')), `${locale} ${key} names ${entry.want.pattern}`);
   }
   for (const [locale, keys] of Object.entries(entry.mustNotFlag ?? {})) {
     const flagged = run(locale, options, entry.input).findings.filter((f) => f.code === entry.want.code && (keys.includes('*') || keys.includes(f.key)));

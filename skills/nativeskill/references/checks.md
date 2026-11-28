@@ -80,6 +80,7 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `hand-rolled-plural` | warning | The source picks a form with `n === 1 ? … : …` and the target locale has more than two plural forms (Arabic, Russian, Polish…), while the translation has fewer forms than the locale needs. Use ICU or `Intl.PluralRules`. |
 | `source-changed` | warning | With `--old-source <previous English>`: the English changed after this was translated and the translation was not updated. |
 | `term-inconsistent` | warning | With `--glossary <file>`: the translation does not use the glossary term for this locale, or uses a rejected one. |
+| `wrong-word` | warning | A known wrong sense from the audit checklist in [assets/audit-patterns.json](../assets/audit-patterns.json): the dialog Cancel word on a renewal, Arabic `تحميل` for download, Tamil `மீண்டும்` for Back, sales "lead" as the metal, and others. The message ends with the pattern id and a suggestion; suggestions marked draft are not attested. `--no-audit` turns these off. |
 
 ### Stale strings and glossary
 

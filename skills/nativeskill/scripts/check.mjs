@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { DictionaryError, readDictionary } from './dict.mjs';
 import { applySettings, resolveSettings } from './config.mjs';
 import { formatText, summarize } from './report.mjs';
+import { auditCatalog } from './audit.mjs';
 import { checkBranches, checkGlossary, checkSourceChanged, readGlossary, textChecks } from './checks.mjs';
 
 export const EXIT = { ok: 0, findings: 1, usage: 2, unreadable: 3 };
@@ -501,6 +502,7 @@ export function checkCatalogs(options) {
   }
   if (settings.oldSource) checkSourceChanged(readCatalog(settings.oldSource, mode, sourceLocale, 'source', sourceExport), left, right, add);
   checkGlossary(readGlossary(settings.glossary), left, right, locale, add);
+  if (languageChanges && options.audit !== false) auditCatalog(left, right, locale, add);
   findings.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
   const { kept, suppressed } = applySettings(findings, settings, (key) => left.get(key)?.text ?? null);
   const errors = kept.filter(({ severity }) => severity === 'error').length;
@@ -523,7 +525,7 @@ function printUsage() {
   console.log(`Usage: node check.mjs --source <file> --target <file> --locale <tag> [--source-locale <tag>]
        [--format auto|json|android|strings|xcstrings|script] [--source-export <name>] [--target-export <name>] [--json]
        [--old-source <previous English catalog>] [--glossary <glossary.json>]
-       [--verbose] [--config <file> | --no-config] [--allow-missing <key-prefix>]... [--keep-english <term>]... [--ignore-key <pattern>]...
+       [--verbose] [--no-audit] [--config <file> | --no-config] [--allow-missing <key-prefix>]... [--keep-english <term>]... [--ignore-key <pattern>]...
 
 Checks missing and extra keys, placeholder changes, ICU syntax, CLDR plural categories, length blowups, and strings copied unchanged from the source.
 Formats: ARB, JSON, i18next, Android strings.xml, iOS .strings, .xcstrings, and TS/JS dictionaries
@@ -551,6 +553,7 @@ if (invokedDirectly()) {
         if (name === '--json') { options.json = true; continue; }
         if (name === '--no-config') { options.noConfig = true; continue; }
         if (name === '--verbose') { options.verbose = true; continue; }
+        if (name === '--no-audit') { options.audit = false; continue; }
         const value = args[++index];
         if (!value || value.startsWith('--')) throw new Error('Missing value for ' + name);
         if (name === '--source') options.source = value;

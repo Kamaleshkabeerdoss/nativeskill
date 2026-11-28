@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -19,7 +19,8 @@ function run(script, args) {
   return result;
 }
 
-test('the checkout CLI runs the same catalog checker', () => {
+// packages/cli lives only in the repository. An installed copy of the skill folder skips this test.
+test('the checkout CLI runs the same catalog checker', { skip: !existsSync(bin) && 'CLI exists only in the repo checkout' }, () => {
   const result = run(bin, ['check', '--json', '--source', join(examples, 'flutter/lib/l10n/app_en.arb'), '--target', join(examples, 'flutter/lib/l10n/app_ms.arb'), '--locale', 'ms', '--source-locale', 'en']);
   assert.equal(result.status, 0, result.stderr);
   assert.equal(result.report.errors, 0);
@@ -224,7 +225,7 @@ test('--old-source reports translations of English that changed, and --glossary 
     writeFileSync(join(dir, 'glossary.json'), JSON.stringify({ lead: { source: '\\bleads?\\b', ms: 'prospek', avoid: { ms: ['petunjuk'] } } }));
     return { oldSource: join(dir, 'old.json'), glossary: join(dir, 'glossary.json') };
   });
-  assert.deepEqual(codesOf(result), ['source-changed a', 'term-inconsistent b']);
+  assert.deepEqual(codesOf(result), ['source-changed a', 'term-inconsistent b', 'wrong-word b']);
 });
 
 test('function dictionaries: English left in a branch and hand-rolled plurals for many-form locales', () => {
@@ -247,4 +248,37 @@ test('a repeated placeholder said once is a warning, and Filipino gets more room
   assert.deepEqual(codesOf(pairCheck({ b: 'Rename' }, { b: 'Palitan ang pangalan' }, 'fil', () => ({}))), []);
   assert.deepEqual(codesOf(pairCheck({ c: 'Leads' }, { c: 'Khách hàng tiềm năng' }, 'vi', () => ({}))), ['length-blowup c']);
   assert.deepEqual(codesOf(pairCheck({ a: 'Share {a} with {b}' }, { a: 'Kongsi {a}' }, 'ms', () => ({}))), ['placeholder-mismatch a']);
+});
+
+test('every audit checklist pattern fires on its example and stays quiet on the fix', () => {
+  const cases = [
+    ['renewal-uses-dialog-cancel', 'ms', 'Cancels at period end', 'Batal pada akhir tempoh', 'Akan dibatalkan pada akhir tempoh'],
+    ['ar-download-is-upload', 'ar', 'Download', 'تحميل', 'تنزيل'],
+    ['zh-filter-device', 'zh', 'Filters', '过滤器', '筛选'],
+    ['ta-archive-is-copy', 'ta', 'Archive', 'காப்பிடு', 'காப்பகப்படுத்து'],
+    ['hi-skip-is-not-now', 'hi', 'Skip', 'अभी नहीं', 'छोड़ें'],
+    ['de-sie-glued-to-infinitive', 'de', 'Download', 'Herunterladen Sie', 'Herunterladen'],
+    ['ja-button-is-a-sentence', 'ja', 'Save', '保存します', '保存'],
+    ['zh-nin-and-ni-in-one-string', 'zh', 'Your account', '您的账户和你的设置', '您的账户'],
+    ['ms-indonesian-word', 'ms', 'Download', 'Unduh', 'Muat turun'],
+    ['ta-back-means-again', 'ta', 'Back', 'மீண்டும்', 'பின்செல்'],
+    ['ta-clear-means-clarity', 'ta', 'Clear', 'தெளிவு', 'அழி'],
+    ['ms-generic-error-loses-wrong', 'ms', 'Something went wrong.', 'Sesuatu telah berlaku.', 'Ada masalah.'],
+    ['vi-scope-is-camera-lens', 'vi', 'Scopes', 'Ống kính', 'Phạm vi'],
+    ['lead-as-metal-verb-or-clue', 'ar', 'No lead scoring.', 'لا يوجد تسجيل الرصاص.', 'لا يوجد تقييم للعملاء المحتملين.'],
+    ['ar-revoke-uses-cancel-word', 'ar', 'Revoke "{name}"?', 'إلغاء "{name}"؟', 'إبطال "{name}"؟'],
+    ['id-renews-on-without-on', 'id', 'Renews on', 'Memperbarui', 'Diperbarui pada']
+  ];
+  for (const [id, locale, english, bad, good] of cases) {
+    const wrong = pairCheck({ k: english }, { k: bad }, locale, () => ({})).findings.filter((f) => f.code === 'wrong-word');
+    assert.ok(wrong.some((f) => f.message.includes('[' + id + ']')), id + ' fires on ' + bad);
+    const right = pairCheck({ k: english }, { k: good }, locale, () => ({})).findings.filter((f) => f.code === 'wrong-word');
+    assert.deepEqual(right.map((f) => f.message), [], id + ' quiet on ' + good);
+  }
+  // Daftar is fine in Malay and Indonesian; the dialog Cancel word is fine on a dialog.
+  assert.deepEqual(codesOf(pairCheck({ k: 'Sign up' }, { k: 'Daftar' }, 'ms', () => ({}))), []);
+  assert.deepEqual(codesOf(pairCheck({ k: 'Cancel' }, { k: 'Batal' }, 'ms', () => ({}))), []);
+  const mixed = pairCheck({ a: 'Save your file', b: 'Open your file', c: 'Edit your file' }, { a: 'Speichern Sie Ihre Datei.', b: 'Öffnen Sie Ihre Datei.', c: 'Bearbeite deine Datei.' }, 'de', () => ({}));
+  assert.ok(mixed.findings.some((f) => f.key === 'c' && f.message.includes('[de-du-and-sie]')));
+  assert.equal(pairCheck({ k: 'Download' }, { k: 'تحميل' }, 'ar', () => ({ audit: false })).findings.length, 0);
 });
