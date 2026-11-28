@@ -71,6 +71,28 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `plural-number-missing` | warning | An ICU plural branch has no `#` (or `{count}`) although the source shows the number, and that category covers more than one number in this locale. French `one {un fichier}` also shows for 0. |
 | `length-blowup` | warning | The translation is more than three times the source and at least 12 characters longer. Check the control. |
 | `dynamic-value` | warning | A TS/JS dictionary value could not be resolved without running code. Check it by hand. |
+| `placeholder-spacing` | warning | A space the source does not have: after an opening quote (`" {name}`), before a closing quote, before `? ! . , : ;` (French is exempt), or inside brackets. A machine-translation tell. |
+| `invisible-character` | warning | U+200B, U+2060 or U+FEFF that the source does not have. Thai, Lao, Khmer, Burmese and Tibetan may use U+200B; ZWJ/ZWNJ are only flagged in all-Latin text without emoji. |
+| `english-residue` | warning | An English plural marker such as `(s)` or `{noun}s` in a translation, or a run of English words with at least two function words (`the`, `of`, `your`) inside non-Latin text. |
+| `count-noun-order` | warning | The source counts a plural noun (`{count} files`) and the translation puts the count after the noun (`Fail {count}`, `Tin nhắn {count}`, `رسائل {count}`), which reads as a label or an ID. Checked for ms, id, vi, fil, ar. For Thai the count needs a classifier after it (`ไฟล์ {count} ไฟล์`). |
+| `english-in-branch` | warning | A TS/JS function returns the translation for one input and English for another (`n ? 'Import {n}' : 'Import'`). |
+| `hand-rolled-plural` | warning | The source picks a form with `n === 1 ? … : …` and the target locale has more than two plural forms (Arabic, Russian, Polish…), while the translation has fewer forms than the locale needs. Use ICU or `Intl.PluralRules`. |
+| `source-changed` | warning | With `--old-source <previous English>`: the English changed after this was translated and the translation was not updated. |
+| `term-inconsistent` | warning | With `--glossary <file>`: the translation does not use the glossary term for this locale, or uses a rejected one. |
+
+### Stale strings and glossary
+
+`--old-source` takes the English catalog the translations were made from (a git copy such as `git show HEAD~20:src/en.ts > /tmp/en.old.ts`, or the last release). Every key whose English changed since then and whose translation was not touched is reported as `source-changed`. `oldSource` in `.nativeskillrc` does the same.
+
+`--glossary` (or `glossary` in `.nativeskillrc`) is JSON with one entry per concept:
+
+```json
+{
+  "lead": { "source": "\\bleads?\\b", "ms": "prospek", "id": "prospek", "avoid": { "ms": ["petunjuk"], "id": ["petunjuk"] } }
+}
+```
+
+`source` is a case-insensitive regex for the English; each locale value is the required term (a string, a list of accepted terms, or `/regex/`); `avoid` lists rejected terms. Use it so one concept has one name across the product.
 
 Plural categories come from `Intl.PluralRules` for the target locale. Exact choices such as `=0` are allowed on top of the categories. Android `<plurals>` quantities and i18next `_one` / `_other` suffixes (or a nested `one` / `other` object) are checked the same way.
 
@@ -78,7 +100,7 @@ ARB metadata keys that start with `@` are ignored. iOS `.strings` comments are i
 
 ## What the scanner flags
 
-`scan.mjs` looks in Dart, Kotlin, Java, Swift, TS, TSX, JS, JSX, XML, and Vue for string literals in `Text(...)`, `setText(...)`, `title` / `label` / `hint` / `placeholder`, and `android:text` / `android:hint` / `android:contentDescription`. It skips `@string/` references, URLs, hex colors, and tokens with no spaces. It exits 1 when it finds any. Catalog files are not source code: a `.ts` / `.js` file that is itself a locale dictionary is skipped for literals. A hit is a candidate, not proof. Confirm it is user-facing before you extract it.
+`scan.mjs` looks in Dart, Kotlin, Java, Swift, TS, TSX, JS, JSX, XML, and Vue for string literals in `Text(...)`, `setText(...)`, `title` / `label` / `hint` / `placeholder`, and `android:text` / `android:hint` / `android:contentDescription`. It skips `@string/` references, URLs, hex colors, and tokens with no spaces. It also reports hand-rolled English plurals (`count === 1 ? '' : 's'`, `n > 1 ? 'items' : 'item'`) as `hand-rolled-plural`, in code and in dictionaries. It exits 1 when it finds any. Catalog files are not source code: a `.ts` / `.js` file that is itself a locale dictionary is skipped for literals. A hit is a candidate, not proof. Confirm it is user-facing before you extract it.
 
 ## Fixtures
 

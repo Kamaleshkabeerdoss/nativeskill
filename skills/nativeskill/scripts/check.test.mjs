@@ -185,3 +185,57 @@ test('the summary reports coverage per section and the text output groups repeat
   const verbose = run(check, ['--no-config', '--verbose', '--source', join(dir, 'en.json'), '--target', join(dir, 'ms.json'), '--locale', 'ms']);
   assert.match(verbose.stdout, /possible-source-copy inbox\.k7/);
 });
+
+function pairCheck(source, target, locale, extra = {}) {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-pair-'));
+  writeFileSync(join(dir, 'en.json'), JSON.stringify(source));
+  writeFileSync(join(dir, locale + '.json'), JSON.stringify(target));
+  return checkCatalogs({ source: join(dir, 'en.json'), target: join(dir, locale + '.json'), locale, noConfig: true, ...extra(dir) });
+}
+const codesOf = (result) => result.findings.map(({ code, key }) => code + ' ' + key).sort();
+
+test('machine-translation tells: padded placeholders, invisible characters, English residue', () => {
+  const source = { a: 'Delete "{name}"?', b: 'Leave {workspace}?', c: 'Read our docs', d: 'Selected {noun}(s)', e: 'Edit {name}?' };
+  const ms = pairCheck(source, { a: 'Padam " {name} "?', b: 'Tinggalkan {workspace} ?', c: 'Baca\u200B dokumen kami', d: '{noun} (s) dipilih', e: 'Sunting {name}?' }, 'ms', () => ({}));
+  assert.deepEqual(codesOf(ms), ['english-residue d', 'invisible-character c', 'placeholder-spacing a', 'placeholder-spacing b']);
+  // French puts a space before ? and !; Thai uses U+200B to mark word breaks.
+  assert.deepEqual(codesOf(pairCheck({ b: 'Leave {workspace}?' }, { b: 'Quitter {workspace} ?' }, 'fr', () => ({}))), []);
+  assert.deepEqual(codesOf(pairCheck({ c: 'Read our docs' }, { c: 'อ่าน\u200Bเอกสาร' }, 'th', () => ({}))), []);
+  assert.deepEqual(codesOf(pairCheck({ c: 'Read the guide for your team' }, { c: 'اقرأ the guide for your team' }, 'ar', () => ({}))), ['english-residue c']);
+});
+
+test('count before noun: Malay, Indonesian, Vietnamese, Arabic, Filipino and Thai classifiers', () => {
+  const source = { a: '{count} messages · {ago}', b: 'Upload {count} files', c: '{n} pages left', d: '{n} pages left' };
+  const ms = pairCheck(source, { a: 'Mesej {count} · {ago}', b: 'Muat naik fail {count}', c: 'Halaman {n} tinggal', d: 'Tinggal {n} halaman' }, 'ms', () => ({}));
+  assert.deepEqual(codesOf(ms), ['count-noun-order a', 'count-noun-order b', 'count-noun-order c']);
+  const good = pairCheck(source, { a: '{count} mesej · {ago}', b: 'Muat naik {count} fail', c: '{n} halaman lagi', d: 'Masih ada {n} halaman' }, 'ms', () => ({}));
+  assert.deepEqual(codesOf(good), []);
+  const th = pairCheck({ a: '{count} files' }, { a: 'ไฟล์ {count}' }, 'th', () => ({}));
+  assert.deepEqual(codesOf(th), ['count-noun-order a']);
+  assert.deepEqual(codesOf(pairCheck({ a: '{count} files' }, { a: 'ไฟล์ {count} ไฟล์' }, 'th', () => ({}))), []);
+  // Page {n} is a label, not a count; the source has no plural noun after the number.
+  assert.deepEqual(codesOf(pairCheck({ a: 'Page {n}' }, { a: 'Halaman {n}' }, 'ms', () => ({}))), []);
+  assert.deepEqual(codesOf(pairCheck({ a: '{count} files' }, { a: '{count} 个文件' }, 'zh', () => ({}))), []);
+});
+
+test('--old-source reports translations of English that changed, and --glossary enforces one term', () => {
+  const result = pairCheck({ a: 'Launcher greeting', b: 'Read leads', c: 'Leads' }, { a: 'Petua alat', b: 'Baca petunjuk', c: 'Prospek' }, 'ms', (dir) => {
+    writeFileSync(join(dir, 'old.json'), JSON.stringify({ a: 'Tooltip', b: 'Read leads', c: 'Leads' }));
+    writeFileSync(join(dir, 'glossary.json'), JSON.stringify({ lead: { source: '\\bleads?\\b', ms: 'prospek', avoid: { ms: ['petunjuk'] } } }));
+    return { oldSource: join(dir, 'old.json'), glossary: join(dir, 'glossary.json') };
+  });
+  assert.deepEqual(codesOf(result), ['source-changed a', 'term-inconsistent b']);
+});
+
+test('function dictionaries: English left in a branch and hand-rolled plurals for many-form locales', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-branch-'));
+  writeFileSync(join(dir, 'en.ts'), "export default { imp: (n: number) => n ? `Import ${n}` : 'Import', files: (count: number) => `${count} file${count === 1 ? '' : 's'}` };\n");
+  writeFileSync(join(dir, 'ar.ts'), "export default { imp: (n: number) => n ? `استيراد ${n}` : 'Import', files: (count: number) => `${count} ملف` };\n");
+  writeFileSync(join(dir, 'ms.ts'), "export default { imp: (n: number) => n ? `Import ${n}` : 'Import', files: (count: number) => `${count} fail` };\n");
+  const ar = checkCatalogs({ source: join(dir, 'en.ts'), target: join(dir, 'ar.ts'), locale: 'ar', noConfig: true });
+  assert.deepEqual(codesOf(ar), ['english-in-branch imp', 'hand-rolled-plural files']);
+  const ms = checkCatalogs({ source: join(dir, 'en.ts'), target: join(dir, 'ms.ts'), locale: 'ms', noConfig: true });
+  assert.deepEqual(codesOf(ms), ['possible-source-copy imp']);
+  const scanned = run(scan, ['--json', join(dir, 'en.ts')]);
+  assert.deepEqual(scanned.report.findings.map(({ kind, line }) => kind + ':' + line), ['hand-rolled-plural:1']);
+});

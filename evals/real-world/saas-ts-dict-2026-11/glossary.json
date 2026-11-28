@@ -1,0 +1,9 @@
+{
+  "$comment": "Project glossary used by the one-concept-two-terms entry: one target term per concept and locale, plus terms to reject.",
+  "lead": {
+    "source": "\\bleads?\\b",
+    "ms": "prospek",
+    "id": "prospek",
+    "avoid": { "ms": ["petunjuk"], "id": ["petunjuk"] }
+  }
+}

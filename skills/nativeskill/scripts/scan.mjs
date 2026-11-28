@@ -45,8 +45,19 @@ const patterns = [
   { kind: 'named-copy', re: /\b(?:title|label|hint|message|placeholder|contentDescription|semanticsLabel)\s*[:=]\s*["']([^"'\n]+)["']/g }
 ];
 
+// `n === 1 ? 'file' : 'files'`, `count > 1 ? 's' : ''`: English-only plurals in code or in a dictionary.
+const handRolledPlural = /\b[\w.]+\s*(?:[!=]==?\s*1|>\s*1|<=\s*1)\s*\?\s*(['"`])[^'"`\n]*\1\s*:\s*(['"`])[^'"`\n]*\2/g;
+
 export function scanText(file, text, { dictionary = false } = {}) {
   const findings = [];
+  if (scriptFile.test(file) || /\.(?:dart|kt|java|swift|vue)$/.test(file)) {
+    for (const match of text.matchAll(handRolledPlural)) {
+      findings.push({
+        file, line: lineOf(text, match.index), kind: 'hand-rolled-plural', text: match[0],
+        message: 'English-only plural (one/other by hand). Use ICU plural or Intl.PluralRules; Arabic, Russian and Polish need more forms.'
+      });
+    }
+  }
   // A locale dictionary is where copy belongs, so its literals are not hardcoded text.
   for (const { kind, re } of dictionary ? [] : patterns) {
     re.lastIndex = 0;
@@ -87,8 +98,9 @@ if (invokedDirectly()) {
       const findings = scanPaths(args);
       if (json) console.log(JSON.stringify({ schema: 1, findings }, null, 2));
       else {
-        for (const finding of findings) console.log(finding.file + ':' + finding.line + ' ' + finding.text);
-        console.log(findings.length + ' hardcoded strings');
+        for (const finding of findings) console.log(finding.file + ':' + finding.line + (finding.kind === 'hand-rolled-plural' ? ' [hand-rolled plural] ' : ' ') + finding.text);
+        const plurals = findings.filter((finding) => finding.kind === 'hand-rolled-plural').length;
+        console.log((findings.length - plurals) + ' hardcoded strings, ' + plurals + ' hand-rolled plurals');
       }
       if (findings.length) process.exitCode = 1;
     } catch (error) {

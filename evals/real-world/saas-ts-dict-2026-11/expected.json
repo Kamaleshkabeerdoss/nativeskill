@@ -323,7 +323,7 @@
       "fix": 4,
       "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ms",
         "id",
@@ -393,7 +393,7 @@
       "fix": 4,
       "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "hits": {
         "ms": [
           "nav.leaveWorkspaceBody",
@@ -431,7 +431,7 @@
       "fix": 4,
       "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ms",
         "id",
@@ -445,21 +445,23 @@
         "widget.tooltip",
         "widget.hideLauncherTooltip"
       ],
-      "baseline": "json/en.baseline.json",
       "today": null,
       "want": {
         "code": "source-changed",
         "severity": "warning",
-        "with": "--baseline json/en.baseline.json (or a lock file of source hashes)"
+        "with": "--old-source json/en.baseline.json (the English catalog the translations were made from)"
       },
-      "note": "English moved from 'Tooltip (launcher hover)' to 'Launcher greeting'. The baseline file is reconstructed from what the translations say."
+      "note": "English moved from 'Tooltip (launcher hover)' to 'Launcher greeting'. The baseline file is reconstructed from what the translations say.",
+      "options": {
+        "oldSource": "json/en.baseline.json"
+      }
     },
     {
       "id": "one-concept-two-terms",
       "fix": 4,
       "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "hits": {
         "ms": [
           "nav.leads",
@@ -467,24 +469,31 @@
           "bot.modeOffDesc"
         ],
         "id": [
-          "nav.leads",
           "api.scopeLeadsRead"
         ]
       },
       "today": null,
       "want": {
         "code": "term-inconsistent",
-        "severity": "info",
-        "with": "a glossary (lead -> one target term per locale)"
+        "severity": "warning",
+        "with": "--glossary glossary.json (lead -> prospek for ms and id; petunjuk rejected)"
       },
-      "note": "Malay uses 'Lead' in the nav and 'petunjuk' (clue, hint) elsewhere; Indonesian 'Prospek' vs 'petunjuk'."
+      "note": "Malay uses 'Lead' in the nav and 'petunjuk' (clue, hint) elsewhere; Indonesian 'Prospek' vs 'petunjuk'. Indonesian nav.leads 'Prospek' matches the glossary and must not be flagged.",
+      "options": {
+        "glossary": "glossary.json"
+      },
+      "mustNotFlag": {
+        "id": [
+          "nav.leads"
+        ]
+      }
     },
     {
       "id": "english-plural-residue",
       "fix": 4,
       "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "hits": {
         "ms": [
           "integrations.toastNoTextFound"
@@ -513,7 +522,7 @@
       "fix": 4,
       "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "hits": {
         "vi": [
           "api.confirmRevokeToken",
@@ -532,7 +541,7 @@
       "fix": 4,
       "layer": "checker",
       "kind": "defect",
-      "status": "known-gap",
+      "status": "currently-caught",
       "input": "ts",
       "locales": [
         "ar"

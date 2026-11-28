@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { DictionaryError, readDictionary } from './dict.mjs';
 import { applySettings, resolveSettings } from './config.mjs';
 import { formatText, summarize } from './report.mjs';
+import { checkBranches, checkGlossary, checkSourceChanged, readGlossary, textChecks } from './checks.mjs';
 
 export const EXIT = { ok: 0, findings: 1, usage: 2, unreadable: 3 };
 
@@ -262,6 +263,7 @@ export function compareText(source, target, locale, add, key, options = {}) {
   if (sourceLength >= 4 && targetLength > sourceLength * 3 && targetLength - sourceLength > 12) {
     add('length-blowup', 'warning', key, 'Translation is ' + targetLength + ' characters against a source of ' + sourceLength + '. Check it still fits the control.');
   }
+  textChecks(source, target, locale, add, key);
   for (const plural of right.plurals) {
     const type = plural.type === 'selectordinal' ? 'ordinal' : 'cardinal';
     const required = pluralCategories(locale, type);
@@ -481,7 +483,11 @@ export function checkCatalogs(options) {
       add('possible-source-copy', 'warning', key, 'Text matches the source. Keep it only for a brand, a name, or a glossary term that is intentionally shared.');
     }
     compareText(sourceMessage.text, targetMessage.text, locale, add, key);
+    checkBranches(sourceMessage, targetMessage, locale, add, key, languageChanges);
   }
+  if (settings.oldSource) checkSourceChanged(readCatalog(settings.oldSource, mode, sourceLocale, 'source', sourceExport), left, right, add);
+  checkGlossary(readGlossary(settings.glossary), left, right, locale, add);
+  findings.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
   const { kept, suppressed } = applySettings(findings, settings, (key) => left.get(key)?.text ?? null);
   const errors = kept.filter(({ severity }) => severity === 'error').length;
   const summary = summarize({ left, right, findings: kept, suppressed, locale });
@@ -502,6 +508,7 @@ function invokedDirectly() {
 function printUsage() {
   console.log(`Usage: node check.mjs --source <file> --target <file> --locale <tag> [--source-locale <tag>]
        [--format auto|json|android|strings|xcstrings|script] [--source-export <name>] [--target-export <name>] [--json]
+       [--old-source <previous English catalog>] [--glossary <glossary.json>]
        [--verbose] [--config <file> | --no-config] [--allow-missing <key-prefix>]... [--keep-english <term>]... [--ignore-key <pattern>]...
 
 Checks missing and extra keys, placeholder changes, ICU syntax, CLDR plural categories, length blowups, and strings copied unchanged from the source.
@@ -539,6 +546,8 @@ if (invokedDirectly()) {
         else if (name === '--format') options.format = value;
         else if (name === '--source-export') options.sourceExport = value;
         else if (name === '--config') options.config = value;
+        else if (name === '--old-source') options.oldSource = value;
+        else if (name === '--glossary') options.glossary = value;
         else if (name === '--allow-missing') options.allowMissing.push(value);
         else if (name === '--keep-english') options.keepEnglish.push(value);
         else if (name === '--ignore-key') options.ignoreKeys.push(value);
