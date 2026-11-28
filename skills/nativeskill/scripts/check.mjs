@@ -2,7 +2,7 @@ import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { DictionaryError, readDictionary } from './dict.mjs';
 import { applySettings, resolveSettings } from './config.mjs';
-import { formatText, summarize } from './report.mjs';
+import { bucketOf, formatText, summarize } from './report.mjs';
 import { auditCatalog } from './audit.mjs';
 import { checkBranches, checkGlossary, checkSourceChanged, readGlossary, textChecks } from './checks.mjs';
 
@@ -504,11 +504,12 @@ export function checkCatalogs(options) {
   checkGlossary(readGlossary(settings.glossary), left, right, locale, add);
   if (languageChanges && options.audit !== false) auditCatalog(left, right, locale, add);
   findings.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
+  for (const finding of findings) finding.bucket = bucketOf(finding);
   const { kept, suppressed } = applySettings(findings, settings, (key) => left.get(key)?.text ?? null);
   const errors = kept.filter(({ severity }) => severity === 'error').length;
   const summary = summarize({ left, right, findings: kept, suppressed, locale });
   return {
-    schema: 1, source, target, locale, config: settings.configPath,
+    schema: 2, source, target, locale, config: settings.configPath,
     errors, warnings: kept.length - errors, summary, findings: kept, suppressed
   };
 }

@@ -25,7 +25,9 @@ Sections with gaps:
 
 A section is the first key segment (`inbox.title` -> `inbox`). "Taken from" names the English section a TS dictionary reuses (`inbox: en.inbox`). A section with at least 3 keys and under 10% translated is marked as looking untranslated: report it as one finding, not per key.
 
-When the same warning, or `missing-key`, appears more than 5 times in one section, the text output prints one line for the group. `--verbose` prints every key. `--json` always has every finding, plus `summary` with `sections` and `groups`.
+When the same warning, or `missing-key`, appears more than 5 times in one section, the text output prints one line for the group. `--verbose` prints every key. `--json` always has every finding, plus `summary` with `sections`, `groups` and `buckets`.
+
+Every finding has a `bucket`: `P1` for errors (broken or missing), `P2` for wrong meaning or English left in (`possible-source-copy`, `english-in-branch`, `english-residue`, `wrong-word`, `count-noun-order`, `source-changed`, `hand-rolled-plural`, `term-inconsistent`), `P3` for polish. The text output starts with the counts per bucket and lists P1 first. The JSON report is `schema: 2` (schema 1 had no `summary`, `suppressed` or `bucket`).
 
 ## Settings: deliberate English and optional sections
 

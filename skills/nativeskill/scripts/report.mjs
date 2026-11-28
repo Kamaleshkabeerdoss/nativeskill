@@ -1,5 +1,19 @@
 // Summaries and text output for check.mjs.
 
+// Triage order for a report. P1 breaks the app or shows nothing; P2 shows the wrong meaning or English;
+// P3 is polish a native reader would notice.
+export const BUCKETS = {
+  P1: 'broken or missing',
+  P2: 'wrong meaning or still English',
+  P3: 'polish'
+};
+const P2 = new Set(['possible-source-copy', 'english-in-branch', 'english-residue', 'wrong-word', 'count-noun-order', 'source-changed', 'hand-rolled-plural', 'term-inconsistent']);
+
+export function bucketOf(finding) {
+  if (finding.severity === 'error') return 'P1';
+  return P2.has(finding.code) ? 'P2' : 'P3';
+}
+
 export function sectionOf(key) {
   const base = key.split('#')[0];
   if (base.includes('.')) return base.split('.')[0];
@@ -57,9 +71,12 @@ export function summarize({ left, right, findings, suppressed, locale }) {
     group.count += 1;
     group.keys.push(finding.key);
   }
+  const buckets = { P1: 0, P2: 0, P3: 0 };
+  for (const finding of findings) buckets[finding.bucket ?? bucketOf(finding)] += 1;
   return {
     locale,
     ...totals,
+    buckets,
     coveragePct: counted ? Math.round((totals.translated / counted) * 100) : 100,
     sections: list,
     groups: [...groups.values()].sort((a, b) => b.count - a.count)
@@ -72,6 +89,7 @@ export function formatText(result, { verbose = false, groupAt = 5 } = {}) {
   const lines = [];
   const { summary } = result;
   if (summary) {
+    lines.push('Triage: P1 ' + BUCKETS.P1 + ' ' + summary.buckets.P1 + ' · P2 ' + BUCKETS.P2 + ' ' + summary.buckets.P2 + ' · P3 ' + BUCKETS.P3 + ' ' + summary.buckets.P3);
     lines.push('Coverage ' + summary.locale + ': ' + summary.translated + ' of ' + (summary.keys - summary.deliberate) + ' keys translated (' + summary.coveragePct + '%), ' +
       summary.missing + ' missing, ' + summary.sourceCopy + ' still English' + (summary.deliberate ? ', ' + summary.deliberate + ' deliberately English' : '') + '.');
     const weak = summary.sections.filter((item) => item.missing + item.sourceCopy > 0);
@@ -95,13 +113,14 @@ export function formatText(result, { verbose = false, groupAt = 5 } = {}) {
     }
   }
   const printedGroups = new Set();
-  for (const finding of result.findings) {
+  const order = [...result.findings].sort((a, b) => (a.bucket ?? '').localeCompare(b.bucket ?? ''));
+  for (const finding of order) {
     const id = finding.code + '\0' + sectionOf(finding.key);
     if (grouped.has(id)) {
       if (printedGroups.has(id)) continue;
       printedGroups.add(id);
       const group = summary.groups.find((item) => item.code + '\0' + item.section === id);
-      lines.push(finding.severity + ' ' + finding.code + ' ' + group.count + ' keys in ' + group.section + ' (' + group.keys.slice(0, 3).join(', ') + ', …). --verbose lists them.');
+      lines.push(finding.severity + (finding.bucket ? ' ' + finding.bucket : '') + ' ' + finding.code + ' ' + group.count + ' keys in ' + group.section + ' (' + group.keys.slice(0, 3).join(', ') + ', …). --verbose lists them.');
       continue;
     }
     lines.push(finding.severity + (finding.bucket ? ' ' + finding.bucket : '') + ' ' + finding.code + ' ' + finding.key + ' ' + finding.message);

@@ -2,6 +2,7 @@
 import { parseArgs } from 'node:util';
 import { inspectConcept, inspectLanguage, inspectLocale, lookupWording, registry } from './locales.mjs';
 import { checkCatalogs } from '../../../skills/nativeskill/scripts/check.mjs';
+import { formatText } from '../../../skills/nativeskill/scripts/report.mjs';
 
 const help = `
 NativeSkill CLI
@@ -118,10 +119,7 @@ async function main([command, ...args]) {
       source: values.source, target: values.target, locale: values.locale, format,
       sourceLocale: values['source-locale'] ?? 'en'
     });
-    print(result, values.json, ({ findings, errors, warnings }) => [
-      ...findings.map(({ severity, code, key, message }) => severity + ' ' + code + ' ' + key + ' ' + message),
-      errors + ' errors, ' + warnings + ' warnings'
-    ].join('\n'));
+    print(result, values.json, (output) => formatText(output));
     process.exitCode = result.errors ? 1 : 0;
     return;
   }

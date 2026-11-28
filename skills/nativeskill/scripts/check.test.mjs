@@ -282,3 +282,17 @@ test('every audit checklist pattern fires on its example and stays quiet on the 
   assert.ok(mixed.findings.some((f) => f.key === 'c' && f.message.includes('[de-du-and-sie]')));
   assert.equal(pairCheck({ k: 'Download' }, { k: 'تحميل' }, 'ar', () => ({ audit: false })).findings.length, 0);
 });
+
+test('findings carry a triage bucket, and the text report leads with the counts', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-buckets-'));
+  writeFileSync(join(dir, 'en.json'), JSON.stringify({ a: 'Pay {amount}', b: 'Download', c: 'Delete "{name}"?', d: 'Help' }));
+  writeFileSync(join(dir, 'ar.json'), JSON.stringify({ a: 'ادفع', b: 'تحميل', c: 'حذف " {name} "؟', d: 'Help' }));
+  const result = run(check, ['--json', '--no-config', '--source', join(dir, 'en.json'), '--target', join(dir, 'ar.json'), '--locale', 'ar']);
+  assert.equal(result.report.schema, 2);
+  assert.deepEqual(result.report.findings.map(({ key, code, bucket }) => key + ' ' + code + ' ' + bucket),
+    ['a placeholder-mismatch P1', 'b wrong-word P2', 'c placeholder-spacing P3', 'd possible-source-copy P2']);
+  assert.deepEqual(result.report.summary.buckets, { P1: 1, P2: 2, P3: 1 });
+  const text = run(check, ['--no-config', '--source', join(dir, 'en.json'), '--target', join(dir, 'ar.json'), '--locale', 'ar']);
+  assert.match(text.stdout.split('\n')[0], /^Triage: P1 broken or missing 1 · P2 wrong meaning or still English 2 · P3 polish 1$/);
+  assert.match(text.stdout, /error P1 placeholder-mismatch a[\s\S]*warning P2 wrong-word b[\s\S]*warning P3 placeholder-spacing c/);
+});
