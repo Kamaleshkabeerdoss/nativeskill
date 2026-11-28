@@ -8,7 +8,7 @@ Product UI is neutral and polite without particles. Do not end buttons or labels
 
 ## Counting needs a classifier
 
-Thai counts as noun + number + classifier: `ไฟล์ 3 ไฟล์`, `ข้อความ 5 ข้อความ`, `ผู้ใช้ 2 คน`. The noun can be dropped when context is clear (`3 ไฟล์`), but the classifier cannot. `ไฟล์ {count}` with nothing after the number reads as "file number {count}". The checker reports it as `count-noun-order`. Pick the classifier for the noun (`คน` for people, `รายการ` for items, `หน้า` for pages, the noun itself for many tech nouns).
+Thai counts as noun + number + classifier: `ไฟล์ 3 ไฟล์`, `ข้อความ 5 ข้อความ`, `ผู้ใช้ 2 คน`. The noun can be dropped when context is clear (`3 ไฟล์`), but the classifier cannot. `ไฟล์ {count}` with nothing after the number reads as "file number {count}". The checker reports it as `count-noun-order` in bucket P3: a short UI label without a classifier can be acceptable, and this rule has not been confirmed by a Thai speaker, so ask one before changing many strings. Pick the classifier for the noun (`คน` for people, `รายการ` for items, `หน้า` for pages, the noun itself for many tech nouns).
 
 ## Buttons
 

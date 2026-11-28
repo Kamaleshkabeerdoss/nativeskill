@@ -7,10 +7,12 @@ export const BUCKETS = {
   P2: 'wrong meaning or still English',
   P3: 'polish'
 };
-const P2 = new Set(['possible-source-copy', 'english-in-branch', 'english-residue', 'wrong-word', 'count-noun-order', 'source-changed', 'hand-rolled-plural', 'term-inconsistent']);
+const P2 = new Set(['code-mismatch', 'possible-source-copy', 'english-in-branch', 'english-residue', 'wrong-word', 'count-noun-order', 'source-changed', 'hand-rolled-plural', 'term-inconsistent']);
 
 export function bucketOf(finding) {
   if (finding.severity === 'error') return 'P1';
+  // Unverified by a native speaker: a Thai label without a classifier may be acceptable.
+  if (finding.code === 'count-noun-order' && finding.message.startsWith('Thai')) return 'P3';
   return P2.has(finding.code) ? 'P2' : 'P3';
 }
 

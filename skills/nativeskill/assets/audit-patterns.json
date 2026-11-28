@@ -96,6 +96,7 @@
     },
     {
       "id": "zh-nin-and-ni-in-one-string",
+      "skipKeys": "(?:placeholder|quickprompt|example|sample)[^.]*$",
       "locales": [
         "zh"
       ],
@@ -223,6 +224,7 @@
     },
     {
       "id": "zh-nin-and-ni",
+      "skipKeys": "(?:placeholder|quickprompt|example|sample)[^.]*$",
       "locales": [
         "zh"
       ],

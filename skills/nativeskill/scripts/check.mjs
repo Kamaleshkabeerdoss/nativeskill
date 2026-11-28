@@ -228,8 +228,16 @@ function choiceKey(items) {
   return items.map((item) => item.name + ':' + [...item.choices ?? item.values].sort().join(',')).sort().join('|');
 }
 
+// Page-structure tags such as </body> in "paste the snippet before </body>" are literal code in the text,
+// not rich-text markup the app renders.
+const CODE_TAG = /^<\/?(?:html|head|body|script|style|meta|link|title|iframe|noscript)$/i;
+
 function tagsIn(text) {
-  return [...text.matchAll(/<\/?[A-Za-z][^>\s/>]*/g)].map((match) => match[0]);
+  return [...text.matchAll(/<\/?[A-Za-z][^>\s/>]*/g)].map((match) => match[0]).filter((tag) => !CODE_TAG.test(tag));
+}
+
+function codeTagsIn(text) {
+  return [...text.matchAll(/<\/?[A-Za-z][^>\s/>]*>?/g)].map((match) => match[0]).filter((tag) => CODE_TAG.test(tag.replace(/>$/, '')));
 }
 
 export function compareText(source, target, locale, add, key, options = {}) {
@@ -271,6 +279,15 @@ export function compareText(source, target, locale, add, key, options = {}) {
   }
   if (!sameList(tagsIn(source), tagsIn(target))) {
     add('markup-mismatch', 'error', key, 'Rich-text tags changed.');
+  }
+  const sourceCode = codeTagsIn(source);
+  const targetCode = codeTagsIn(target);
+  if (!sameList(sourceCode, targetCode)) {
+    const only = targetCode.filter((tag) => !sourceCode.includes(tag));
+    const gone = sourceCode.filter((tag) => !targetCode.includes(tag));
+    add('code-mismatch', 'warning', key, (only.length ? 'The translation mentions ' + only.join(', ') + ', which the English does not. '
+      : 'The English mentions ' + gone.join(', ') + ', which the translation does not. ') +
+      'Code is never translated, so the two texts likely describe different steps: the translation may be of older English. Translate the current English again (--old-source confirms what changed).');
   }
   const sourceLength = lengthOf(source);
   const targetLength = lengthOf(target);

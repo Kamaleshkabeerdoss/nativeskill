@@ -144,7 +144,7 @@ A pattern that does not fit your product (a brand that happens to match) goes in
 
 Start with the grouped summary, not a list of keys. Run `check.mjs --json` per locale and build it from `summary`:
 
-1. **Triage counts per locale**: P1 broken or missing (every error), P2 wrong meaning or still English (`possible-source-copy`, `english-in-branch`, `english-residue`, `wrong-word`, `count-noun-order`, `source-changed`, `hand-rolled-plural`, `term-inconsistent`), P3 polish (spacing, invisible characters, length, plural and extra-key warnings). Each finding carries its `bucket`.
+1. **Triage counts per locale**: P1 broken or missing (every error), P2 wrong meaning or still English (`code-mismatch`, `possible-source-copy`, `english-in-branch`, `english-residue`, `wrong-word`, `count-noun-order`, `source-changed`, `hand-rolled-plural`, `term-inconsistent`), P3 polish (spacing, invisible characters, length, plural and extra-key warnings). Each finding carries its `bucket`.
 2. **Coverage**: translated percentage per locale, then the sections marked `untranslated` (for example "inbox: 0/139, taken from en.inbox"). One line per section, not one per key.
 3. **Deliberate English**: what `.nativeskillrc` suppressed and why. Never hide a gap without saying so.
 4. **Native review sample**: name the strings a native speaker must read. Take every P2 `wrong-word` and `count-noun-order` hit, every changed account, billing or permission string, and at least 10 other changed strings per locale (or all, if fewer). Say that the rest was checked by script and by you, not by a native speaker.

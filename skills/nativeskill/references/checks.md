@@ -27,7 +27,7 @@ A section is the first key segment (`inbox.title` -> `inbox`). "Taken from" name
 
 When the same warning, or `missing-key`, appears more than 5 times in one section, the text output prints one line for the group. `--verbose` prints every key. `--json` always has every finding, plus `summary` with `sections`, `groups` and `buckets`.
 
-Every finding has a `bucket`: `P1` for errors (broken or missing), `P2` for wrong meaning or English left in (`possible-source-copy`, `english-in-branch`, `english-residue`, `wrong-word`, `count-noun-order`, `source-changed`, `hand-rolled-plural`, `term-inconsistent`), `P3` for polish. The text output starts with the counts per bucket and lists P1 first. The JSON report is `schema: 2` (schema 1 had no `summary`, `suppressed` or `bucket`).
+Every finding has a `bucket`: `P1` for errors (broken or missing), `P2` for wrong meaning or English left in (`code-mismatch`, `possible-source-copy`, `english-in-branch`, `english-residue`, `wrong-word`, `count-noun-order`, `source-changed`, `hand-rolled-plural`, `term-inconsistent`), `P3` for polish. The text output starts with the counts per bucket and lists P1 first. The JSON report is `schema: 2` (schema 1 had no `summary`, `suppressed` or `bucket`).
 
 ## Settings: deliberate English and optional sections
 
@@ -65,7 +65,8 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `placeholder-order` | error | Unnumbered `%@` / `%d` placeholders swapped. Keep the order, or number them `%1$@` and `%2$d`. A numbered swap that keeps each argument's type is allowed. |
 | `selector-mismatch` | error | An ICU `select` branch was renamed or removed. |
 | `exact-choice-missing` | error | An exact plural such as `=0` was added or removed. |
-| `markup-mismatch` | error | Rich-text tags changed. |
+| `markup-mismatch` | error | Rich-text tags changed. Page-structure tags written as text (`</body>`, `<head>`, `<script>`) are not markup and are checked by `code-mismatch` instead. |
+| `code-mismatch` | warning | One side mentions literal code such as `</body>` and the other does not ("paste the tag before `</body>`" against new English with no tag). Code is never translated, so the translation probably describes older English. Translate it again. |
 | `icu-syntax` | error | A brace, a plural, or a placeholder is not closed, or a plural has no `other`. |
 | `plural-missing` | error | A plural is missing a CLDR category for this locale. |
 | `plural-unused` | warning | A plural has a category this locale does not use. |
@@ -77,12 +78,12 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `placeholder-spacing` | warning | A space the source does not have: after an opening quote (`" {name}`), before a closing quote, before `? ! . , : ;` (French is exempt), or inside brackets. A machine-translation tell. |
 | `invisible-character` | warning | U+200B, U+2060 or U+FEFF that the source does not have. Thai, Lao, Khmer, Burmese and Tibetan may use U+200B; ZWJ/ZWNJ are only flagged in all-Latin text without emoji. |
 | `english-residue` | warning | An English plural marker such as `(s)` or `{noun}s` in a translation, or a run of English words with at least two function words (`the`, `of`, `your`) inside non-Latin text. |
-| `count-noun-order` | warning | The source counts a plural noun (`{count} files`) and the translation puts the count after the noun (`Fail {count}`, `Tin nhắn {count}`, `رسائل {count}`), which reads as a label or an ID. Checked for ms, id, vi, fil, ar. For Thai the count needs a classifier after it (`ไฟล์ {count} ไฟล์`). |
+| `count-noun-order` | warning | The source counts a plural noun (`{count} files`) and the translation puts the count after the noun (`Fail {count}`, `Tin nhắn {count}`, `رسائل {count}`), which reads as a label or an ID. Checked for ms, id, vi, fil, ar. For Thai the count needs a classifier after it (`ไฟล์ {count} ไฟล์`); the Thai finding names the real noun and is P3 until a Thai speaker confirms it. |
 | `english-in-branch` | warning | A TS/JS function returns the translation for one input and English for another, in either direction: `n ? 'استيراد {n}' : 'Import'`, or the main count branch left English, `n ? 'Import {n} into knowledge base' : 'Impor ke basis pengetahuan'`. A branch counts as English when it equals a source branch or reads like one (Latin-only words in a non-Latin locale; 80% of its words from a source branch in a Latin locale). One finding per key, instead of `possible-source-copy`. A function that is English in every branch stays `possible-source-copy`. |
 | `hand-rolled-plural` | warning | The source picks a form with `n === 1 ? … : …` and the target locale has more than two plural forms (Arabic, Russian, Polish…), while the translation has fewer forms than the locale needs. Use ICU or `Intl.PluralRules`. |
 | `source-changed` | warning | With `--old-source <previous English>`: the English changed after this was translated and the translation was not updated. |
 | `term-inconsistent` | warning | With `--glossary <file>`: the translation does not use the glossary term for this locale, or uses a rejected one. |
-| `wrong-word` | warning | A known wrong sense from the audit checklist in [assets/audit-patterns.json](../assets/audit-patterns.json): the dialog Cancel word on a renewal, Arabic `تحميل` for download, Tamil `மீண்டும்` for Back, sales "lead" as the metal, and others. The message ends with the pattern id and a suggestion; suggestions marked draft are not attested. `--no-audit` turns these off. |
+| `wrong-word` | warning | A known wrong sense from the audit checklist in [assets/audit-patterns.json](../assets/audit-patterns.json): the dialog Cancel word on a renewal, Arabic `تحميل` for download, Tamil `மீண்டும்` for Back, sales "lead" as the metal, and others. The message ends with the pattern id and a suggestion; suggestions marked draft are not attested. A pattern's `skipKeys` leaves out keys whose text is not the product's voice (the 您/你 check skips sample visitor questions such as `*Placeholder` and `quickPrompts*`). `--no-audit` turns these off. |
 
 ### Stale strings and glossary
 

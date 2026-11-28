@@ -1,6 +1,7 @@
 // Extra checks used by check.mjs: spacing, invisible characters, English residue, count order,
 // stale strings, glossary terms, and function-dictionary branches.
 import { existsSync, readFileSync } from 'node:fs';
+import { BRANDS } from './config.mjs';
 
 const language = (tag) => new Intl.Locale(tag).language;
 const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -64,6 +65,8 @@ export function checkEnglishResidue(source, target, locale, add, key) {
   if (!/[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u.test(target)) return;
   for (const run of target.replace(/\{[^{}]*\}/g, ' ').matchAll(/(?:\b[A-Za-z]+\b[ ,]+){3,}\b[A-Za-z]+\b/g)) {
     const words = run[0].split(/[ ,]+/);
+    // A product name such as "Outlook on the web" stays English.
+    if (/^[A-Z]/.test(words[0]) && BRANDS.has(words[0].toLowerCase())) continue;
     if (words.filter((word) => STOPWORDS.test(word)).length >= 2) {
       add('english-residue', 'warning', key, 'English left inside the translation: ' + JSON.stringify(run[0]) + '.');
       return;
@@ -83,14 +86,17 @@ export function checkCountOrder(source, target, locale, add, key) {
   const lang = language(locale);
   if (!AFTER_NOUN.has(lang) && lang !== 'th') return;
   const counted = [...source.matchAll(/\{(\w+)\}\s+(\p{L}+s)\b/gu)].filter((match) => COUNT_NAME.test(match[1]));
-  for (const [, name] of counted) {
+  for (const [, name, noun] of counted) {
     const token = '{' + name + '}';
     if (!target.includes(token)) continue;
     const segments = target.split(/\s+[·•—–|-]\s+|:\s+|\n/);
     const segment = segments.find((part) => part.includes(token)).trim();
     const last = new RegExp('[\\p{L}\\p{M}]\\s+' + escape(token) + '[.!?]?$', 'u').test(segment);
     if (lang === 'th') {
-      if (last) add('count-noun-order', 'warning', key, 'Thai counts as noun + number + classifier ("ไฟล์ ' + token + ' ไฟล์"). ' + token + ' has no classifier after it, so it reads as a label or an ID.');
+      if (last) {
+        add('count-noun-order', 'warning', key, 'Thai usually counts as noun + number + classifier (noun ' + token + ' classifier, e.g. "ข้อความ 5 ข้อความ"). In "' + segment +
+          '" the count of ' + noun + ' has no classifier after it. A short label may be fine without one; ask a Thai speaker before changing it (P3).');
+      }
       return;
     }
     if (last) {
@@ -152,7 +158,11 @@ export function checkBranches(sourceMessage, targetMessage, locale, add, key, la
   }
   const numeric = sourceMessage.fn?.numericBranch || targetMessage.fn?.numericBranch;
   if (!numeric || targetMessage.fn?.pluralRules) return reported;
-  const categories = new Intl.PluralRules(locale).resolvedOptions().pluralCategories;
+  // Only the categories a UI count actually reaches: fr, es, pt and it have `many` for 1,000,000 and
+  // compact numbers, which a count === 1 ternary does not need to handle.
+  const rules = new Intl.PluralRules(locale);
+  const reached = new Set(Array.from({ length: 1001 }, (_, n) => rules.select(n)));
+  const categories = rules.resolvedOptions().pluralCategories.filter((category) => reached.has(category));
   if (categories.length <= 2) return reported;
   const forms = new Set(targetVariants.length ? targetVariants : [targetMessage.text]).size;
   if (forms < categories.length) {

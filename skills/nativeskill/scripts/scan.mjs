@@ -46,12 +46,14 @@ const patterns = [
 ];
 
 // `n === 1 ? 'file' : 'files'`, `count > 1 ? 's' : ''`: English-only plurals in code or in a dictionary.
-const handRolledPlural = /\b[\w.]+\s*(?:[!=]==?\s*1|>\s*1|<=\s*1)\s*\?\s*(['"`])[^'"`\n]*\1\s*:\s*(['"`])[^'"`\n]*\2/g;
+const handRolledPlural = /\b[\w.]+\s*(?:[!=]==?\s*1|>\s*1|<=\s*1)\s*\?\s*(['"`])([^'"`\n]*)\1\s*:\s*(['"`])([^'"`\n]*)\3/g;
 
 export function scanText(file, text, { dictionary = false } = {}) {
   const findings = [];
   if (scriptFile.test(file) || /\.(?:dart|kt|java|swift|vue)$/.test(file)) {
     for (const match of text.matchAll(handRolledPlural)) {
+      // Identical branches (`n === 1 ? '个' : '个'`) are a translation that has no plural, not an English plural.
+      if (match[2] === match[4]) continue;
       findings.push({
         file, line: lineOf(text, match.index), kind: 'hand-rolled-plural', text: match[0],
         message: 'English-only plural (one/other by hand). Use ICU plural or Intl.PluralRules; Arabic, Russian and Polish need more forms.'

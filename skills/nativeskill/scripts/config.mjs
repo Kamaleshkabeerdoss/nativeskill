@@ -103,6 +103,30 @@ export function resolveSettings(options) {
 
 const ENGLISH_CODES = new Set(['possible-source-copy', 'english-in-branch', 'section-aliased', 'english-residue']);
 
+// Product and company names that stay in Latin script in every locale we cover.
+export const BRANDS = new Set(['whatsapp', 'instagram', 'facebook', 'messenger', 'telegram', 'viber', 'wechat', 'discord', 'slack',
+  'zoom', 'google', 'gmail', 'outlook', 'microsoft', 'excel', 'dropbox', 'notion', 'shopify',
+  'woocommerce', 'wordpress', 'wix', 'squarespace', 'webflow', 'stripe', 'paypal', 'zapier', 'hubspot', 'salesforce', 'zendesk',
+  'intercom', 'mailchimp', 'calendly', 'twilio', 'youtube', 'tiktok', 'linkedin', 'github', 'gitlab', 'apple', 'ios', 'android',
+  'openai', 'chatgpt', 'gemini', 'json', 'csv', 'pdf', 'oauth']);
+// Generic words that are part of a name only after a brand: Google Calendar, Microsoft Teams.
+const AFTER_BRAND = new Set(['calendar', 'drive', 'sheets', 'docs', 'meet', 'teams', 'business', 'pay']);
+
+// True for text that is the same in every language: a URL, an e-mail address, placeholders only, or names
+// (a known brand, a CamelCase name such as HubSpot, an acronym such as CSV, a version such as v2.1).
+export function sharedOnPurpose(text) {
+  const value = text.trim();
+  if (!value) return false;
+  if (/^(?:https?:\/\/|www\.)\S+$/i.test(value) || /^[\w.+-]+@[\w-]+(?:\.[\w-]+)+$/.test(value)) return true;
+  const rest = value.replace(/\{[^{}]*\}|%\d*\$?[sd@]|\{\{[^}]*\}\}/g, ' ');
+  if (!/\p{L}/u.test(rest)) return true;
+  const words = rest.split(/[\s/&,+·|()]+/).filter(Boolean);
+  const bare = (word) => word.toLowerCase().replace(/[.:!]$/, '');
+  return words.every((word, index) => BRANDS.has(bare(word)) || (index > 0 && AFTER_BRAND.has(bare(word)) && BRANDS.has(bare(words[index - 1]))) ||
+    /^[A-Za-z]*[a-z][A-Z][A-Za-z]*$/.test(word) || /^[A-Z]{2,6}s?$/.test(word) || /^v?\d+(?:\.\d+)*$/i.test(word) ||
+    /^[A-Za-z]+\.(?:js|io|ai|com)$/.test(word));
+}
+
 // Splits findings into reported and suppressed. Suppressed ones keep the reason, so nothing disappears silently.
 export function applySettings(findings, settings, sourceText) {
   const allowed = keyMatcher(settings.allowMissing);
@@ -114,6 +138,7 @@ export function applySettings(findings, settings, sourceText) {
     if (ignored(finding.key)) reason = 'ignoreKeys';
     else if (allowed(finding.key) && (finding.code === 'missing-key' || ENGLISH_CODES.has(finding.code))) reason = 'allowMissing';
     else if (ENGLISH_CODES.has(finding.code) && settings.keepEnglish.length && keptEnglish(settings.keepEnglish, sourceText(finding.key) ?? '')) reason = 'keepEnglish';
+    else if (finding.code === 'possible-source-copy' && sharedOnPurpose(sourceText(finding.key) ?? '')) reason = 'brand-or-url';
     if (reason) suppressed.push({ ...finding, suppressedBy: reason });
     else kept.push(finding);
   }

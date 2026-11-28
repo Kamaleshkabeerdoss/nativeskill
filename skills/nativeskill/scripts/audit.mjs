@@ -10,8 +10,9 @@ export function loadPatterns(path = fileURLToPath(PATTERNS)) {
   const data = JSON.parse(readFileSync(path, 'utf8'));
   const compile = (text) => (text == null ? null : new RegExp(text, 'iu'));
   const compileCase = (text) => new RegExp(text, 'u');
-  const patterns = data.patterns.map((item) => ({ ...item, sourceRe: compile(item.source), targetRe: compile(item.target) }));
-  const fileMix = (data.fileMix ?? []).map((item) => ({ ...item, formRes: Object.entries(item.forms).map(([name, text]) => [name, compileCase(text)]) }));
+  // `skipKeys` matches keys whose text is not the product's own voice, such as sample visitor questions.
+  const patterns = data.patterns.map((item) => ({ ...item, sourceRe: compile(item.source), targetRe: compile(item.target), skipRe: compile(item.skipKeys) }));
+  const fileMix = (data.fileMix ?? []).map((item) => ({ ...item, skipRe: compile(item.skipKeys), formRes: Object.entries(item.forms).map(([name, text]) => [name, compileCase(text)]) }));
   cache = { path, data: { patterns, fileMix } };
   return cache.data;
 }
@@ -34,6 +35,7 @@ export function auditCatalog(left, right, locale, add) {
     if (!target || target.missing || target.dynamic || message.dynamic || message.plural || target.plural) continue;
     const texts = [target.text, ...(target.variants ?? [])];
     for (const item of active) {
+      if (item.skipRe?.test(key)) continue;
       if (item.sourceRe && !item.sourceRe.test(message.text)) continue;
       if (item.short && !isShort(message.text)) continue;
       if (item.sourceRe === null && item.targetRe.test(message.text)) continue;
@@ -42,6 +44,7 @@ export function auditCatalog(left, right, locale, add) {
       add('wrong-word', 'warning', key, item.message + suggestion(item, locale, language) + ' [' + item.id + ']');
     }
     mixes.forEach((item, index) => {
+      if (item.skipRe?.test(key)) return;
       for (const [name, re] of item.formRes) if (re.test(target.text)) counts[index].get(name).push(key);
     });
   }

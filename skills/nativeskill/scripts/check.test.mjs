@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import test from 'node:test';
 import { checkCatalogs } from './check.mjs';
+import { formatText } from './report.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const examples = join(root, '../examples');
@@ -312,4 +313,47 @@ test('english-in-branch also fires when the main (count) branch is English and a
   assert.ok(codesOf(th).includes('english-in-branch imp'), 'English-like text in a non-Latin locale counts even when it differs from the source');
   const ja = checkCatalogs({ source: join(dir, 'en.ts'), target: join(dir, 'ja.ts'), locale: 'ja', noConfig: true, minCoverage: 0 });
   assert.ok(!codesOf(ja).includes('english-in-branch imp'));
+});
+
+test('smaller fixes: brands and URLs, literal code tags, Thai classifiers, fr plurals, JSON arrays, suppressed in text', () => {
+  const ms = pairCheck(
+    { a: 'WhatsApp', b: 'https://acme.example/docs', c: 'Google Calendar', d: 'Start free trial', e: 'One script on your site, then switch it on.', f: ['First step', 'Second step'] },
+    { a: 'WhatsApp', b: 'https://acme.example/docs', c: 'Google Calendar', d: 'Start free trial', e: 'Salin satu tag skrip sebelum </body>.', f: ['Langkah pertama', 'Second step'] },
+    'ms', () => ({}));
+  assert.deepEqual(codesOf(ms), ['code-mismatch e', 'possible-source-copy d', 'possible-source-copy f.1']);
+  assert.deepEqual(ms.suppressed.map((item) => item.key + ':' + item.suppressedBy).sort(), ['a:brand-or-url', 'b:brand-or-url', 'c:brand-or-url']);
+  assert.equal(ms.findings.find((f) => f.code === 'code-mismatch').bucket, 'P2');
+  const verbose = formatText(ms, { verbose: true });
+  assert.match(verbose, /Suppressed \(3\):\n {2}possible-source-copy a \(brand-or-url\)/);
+  assert.match(formatText(ms), /3 suppressed by flags \(--verbose lists them\)/);
+
+  const th = pairCheck({ a: '{count} messages' }, { a: 'ข้อความ {count}' }, 'th', () => ({}));
+  const thai = th.findings.find((f) => f.code === 'count-noun-order');
+  assert.equal(thai.bucket, 'P3');
+  assert.match(thai.message, /count of messages/);
+  assert.doesNotMatch(thai.message, /ไฟล์/);
+
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-fr-'));
+  writeFileSync(join(dir, 'en.ts'), "export default { files: (count: number) => `${count} file${count === 1 ? '' : 's'}` };\n");
+  writeFileSync(join(dir, 'fr.ts'), "export default { files: (count: number) => `${count} fichier${count === 1 ? '' : 's'}` };\n");
+  writeFileSync(join(dir, 'ru.ts'), "export default { files: (count: number) => `${count} файл${count === 1 ? '' : 'ов'}` };\n");
+  const fr = checkCatalogs({ source: join(dir, 'en.ts'), target: join(dir, 'fr.ts'), locale: 'fr', noConfig: true });
+  assert.ok(!codesOf(fr).includes('hand-rolled-plural files'), 'fr `many` is only reached by 1,000,000 and compact numbers');
+  const ru = checkCatalogs({ source: join(dir, 'en.ts'), target: join(dir, 'ru.ts'), locale: 'ru', noConfig: true });
+  assert.ok(codesOf(ru).includes('hand-rolled-plural files'));
+});
+
+test('scan skips files of per-locale exports and identical plural branches', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-scan-'));
+  writeFileSync(join(dir, 'translated.ts'), "export const ja = { title: 'タイトル', save: '保存', hint: '{n} 件' }\nexport const ms = { title: 'Tajuk', save: 'Simpan', hint: 'Petua' }\nexport const zh = { title: '标题', save: '保存', files: (n: number) => `${n} ${n === 1 ? '个' : '个'}文件` }\n");
+  const scanned = run(scan, ['--json', join(dir, 'translated.ts')]);
+  assert.deepEqual(scanned.report.findings, []);
+});
+
+test('sample visitor questions do not count toward the 您/你 mix, and product names are not English residue', () => {
+  const source = { a: 'How can we help you?', b: 'Your account', c: 'Your plan', quickPromptsPlaceholder: 'Can you ship to me?' };
+  const zh = pairCheck(source, { a: '我们能为您做什么？', b: '您的账户', c: '您的套餐', quickPromptsPlaceholder: '你们能寄给我吗？你好' }, 'zh', () => ({}));
+  assert.ok(!codesOf(zh).some((item) => item.startsWith('wrong-word')));
+  const ja = pairCheck({ a: 'Connect Outlook on the web' }, { a: 'Outlook on the web に接続' }, 'ja', () => ({}));
+  assert.ok(!codesOf(ja).includes('english-residue a'));
 });
