@@ -12,6 +12,21 @@ node <skill-dir>/scripts/lookup.mjs ta auth.sign_out button
 
 TS/JS dictionaries are parsed, not executed, by `scripts/dict.mjs` (no dependencies). It reads `export const ms: Dict = {...}`, `export default`, `module.exports`, `as const`, `satisfies`, arrow and `function` values, template literals, ternaries, `if` / `switch` returns, spreads, `section: en.section` aliases and relative imports, including JSON. Parameters become `{name}` placeholders spelled as in the source. The checked text is the branch a count such as 5 takes; the other branches are kept and checked too. When a file exports several objects, pass `--source-export` / `--target-export`. A value that needs running code (a call into a package, a computed key) is reported as `dynamic-value` instead of guessed. `node scripts/dict.mjs <file> [--export name] [--branches]` prints the flat JSON the checker sees.
 
+## Coverage summary and grouping
+
+Text output starts with a coverage line and the sections that have gaps:
+
+```text
+Coverage ms: 1171 of 1750 keys translated (67%), 110 missing, 469 still English.
+Sections with gaps:
+  inbox          0/139 translated   139 English  (taken from en.inbox)  <- looks untranslated
+  kbTools        0/40 translated    40 missing  <- looks untranslated
+```
+
+A section is the first key segment (`inbox.title` -> `inbox`). "Taken from" names the English section a TS dictionary reuses (`inbox: en.inbox`). A section with at least 3 keys and under 10% translated is marked as looking untranslated: report it as one finding, not per key.
+
+When the same warning, or `missing-key`, appears more than 5 times in one section, the text output prints one line for the group. `--verbose` prints every key. `--json` always has every finding, plus `summary` with `sections` and `groups`.
+
 ## Settings: deliberate English and optional sections
 
 Put a `.nativeskillrc` (JSON) next to the catalogs or in any parent folder, or pass `--config <file>`. `--no-config` ignores it.

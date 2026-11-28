@@ -181,7 +181,14 @@
       "want": {
         "code": "possible-source-copy",
         "severity": "warning",
-        "summary": "inbox: 0% translated (aliased to en.inbox)"
+        "summary": "Coverage summary lists inbox as 0/3 translated, taken from en.inbox, looks untranslated; the per-key warnings are grouped into one line when a section has more than 5.",
+        "section": {
+          "name": "inbox",
+          "translated": 0,
+          "translatedPct": 0,
+          "untranslated": true,
+          "aliasedFrom": "en.inbox"
+        }
       },
       "note": "In the real catalog this was 133 keys per locale, buried among 400-500 ungrouped warnings. The grouped summary is the fix; the per-key code stays."
     },

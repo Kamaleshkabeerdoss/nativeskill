@@ -44,6 +44,13 @@ function wantCode(entry) {
     const flagged = run(locale, options, entry.input).findings.filter((f) => f.code === entry.want.code && (keys.includes('*') || keys.includes(f.key)));
     assert.equal(flagged.length, 0, `${locale} must not report ${entry.want.code}: ${flagged.map((f) => f.key).join(', ')}`);
   }
+  if (entry.want.section) {
+    for (const locale of entry.locales) {
+      const section = run(locale, options, 'ts').summary.sections.find((item) => item.section === entry.want.section.name);
+      assert.ok(section, `${locale} summary has section ${entry.want.section.name}`);
+      for (const [name, value] of Object.entries(entry.want.section)) if (name !== 'name') assert.deepEqual(section[name], value, `${locale} ${entry.want.section.name}.${name}`);
+    }
+  }
 }
 
 function wantAbsent(entry) {

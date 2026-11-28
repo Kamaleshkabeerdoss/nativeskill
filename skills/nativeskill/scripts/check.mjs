@@ -2,6 +2,7 @@ import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { DictionaryError, readDictionary } from './dict.mjs';
 import { applySettings, resolveSettings } from './config.mjs';
+import { formatText, summarize } from './report.mjs';
 
 export const EXIT = { ok: 0, findings: 1, usage: 2, unreadable: 3 };
 
@@ -483,9 +484,10 @@ export function checkCatalogs(options) {
   }
   const { kept, suppressed } = applySettings(findings, settings, (key) => left.get(key)?.text ?? null);
   const errors = kept.filter(({ severity }) => severity === 'error').length;
+  const summary = summarize({ left, right, findings: kept, suppressed, locale });
   return {
     schema: 1, source, target, locale, config: settings.configPath,
-    errors, warnings: kept.length - errors, findings: kept, suppressed
+    errors, warnings: kept.length - errors, summary, findings: kept, suppressed
   };
 }
 
@@ -500,11 +502,14 @@ function invokedDirectly() {
 function printUsage() {
   console.log(`Usage: node check.mjs --source <file> --target <file> --locale <tag> [--source-locale <tag>]
        [--format auto|json|android|strings|xcstrings|script] [--source-export <name>] [--target-export <name>] [--json]
-       [--config <file> | --no-config] [--allow-missing <key-prefix>]... [--keep-english <term>]... [--ignore-key <pattern>]...
+       [--verbose] [--config <file> | --no-config] [--allow-missing <key-prefix>]... [--keep-english <term>]... [--ignore-key <pattern>]...
 
 Checks missing and extra keys, placeholder changes, ICU syntax, CLDR plural categories, length blowups, and strings copied unchanged from the source.
 Formats: ARB, JSON, i18next, Android strings.xml, iOS .strings, .xcstrings, and TS/JS dictionaries
 (typed objects, arrow functions, spreads and imported sections; read without running them).
+
+Output starts with a coverage summary per section. Warnings that repeat more than 5 times in one section are
+grouped into one line; --verbose lists every key. --json always has every finding plus "summary".
 
 Settings: .nativeskillrc (JSON) is read from the target's folder or a parent: allowMissing, keepEnglish, ignoreKeys.
 Suppressed findings are counted and listed under "suppressed" in --json.
@@ -546,11 +551,7 @@ if (invokedDirectly()) {
       const result = checkCatalogs(options);
       if (options.json) console.log(JSON.stringify(result, null, 2));
       else {
-        for (const finding of result.findings) {
-          console.log(finding.severity + ' ' + finding.code + ' ' + finding.key + ' ' + finding.message);
-        }
-        console.log(result.errors + ' errors, ' + result.warnings + ' warnings' +
-          (result.suppressed.length ? ', ' + result.suppressed.length + ' suppressed by ' + (result.config ?? 'flags') : ''));
+        console.log(formatText(result, { verbose: options.verbose }));
       }
       if (result.errors) process.exitCode = 1;
     }

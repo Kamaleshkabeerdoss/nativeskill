@@ -15,7 +15,7 @@ const bin = join(root, '../../../packages/cli/src/cli.mjs');
 
 function run(script, args) {
   const result = spawnSync(process.execPath, [script, ...args], { encoding: 'utf8' });
-  if (result.stdout) result.report = JSON.parse(result.stdout);
+  if (result.stdout && args.includes("--json")) result.report = JSON.parse(result.stdout);
   return result;
 }
 
@@ -166,4 +166,22 @@ test('.nativeskillrc and flags allow deliberate omissions and kept English, and 
   const ignored = run(check, ['--json', '--no-config', '--allow-missing', 'extras', '--source', join(dir, 'en.json'), '--target', join(dir, 'ms.json'), '--locale', 'ms']);
   assert.equal(ignored.status, 1);
   assert.deepEqual(ignored.report.suppressed.map(({ key }) => key), ['extras.title']);
+});
+
+test('the summary reports coverage per section and the text output groups repeated warnings', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-summary-'));
+  const source = { nav: { home: 'Home', save: 'Save' }, inbox: Object.fromEntries(Array.from({ length: 8 }, (_, i) => ['k' + i, 'Inbox text ' + i])) };
+  const target = { nav: { home: 'Utama', save: 'Simpan' }, inbox: source.inbox };
+  writeFileSync(join(dir, 'en.json'), JSON.stringify(source));
+  writeFileSync(join(dir, 'ms.json'), JSON.stringify(target));
+  const result = checkCatalogs({ source: join(dir, 'en.json'), target: join(dir, 'ms.json'), locale: 'ms', noConfig: true });
+  const inbox = result.summary.sections.find((item) => item.section === 'inbox');
+  assert.equal(inbox.untranslated, true);
+  assert.equal(inbox.sourceCopy, 8);
+  assert.equal(result.summary.coveragePct, 20);
+  const text = run(check, ['--no-config', '--source', join(dir, 'en.json'), '--target', join(dir, 'ms.json'), '--locale', 'ms']);
+  assert.match(text.stdout, /Coverage ms: 2 of 10 keys translated \(20%\)/);
+  assert.match(text.stdout, /possible-source-copy 8 keys in inbox/);
+  const verbose = run(check, ['--no-config', '--verbose', '--source', join(dir, 'en.json'), '--target', join(dir, 'ms.json'), '--locale', 'ms']);
+  assert.match(verbose.stdout, /possible-source-copy inbox\.k7/);
 });
