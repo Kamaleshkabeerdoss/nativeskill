@@ -20,7 +20,7 @@ Tamil buttons are short verbs, often the bare stem or a light imperative, not a 
 
 `காப்பிடு` is what Android Settings shipped for the archive button in the pinned revision. It means **copy**. Do not use it for `item.archive`. The lookup draft `காப்பகப்படுத்து` is the archive verb, and it stays a draft.
 
-`அனுமதி` (Android Allow) is a **noun**, "permission". It is source-attested. On a button that grants access, either keep it and say in the report that it is a noun, or write a verb draft such as `அனுமதி` is not that verb. A verb draft is `அனுமதிக்கவும்` only if the rest of the file already uses the longer polite `-உம்` form. Do not mix `பகிர்` and `பகிரவும்` in one product.
+`அனுமதி` (Android Allow) is a **noun**, "permission". It is source-attested. On a button that grants access, either keep `அனுமதி` and say in the report that it is a noun, or write a verb draft: `அனுமதிக்கவும்` if the rest of the file already uses the longer polite `-உம்` form, and the bare verb stem otherwise. Do not mix `பகிர்` and `பகிரவும்` in one product.
 
 Dialog cancel that Android ships is `ரத்துசெய்`. That is `dialog.cancel_action`. It is the wrong word for stopping a subscription renewal.
 
