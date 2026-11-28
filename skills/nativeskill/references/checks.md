@@ -12,6 +12,26 @@ node <skill-dir>/scripts/lookup.mjs ta auth.sign_out button
 
 TS/JS dictionaries are parsed, not executed, by `scripts/dict.mjs` (no dependencies). It reads `export const ms: Dict = {...}`, `export default`, `module.exports`, `as const`, `satisfies`, arrow and `function` values, template literals, ternaries, `if` / `switch` returns, spreads, `section: en.section` aliases and relative imports, including JSON. Parameters become `{name}` placeholders spelled as in the source. The checked text is the branch a count such as 5 takes; the other branches are kept and checked too. When a file exports several objects, pass `--source-export` / `--target-export`. A value that needs running code (a call into a package, a computed key) is reported as `dynamic-value` instead of guessed. `node scripts/dict.mjs <file> [--export name] [--branches]` prints the flat JSON the checker sees.
 
+## Settings: deliberate English and optional sections
+
+Put a `.nativeskillrc` (JSON) next to the catalogs or in any parent folder, or pass `--config <file>`. `--no-config` ignores it.
+
+```json
+{
+  "allowMissing": ["apiTools", "dataTools"],
+  "keepEnglish": ["Acme", "WhatsApp", "/^https?:/"],
+  "ignoreKeys": ["debug.*"],
+  "locales": { "ar": { "allowMissing": ["marketing"] } }
+}
+```
+
+- `allowMissing`: key prefixes, globs or `/regex/` for sections that fall back to English on purpose. Their `missing-key` and English-copy findings are suppressed.
+- `keepEnglish`: brands and terms that stay English. A string made only of these terms, placeholders, numbers and punctuation is not reported as a copy.
+- `ignoreKeys`: keys never reported.
+- The same lists can be given as flags: `--allow-missing`, `--keep-english`, `--ignore-key` (repeatable).
+
+Suppressed findings are not dropped. The summary line counts them and `--json` lists them under `suppressed` with the setting that hid them. Do not use settings to hide a real gap; say in the report which sections are deliberately English.
+
 Android `translatable="false"` strings are skipped. A plural category that covers exactly one number may omit it: Arabic `zero`, `one`, and `two`, or German and English `one`. French `one` is not such a category, because it covers both 0 and 1. A French `one` without the number is an Android `placeholder-mismatch` and an ICU `plural-number-missing` warning. A string catalog with source strings and no target locale fails with `missing-key`.
 
 Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` and `--locale` pick the columns.

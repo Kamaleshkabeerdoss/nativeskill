@@ -149,3 +149,21 @@ test('the scanner reads TS/JS source but skips files that are locale dictionarie
   const result = run(scan, ['--json', dir]);
   assert.deepEqual(result.report.findings.map(({ text }) => text), ['Your email address']);
 });
+
+test('.nativeskillrc and flags allow deliberate omissions and kept English, and report what they hid', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-config-'));
+  writeFileSync(join(dir, 'en.json'), JSON.stringify({ brand: 'Acme', save: 'Save', extras: { title: 'Data tools' }, debug: { x: 'X' } }));
+  writeFileSync(join(dir, 'ms.json'), JSON.stringify({ brand: 'Acme', save: 'Save', debug: {} }));
+  const bare = checkCatalogs({ source: join(dir, 'en.json'), target: join(dir, 'ms.json'), locale: 'ms' });
+  assert.deepEqual(bare.findings.map(({ code, key }) => code + ' ' + key).sort(),
+    ['missing-key debug.x', 'missing-key extras.title', 'possible-source-copy brand', 'possible-source-copy save']);
+  writeFileSync(join(dir, '.nativeskillrc'), JSON.stringify({ allowMissing: ['extras'], keepEnglish: ['Acme'], locales: { ms: { ignoreKeys: ['debug.*'] } } }));
+  const configured = checkCatalogs({ source: join(dir, 'en.json'), target: join(dir, 'ms.json'), locale: 'ms' });
+  assert.deepEqual(configured.findings.map(({ code, key }) => code + ' ' + key), ['possible-source-copy save']);
+  assert.deepEqual(configured.suppressed.map(({ key, suppressedBy }) => key + ' ' + suppressedBy).sort(),
+    ['brand keepEnglish', 'debug.x ignoreKeys', 'extras.title allowMissing']);
+  assert.equal(configured.errors, 0);
+  const ignored = run(check, ['--json', '--no-config', '--allow-missing', 'extras', '--source', join(dir, 'en.json'), '--target', join(dir, 'ms.json'), '--locale', 'ms']);
+  assert.equal(ignored.status, 1);
+  assert.deepEqual(ignored.report.suppressed.map(({ key }) => key), ['extras.title']);
+});

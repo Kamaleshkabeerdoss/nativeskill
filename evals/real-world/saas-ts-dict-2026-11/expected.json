@@ -190,7 +190,7 @@
       "fix": 2,
       "layer": "checker",
       "kind": "false-positive",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ms",
         "id",
@@ -210,16 +210,21 @@
       },
       "want": {
         "absent": true,
-        "with": "--allow-missing extras (or nativeskill.config.json)"
+        "with": "--allow-missing extras, or allowMissing in .nativeskillrc"
       },
-      "note": "The app falls back to English for this optional add-on by design. Today the run exits 1 and cannot go green."
+      "note": "The app falls back to English for this optional add-on by design. Today the run exits 1 and cannot go green. Without the setting it is still reported; with it the findings move to `suppressed`.",
+      "options": {
+        "allowMissing": [
+          "extras"
+        ]
+      }
     },
     {
       "id": "brand-kept-in-english",
       "fix": 2,
       "layer": "checker",
       "kind": "false-positive",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ms",
         "id",
@@ -238,7 +243,12 @@
       },
       "want": {
         "absent": true,
-        "with": "--keep-english Acme (or a glossary file)"
+        "with": "--keep-english Acme, or keepEnglish in .nativeskillrc"
+      },
+      "options": {
+        "keepEnglish": [
+          "Acme"
+        ]
       }
     },
     {

@@ -1,6 +1,7 @@
 import { readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { DictionaryError, readDictionary } from './dict.mjs';
+import { applySettings, resolveSettings } from './config.mjs';
 
 export const EXIT = { ok: 0, findings: 1, usage: 2, unreadable: 3 };
 
@@ -297,7 +298,7 @@ function flattenJson(value, path, out) {
   }
   if (!value || typeof value !== 'object' || Array.isArray(value)) return;
   const quantities = Object.keys(value);
-  if (path.length && quantities.every((key) => pluralOrder.includes(key) && typeof value[key] === 'string')) {
+  if (path.length && quantities.length && quantities.every((key) => pluralOrder.includes(key) && typeof value[key] === 'string')) {
     out.set(path.join('.'), { plural: Object.fromEntries(quantities.map((key) => [key, value[key]])) });
     return;
   }
@@ -439,8 +440,10 @@ function comparePlural(source, target, locale, add, key) {
   }
 }
 
-export function checkCatalogs({ source, target, locale, sourceLocale = 'en', format = 'auto', sourceExport, targetExport }) {
+export function checkCatalogs(options) {
+  const { source, target, locale, sourceLocale = 'en', format = 'auto', sourceExport, targetExport } = options;
   if (!source || !target || !locale) throw new Error('Provide --source, --target, and --locale');
+  const settings = resolveSettings(options);
   const mode = format;
   const left = readCatalog(source, mode, sourceLocale, 'source', sourceExport);
   const right = readCatalog(target, mode, locale, 'target', targetExport);
@@ -478,8 +481,12 @@ export function checkCatalogs({ source, target, locale, sourceLocale = 'en', for
     }
     compareText(sourceMessage.text, targetMessage.text, locale, add, key);
   }
-  const errors = findings.filter(({ severity }) => severity === 'error').length;
-  return { schema: 1, source, target, locale, errors, warnings: findings.length - errors, findings };
+  const { kept, suppressed } = applySettings(findings, settings, (key) => left.get(key)?.text ?? null);
+  const errors = kept.filter(({ severity }) => severity === 'error').length;
+  return {
+    schema: 1, source, target, locale, config: settings.configPath,
+    errors, warnings: kept.length - errors, findings: kept, suppressed
+  };
 }
 
 function invokedDirectly() {
@@ -493,10 +500,14 @@ function invokedDirectly() {
 function printUsage() {
   console.log(`Usage: node check.mjs --source <file> --target <file> --locale <tag> [--source-locale <tag>]
        [--format auto|json|android|strings|xcstrings|script] [--source-export <name>] [--target-export <name>] [--json]
+       [--config <file> | --no-config] [--allow-missing <key-prefix>]... [--keep-english <term>]... [--ignore-key <pattern>]...
 
 Checks missing and extra keys, placeholder changes, ICU syntax, CLDR plural categories, length blowups, and strings copied unchanged from the source.
 Formats: ARB, JSON, i18next, Android strings.xml, iOS .strings, .xcstrings, and TS/JS dictionaries
 (typed objects, arrow functions, spreads and imported sections; read without running them).
+
+Settings: .nativeskillrc (JSON) is read from the target's folder or a parent: allowMissing, keepEnglish, ignoreKeys.
+Suppressed findings are counted and listed under "suppressed" in --json.
 
 Exit codes: 0 no errors, 1 errors found, 2 wrong arguments, 3 a catalog could not be read.`);
 }
@@ -508,10 +519,12 @@ if (invokedDirectly()) {
       printUsage();
       process.exitCode = args.length ? 0 : 2;
     } else {
-      const options = { format: 'auto', sourceLocale: 'en', json: false };
+      const options = { format: 'auto', sourceLocale: 'en', json: false, allowMissing: [], keepEnglish: [], ignoreKeys: [] };
       for (let index = 0; index < args.length; index += 1) {
         const name = args[index];
         if (name === '--json') { options.json = true; continue; }
+        if (name === '--no-config') { options.noConfig = true; continue; }
+        if (name === '--verbose') { options.verbose = true; continue; }
         const value = args[++index];
         if (!value || value.startsWith('--')) throw new Error('Missing value for ' + name);
         if (name === '--source') options.source = value;
@@ -520,6 +533,10 @@ if (invokedDirectly()) {
         else if (name === '--source-locale') options.sourceLocale = value;
         else if (name === '--format') options.format = value;
         else if (name === '--source-export') options.sourceExport = value;
+        else if (name === '--config') options.config = value;
+        else if (name === '--allow-missing') options.allowMissing.push(value);
+        else if (name === '--keep-english') options.keepEnglish.push(value);
+        else if (name === '--ignore-key') options.ignoreKeys.push(value);
         else if (name === '--target-export') options.targetExport = value;
         else throw new Error('Unknown argument ' + name);
       }
@@ -532,7 +549,8 @@ if (invokedDirectly()) {
         for (const finding of result.findings) {
           console.log(finding.severity + ' ' + finding.code + ' ' + finding.key + ' ' + finding.message);
         }
-        console.log(result.errors + ' errors, ' + result.warnings + ' warnings');
+        console.log(result.errors + ' errors, ' + result.warnings + ' warnings' +
+          (result.suppressed.length ? ', ' + result.suppressed.length + ' suppressed by ' + (result.config ?? 'flags') : ''));
       }
       if (result.errors) process.exitCode = 1;
     }
