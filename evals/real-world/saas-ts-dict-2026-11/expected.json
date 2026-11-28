@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "case": "saas-ts-dict-2026-11",
+  "note": "Real-world regression case. Each entry is one defect or one false alarm seen on a production TypeScript dictionary. status: currently-caught = check.mjs reports it today on json/ and must keep doing so. known-gap = the skill misses it (or mis-reports it) today. fix = item number in the fix plan. layer: checker = check.mjs should decide it; agent = needs the SKILL.md read-through, the audit checklist, or lookup.mjs. Suggested replacements are drafts, not a native-speaker review.",
+  "fixPlan": {
+    "1": "Read typed TS/JS dictionaries with functions (adapter) and fix the dead-end error message",
+    "2": "Allowlist / config for deliberate omissions and kept-English terms",
+    "3": "Group possible-source-copy by section and print a coverage summary",
+    "4": "New mechanical checks (count order, placeholder spacing, stale, terminology, English in branches, English residue, invisible characters)",
+    "5": "Too-strict checks and misleading notes (dropped repeated placeholder, length-blowup, Indonesian Daftar)",
+    "6": "Locale notes (th, vi, fil, ko, te; ta.md garbled sentence; ms generic error)",
+    "7": "Audit checklist as testable patterns; installed-copy test path",
+    "8": "Severity buckets and grouped summary in the report"
+  },
+  "entries": [
+    {
+      "id": "ts-dictionary-unreadable",
+      "fix": 1, "layer": "checker", "kind": "defect", "status": "known-gap",
+      "input": "ts", "locales": ["ms", "id", "ar", "ta", "vi", "fil", "ja"], "keys": ["*"],
+      "today": "check.mjs exits 2: 'This dictionary uses code the zero-dependency check cannot read. Install dependencies and run nativeskill validate.' No such command ships with the installed skill.",
+      "want": "ts/<locale>.ts checks the same as json/<locale>.json, every function branch included."
+    },
+    {
+      "id": "ts-param-renamed-by-bundler",
+      "fix": 1, "layer": "checker", "kind": "false-positive", "status": "known-gap",
+      "input": "ts", "locales": ["id"], "keys": ["contacts.externalId"],
+      "today": "Not reached (exit 2). A naive esbuild bundle renames the parameter id to id2 because the locale export is also named id, which then shows up as a fake placeholder-mismatch.",
+      "want": "Placeholder names come from the original source, so {id} stays {id}."
+    },
+    {
+      "id": "wrong-function-signature",
+      "fix": 1, "layer": "checker", "kind": "defect", "status": "currently-caught",
+      "locales": ["ms", "id", "ar", "ta", "vi", "fil"], "keys": ["integrations.confirmDisconnect"],
+      "today": {"code": "placeholder-mismatch", "severity": "error"},
+      "want": {"code": "placeholder-mismatch", "severity": "error"},
+      "note": "Translators pasted a different dialog (OAuth client) with the parameter (clientName). The user is told the connection 'loses access immediately' and never that imported content stays. TypeScript accepts it because a function with fewer parameters is assignable."
+    },
+    {
+      "id": "all-placeholders-dropped-stale",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "currently-caught",
+      "locales": ["ms", "id", "ar", "ta", "vi", "fil", "ja"], "keys": ["widget.tooltipPlaceholder"],
+      "today": {"code": "placeholder-mismatch", "severity": "error"},
+      "want": {"code": "placeholder-mismatch", "severity": "error"},
+      "note": "The English became a long greeting with {botName}; every locale still says 'Chat with us!'. Must stay an error after fix 5 relaxes repeated placeholders, because none remains."
+    },
+    {
+      "id": "english-in-function-branch",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "currently-caught",
+      "locales": ["ms", "id", "ar", "ta", "vi", "fil"], "keys": ["integrations.importIntoKb"],
+      "today": {"code": "possible-source-copy", "severity": "warning"},
+      "want": {"code": "possible-source-copy", "severity": "warning"},
+      "note": "(n) => n ? `Import ${n} into knowledge base` : '<translated>'. Caught in json/ only because the flattener called the function with a truthy value. The TS adapter must evaluate every branch."
+    },
+    {
+      "id": "english-hand-rolled-plural-branch",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "currently-caught",
+      "locales": ["fil"], "keys": ["bots.slotsAvailable"],
+      "today": {"code": "possible-source-copy", "severity": "warning"},
+      "want": {"code": "possible-source-copy", "severity": "warning"},
+      "note": "n === 1 ? '1 available' : `${n} available`. Both branches English."
+    },
+    {
+      "id": "section-aliased-to-english",
+      "fix": 3, "layer": "checker", "kind": "defect", "status": "currently-caught",
+      "locales": ["ms", "id", "ar", "ta", "vi", "fil"], "keys": ["inbox.title", "inbox.description", "inbox.unpaidTitle"],
+      "today": {"code": "possible-source-copy", "severity": "warning"},
+      "want": {"code": "possible-source-copy", "severity": "warning", "summary": "inbox: 0% translated (aliased to en.inbox)"},
+      "note": "In the real catalog this was 133 keys per locale, buried among 400-500 ungrouped warnings. The grouped summary is the fix; the per-key code stays."
+    },
+    {
+      "id": "optional-section-omitted-on-purpose",
+      "fix": 2, "layer": "checker", "kind": "false-positive", "status": "known-gap",
+      "locales": ["ms", "id", "ar", "ta", "vi", "fil", "ja"], "keys": ["extras.title", "extras.hint"],
+      "today": {"code": "missing-key", "severity": "error"},
+      "want": {"absent": true, "with": "--allow-missing extras (or nativeskill.config.json)"},
+      "note": "The app falls back to English for this optional add-on by design. Today the run exits 1 and cannot go green."
+    },
+    {
+      "id": "brand-kept-in-english",
+      "fix": 2, "layer": "checker", "kind": "false-positive", "status": "known-gap",
+      "locales": ["ms", "id", "ar", "ta", "vi", "fil", "ja"], "keys": ["brand.productName"],
+      "today": {"code": "possible-source-copy", "severity": "warning"},
+      "want": {"absent": true, "with": "--keep-english Acme (or a glossary file)"}
+    },
+    {
+      "id": "repeated-placeholder-dropped-legitimately",
+      "fix": 5, "layer": "checker", "kind": "false-positive", "status": "known-gap",
+      "locales": ["ja"], "keys": ["integrations.noItemsFound", "integrations.toastNoTextFound"],
+      "today": {"code": "placeholder-mismatch", "severity": "error"},
+      "want": {"code": "placeholder-repeat-dropped", "severity": "warning"},
+      "note": "English says {nounPlural} twice; natural Japanese says it once. Every distinct placeholder is still present."
+    },
+    {
+      "id": "length-blowup-long-but-correct",
+      "fix": 5, "layer": "checker", "kind": "disputed", "status": "currently-caught",
+      "locales": ["vi"], "keys": ["nav.leads"],
+      "today": {"code": "length-blowup", "severity": "warning"},
+      "want": {"code": "length-blowup", "severity": "warning"},
+      "note": "'Khách hàng tiềm năng' is the correct term and also 4x 'Leads' in a nav item, so the warning is fair. Keep it as a warning; do not loosen the threshold globally. A per-script factor is optional."
+    },
+    {
+      "id": "indonesian-daftar-is-fine",
+      "fix": 5, "layer": "agent", "kind": "must-not-flag", "status": "known-gap",
+      "locales": ["id"], "keys": ["login.signupCta"],
+      "today": "check.mjs does not flag it, but signs.md ('Mendaftar is the Indonesian devise string. Daftar is the Malay one') and SKILL.md Never ('Indonesian Mendaftar is not Malay Daftar') invite an agent to 'fix' it.",
+      "want": "No agent finding. Daftar is the common Indonesian sign-up button."
+    },
+    {
+      "id": "count-after-noun",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "known-gap",
+      "locales": ["ms", "id", "ar", "vi", "fil"],
+      "keys": ["conversations.messagesAgo", "kbNew.uploadFiles", "kbNew.pagesLeftInQuota", "api.scopesCount"],
+      "hits": {
+        "ms": ["conversations.messagesAgo", "kbNew.uploadFiles", "api.scopesCount"],
+        "id": ["conversations.messagesAgo", "kbNew.uploadFiles", "kbNew.pagesLeftInQuota", "api.scopesCount"],
+        "ar": ["conversations.messagesAgo", "kbNew.uploadFiles", "kbNew.pagesLeftInQuota", "api.scopesCount"],
+        "vi": ["conversations.messagesAgo", "kbNew.uploadFiles", "kbNew.pagesLeftInQuota", "api.scopesCount"],
+        "fil": ["conversations.messagesAgo", "api.scopesCount"]
+      },
+      "mustNotFlag": {"ms": ["kbNew.pagesLeftInQuota"], "ta": ["*"], "ja": ["*"], "fil": ["kbNew.uploadFiles", "kbNew.pagesLeftInQuota"]},
+      "today": null,
+      "want": {"code": "count-noun-order", "severity": "warning"},
+      "note": "'Mesej {count}' reads as 'Message number 5', not '5 messages'. Locale-aware: Thai counts as noun + number + classifier, so Thai needs a classifier rule, not this one."
+    },
+    {
+      "id": "space-inside-quotes-or-before-punctuation",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "known-gap",
+      "hits": {
+        "ms": ["nav.leaveWorkspaceBody", "api.confirmRevokeToken", "integrations.confirmDisconnect", "integrations.noItemsFound", "bots.toastCreated", "bots.deleteDialogBody"],
+        "id": ["api.confirmRevokeToken"],
+        "vi": ["api.confirmRevokeToken", "bots.toastCreated"],
+        "fil": ["nav.leaveWorkspaceBody", "integrations.confirmDisconnect", "integrations.noItemsFound", "bots.toastCreated", "bots.deleteDialogBody", "api.confirmRevokeToken"]
+      },
+      "today": null,
+      "want": {"code": "placeholder-spacing", "severity": "warning"},
+      "note": "Machine-translation artifact: '\" {name} \"', '{workspace} ?', '{provider} ,'. Only flag when the source has no such space. French and other locales that space before ? ! : ; are exempt."
+    },
+    {
+      "id": "stale-after-english-changed",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "known-gap",
+      "locales": ["ms", "id", "ar", "ta", "vi", "fil", "ja"], "keys": ["widget.tooltip", "widget.hideLauncherTooltip"],
+      "baseline": "json/en.baseline.json",
+      "today": null,
+      "want": {"code": "source-changed", "severity": "warning", "with": "--baseline json/en.baseline.json (or a lock file of source hashes)"},
+      "note": "English moved from 'Tooltip (launcher hover)' to 'Launcher greeting'. The baseline file is reconstructed from what the translations say."
+    },
+    {
+      "id": "one-concept-two-terms",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "known-gap",
+      "hits": {"ms": ["nav.leads", "api.scopeLeadsRead", "bot.modeOffDesc"], "id": ["nav.leads", "api.scopeLeadsRead"]},
+      "today": null,
+      "want": {"code": "term-inconsistent", "severity": "info", "with": "a glossary (lead -> one target term per locale)"},
+      "note": "Malay uses 'Lead' in the nav and 'petunjuk' (clue, hint) elsewhere; Indonesian 'Prospek' vs 'petunjuk'."
+    },
+    {
+      "id": "english-plural-residue",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "known-gap",
+      "hits": {"ms": ["integrations.toastNoTextFound"], "ar": ["integrations.toastNoTextFound"]},
+      "mustNotFlag": {"vi": ["integrations.toastNoTextFound"], "fil": ["integrations.toastNoTextFound"]},
+      "today": null,
+      "want": {"code": "english-residue", "severity": "warning"},
+      "note": "'{noun} (s)' left from the English '{noun}(s)'. Vietnamese '(các)' and Filipino '(mga)' are the native equivalents and are fine. Tamil '(கள்)' is also native."
+    },
+    {
+      "id": "invisible-characters",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "known-gap",
+      "hits": {"vi": ["api.confirmRevokeToken", "bots.deleteDialogBody"]},
+      "today": null,
+      "want": {"code": "invisible-character", "severity": "warning"},
+      "note": "U+200B zero-width spaces inside 'sử dụng' and 'kiến thức', a known machine-translation paste artifact. 18 strings in the real catalog (vi 13, ta 3, ar 2). Exempt ZWNJ/ZWJ where the script needs them (fa, hi, ml, si...)."
+    },
+    {
+      "id": "arabic-hand-rolled-plural",
+      "fix": 4, "layer": "checker", "kind": "defect", "status": "known-gap",
+      "input": "ts", "locales": ["ar"], "keys": ["bots.slotsAvailable", "kbNew.uploadFiles"],
+      "today": null,
+      "want": {"code": "hand-rolled-plural", "severity": "warning"},
+      "note": "Source uses `n === 1 ? ... : ...` and `${count === 1 ? '' : 's'}`. Arabic needs six categories; the target has one form. Visible only in the TS source, so it belongs to the adapter or scan.mjs."
+    },
+    {
+      "id": "ta-back-means-again",
+      "fix": 7, "layer": "agent", "kind": "defect", "status": "known-gap",
+      "locales": ["ta"], "keys": ["common.back"], "current": "மீண்டும்", "suggested": "பின்செல்",
+      "note": "மீண்டும் means 'again'. lookup.mjs ta navigation.go_back only has the tooltip 'முந்தைய பக்கம்', so the button is uncovered."
+    },
+    {
+      "id": "ta-clear-means-clarity",
+      "fix": 7, "layer": "agent", "kind": "defect", "status": "known-gap",
+      "locales": ["ta"], "keys": ["common.clear"], "current": "தெளிவு", "suggested": "அழி",
+      "note": "தெளிவு is the noun 'clarity'. lookup.mjs ta form.clear_input points at the அழி verb, so the data would have helped if the agent looked it up."
+    },
+    {
+      "id": "lead-mistranslated",
+      "fix": 7, "layer": "agent", "kind": "defect", "status": "known-gap",
+      "hits": {"ta": ["nav.leads", "api.scopeLeadsRead"], "ar": ["bot.modeOffDesc"], "vi": ["bot.modeOffDesc"], "ms": ["api.scopeLeadsRead", "bot.modeOffDesc"], "id": ["api.scopeLeadsRead"]},
+      "note": "Sales 'lead' rendered as the verb 'to lead' (ta வழிநடத்துகிறது), 'tracks' (ta தடங்கள்), the metal lead (ar الرصاص), 'leading' (vi dẫn đầu) and 'clue' (ms/id petunjuk). crm.sales_leads exists in concepts.json but only ta has a (draft) entry."
+    },
+    {
+      "id": "vi-scopes-means-camera-lens",
+      "fix": 7, "layer": "agent", "kind": "defect", "status": "known-gap",
+      "locales": ["vi"], "keys": ["api.scopesCount"], "current": "Ống kính {n}", "suggested": "{n} phạm vi",
+      "note": "Ống kính is a camera lens. Also count-after-noun."
+    },
+    {
+      "id": "ms-generic-error-loses-wrong",
+      "fix": 6, "layer": "agent", "kind": "defect", "status": "known-gap",
+      "locales": ["ms"], "keys": ["common.errorGeneric"], "current": "Sesuatu telah berlaku.", "suggested": "Berlaku ralat.",
+      "note": "Back-translates as 'Something has happened.' No status.error concept exists in the data."
+    },
+    {
+      "id": "ar-revoke-uses-cancel-word",
+      "fix": 7, "layer": "agent", "kind": "defect", "status": "known-gap",
+      "locales": ["ar"], "keys": ["api.confirmRevokeToken"], "current": "إلغاء", "suggested": "إبطال",
+      "note": "Minor. إلغاء is understood, but ar.md already reserves it for dialog cancel; a token revoke reads better as إبطال. There is no revoke concept in the data."
+    },
+    {
+      "id": "ms-status-uses-dialog-cancel",
+      "fix": 7, "layer": "agent", "kind": "defect", "status": "known-gap",
+      "locales": ["ms"], "keys": ["billing.cancelsAtPeriodEnd"], "current": "Batal pada akhir tempoh", "suggested": "Akan dibatalkan pada akhir tempoh",
+      "note": "The skill's own first checklist item (renewal control uses the dialog Cancel word). Agent-layer today."
+    },
+    {
+      "id": "id-renews-on-truncated",
+      "fix": 7, "layer": "agent", "kind": "defect", "status": "known-gap",
+      "locales": ["id"], "keys": ["billing.renewsOn"], "current": "Memperbarui", "suggested": "Diperbarui pada",
+      "note": "A date follows the label; 'Memperbarui' is 'renewing' with no 'on'."
+    }
+  ]
+}

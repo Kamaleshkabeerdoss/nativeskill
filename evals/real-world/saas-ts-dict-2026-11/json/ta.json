@@ -1,0 +1,64 @@
+{
+  "brand": {
+    "productName": "Acme"
+  },
+  "common": {
+    "back": "மீண்டும்",
+    "clear": "தெளிவு",
+    "delete": "நீக்கு",
+    "remove": "அகற்று",
+    "errorGeneric": "ஏதோ தவறாகிவிட்டது.",
+    "saving": "சேமிக்கிறது…",
+    "cancel": "ரத்து செய்"
+  },
+  "nav": {
+    "leads": "வழிநடத்துகிறது",
+    "leaveWorkspaceBody": "{workspace} ஐ விட்டு வெளியேறவா? உடனடியாக அணுகலை இழப்பீர்கள். உரிமையாளர் அல்லது நிர்வாகி உங்களை பின்னர் அழைக்கலாம்."
+  },
+  "login": {
+    "signupCta": "பதிவு செய்யவும்"
+  },
+  "bot": {
+    "modeOffDesc": "முன்னணி ஸ்கோரிங் அல்லது பிடிப்பு இல்லை."
+  },
+  "api": {
+    "scopeLeadsRead": "தடங்களைப் படிக்கவும்",
+    "confirmRevokeToken": "\"{name}\" ஐ திரும்பப்பெறவா? குறியீட்டைப் பயன்படுத்தும் குறியீடு உடனடியாக வேலை செய்வதை நிறுத்தும்.",
+    "scopesCount": "{n} நோக்கங்கள்"
+  },
+  "billing": {
+    "renewsOn": "புதுப்பிக்கிறது",
+    "cancelsAtPeriodEnd": "கால முடிவில் ரத்து செய்யப்படுகிறது"
+  },
+  "integrations": {
+    "confirmDisconnect": "{clientName} இணைப்பைத் துண்டிக்கவா? அது உடனடியாக அணுகலை இழக்கிறது.",
+    "importIntoKb": "Import {n} into knowledge base",
+    "noItemsFound": "{nounPlural} இல்லை. {provider} இல், Acme இணைப்புடன் நீங்கள் விரும்பும் {nounPlural} ஐப் பகிர்ந்து, பின்னர் மீண்டும் ஏற்றவும்.",
+    "toastNoTextFound": "தேர்ந்தெடுக்கப்பட்ட {noun} (கள்) இல் உரை உள்ளடக்கம் இல்லை. எழுதப்பட்ட உள்ளடக்கத்தைக் கொண்ட {noun} களைத் தேர்ந்தெடுக்கவும், வெறுமையானவை அல்ல."
+  },
+  "conversations": {
+    "messagesAgo": "{count} செய்திகள் · {ago}"
+  },
+  "kbNew": {
+    "uploadFiles": "{count} கோப்பைப் பதிவேற்றவும்",
+    "pagesLeftInQuota": "ஒதுக்கீட்டில் {n} பக்கங்கள் மீதமுள்ளன"
+  },
+  "widget": {
+    "tooltip": "உதவிக்குறிப்பு (லாஞ்சர் ஹோவர்)",
+    "hideLauncherTooltip": "துவக்கி உதவிக்குறிப்பை மறை",
+    "tooltipPlaceholder": "எங்களுடன் chatயடி!"
+  },
+  "bots": {
+    "toastCreated": "\"{name}\" உருவாக்கப்பட்டது",
+    "deleteDialogBody": "\"{name}\" ஐ நீக்கவா? அதன் Knowledge Base மற்றும் உரையாடல் வரலாறு அகற்றப்படும். இதை செயல்தவிர்க்க முடியாது.",
+    "slotsAvailable": "{n} கிடைக்கும்"
+  },
+  "contacts": {
+    "externalId": "ஐடி: {id}"
+  },
+  "inbox": {
+    "title": "Inbox",
+    "description": "Connect your support address. Customers email it as usual; the bot answers from its knowledge base in the same thread.",
+    "unpaidTitle": "The email bot needs a plan or an active trial"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "brand": {
+    "productName": "Acme"
+  },
+  "common": {
+    "back": "Kembali",
+    "clear": "Kosongkan",
+    "delete": "Padam",
+    "remove": "Buang",
+    "errorGeneric": "Sesuatu telah berlaku.",
+    "saving": "Menyimpan…",
+    "cancel": "Batal"
+  },
+  "nav": {
+    "leads": "Lead",
+    "leaveWorkspaceBody": "Tinggalkan {workspace} ? Anda akan kehilangan akses serta-merta. Pemilik atau pentadbir boleh menjemput anda kembali kemudian."
+  },
+  "login": {
+    "signupCta": "Daftar"
+  },
+  "bot": {
+    "modeOffDesc": "Tiada pemarkahan atau tangkapan petunjuk."
+  },
+  "api": {
+    "scopeLeadsRead": "Baca petunjuk",
+    "confirmRevokeToken": "Batalkan \" {name} \"? Kod yang menggunakannya akan berhenti berfungsi serta-merta.",
+    "scopesCount": "Skop {n}"
+  },
+  "billing": {
+    "renewsOn": "Dibaharui pada",
+    "cancelsAtPeriodEnd": "Batal pada akhir tempoh"
+  },
+  "integrations": {
+    "confirmDisconnect": "Putuskan sambungan {clientName} ? Ia kehilangan akses serta-merta.",
+    "importIntoKb": "Import {n} into knowledge base",
+    "noItemsFound": "Tiada {nounPlural} ditemui. Dalam {provider} , kongsi {nounPlural} yang anda inginkan dengan sambungan Acme, kemudian muat semula.",
+    "toastNoTextFound": "Tiada kandungan teks ditemui dalam {noun} (s) yang dipilih. Pilih {noun} yang mempunyai kandungan bertulis, bukan yang kosong."
+  },
+  "conversations": {
+    "messagesAgo": "Mesej {count} · {ago}"
+  },
+  "kbNew": {
+    "uploadFiles": "Muat naik fail {count}",
+    "pagesLeftInQuota": "{n} halaman tinggal dalam kuota"
+  },
+  "widget": {
+    "tooltip": "Petua alat (legar pelancar)",
+    "hideLauncherTooltip": "Sembunyikan petua alat pelancar",
+    "tooltipPlaceholder": "Sembang dengan kami!"
+  },
+  "bots": {
+    "toastCreated": "Dicipta \" {name} \"",
+    "deleteDialogBody": "Padamkan \" {name} \"? Pangkalan pengetahuan dan sejarah perbualannya akan dialih keluar. Ini tidak boleh dibuat asal.",
+    "slotsAvailable": "{n} tersedia"
+  },
+  "contacts": {
+    "externalId": "id: {id}"
+  },
+  "inbox": {
+    "title": "Inbox",
+    "description": "Connect your support address. Customers email it as usual; the bot answers from its knowledge base in the same thread.",
+    "unpaidTitle": "The email bot needs a plan or an active trial"
+  }
+}

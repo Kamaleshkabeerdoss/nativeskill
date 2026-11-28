@@ -19,7 +19,7 @@
     "skills/nativeskill/THIRD_PARTY_NOTICES.md"
   ],
   "scripts": {
-    "test": "node --test packages/cli/test/*.test.mjs skills/nativeskill/scripts/*.test.mjs",
+    "test": "node --test packages/cli/test/*.test.mjs skills/nativeskill/scripts/*.test.mjs evals/real-world/*/*.test.mjs",
     "import:wording": "node scripts/import-wording.mjs",
     "generate:locales": "node scripts/generate-locales.mjs"
   },

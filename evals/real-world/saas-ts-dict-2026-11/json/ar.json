@@ -1,0 +1,64 @@
+{
+  "brand": {
+    "productName": "Acme"
+  },
+  "common": {
+    "back": "رجوع",
+    "clear": "مسح",
+    "delete": "حذف",
+    "remove": "إزالة",
+    "errorGeneric": "حدث خطأ ما.",
+    "saving": "جارٍ الحفظ…",
+    "cancel": "إلغاء"
+  },
+  "nav": {
+    "leads": "العملاء المحتملون",
+    "leaveWorkspaceBody": "ترك {workspace}؟ ستفقد إمكانية الوصول على الفور. يمكن للمالك أو المسؤول دعوتك مرة أخرى لاحقًا."
+  },
+  "login": {
+    "signupCta": "إنشاء حساب"
+  },
+  "bot": {
+    "modeOffDesc": "لا يوجد تسجيل الرصاص أو التقاط."
+  },
+  "api": {
+    "scopeLeadsRead": "قراءة العملاء المحتملين",
+    "confirmRevokeToken": "إلغاء \"{name}\"؟ سيتوقف الكود الذي يستخدمه عن العمل على الفور.",
+    "scopesCount": "نطاقات {n}"
+  },
+  "billing": {
+    "renewsOn": "يتجدد على",
+    "cancelsAtPeriodEnd": "يلغي في نهاية الفترة"
+  },
+  "integrations": {
+    "confirmDisconnect": "افصل {clientName}؟ يفقد الوصول على الفور.",
+    "importIntoKb": "Import {n} into knowledge base",
+    "noItemsFound": "لم يتم العثور على {nounPlural}. في {provider}، قم بمشاركة {nounPlural} الذي تريده مع اتصال Acme، ثم أعد التحميل.",
+    "toastNoTextFound": "لم يتم العثور على محتوى نصي في {noun} (s) المحددة. اختر أجهزة {noun} التي تحتوي على محتوى مكتوب، وليس محتوى فارغًا."
+  },
+  "conversations": {
+    "messagesAgo": "رسائل {count} · {ago}"
+  },
+  "kbNew": {
+    "uploadFiles": "تحميل ملف {count}",
+    "pagesLeftInQuota": "صفحات {n} متبقية في الحصة"
+  },
+  "widget": {
+    "tooltip": "تلميح الأداة (التمرير فوق المشغل)",
+    "hideLauncherTooltip": "إخفاء تلميح أداة المشغل",
+    "tooltipPlaceholder": "الدردشة معنا!"
+  },
+  "bots": {
+    "toastCreated": "تم إنشاء \"{name}\"",
+    "deleteDialogBody": "هل تريد حذف \"{name}\"؟ ستتم إزالة قاعدة المعرفة وسجل المحادثات. لا يمكن التراجع عن هذا.",
+    "slotsAvailable": "{n} متاحة"
+  },
+  "contacts": {
+    "externalId": "المعرف: {id}"
+  },
+  "inbox": {
+    "title": "Inbox",
+    "description": "Connect your support address. Customers email it as usual; the bot answers from its knowledge base in the same thread.",
+    "unpaidTitle": "The email bot needs a plan or an active trial"
+  }
+}

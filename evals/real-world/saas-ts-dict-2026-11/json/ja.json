@@ -1,0 +1,64 @@
+{
+  "brand": {
+    "productName": "Acme"
+  },
+  "common": {
+    "back": "戻る",
+    "clear": "クリア",
+    "delete": "削除",
+    "remove": "削除",
+    "errorGeneric": "問題が発生しました。",
+    "saving": "保存中…",
+    "cancel": "キャンセル"
+  },
+  "nav": {
+    "leads": "リード",
+    "leaveWorkspaceBody": "{workspace} を退出しますか? アクセス権はすぐに失われます。所有者または管理者が後で再度招待できます。"
+  },
+  "login": {
+    "signupCta": "新規登録"
+  },
+  "bot": {
+    "modeOffDesc": "リードのスコアリングやキャプチャなし。"
+  },
+  "api": {
+    "scopeLeadsRead": "リードの読み取り",
+    "confirmRevokeToken": "「{name}」を取り消しますか? 使用中のコードはすぐに動かなくなります。",
+    "scopesCount": "{n} スコープ"
+  },
+  "billing": {
+    "renewsOn": "更新日",
+    "cancelsAtPeriodEnd": "期間終了時に解約"
+  },
+  "integrations": {
+    "confirmDisconnect": "{provider} を切断しますか? 既にインポートした {nounPlural} はナレッジベースに残ります。",
+    "importIntoKb": "{n} 件をナレッジベースにインポート",
+    "noItemsFound": "{nounPlural} が見つかりません。{provider} で Acme 接続に共有してから再読み込みしてください。",
+    "toastNoTextFound": "選択した {noun} にテキストコンテンツがありません。空でない書面コンテンツのあるものを選んでください。"
+  },
+  "conversations": {
+    "messagesAgo": "{count} メッセージ · {ago}"
+  },
+  "kbNew": {
+    "uploadFiles": "{count} 件のファイルをアップロード",
+    "pagesLeftInQuota": "クォータ残り {n} ページ"
+  },
+  "widget": {
+    "tooltip": "ツールチップ(ランチャーホバー)",
+    "hideLauncherTooltip": "ランチャーツールチップを非表示",
+    "tooltipPlaceholder": "チャットしましょう!"
+  },
+  "bots": {
+    "toastCreated": "「{name}」を作成しました",
+    "deleteDialogBody": "「{name}」を削除しますか? ナレッジベースと会話が削除されます。この操作は元に戻せません。",
+    "slotsAvailable": "{n} 空き"
+  },
+  "contacts": {
+    "externalId": "id: {id}"
+  },
+  "inbox": {
+    "title": "受信トレイ",
+    "description": "サポート用アドレスを接続します。顧客はこれまでどおりそのアドレスにメールを送り、ボットがナレッジベースをもとに同じスレッドで返信します。",
+    "unpaidTitle": "メールボットにはプランまたは有効なトライアルが必要です"
+  }
+}
