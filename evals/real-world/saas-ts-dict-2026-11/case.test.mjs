@@ -70,7 +70,10 @@ const special = {
       const fromTs = run(locale, {}, 'ts');
       const fromJson = run(locale);
       const tsFindings = new Set(fromTs.findings.map((f) => f.code + ' ' + f.key));
-      for (const finding of fromJson.findings) assert.ok(tsFindings.has(finding.code + ' ' + finding.key), `${locale}: ${finding.code} ${finding.key} also found from .ts`);
+      // The JSON export ran each function once, so English in one branch shows there as a plain source copy.
+      const same = (finding) => tsFindings.has(finding.code + ' ' + finding.key) ||
+        (finding.code === 'possible-source-copy' && tsFindings.has('english-in-branch ' + finding.key));
+      for (const finding of fromJson.findings) assert.ok(same(finding), `${locale}: ${finding.code} ${finding.key} also found from .ts`);
     }
   },
   'ts-param-renamed-by-bundler': () => {

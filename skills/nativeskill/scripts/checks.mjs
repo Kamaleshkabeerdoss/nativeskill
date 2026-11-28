@@ -113,21 +113,52 @@ export function checkCountOrder(source, target, locale, add, key) {
 }
 
 // --- english-in-branch / hand-rolled-plural ------------------------------------------------------
+const wordsOf = (text) => text.replace(/\{[^}]*\}/g, ' ').toLowerCase().match(/[\p{L}\p{M}']+/gu) ?? [];
+
+function latinLocale(locale) {
+  try { return new Intl.Locale(locale).maximize().script === 'Latn'; } catch { return true; }
+}
+
+// A branch is English when it equals a source branch, or reads like one: in a non-Latin locale, two or more
+// words and only Latin letters; in a Latin locale, two or more words, 80% of them taken from one source branch.
+function englishBranch(text, sourceVariants, latin) {
+  const words = wordsOf(text);
+  if (!words.length) return false;
+  if (sourceVariants.includes(text)) return !latin || words.length >= 2;
+  if (words.length < 2) return false;
+  if (!latin) return /^[\p{Script=Latin}\p{M}'\s\p{P}\p{N}{}$]*$/u.test(text.replace(/\{[^}]*\}/g, ''));
+  return sourceVariants.some((source) => {
+    const pool = new Set(wordsOf(source));
+    return pool.size >= 2 && words.filter((word) => pool.has(word)).length / words.length >= 0.8;
+  });
+}
+
+// Returns true when it reported english-in-branch, so the caller can skip possible-source-copy for the key.
 export function checkBranches(sourceMessage, targetMessage, locale, add, key, languageChanges) {
   const targetVariants = targetMessage.variants ?? [];
-  const sourceVariants = new Set([sourceMessage.text, ...(sourceMessage.variants ?? [])].map((text) => text.trim()));
-  if (languageChanges && targetMessage.text.trim() !== sourceMessage.text.trim()) {
-    const english = targetVariants.filter((text) => text !== targetMessage.text && sourceVariants.has(text.trim()) && /\p{L}/u.test(text));
-    if (english.length) add('english-in-branch', 'warning', key, 'One branch of this function is still English: ' + JSON.stringify(english[0]) + '. Every branch needs translating.');
+  let reported = false;
+  if (languageChanges && targetVariants.length) {
+    const sourceVariants = [sourceMessage.text, ...(sourceMessage.variants ?? [])].map((text) => text.trim());
+    const latin = latinLocale(locale);
+    const all = [...new Set([targetMessage.text, ...targetVariants].map((text) => text.trim()))].filter((text) => /\p{L}/u.test(text));
+    const english = all.filter((text) => englishBranch(text, sourceVariants, latin));
+    const translated = all.filter((text) => !english.includes(text) && !sourceVariants.includes(text));
+    if (english.length && translated.length) {
+      const main = english.includes(targetMessage.text.trim());
+      add('english-in-branch', 'warning', key, (main ? 'The main branch (the text for a typical count or value)' : 'One branch of this function') +
+        ' is still English: ' + JSON.stringify(english[0]) + ', while ' + JSON.stringify(translated[0]) + ' is translated. Every branch needs translating.');
+      reported = true;
+    }
   }
   const numeric = sourceMessage.fn?.numericBranch || targetMessage.fn?.numericBranch;
-  if (!numeric || targetMessage.fn?.pluralRules) return;
+  if (!numeric || targetMessage.fn?.pluralRules) return reported;
   const categories = new Intl.PluralRules(locale).resolvedOptions().pluralCategories;
-  if (categories.length <= 2) return;
+  if (categories.length <= 2) return reported;
   const forms = new Set(targetVariants.length ? targetVariants : [targetMessage.text]).size;
   if (forms < categories.length) {
     add('hand-rolled-plural', 'warning', key, 'The plural is hand-rolled (n === 1 ? … : …) and ' + locale + ' has ' + categories.length + ' plural forms (' + categories.join(', ') + '); this text has ' + forms + '. Use Intl.PluralRules or an ICU plural.');
   }
+  return reported;
 }
 
 // --- source-changed ------------------------------------------------------------------------------

@@ -296,3 +296,20 @@ test('findings carry a triage bucket, and the text report leads with the counts'
   assert.match(text.stdout.split('\n')[0], /^Triage: P1 broken or missing 1 · P2 wrong meaning or still English 2 · P3 polish 1$/);
   assert.match(text.stdout, /error P1 placeholder-mismatch a[\s\S]*warning P2 wrong-word b[\s\S]*warning P3 placeholder-spacing c/);
 });
+
+test('english-in-branch also fires when the main (count) branch is English and another branch is translated', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'nativeskill-branch-'));
+  const fn = (other, main = '`Import ${n} into knowledge base`') => `export default { imp: (n: number) => n ? ${main} : '${other}', all: (n: number) => n ? \`\${n} plan\` : 'No plan' };\n`;
+  writeFileSync(join(dir, 'en.ts'), fn('Import into knowledge base'));
+  writeFileSync(join(dir, 'ms.ts'), fn('Import ke dalam pangkalan pengetahuan').replace("'No plan'", "'No plan'"));
+  writeFileSync(join(dir, 'th.ts'), fn('นำเข้าสู่ฐานความรู้', '`Import ${n} items to the knowledge base`'));
+  writeFileSync(join(dir, 'ja.ts'), fn('ナレッジベースにインポート', '`${n} 件をナレッジベースにインポート`'));
+  const ms = checkCatalogs({ source: join(dir, 'en.ts'), target: join(dir, 'ms.ts'), locale: 'ms', noConfig: true, minCoverage: 0 });
+  // One finding per key; the fully English `all` stays a plain source copy.
+  assert.deepEqual(codesOf(ms), ['possible-source-copy all', 'english-in-branch imp'].sort());
+  assert.match(ms.findings.find((f) => f.key === 'imp').message, /main branch .* still English: "Import \{n\} into knowledge base"/);
+  const th = checkCatalogs({ source: join(dir, 'en.ts'), target: join(dir, 'th.ts'), locale: 'th', noConfig: true, minCoverage: 0 });
+  assert.ok(codesOf(th).includes('english-in-branch imp'), 'English-like text in a non-Latin locale counts even when it differs from the source');
+  const ja = checkCatalogs({ source: join(dir, 'en.ts'), target: join(dir, 'ja.ts'), locale: 'ja', noConfig: true, minCoverage: 0 });
+  assert.ok(!codesOf(ja).includes('english-in-branch imp'));
+});

@@ -548,11 +548,11 @@ export function checkCatalogs(options) {
       continue;
     }
     if (!targetMessage.text.trim()) add('empty-message', 'error', key, 'This translation is empty.');
-    if (languageChanges && sourceMessage.text.trim() === targetMessage.text.trim() && /\p{L}/u.test(sourceMessage.text)) {
+    const branchEnglish = checkBranches(sourceMessage, targetMessage, locale, add, key, languageChanges);
+    if (!branchEnglish && languageChanges && sourceMessage.text.trim() === targetMessage.text.trim() && /\p{L}/u.test(sourceMessage.text)) {
       add('possible-source-copy', 'warning', key, 'Text matches the source. Keep it only for a brand, a name, or a glossary term that is intentionally shared.');
     }
     compareText(sourceMessage.text, targetMessage.text, locale, add, key);
-    checkBranches(sourceMessage, targetMessage, locale, add, key, languageChanges);
   }
   if (settings.oldSource) checkSourceChanged(readCatalog(settings.oldSource, mode, sourceLocale, 'source', sourcePick), left, right, add);
   checkGlossary(readGlossary(settings.glossary), left, right, locale, add);

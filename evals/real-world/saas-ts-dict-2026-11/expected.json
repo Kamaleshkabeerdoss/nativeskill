@@ -123,15 +123,16 @@
       "keys": [
         "integrations.importIntoKb"
       ],
+      "input": "ts",
       "today": {
-        "code": "possible-source-copy",
+        "code": "english-in-branch",
         "severity": "warning"
       },
       "want": {
-        "code": "possible-source-copy",
+        "code": "english-in-branch",
         "severity": "warning"
       },
-      "note": "(n) => n ? `Import ${n} into knowledge base` : '<translated>'. Caught in json/ only because the flattener called the function with a truthy value. The TS adapter must evaluate every branch."
+      "note": "(n) => n ? `Import ${n} into knowledge base` : '<translated>'. The main (count) branch is English and the other branch is translated. Read from ts/, this is english-in-branch, reported once per key instead of possible-source-copy. The json/ export ran the function once with a truthy value, so there it can only be possible-source-copy."
     },
     {
       "id": "english-hand-rolled-plural-branch",
