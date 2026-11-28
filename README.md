@@ -41,7 +41,7 @@ The playbook the agent follows is [skills/nativeskill/SKILL.md](skills/nativeski
 
 ## Check a catalog
 
-The skill includes a Node.js catalog checker and a source scanner that run without extra dependencies. The checker supports ARB, JSON, i18next, Android `strings.xml`, iOS `.strings` and `.xcstrings`. Your agent can run both scripts from the installed skill folder. [Check commands and report codes](skills/nativeskill/references/checks.md)
+The skill includes a Node.js catalog checker and a source scanner that run without extra dependencies. The checker supports ARB, JSON, i18next, Android `strings.xml`, iOS `.strings` and `.xcstrings`, and typed TS/JS dictionaries (`export const ms: Dict = {...}` with arrow functions, spreads and section aliases), which it parses without running them. Your agent can run both scripts from the installed skill folder. [Check commands and report codes](skills/nativeskill/references/checks.md)
 
 Try them on the examples in this repo:
 
@@ -61,13 +61,17 @@ node skills/nativeskill/scripts/scan.mjs \
   skills/nativeskill/examples/android/res/layout
 ```
 
+Every report starts with triage counts (P1 broken or missing, P2 wrong meaning or still English, P3 polish) and per-section coverage, and groups repeated warnings. Besides placeholders and plurals it flags machine-translation tells (padded placeholders, zero-width spaces, `(s)` left in), the count after the noun in Malay, Indonesian, Vietnamese, Filipino and Arabic, missing Thai classifiers, hand-rolled English plurals, known wrong senses from the audit checklist, stale strings (`--old-source`) and glossary drift (`--glossary`). Brands and sections that are English on purpose go in a `.nativeskillrc`.
+
 The Flutter and Android examples pass. The buggy Arabic catalog is supposed to fail: renamed placeholder, `{{name}}` turned into `{name}`, dropped `%1$s`, unclosed plural, missing Arabic plural categories, a missing key, an extra key, an unchanged "Cancel", and a length blowup. The scanner reports `Cancel subscription` and `Pay now` and ignores `@string/` references.
 
 ## What is bundled
 
-110 languages and 449 regional profiles. Every one has CLDR plural categories and direction. Phrase coverage is narrower. 3,379 source-attested labels are bundled. 2,694 of those come from Wikimedia editor catalogs (OOUI, VisualEditor, the language picker). 685 come from Django, Flutter, Android, and devise-i18n. Drafts fill account, billing, permission, dialog, and form actions for the ten style-guide locales when no compatible catalog had the line. Drafts are not attestations. The provenance table is [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md).
+110 languages and 449 regional profiles. Every one has CLDR plural categories and direction. Phrase coverage is narrower. 3,379 source-attested labels are bundled. 2,694 of those come from Wikimedia editor catalogs (OOUI, VisualEditor, the language picker). 685 come from Django, Flutter, Android, and devise-i18n. Drafts fill account, billing, permission, dialog, and form actions for the locales with notes when no compatible catalog had the line. Machine translations known to be wrong are kept as rejected entries so lookups warn about them. Drafts are not attestations. The provenance table is [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md).
 
 Third-party strings keep their own licenses. See [skills/nativeskill/references/sources.md](skills/nativeskill/references/sources.md) and [skills/nativeskill/THIRD_PARTY_NOTICES.md](skills/nativeskill/THIRD_PARTY_NOTICES.md). GPL and AGPL catalogs, including Telegram, are not bundled. Original NativeSkill material is [MIT](LICENSE).
+
+Changes by release are in [CHANGELOG.md](CHANGELOG.md).
 
 ## Maintainer
 
