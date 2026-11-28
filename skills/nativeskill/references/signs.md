@@ -30,7 +30,7 @@ Go through the locale you are editing and note each sign with the key it lives o
 - A noun where the control is a verb. Tamil Android ships `அனுமதி` for Allow, and that word is a noun. French devise ships `Inscription` for Sign up, and that word is a noun. If the control needs a verb, write a draft and say why. Do not call the noun a verb.
 - Hindi Android `skip_button_label` is `अभी नहीं` ("not now"). Using it for `navigation.skip_step` changes the action. The skip draft is `छोड़ें`, and it stays a draft.
 - Malay Android `deny` is `Nafi`, which sounds legal. The accessibility dialog ships `Tolak` for the same decline. Prefer `Tolak` on a prompt button. Both are source-attested. Say which one you used.
-- Indonesian wording copied into Malay, or the reverse. `Mendaftar` is the Indonesian devise string. `Daftar` is the Malay one. `Log masuk` / `Log keluar` are the Malay Django pair.
+- Indonesian wording copied into Malay, or the reverse. Look at words that differ: Malay `Log masuk` / `Log keluar` / `Muat turun` / `Padam` / `Kata laluan` against Indonesian `Masuk` / `Keluar` / `Unduh` / `Hapus` / `Kata sandi`. Sign up is not one of them: `Daftar` is a normal sign-up button in both languages, and Indonesian `Mendaftar` (devise) is also fine. Do not flag either.
 - Simplified Chinese copied into a Traditional locale, or the reverse (`允许` versus `允許`, `软件` versus `軟體`)
 
 ## Formality, names, and format

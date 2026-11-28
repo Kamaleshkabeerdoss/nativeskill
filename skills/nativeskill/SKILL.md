@@ -123,7 +123,7 @@ On an audit, check every locale for these even when the string is grammatical:
 - German has `Sie` glued to an infinitive (`Herunterladen Sie`) or `du` next to `Sie`.
 - Japanese buttons end in `します` or `してください`.
 - One Chinese sentence uses both `您` and `你`.
-- A Malay file uses Indonesian `Unduh`, `Hapus`, or `Mendaftar`.
+- A Malay file uses Indonesian `Unduh`, `Hapus`, or `Kata sandi`. (`Daftar` is a correct sign-up button in Malay and in Indonesian.)
 - A placeholder was translated or dropped (`{name}`, `{amount}`, `%1$s`, `{{name}}`).
 - A whole English sentence is still in a non-English file, and it is not a brand.
 
@@ -201,4 +201,4 @@ Screens that mirror in Arabic, Hebrew, Persian, Urdu, or other RTL locales still
 - Do not translate the inside of a placeholder, and do not concatenate fragments to make a plural.
 - Do not copy Hindi AOSP `skip_button_label` onto a skip action, and do not describe Tamil AOSP `allow` as a verb.
 - Do not reuse an entry marked `preferred: false` because it is `source-attested`. The rejection wins.
-- Do not promote a draft to `source-attested` because it sounds familiar or because a similar language uses it. Indonesian `Mendaftar` is not Malay `Daftar`. Simplified Chinese is not Traditional Chinese.
+- Do not promote a draft to `source-attested` because it sounds familiar or because a similar language uses it. Indonesian `Unduh` is not Malay `Muat turun`. Simplified Chinese is not Traditional Chinese.

@@ -239,3 +239,12 @@ test('function dictionaries: English left in a branch and hand-rolled plurals fo
   const scanned = run(scan, ['--json', join(dir, 'en.ts')]);
   assert.deepEqual(scanned.report.findings.map(({ kind, line }) => kind + ':' + line), ['hand-rolled-plural:1']);
 });
+
+test('a repeated placeholder said once is a warning, and Filipino gets more room before length-blowup', () => {
+  const result = pairCheck({ a: 'No {items} found. Share the {items} you want.', b: 'Rename', c: 'Leads' },
+    { a: '{items} が見つかりません。共有してください。', b: 'Palitan ang pangalan', c: 'Khách hàng tiềm năng' }, 'ja', () => ({}));
+  assert.deepEqual(result.findings.map(({ code, severity, key }) => key + ' ' + code + ' ' + severity).filter((line) => line.startsWith('a')), ['a placeholder-repeat-dropped warning']);
+  assert.deepEqual(codesOf(pairCheck({ b: 'Rename' }, { b: 'Palitan ang pangalan' }, 'fil', () => ({}))), []);
+  assert.deepEqual(codesOf(pairCheck({ c: 'Leads' }, { c: 'Khách hàng tiềm năng' }, 'vi', () => ({}))), ['length-blowup c']);
+  assert.deepEqual(codesOf(pairCheck({ a: 'Share {a} with {b}' }, { a: 'Kongsi {a}' }, 'ms', () => ({}))), ['placeholder-mismatch a']);
+});

@@ -1966,5 +1966,13 @@
     "text": "अनुमति न दें",
     "note": "Unreviewed draft for the Don't allow button on a permission prompt. The attested अस्वीकारें is a rare verb form and न दें is a fragment. Not a native-speaker review.",
     "url": "https://github.com/Kamaleshkabeerdoss/nativeskill/blob/main/skills/nativeskill/assets/concepts.json"
+  },
+  {
+    "locale": "id",
+    "concept": "auth.create_account",
+    "role": "button",
+    "text": "Daftar",
+    "note": "Short Indonesian sign-up button, as common in Indonesian apps as devise's Mendaftar. Cited from Discourse's Indonesian catalog (GPL-2.0, so cited, not imported). Not a native-speaker review.",
+    "url": "https://github.com/discourse/discourse/blob/ac77474119d494def39d3f7d24487d1cddfbac04/config/locales/client.id.yml#L239"
   }
 ]

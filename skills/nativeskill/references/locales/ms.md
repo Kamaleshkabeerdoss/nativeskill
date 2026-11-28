@@ -8,11 +8,12 @@ Latin script, left to right, for `ms` and `ms-MY`. This is Bahasa Malaysia, not 
 | --- | --- | --- |
 | Sign in | Log masuk (Django, attested) | Masuk |
 | Sign out | Log keluar (attested) | Keluar |
-| Sign up | Daftar (devise, attested) | Mendaftar |
 | Download | Muat turun (draft) | Unduh |
 | Delete | Padam (draft, preferred) | Hapus |
 | Delete permanently | Padam secara kekal (draft) | Hapus permanen |
 | Allow | Benarkan (Android, attested) | Izinkan |
+
+Sign up is `Daftar` in both languages, so it is not in this table.
 
 If the file is `id`, use the Indonesian column. If it is `ms`, use the Malay column. A shared word (`Tambah`, `Simpan`) can appear in both. Do not assume the rest of the file can be copied.
 

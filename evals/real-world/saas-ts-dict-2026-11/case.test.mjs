@@ -115,3 +115,16 @@ test('the Indonesian sign-up button is not flagged by the checker', () => {
   assert.equal(findingsFor(run('id'), 'login.signupCta').length, 0);
   assert.equal(findingsFor(run('id', {}, 'ts'), 'login.signupCta').length, 0);
 });
+
+test('the guidance no longer tells agents that Indonesian Daftar is a Malay leak', () => {
+  const skill = join(here, '../../../skills/nativeskill');
+  const read = (path) => readFileSync(join(skill, path), 'utf8');
+  for (const path of ['SKILL.md', 'references/signs.md', 'references/locales/id.md', 'references/locales/ms.md']) {
+    const text = read(path);
+    assert.doesNotMatch(text, /Mendaftar` is not Malay `Daftar|uses Indonesian [^\n]*`Mendaftar`|`Daftar` is the Malay one|\| Sign up \| Daftar[^\n]*\| Mendaftar \|/, path);
+  }
+  const pack = JSON.parse(read('assets/locales/id.json'));
+  const daftar = pack.wording.entries.find((entry) => entry.concept === 'auth.create_account' && entry.text === 'Daftar');
+  assert.equal(daftar?.preferred, true);
+  assert.equal(daftar.status, 'draft');
+});

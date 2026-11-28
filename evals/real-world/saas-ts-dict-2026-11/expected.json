@@ -263,7 +263,7 @@
       "fix": 5,
       "layer": "checker",
       "kind": "false-positive",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "ja"
       ],
@@ -301,14 +301,14 @@
         "code": "length-blowup",
         "severity": "warning"
       },
-      "note": "'Khách hàng tiềm năng' is the correct term and also 4x 'Leads' in a nav item, so the warning is fair. Keep it as a warning; do not loosen the threshold globally. A per-script factor is optional."
+      "note": "'Khách hàng tiềm năng' is the correct term and also 4x 'Leads' in a nav item, so the warning is fair. Keep it as a warning; do not loosen the threshold globally. A per-script factor is optional. Fix 5 measured the threshold per locale on the real catalog and raised only Filipino to 3.5x (its 3x hits were correct short-verb phrases); this vi hit (4.0x) still fires."
     },
     {
       "id": "indonesian-daftar-is-fine",
       "fix": 5,
       "layer": "agent",
       "kind": "must-not-flag",
-      "status": "known-gap",
+      "status": "currently-caught",
       "locales": [
         "id"
       ],
@@ -316,7 +316,8 @@
         "login.signupCta"
       ],
       "today": "check.mjs does not flag it, but signs.md ('Mendaftar is the Indonesian devise string. Daftar is the Malay one') and SKILL.md Never ('Indonesian Mendaftar is not Malay Daftar') invite an agent to 'fix' it.",
-      "want": "No agent finding. Daftar is the common Indonesian sign-up button."
+      "want": "No agent finding. Daftar is the common Indonesian sign-up button.",
+      "note": " Fix 5 reworded signs.md, SKILL.md, ms.md and id.md, and added id auth.create_account 'Daftar' as a preferred draft; the doc test in case.test.mjs locks it."
     },
     {
       "id": "count-after-noun",

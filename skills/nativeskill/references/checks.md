@@ -69,7 +69,8 @@ Pass the same `.xcstrings` path as `--source` and `--target`. `--source-locale` 
 | `plural-unused` | warning | A plural has a category this locale does not use. |
 | `possible-source-copy` | warning | The text equals the source and the language changed. Keep it only for a brand or a shared glossary term. |
 | `plural-number-missing` | warning | An ICU plural branch has no `#` (or `{count}`) although the source shows the number, and that category covers more than one number in this locale. French `one {un fichier}` also shows for 0. |
-| `length-blowup` | warning | The translation is more than three times the source and at least 12 characters longer. Check the control. |
+| `length-blowup` | warning | The translation is more than three times the source (3.5 for Filipino, whose short verbs become phrases: `Rename` → `Palitan ang pangalan`) and at least 12 characters longer, counted in graphemes. Check the control. On a real 1,100-string catalog this fired for 5 of about 10,000 strings across nine locales. |
+| `placeholder-repeat-dropped` | warning | Every placeholder is kept but one the source repeats appears fewer times. Often correct (the second mention becomes a pronoun); check nothing is lost. Dropping a placeholder entirely is still `placeholder-mismatch`. |
 | `dynamic-value` | warning | A TS/JS dictionary value could not be resolved without running code. Check it by hand. |
 | `placeholder-spacing` | warning | A space the source does not have: after an opening quote (`" {name}`), before a closing quote, before `? ! . , : ;` (French is exempt), or inside brackets. A machine-translation tell. |
 | `invisible-character` | warning | U+200B, U+2060 or U+FEFF that the source does not have. Thai, Lao, Khmer, Burmese and Tibetan may use U+200B; ZWJ/ZWNJ are only flagged in all-Latin text without emoji. |

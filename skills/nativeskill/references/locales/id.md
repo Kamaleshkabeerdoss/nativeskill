@@ -4,7 +4,7 @@ Latin script, left to right. Cardinal plurals are `other` only. Android's legacy
 
 ## Not Malay
 
-Indonesian and Malay share some words and differ on others. devise ships `Mendaftar` for sign up here and `Daftar` for Malay. Do not copy a Malay catalog into `id` or the reverse. Android Indonesian Allow is `Izinkan`, Deny is `Tolak`, and Skip is `Lewati`.
+Indonesian and Malay share some words and differ on others: Indonesian `Masuk` / `Unduh` / `Hapus` / `Kata sandi` against Malay `Log masuk` / `Muat turun` / `Padam` / `Kata laluan`. Do not copy a Malay catalog into `id` or the reverse. Sign up is shared: `Daftar` is the usual short button in Indonesian apps (draft, preferred) and devise's `Mendaftar` is also correct. Neither is a Malay leak. Android Indonesian Allow is `Izinkan`, Deny is `Tolak`, and Skip is `Lewati`.
 
 ## Voice
 

@@ -42,5 +42,6 @@
   {"locale": "es", "concept": "auth.sign_out", "role": "button", "text": "Cerrar sesión", "preferred": true, "note": "Preferred Sign out. Terminar sesión is less common."},
   {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Padam", "preferred": true, "note": "Preferred Delete (draft). Owner choice, matches Google/Microsoft Malaysian UI."},
   {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Buang", "preferred": false, "note": "Owner choice, matches Google/Microsoft Malaysian UI. Prefer Padam. Buang reads as throw away."},
-  {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Hapuskan", "preferred": false, "note": "Owner choice, matches Google/Microsoft Malaysian UI. Prefer Padam. Hapuskan reads as abolish and sits close to Indonesian Hapus."}
+  {"locale": "ms", "concept": "item.delete", "role": "button", "text": "Hapuskan", "preferred": false, "note": "Owner choice, matches Google/Microsoft Malaysian UI. Prefer Padam. Hapuskan reads as abolish and sits close to Indonesian Hapus."},
+  {"locale": "id", "concept": "auth.create_account", "role": "button", "text": "Daftar", "preferred": true, "note": "Preferred short sign-up button. Mendaftar (devise) is also correct Indonesian; do not flag either."}
 ]

@@ -9,6 +9,12 @@ export const EXIT = { ok: 0, findings: 1, usage: 2, unreadable: 3 };
 
 const pluralOrder = ['zero', 'one', 'two', 'few', 'many', 'other'];
 
+// length-blowup fires when a translation is longer than factor × the source (in graphemes) and 12+ longer.
+// Filipino short verbs grow into phrases ("Rename" -> "Palitan ang pangalan", 3.3x) and are correct, so it
+// gets 3.5. Measured on a 1,100-1,700 string SaaS catalog per locale: fil median 1.27x, p99 2.5x; vi 1.12x /
+// 2.4x; th 0.80x / 1.6x. Thai and Vietnamese keep 3: their only hits at 3x were real fit problems.
+const LENGTH_FACTOR = { fil: 3.5, tl: 3.5 };
+
 function lengthOf(text) {
   if (typeof Intl.Segmenter === 'function') return [...new Intl.Segmenter().segment(text)].length;
   return [...text].length;
@@ -247,7 +253,14 @@ export function compareText(source, target, locale, add, key, options = {}) {
     add('placeholder-mismatch', 'error', key, 'Placeholders changed. Source has ' + (sourcePrintf.join(' ') || 'none') + '. Target has ' + (targetPrintf.join(' ') || 'none') + '.');
   }
   if (!sameList(sourceNamed, targetNamed)) {
-    add('placeholder-mismatch', 'error', key, 'Placeholders changed. Source has ' + (sourceNamed.join(' ') || 'none') + '. Target has ' + (targetNamed.join(' ') || 'none') + '.');
+    const unique = (list) => [...new Set(list)];
+    const fewerRepeats = sameList(unique(sourceNamed), unique(targetNamed)) && targetNamed.length < sourceNamed.length;
+    if (fewerRepeats) {
+      // "Share the {nounPlural} … no {nounPlural} found" often reads better with the second mention as a pronoun.
+      add('placeholder-repeat-dropped', 'warning', key, 'Every placeholder is still there, but one that the source repeats appears fewer times (' + sourceNamed.length + ' → ' + targetNamed.length + '). Fine if the sentence refers back to it; check nothing is lost.');
+    } else {
+      add('placeholder-mismatch', 'error', key, 'Placeholders changed. Source has ' + (sourceNamed.join(' ') || 'none') + '. Target has ' + (targetNamed.join(' ') || 'none') + '.');
+    }
   }
   if (choiceKey(left.selects.map((item) => ({ name: item.name, choices: item.choices }))) !== choiceKey(right.selects.map((item) => ({ name: item.name, choices: item.choices })))) {
     add('selector-mismatch', 'error', key, 'Select branches changed. Keep every choice, including other.');
@@ -260,7 +273,8 @@ export function compareText(source, target, locale, add, key, options = {}) {
   }
   const sourceLength = lengthOf(source);
   const targetLength = lengthOf(target);
-  if (sourceLength >= 4 && targetLength > sourceLength * 3 && targetLength - sourceLength > 12) {
+  const factor = LENGTH_FACTOR[languageOf(locale)] ?? 3;
+  if (sourceLength >= 4 && targetLength > sourceLength * factor && targetLength - sourceLength > 12) {
     add('length-blowup', 'warning', key, 'Translation is ' + targetLength + ' characters against a source of ' + sourceLength + '. Check it still fits the control.');
   }
   textChecks(source, target, locale, add, key);
